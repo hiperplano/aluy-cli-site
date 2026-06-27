@@ -389,6 +389,8 @@ kbd { font-family: var(--mono); font-size: 12px; color: var(--tx); background: v
 .next-card .go { font-family: var(--mono); font-size: 12px; color: var(--amber); margin-top: 2px; }
 .hint { margin: 12px 0 0; font-family: var(--mono); font-size: 12px; color: var(--mut2); }
 .hint code { color: var(--tx2); }
+.lnk { color: var(--amber); text-decoration: none; }
+.lnk:hover { text-decoration: underline; }
 
 /* ---- footer --------------------------------------------------------------- */
 .foot { margin-top: 60px; padding: 30px var(--pad) 44px; border-top: 1px solid var(--bd-09); }
