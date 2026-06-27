@@ -379,7 +379,7 @@ kbd { font-family: var(--mono); font-size: 12px; color: var(--tx); background: v
 .guarantee { color: var(--green); margin-bottom: 9px; }
 
 /* ---- install steps -------------------------------------------------------- */
-.step-head { display: flex; align-items: center; gap: 11px; margin-bottom: 14px; }
+.step-head { display: flex; align-items: center; gap: 11px; margin: 44px 0 14px; }
 .step-num {
   width: 30px; height: 30px; border-radius: 999px; display: flex; align-items: center; justify-content: center;
   font-family: var(--mono); font-weight: 500; font-size: 13px; color: var(--amber);
