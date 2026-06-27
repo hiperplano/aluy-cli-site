@@ -10,7 +10,7 @@ REM  encoding do .ps1/irm; a UI bonita vive no onboard, em Node).
 REM ===========================================================================
 setlocal
 chcp 65001 >nul
-if defined ALUY_PKG (set "PKG=%ALUY_PKG%") else (set "PKG=@aluy/cli")
+if defined ALUY_PKG (set "PKG=%ALUY_PKG%") else (set "PKG=@hiperplano/aluy-cli")
 
 REM 1) Node (unico pre-requisito)
 echo [*] Passo 1/2 - verificando o Node ^(o aluy roda sobre ele^)...

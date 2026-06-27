@@ -8,7 +8,7 @@
 # sidecars) é o `aluy onboard` (Node + Ink): encoding-safe, i18n, 1 código.
 # ─────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
-PKG="${ALUY_PKG:-@aluy/cli}"
+PKG="${ALUY_PKG:-@hiperplano/aluy-cli}"
 MIN_NODE=20
 
 say() { printf '\033[36m▸\033[0m %s\n' "$*"; }

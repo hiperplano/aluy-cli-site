@@ -8,7 +8,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 $ErrorActionPreference = 'Stop'
 try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch {}
-$Pkg     = if ($env:ALUY_PKG) { $env:ALUY_PKG } else { '@aluy/cli' }
+$Pkg     = if ($env:ALUY_PKG) { $env:ALUY_PKG } else { '@hiperplano/aluy-cli' }
 $MinNode = 20
 function Say($m) { Write-Host "▸ $m" -ForegroundColor Cyan }
 
