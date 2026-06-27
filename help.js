@@ -18,6 +18,28 @@
       if (sec) sections.push({ a: a, sec: sec });
     });
 
+    // --- docs search: filter the TOC by section heading + content ---
+    var searchEl = document.getElementById("docs-search");
+    var noRes = document.getElementById("docs-noresults");
+    if (searchEl) {
+      var index = sections.map(function (s) {
+        return { a: s.a, text: ((s.a.textContent || "") + " " + (s.sec.textContent || "")).toLowerCase() };
+      });
+      searchEl.addEventListener("input", function () {
+        var q = searchEl.value.trim().toLowerCase();
+        var shown = 0;
+        index.forEach(function (it) {
+          var hit = !q || it.text.indexOf(q) !== -1;
+          it.a.hidden = !hit;
+          if (hit) shown++;
+        });
+        if (noRes) noRes.hidden = !(q && shown === 0);
+      });
+      searchEl.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { searchEl.value = ""; searchEl.dispatchEvent(new Event("input")); }
+      });
+    }
+
     function setActive(entry) {
       links.forEach(function (a) { a.classList.remove("active"); a.removeAttribute("aria-current"); });
       if (!entry) return;

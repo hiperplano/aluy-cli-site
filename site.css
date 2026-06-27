@@ -426,10 +426,20 @@ kbd { font-family: var(--mono); font-size: 12px; color: var(--tx); background: v
   letter-spacing: .16em; text-transform: uppercase; color: var(--mut2);
   border-bottom: 1px solid var(--bd-09); margin-bottom: 8px;
 }
+.docs-search {
+  width: 100%; box-sizing: border-box; margin: 0 0 8px;
+  font-family: var(--ui); font-size: 13px; color: var(--tx);
+  background: var(--s3); border: 1px solid var(--bd); border-radius: 8px;
+  padding: 7px 10px; outline: none; transition: border-color .14s;
+}
+.docs-search::placeholder { color: var(--mut2); }
+.docs-search:focus { border-color: var(--amber-bd); }
+.docs-noresults { margin: 4px 12px 8px; font-size: 12.5px; color: var(--mut2); }
 #docs-sidebar a {
   display: flex; gap: 9px; font-size: 13px; font-weight: 500; color: var(--tx2);
   padding: 6px 12px; border-radius: 6px; border-left: 2px solid transparent; text-decoration: none; margin: 1px 0;
 }
+#docs-sidebar a[hidden] { display: none; }
 #docs-sidebar a .n { font-family: var(--mono); font-size: 10.5px; color: var(--mut2); min-width: 16px; }
 #docs-sidebar a:hover { color: var(--tx); }
 #docs-sidebar a.active { color: var(--amber); background: var(--amber-bg); border-left-color: var(--amber); }
