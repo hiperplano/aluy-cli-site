@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="How Aluy CLI is built — a single process in your terminal. Session, memory and your key stay local, behind the permission gate. Only the model call crosses the edge." />
+<title>Architecture — Aluy CLI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="site.css" />
+<script src="lang.js"></script>
+<script defer src="site.js"></script>
+</head>
+<body>
+<div class="aurora aurora--hero" aria-hidden="true"></div>
+<div class="page">
+
+  <!-- ===== HEADER ===== -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Aluy CLI — home">
+        <img src="assets/aluy-wordmark-white.png" alt="Aluy" />
+        <span class="cli">CLI</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="funcionalidades.html">Features</a>
+        <a href="comandos.html">Commands</a>
+        <a href="arquitetura.html" class="active">Architecture</a>
+        <a href="comecar.html">Install</a>
+        <a href="help.html">Docs</a>
+      </nav>
+      <span class="grow"></span>
+      <div class="lang-toggle" role="group" aria-label="Language · idioma">
+        <a href="arquitetura.html" data-lang="en" hreflang="en" aria-current="true">EN</a>
+        <a href="pt/arquitetura.html" data-lang="pt" hreflang="pt-BR" aria-current="false">PT</a>
+      </div>
+      <a class="gh-link" href="https://github.com/hiperplano/aluy-cli" aria-label="View on GitHub">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.52.1.71-.23.71-.5v-1.95c-2.9.63-3.52-1.24-3.52-1.24-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.93 1.6 2.45 1.13 3.05.86.09-.68.36-1.13.66-1.39-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.41-2.07 1.07-2.8-.11-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a9.9 9.9 0 0 1 5.24 0c2-1.35 2.87-1.07 2.87-1.07.57 1.43.21 2.49.11 2.75.67.73 1.07 1.66 1.07 2.8 0 4.01-2.45 4.9-4.78 5.16.38.32.71.95.71 1.92v2.85c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>
+        GitHub
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <span class="eyebrow">architecture</span>
+      <h1>How Aluy is built.</h1>
+      <p class="lead">The Aluy CLI is a single process that runs in your terminal — no server, no cloud in the middle of your project. It reads and edits files, runs commands and keeps the session, memory and your key on your machine. The only thing that goes out to the internet is the model call (plus any MCP connectors you turn on).</p>
+    </section>
+
+    <!-- ===== LEGEND ===== -->
+    <div class="legend">
+      <span class="chip"><span class="sw sw--amber"></span>on your machine</span>
+      <span class="chip"><span class="sw sw--teal"></span>the permission gate</span>
+      <span class="chip"><span class="sw sw--dashed"></span>what leaves the machine</span>
+    </div>
+
+    <!-- ===== DIAGRAM ===== -->
+    <div class="diagram">
+
+      <!-- machine zone -->
+      <div class="zone">
+        <span class="zone-badge">on your machine <span class="loc">· 127.0.0.1</span></span>
+
+        <!-- flow: TUI -> core -> gate -->
+        <div class="flow">
+          <div class="flow-node">
+            <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></span>
+            <div><h4>TUI <span class="tag">Ink</span></h4><p>The interface you type into. Themes, panels, the slash menu.</p></div>
+          </div>
+          <div class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DDA13F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></div>
+          <div class="flow-node">
+            <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></span>
+            <div><h4>Core engine <span class="tag">@aluy/cli-core</span></h4><p>Reads and edits files, runs commands and decides the next step — the read → act → observe loop.</p></div>
+          </div>
+          <div class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DDA13F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></div>
+          <!-- gate -->
+          <div class="flow-node gate">
+            <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
+            <div><h4>The permission gate <span class="pill-ghost">single point</span></h4><p>Every effect passes through here <b>before it happens</b>. Read = allow, write/run = ask, always-ask = locked.</p></div>
+          </div>
+        </div>
+
+        <!-- local state -->
+        <div class="zone-sub">
+          <span class="subhead">local state — never leaves</span>
+          <div class="grid grid-2">
+            <div class="minitile"><h4>Session &amp; history</h4><p>Transcripts, undo journal, checkpoints.</p></div>
+            <div class="minitile"><h4>Memory</h4><p>Global + per-project facts you control.</p></div>
+            <div class="minitile"><h4>Project files</h4><p>Your repo — read and edited in place.</p></div>
+            <div class="minitile"><h4 class="sc">Provider key</h4><p>In the OS vault — never in plain text.</p></div>
+          </div>
+        </div>
+
+        <!-- sidecars -->
+        <div class="zone-sub">
+          <span class="subhead">sidecars — opt-in, local only</span>
+          <div class="grid grid-3">
+            <div class="minitile"><h4 class="sc">mem0</h4><p>long-term memory</p></div>
+            <div class="minitile"><h4 class="sc">headroom</h4><p>context headroom</p></div>
+            <div class="minitile"><h4 class="sc">ollama</h4><p>local models</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- edge column -->
+      <div class="edge">
+        <div class="edge-rule" aria-hidden="true"></div>
+        <span class="subhead">what leaves your machine</span>
+        <div class="edge-card">
+          <h4><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span>Model call</h4>
+          <p>Through the <b>broker</b> by default — or your own <b>provider</b>, direct, with your credential.</p>
+          <div class="chips">
+            <span class="chip">Claude</span><span class="chip">GPT</span><span class="chip">Gemini</span><span class="chip">DeepSeek</span>
+          </div>
+          <div class="providers">providers: Anthropic · OpenAI · OpenRouter</div>
+        </div>
+        <div class="edge-card">
+          <h4><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span>MCP connectors</h4>
+          <p>Only the ones <b>you turn on</b>. Databases, APIs, services you choose to reach.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== THREE GUARANTEES ===== -->
+    <section class="section">
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3>One process, no daemon</h3>
+          <p>Monolithic delivery: you install one binary, <code>aluy</code>. No background server, no hidden service.</p>
+        </div>
+        <div class="card">
+          <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+          <h3>Confined client kernel</h3>
+          <p>The agent's own path-deny rules forbid it from touching <code>~/.aluy/</code> — its install, config and keys.</p>
+        </div>
+        <div class="card">
+          <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2"/></svg></div>
+          <h3>Sandbox &amp; limits</h3>
+          <p>OS-level confinement for shell (cgroups, egress policy) and hard ceilings on time and steps for autonomous runs.</p>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top:26px;">
+        <a class="btn btn-secondary" href="help.html">Read the docs →</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <img src="assets/aluy-wordmark-white.png" alt="Aluy" />
+      <span class="grow"></span>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="funcionalidades.html">Features</a>
+        <a href="comandos.html">Commands</a>
+        <a href="arquitetura.html">Architecture</a>
+        <a href="comecar.html">Install</a>
+        <a href="help.html">Docs</a>
+        <a href="https://github.com/hiperplano/aluy-cli">GitHub</a>
+      </nav>
+      <p class="foot-fine">Aluy <span class="lam">Λ</span> CLI — the team of agents that lives in your terminal · open source · MIT</p>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

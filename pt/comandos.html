@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Referência de comandos do Aluy CLI — os comandos com barra que você dá dentro de uma sessão. Trabalho, multi-agente, ferramentas, sessão e configuração. Código aberto, MIT." />
+<title>Comandos — Aluy CLI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="../site.css" />
+<script src="../lang.js"></script>
+<script defer src="../site.js"></script>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+<div class="page">
+
+  <!-- ===== HEADER ===== -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Aluy CLI — início">
+        <img src="../assets/aluy-wordmark-white.png" alt="Aluy" />
+        <span class="cli">CLI</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="funcionalidades.html">Funcionalidades</a>
+        <a href="comandos.html" class="active">Comandos</a>
+        <a href="arquitetura.html">Arquitetura</a>
+        <a href="comecar.html">Instalar</a>
+        <a href="help.html">Docs</a>
+      </nav>
+      <span class="grow"></span>
+      <div class="lang-toggle" role="group" aria-label="Language · idioma">
+        <a href="../comandos.html" data-lang="en" hreflang="en" aria-current="false">EN</a>
+        <a href="comandos.html" data-lang="pt" hreflang="pt-BR" aria-current="true">PT</a>
+      </div>
+      <a class="gh-link" href="https://github.com/hiperplano/aluy-cli" aria-label="Ver no GitHub">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.52.1.71-.23.71-.5v-1.95c-2.9.63-3.52-1.24-3.52-1.24-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.93 1.6 2.45 1.13 3.05.86.09-.68.36-1.13.66-1.39-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.41-2.07 1.07-2.8-.11-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a9.9 9.9 0 0 1 5.24 0c2-1.35 2.87-1.07 2.87-1.07.57 1.43.21 2.49.11 2.75.67.73 1.07 1.66 1.07 2.8 0 4.01-2.45 4.9-4.78 5.16.38.32.71.95.71 1.92v2.85c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>
+        GitHub
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <span class="eyebrow">referência de comandos</span>
+      <h1>Os comandos da sessão.</h1>
+      <p class="lead">Digite <code class="icode">/</code> no início da linha para abrir o menu. São os comandos que você dá dentro de uma sessão — atalhos para colocar o agente para trabalhar.</p>
+    </section>
+
+    <!-- ===== GROUPS ===== -->
+    <section class="section section--narrow">
+
+      <!-- WORK -->
+      <div class="cmd-group">
+        <div class="cmd-group-head">
+          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/><path d="M12 7v5l3 2"/></svg></span>
+          <h2>Trabalho</h2>
+          <span class="cap">— coloque o agente para rodar.</span>
+        </div>
+        <div class="cmd-list">
+          <div class="cmd-row">
+            <div class="cmd-name">/cycle <span class="arg">&lt;interval&gt; "&lt;task&gt;"</span></div>
+            <div class="cmd-desc">Roda uma tarefa em ciclos autônomos, com tetos duros e parada automática. O freio de mão contra um agente fugindo do controle. <span class="sub">Sub: pause · resume · status · stop.</span></div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/cron <span class="arg">&lt;when&gt; "&lt;task&gt;"</span></div>
+            <div class="cmd-desc">Agendamento persistente — lista e gerencia jobs que rodam sozinhos, na sua máquina. <span class="sub">list · add · edit · enable · disable · rm.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MULTI-AGENTE -->
+      <div class="cmd-group">
+        <div class="cmd-group-head">
+          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 21v-1a6 6 0 0 1 12 0v1M15.5 21v-.5a4.5 4.5 0 0 1 5.5-4.4"/></svg></span>
+          <h2>Multi-agente</h2>
+          <span class="cap">— sua frota e as salas onde eles colaboram.</span>
+        </div>
+        <div class="cmd-list">
+          <div class="cmd-row">
+            <div class="cmd-name">/subagent <span class="arg">&lt;profile&gt;</span></div>
+            <div class="cmd-desc">Fala 1:1 com um subagente (um perfil <code class="icode">.md</code>) numa sub-sessão focada e contínua. Um especialista por tarefa.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/rooms <span class="arg">[new|list|read|watch]</span></div>
+            <div class="cmd-desc">Cria e observa salas onde vários agentes conversam entre si. Veja a frota colaborar ao vivo.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/agents</div>
+            <div class="cmd-desc">Lista os perfis de agente mapeados (global + projeto), válidos e rejeitados com motivo.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FERRAMENTAS -->
+      <div class="cmd-group">
+        <div class="cmd-group-head">
+          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span>
+          <h2>Ferramentas &amp; integrações</h2>
+          <span class="cap">— conecte o agente ao que você usa.</span>
+        </div>
+        <div class="cmd-list">
+          <div class="cmd-row">
+            <div class="cmd-name">/mcp <span class="arg">[add|search|list|remove]</span></div>
+            <div class="cmd-desc">Lista e gerencia conectores MCP: busca no registro aberto, adiciona um servidor local, liga e desliga. <span class="sub">reconnect · reload.</span></div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/tools</div>
+            <div class="cmd-desc">Inventário unificado das ferramentas do agente — nativas, MCP por servidor e estado de permissão. Read-only.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/skills</div>
+            <div class="cmd-desc">Lista as skills SKILL.md mapeadas (global + projeto), válidas e rejeitadas.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/workflows <span class="arg">[run|use]</span></div>
+            <div class="cmd-desc">Fluxos de atividades que coordenam o agente — lista, roda em sequência e ativa.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SESSÃO -->
+      <div class="cmd-group">
+        <div class="cmd-group-head">
+          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <h2>Sessão</h2>
+          <span class="cap">— saúde, contexto e histórico.</span>
+        </div>
+        <div class="cmd-list">
+          <div class="cmd-row">
+            <div class="cmd-name">/doctor</div>
+            <div class="cmd-desc">Diagnóstico read-only: testa modelo, chave, broker, MCP e config — com dica de conserto.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/ask <span class="arg">"&lt;question&gt;"</span></div>
+            <div class="cmd-desc">Uma pergunta paralela, read-only, que não para o trabalho em curso.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/memory <span class="arg">[list|forget|pin]</span></div>
+            <div class="cmd-desc">Vê, fixa ou esquece o que o agente lembra — global e por projeto.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/compact</div>
+            <div class="cmd-desc">Resume a conversa para liberar espaço e continuar de onde parou.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/clear <span class="arg">[full|memory]</span></div>
+            <div class="cmd-desc">Limpa a sessão. <code class="icode">full</code> também apaga a memória do agente (pede confirmação).</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/history <span class="arg">· /rewind · /undo · /redo</span></div>
+            <div class="cmd-desc">Retoma uma sessão anterior, volta a um ponto no tempo, ou desfaz/refaz a última edição de arquivo do agente.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/usage</div>
+            <div class="cmd-desc">Tokens e tamanho da janela desta sessão.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONFIGURAÇÃO -->
+      <div class="cmd-group">
+        <div class="cmd-group-head">
+          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+          <h2>Configuração &amp; conta</h2>
+          <span class="cap">— provider, modelo, memória e acesso.</span>
+        </div>
+        <div class="cmd-list">
+          <div class="cmd-row">
+            <div class="cmd-name">/init</div>
+            <div class="cmd-desc">Prepara as dependências locais e cria o <code class="icode">AGENT.md</code> do projeto (assistente do primeiro run).</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/model <span class="arg">· /provider · /effort</span></div>
+            <div class="cmd-desc">Troca o tier do modelo, define o provider no modo direto (só o nome) e ajusta o esforço de raciocínio. Mostra o tier, nunca a credencial.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/permissions</div>
+            <div class="cmd-desc">Painel: modo, grants e ferramentas seguras. A trava de sempre-perguntar fica travada.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/theme <span class="arg">· /lang</span></div>
+            <div class="cmd-desc">Troca o tema (escuro/claro/slate) e o idioma (pt-BR/en). Ambos auto-detectam no boot.</div>
+          </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/login <span class="arg">· /logout · /whoami</span></div>
+            <div class="cmd-desc">Entra e sai, e mostra a conta, org e escopos atuais — nunca o segredo.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NOTE -->
+      <div class="note">
+        <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+        <p>Dentro de uma sessão, digite <code class="icode">/help</code> para a lista completa, ou <kbd>Ctrl+P</kbd> para a paleta de comandos.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <img src="../assets/aluy-wordmark-white.png" alt="Aluy" />
+      <span class="grow"></span>
+      <nav class="foot-nav" aria-label="Rodapé">
+        <a href="funcionalidades.html">Funcionalidades</a>
+        <a href="comandos.html">Comandos</a>
+        <a href="arquitetura.html">Arquitetura</a>
+        <a href="comecar.html">Instalar</a>
+        <a href="help.html">Docs</a>
+        <a href="https://github.com/hiperplano/aluy-cli">GitHub</a>
+      </nav>
+      <p class="foot-fine">Aluy <span class="lam">Λ</span> CLI — o time de agentes que vive no seu terminal · código aberto · MIT</p>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

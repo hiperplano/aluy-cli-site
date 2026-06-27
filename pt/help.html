@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Documentação do Aluy CLI — instale, configure e coloque o agente de terminal para trabalhar. Referência completa de CLI e comandos slash, o layout .aluy/, /cycle, subagentes, salas, MCP, sidecars e mais. Código aberto, MIT." />
+<title>Docs — Aluy CLI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="../site.css" />
+<script src="../lang.js"></script>
+<script defer src="../site.js"></script>
+<script defer src="../help.js"></script>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+<div class="page">
+
+  <!-- ===== HEADER ===== -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Aluy CLI — início">
+        <img src="../assets/aluy-wordmark-white.png" alt="Aluy" />
+        <span class="cli">CLI</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="funcionalidades.html">Funcionalidades</a>
+        <a href="comandos.html">Comandos</a>
+        <a href="arquitetura.html">Arquitetura</a>
+        <a href="comecar.html">Instalar</a>
+        <a href="help.html" class="active">Docs</a>
+      </nav>
+      <span class="grow"></span>
+      <div class="lang-toggle" role="group" aria-label="Language · idioma">
+        <a href="../help.html" data-lang="en" hreflang="en" aria-current="false">EN</a>
+        <a href="help.html" data-lang="pt" hreflang="pt-BR" aria-current="true">PT</a>
+      </div>
+      <a class="gh-link" href="https://github.com/hiperplano/aluy-cli" aria-label="Ver no GitHub">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.52.1.71-.23.71-.5v-1.95c-2.9.63-3.52-1.24-3.52-1.24-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.93 1.6 2.45 1.13 3.05.86.09-.68.36-1.13.66-1.39-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.41-2.07 1.07-2.8-.11-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a9.9 9.9 0 0 1 5.24 0c2-1.35 2.87-1.07 2.87-1.07.57 1.43.21 2.49.11 2.75.67.73 1.07 1.66 1.07 2.8 0 4.01-2.45 4.9-4.78 5.16.38.32.71.95.71 1.92v2.85c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>
+        GitHub
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== DOCS LAYOUT ===== -->
+  <div class="docs-wrap">
+
+    <!-- sidebar -->
+    <nav id="docs-sidebar" aria-label="Seções da documentação">
+      <span class="docs-kicker">documentação</span>
+      <a href="#sec-overview" class="active"><span class="n">01</span>Visão geral</a>
+      <a href="#sec-install"><span class="n">02</span>Instalação</a>
+      <a href="#sec-first-steps"><span class="n">03</span>Primeiros passos</a>
+      <a href="#sec-cli"><span class="n">04</span>Referência de CLI</a>
+      <a href="#sec-commands"><span class="n">05</span>Comandos slash</a>
+      <a href="#sec-structure"><span class="n">06</span>Estrutura .aluy/</a>
+      <a href="#sec-cycle"><span class="n">07</span>/cycle</a>
+      <a href="#sec-subagents"><span class="n">08</span>Subagentes</a>
+      <a href="#sec-rooms"><span class="n">09</span>Salas</a>
+      <a href="#sec-mcp"><span class="n">10</span>MCP</a>
+      <a href="#sec-compat"><span class="n">11</span>Compatibilidade</a>
+      <a href="#sec-sidecars"><span class="n">12</span>Sidecars</a>
+      <a href="#sec-architecture"><span class="n">13</span>Arquitetura</a>
+      <a href="#sec-memory"><span class="n">14</span>Memória</a>
+      <a href="#sec-themes"><span class="n">15</span>Temas</a>
+      <a href="#sec-doctor"><span class="n">16</span>Doctor</a>
+      <a href="#sec-faq"><span class="n">17</span>FAQ</a>
+    </nav>
+
+    <!-- content -->
+    <div id="docs-content">
+      <span class="eyebrow eyebrow--sm">docs · beta</span>
+      <h1>Documentação do Aluy CLI</h1>
+      <p class="docs-intro">Tudo para instalar, configurar e colocar o agente para trabalhar — do primeiro comando ao ciclo autônomo, a referência completa do CLI e dos comandos slash, o layout <code class="icode">.aluy/</code> e a compatibilidade. Código aberto sob MIT.</p>
+
+      <!-- 01 OVERVIEW -->
+      <section class="docs-sec first" id="sec-overview">
+        <span class="eyebrow eyebrow--sm">01 · início</span>
+        <h2>Visão geral</h2>
+        <p>O <b>Aluy CLI</b> é o time de agentes que vive no seu terminal. Em vez de sugerir código para você copiar e colar, ele <b>age</b> no seu projeto: lê e edita arquivos, roda comandos e fala com ferramentas — de ponta a ponta, na sua shell.</p>
+        <p>O que roda na sua máquina fica na sua máquina: a sessão, o histórico, os arquivos, a memória e a chave de provider (guardada no cofre do SO). A única coisa que cruza a borda é a <b>chamada ao modelo</b> — por padrão o Aluy cuida dessa conexão, ou você liga o seu próprio provider direto.</p>
+        <p>É <b>código aberto, sob a licença MIT</b>: o que age na sua máquina, você pode ler, auditar e mudar. A missão é simples — democratizar a automação de tarefas, processos, testes e desenvolvimento, sem depender de um time de plataforma.</p>
+        <div class="note">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+          <p>O Aluy CLI é o agente de terminal — não é o orquestrador de histórias, ADRs e sprints na plataforma Aluy. Aqui o foco é agir no seu projeto.</p>
+        </div>
+      </section>
+
+      <!-- 02 INSTALL -->
+      <section class="docs-sec" id="sec-install">
+        <span class="eyebrow eyebrow--sm">02 · início</span>
+        <h2>Instalação</h2>
+        <p>Instale em um comando, como seu usuário, sem <code class="icode">sudo</code>. O instalador resolve as dependências e coloca o <code class="icode">aluy</code> no PATH; re-rodar atualiza. A instalação vive em <code class="icode">~/.aluy</code>.</p>
+        <h3>Linux · macOS</h3>
+        <div class="codeblock"><span class="pr">$</span> curl -fsSL https://aluy.dev/install.sh <span class="pr">|</span> bash</div>
+        <h3>Windows (PowerShell)</h3>
+        <div class="codeblock"><span class="pr">PS&gt;</span> irm https://aluy.dev/install.ps1 <span class="pr">|</span> iex</div>
+        <p>Requisitos: Linux, macOS ou Windows · Node ≥ 20 (o instalador garante) · ~150 MB livres · conexão no primeiro run.</p>
+        <a class="docs-link" href="comecar.html">Guia completo de instalação →</a>
+      </section>
+
+      <!-- 03 FIRST STEPS -->
+      <section class="docs-sec" id="sec-first-steps">
+        <span class="eyebrow eyebrow--sm">03 · início</span>
+        <h2>Primeiros passos</h2>
+        <p>No seu primeiro <code class="icode">aluy</code>, um assistente abre e pede, nesta ordem, <b>provider</b>, <b>chave</b> e <b>modelo</b>.</p>
+        <ul class="docs-list">
+          <li><b>Provider</b> — por padrão, o Aluy cuida da conexão com o modelo e você não configura nada. Ou escolha um provider direto, com a sua credencial. Troque depois com <code class="icode">/provider</code>.</li>
+          <li><b>Chave</b> — vai direto pro cofre do SO (Keychain no macOS, libsecret no Linux, Credential Manager no Windows). Nunca em texto, nunca no repo.</li>
+          <li><b>Modelo</b> — escolha o tier com <code class="icode">/model</code>; ajuste o esforço de raciocínio com <code class="icode">/effort</code> quando precisar.</li>
+        </ul>
+        <p>Então mande a primeira tarefa: abra a sessão, descreva o objetivo (ou use um <code class="icode">/comando</code>) e deixe o agente trabalhar. Cada ação que toca seus arquivos pede permissão.</p>
+        <div class="codeblock">
+          <div><span class="pr">$</span> aluy            <span class="cm"># abre a sessão neste projeto</span></div>
+          <div class="cm">› digite um objetivo, ou um /comando:</div>
+          <div><span class="pr">/doctor</span>          <span class="cm"># checa a saúde da instalação</span></div>
+          <div><span class="pr">/init</span>            <span class="cm"># cria o AGENT.md do projeto</span></div>
+          <div><span class="pr">/cycle</span> <span class="str">"rode os testes e conserte o que quebrar"</span></div>
+        </div>
+        <p>Quer ligar memória de longo prazo, mais fôlego de contexto ou modelos locais? Rode <code class="icode">aluy bootstrap</code> — veja a seção <a href="#sec-sidecars">Sidecars</a>.</p>
+      </section>
+
+      <!-- 04 CLI REFERENCE -->
+      <section class="docs-sec" id="sec-cli">
+        <span class="eyebrow eyebrow--sm">04 · referência</span>
+        <h2>Referência de CLI</h2>
+        <p>São os comandos que você roda na sua shell — <code class="icode">aluy</code> e seus subcomandos. Rode <code class="icode">aluy --help</code> para a lista embutida e <code class="icode">aluy --version</code> para imprimir a versão. O padrão (sem subcomando) abre a sessão interativa.</p>
+
+        <h3>Sinopse</h3>
+        <div class="codeblock">
+          <div><span class="pr">$</span> aluy <span class="arg">[objetivo] [flags…]</span>       <span class="cm"># abre a sessão (opcionalmente com um objetivo)</span></div>
+          <div><span class="pr">$</span> aluy <span class="pr">&lt;subcomando&gt;</span> <span class="arg">[flags…]</span>      <span class="cm"># login, doctor, mcp, cron, bootstrap…</span></div>
+          <div><span class="pr">$</span> aluy -p <span class="str">"&lt;objetivo&gt;"</span> <span class="arg">[flags…]</span>   <span class="cm"># headless one-shot (modo print)</span></div>
+        </div>
+
+        <h3>O comando padrão</h3>
+        <p>Rodar <code class="icode">aluy</code> sem subcomando abre a sessão TUI interativa no diretório atual. Uma string entre aspas isolada vira o <b>objetivo</b> inicial: <code class="icode">aluy "refatore o módulo de auth"</code>. O primeiro token sem flag é o objetivo. No primeiríssimo run — quando ainda não há config — o assistente interativo de primeira execução abre automaticamente antes da sessão, passando por idioma, backend, provider e modelo.</p>
+
+        <h3>Flags de topo</h3>
+        <div>
+          <details class="acc"><summary><code>-v</code>, <code>--version</code> <span class="acc-flag">info</span></summary><div class="acc-body"><p>Imprime a versão e sai imediatamente, antes de montar a TUI. Formato: <code class="icode">aluy &lt;cli&gt; (@aluy/cli-core &lt;core&gt;)</code>.</p></div></details>
+          <details class="acc"><summary><code>-h</code>, <code>--help</code> <span class="acc-flag">info</span></summary><div class="acc-body"><p>Imprime o texto de ajuda embutido completo (todos os comandos e flags) e sai.</p></div></details>
+          <details class="acc"><summary><code>--yolo</code> <span class="acc-flag">sessão · segurança</span></summary><div class="acc-body"><p>Permissão total na máquina: auto-aprova todo efeito, <b>exceto</b> as categorias sempre-perguntar, que seguem inflexíveis. <b>Recusa rodar como root</b> (uid 0). Em TTY pede confirmação uma vez; em headless (<code class="icode">-p</code>) entra direto. O alias depreciado <code class="icode">--unsafe</code> ainda funciona, mas emite um aviso.</p></div></details>
+          <details class="acc"><summary><code>--plan</code> <span class="acc-flag">sessão · segurança</span></summary><div class="acc-body"><p>Modo de planejamento somente-leitura: o agente analisa e propõe, mas não produz efeito. Se <code class="icode">--plan</code> e <code class="icode">--yolo</code> forem passados juntos, <code class="icode">--plan</code> vence.</p></div></details>
+        </div>
+
+        <h3>Modo headless / print</h3>
+        <div>
+          <details class="acc"><summary><code>-p</code>, <code>--print</code>, <code>--exec</code> <span class="acc-flag">scripting</span></summary><div class="acc-body"><p>Run headless one-shot: executa um único objetivo, imprime o resultado, sai. O prompt pode ser inline (<code class="icode">-p "objetivo"</code>) ou vir por stdin (<code class="icode">echo "objetivo" | aluy -p</code>). <code class="icode">--print</code> e <code class="icode">--exec</code> são aliases.</p></div></details>
+          <details class="acc"><summary><code>--output-format</code> <span class="opt">text|json|stream-json</span> <span class="acc-flag">scripting</span></summary><div class="acc-body"><p>Só válido com <code class="icode">-p</code>. <code class="icode">text</code> (padrão) imprime só o resultado; <code class="icode">json</code> imprime um objeto numa linha; <code class="icode">stream-json</code> emite um fluxo NDJSON de eventos ao vivo.</p></div></details>
+          <details class="acc"><summary><code>--quiet</code> <span class="acc-flag">scripting</span></summary><div class="acc-body"><p>Só com <code class="icode">-p</code>: cala os ticks de progresso e o ruído do stderr, deixando só o resultado. Ideal para pipes e CI.</p></div></details>
+          <details class="acc"><summary><code>--cycle</code>, <code>--cycles &lt;N&gt;</code>, <code>--cycle-for &lt;dur&gt;</code> <span class="acc-flag">scripting</span></summary><div class="acc-body"><p>Só com <code class="icode">-p</code>: roda o objetivo autonomamente em ciclos (a forma headless do <code class="icode">/cycle</code>). Exige um teto — <code class="icode">--cycles &lt;N&gt;</code> (máximo de iterações) ou <code class="icode">--cycle-for &lt;dur&gt;</code> (relógio de parede, ex.: <code class="icode">30m</code>, <code class="icode">2h</code>). Anti-runaway: ambos são clampados em limites duros.</p></div></details>
+        </div>
+
+        <h3>Modelo e backend</h3>
+        <div>
+          <details class="acc"><summary><code>--tier &lt;tier&gt;</code> <span class="acc-flag">modelo</span></summary><div class="acc-body"><p>Escolhe o tier de modelo da sessão (alterável em runtime com <code class="icode">/model</code>). Passar o literal <code class="icode">custom</code> sem <code class="icode">--model</code> é erro de uso.</p></div></details>
+          <details class="acc"><summary><code>--model &lt;slug&gt;</code> · <code>--provider &lt;name&gt;</code> <span class="acc-flag">modelo</span></summary><div class="acc-body"><p><code class="icode">--model</code> seleciona um slug curado de modelo do catálogo e força <code class="icode">tier: custom</code>. <code class="icode">--provider</code> precisa vir pareado com <code class="icode">--model</code>. Ambos são <b>dado</b>, nunca credencial — o broker resolve slug/provider para uma credencial server-side.</p></div></details>
+          <details class="acc"><summary><code>--effort &lt;value&gt;</code> <span class="acc-flag">modelo</span></summary><div class="acc-body"><p>Passthrough de esforço de raciocínio (qualquer valor não-vazio ≤ 32 chars, ex.: <code class="icode">low</code>/<code class="icode">medium</code>/<code class="icode">high</code>). Sem tier-gate; o broker/provider valida o valor.</p></div></details>
+          <details class="acc"><summary><code>--backend broker|local</code> <span class="acc-flag">backend</span></summary><div class="acc-body"><p>Escolhe como o modelo é alcançado. <code class="icode">broker</code> (padrão) roteia a chamada pelo broker do Aluy. <code class="icode">local</code> fala com o seu provider direto, com a sua credencial (BYO) do cofre do SO.</p></div></details>
+          <details class="acc"><summary><code>--local-provider</code> · <code>--local-model</code> · <code>--local-auth</code> · <code>--local-base-url</code> <span class="acc-flag">backend · local</span></summary><div class="acc-body"><p>Só sob <code class="icode">--backend local</code>. <code class="icode">--local-provider</code> é <code class="icode">anthropic|openrouter|openai</code>; <code class="icode">--local-model</code> é o slug nativo do provider; <code class="icode">--local-auth</code> é <code class="icode">apikey|oauth</code>; <code class="icode">--local-base-url</code> é o endpoint (protegido por anti-SSRF). Cada um cai no env (<code class="icode">ALUY_LOCAL_*</code>) ou na config quando omitido.</p></div></details>
+        </div>
+
+        <h3>Limites e segurança</h3>
+        <div>
+          <details class="acc"><summary><code>--max-tokens &lt;N&gt;</code> · <code>--max-iterations &lt;N&gt;</code> · <code>--max-output-tokens &lt;N&gt;</code> <span class="acc-flag">budget</span></summary><div class="acc-body"><p><code class="icode">--max-tokens</code> é o budget de tokens da sessão (padrão <code class="icode">1000000</code>); <code class="icode">--max-iterations</code> limita o loop modelo→tool→observação (padrão <code class="icode">300</code>); <code class="icode">--max-output-tokens</code> limita o output por chamada. Ao bater um teto o run pausa e pergunta se continua ou para. Cada um é clampado.</p></div></details>
+          <details class="acc"><summary><code>--budget</code> / <code>--no-budget</code> <span class="acc-flag">budget</span></summary><div class="acc-body"><p>Liga/desliga o circuit-breaker de budget da sessão. Padrão <b>off</b> em <code class="icode">--backend local</code> (BYO, ilimitado por design), sempre <b>on</b> com o broker.</p></div></details>
+          <details class="acc"><summary><code>--self-check</code> / <code>--no-self-check</code> <span class="acc-flag">qualidade</span></summary><div class="acc-body"><p>Força o loop de self-check on ou off (re-âncora o objetivo e verifica antes de declarar "pronto"). Sem a flag é automático: tiers mais fracos ligam.</p></div></details>
+          <details class="acc"><summary><code>--autocompact-at &lt;razão|%|off&gt;</code> <span class="acc-flag">contexto</span></summary><div class="acc-body"><p>Limiar de ocupação da janela que dispara a auto-compactação (padrão <code class="icode">0.85</code>). Aceita <code class="icode">0..1</code>, uma porcentagem (<code class="icode">85%</code>), ou <code class="icode">off</code>. O atalho <code class="icode">--no-autocompact</code> equivale a <code class="icode">--autocompact-at off</code>.</p></div></details>
+          <details class="acc"><summary><code>--no-subagents</code> <span class="acc-flag">agentes</span></summary><div class="acc-body"><p>Desliga os sub-agentes locais paralelos (a tool <code class="icode">spawn_agent</code>). Por padrão os sub-agentes rodam em paralelo com profundidade ≤ 1, herdando permissões e um teto compartilhado.</p></div></details>
+        </div>
+
+        <h3>Sessão, retomada &amp; exibição</h3>
+        <div>
+          <details class="acc"><summary><code>--continue</code> · <code>--resume [&lt;id&gt;]</code> · <code>--new</code> <span class="acc-flag">sessão</span></summary><div class="acc-body"><p><code class="icode">--continue</code> retoma a última sessão deste diretório. <code class="icode">--resume</code> sem id lista as sessões salvas; com um id retoma aquela. <code class="icode">--new</code> começa do zero.</p></div></details>
+          <details class="acc"><summary><code>--lang pt-BR|en</code> <span class="acc-flag">ui</span></summary><div class="acc-body"><p>Idioma da TUI. Precedência: flag &gt; config &gt; auto-detect do locale &gt; padrão <code class="icode">pt-BR</code>. Não traduz o output do agente. Troque em runtime com <code class="icode">/lang</code>.</p></div></details>
+          <details class="acc"><summary><code>--split</code> · <code>--fullscreen</code> <span class="acc-flag">ui</span></summary><div class="acc-body"><p><code class="icode">--split</code> começa em View Avançado (CHAT | LOG lado a lado; <kbd>Ctrl+L</kbd> alterna). <code class="icode">--fullscreen</code> começa em modo Cockpit (alt-screen). Ambos persistem na config.</p></div></details>
+          <details class="acc"><summary><code>--dense</code> · <code>--ascii</code> <span class="acc-flag">ui</span></summary><div class="acc-body"><p><code class="icode">--dense</code> compacta a TUI. <code class="icode">--ascii</code> usa um perfil seguro de glifos para evitar "tofu" Unicode (igual a <code class="icode">ALUY_SAFE_GLYPHS=1</code>).</p></div></details>
+        </div>
+
+        <h3>Subcomandos</h3>
+        <div>
+          <details class="acc"><summary><code>aluy bootstrap [--agent]</code> <span class="acc-flag">setup · sidecars</span></summary><div class="acc-body"><p>Provisiona os sidecars locais (mem0, headroom, ollama) em user space — oferece cada um e você escolhe. <code class="icode">--agent</code> deixa o Aluy instalá-los pelo próprio agente em sistemas sem artefato pinado. Não existe subcomando <code class="icode">aluy onboard</code>: o assistente interativo de primeira execução (idioma, backend, provider, modelo) abre automaticamente na primeira vez que você roda <code class="icode">aluy</code>.</p></div></details>
+          <details class="acc"><summary><code>aluy login</code> <span class="opt">[--token &lt;PAT&gt;] [--org &lt;id&gt;] [--device] [--provider &lt;p&gt;] [--oauth]</span> <span class="acc-flag">conta</span></summary><div class="acc-body"><p>Autentica. Por padrão roda o device-flow do broker. <code class="icode">--token</code> passa um Personal Access Token direto (CI); <code class="icode">--org</code> escolhe uma organização; <code class="icode">--provider</code> faz login num backend local (BYO), e com <code class="icode">--oauth</code> faz um login OAuth-PKCE.</p></div></details>
+          <details class="acc"><summary><code>aluy logout</code> · <code>aluy whoami</code> <span class="acc-flag">conta</span></summary><div class="acc-body"><p><code class="icode">logout</code> revoga a sessão e apaga a credencial do keychain. <code class="icode">whoami</code> mostra o usuário, org e escopos atuais — nunca o segredo.</p></div></details>
+          <details class="acc"><summary><code>aluy doctor [--deep|--test] [--json]</code> <span class="acc-flag">saúde</span></summary><div class="acc-body"><p>Valida a instalação: credencial, broker, servers MCP, perfis de agente, config, versão e memória. <code class="icode">--deep</code> adiciona um teste do tier ao vivo (gasta uma chamada ao modelo). <code class="icode">--json</code> imprime um array legível por máquina; o exit code é diferente de zero se algum check falhar.</p></div></details>
+          <details class="acc"><summary><code>aluy agents</code> · <code>skills</code> · <code>workflows</code> · <code>models</code> · <code>providers</code> <span class="acc-flag">descoberta</span></summary><div class="acc-body"><p>Listagens somente-leitura, exit 0, sem chamada ao modelo. Mostram os perfis de agente <code class="icode">.md</code> mapeados, as skills <code class="icode">SKILL.md</code>, as definições de workflow e os providers/modelos disponíveis (catálogo do broker + local BYO).</p></div></details>
+          <details class="acc"><summary><code>aluy mcp &lt;search|add|list|remove&gt;</code> <span class="acc-flag">ferramentas</span></summary><div class="acc-body"><p>Gerencia conectores MCP pela shell (o mesmo motor do <code class="icode">/mcp</code> na sessão). <code class="icode">add &lt;nome&gt; -- &lt;cmd&gt;</code> adiciona um server stdio local; <code class="icode">--project</code> escreve no <code class="icode">.mcp.json</code> do projeto.</p></div></details>
+          <details class="acc"><summary><code>aluy cron &lt;add|list|edit|enable|disable|rm|run&gt;</code> <span class="acc-flag">agendamento</span></summary><div class="acc-body"><p>Agenda tarefas headless persistentes pelo agendador do SO (sem daemon). Disponível no <b>Linux</b> (crontab); Windows/macOS a caminho. Cada run executa como <code class="icode">aluy -p "&lt;tarefa&gt;"</code> pela trava de permissão. <code class="icode">add &lt;quando&gt; "tarefa"</code> recebe um cron de 5 campos (ex.: <code class="icode">"0 9 * * 1-5"</code>); <code class="icode">list</code> mostra id, on/off, agenda, tarefa e yolo; <code class="icode">edit</code> / <code class="icode">rm</code> / <code class="icode">run &lt;id&gt;</code> reconfiguram, removem ou rodam agora; <code class="icode">enable</code> / <code class="icode">disable &lt;id&gt;</code> alternam sem apagar.</p></div></details>
+        </div>
+
+        <h3>Variáveis de ambiente</h3>
+        <p>Várias flags leem uma env var correspondente como fallback: <code class="icode">ALUY_TOKEN</code>, <code class="icode">ALUY_ORG</code>, <code class="icode">ALUY_BACKEND</code>, <code class="icode">ALUY_LOCAL_*</code>, <code class="icode">ALUY_MAX_TOKENS</code>, <code class="icode">ALUY_BUDGET</code>, <code class="icode">ALUY_AUTOCOMPACT_AT</code>, <code class="icode">ALUY_SAFE_GLYPHS</code>. <code class="icode">NO_COLOR</code> desliga a saída colorida.</p>
+        <div class="note">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+          <p>Exit codes: <code class="icode">0</code> sucesso · <code class="icode">1</code> erro · <code class="icode">2</code> erro de uso — sai sem montar uma sessão.</p>
+        </div>
+      </section>
+
+      <!-- 05 SLASH COMMANDS -->
+      <section class="docs-sec" id="sec-commands">
+        <span class="eyebrow eyebrow--sm">05 · referência</span>
+        <h2>Comandos slash</h2>
+        <p>Dentro de uma sessão em execução, digite <code class="icode">/</code> no início da linha para abrir o menu — filtre enquanto digita, e <kbd>Tab</kbd>/<kbd>Enter</kbd> completa. São comandos que <b>você</b> dá, não tools que o agente invoca. Uma visão compacta e agrupada está na página <a href="comandos.html">Comandos</a>.</p>
+
+        <h3>Conta &amp; sessão</h3>
+        <div>
+          <details class="acc"><summary><code>/login</code> · <code>/logout</code> · <code>/whoami</code> · <code>/doctor</code> <span class="acc-flag">conta · somente-leitura</span></summary><div class="acc-body"><p>Entra/sai e inspeciona a sessão. <code class="icode">/whoami</code> mostra usuário, org, escopos e uma dica de token redigida — nunca o segredo. <code class="icode">/doctor</code> é o health check somente-leitura (credencial, broker, catálogo, MCP, perfis, config, versão, memória) — cada ✓/⚠/✗ com uma dica de conserto. Ambos rodam em paralelo no meio do turno.</p></div></details>
+          <details class="acc"><summary><code>/help</code> · <code>/usage</code> · <code>/rename</code> · <code>/history</code> <span class="acc-flag">sessão</span></summary><div class="acc-body"><p><code class="icode">/help</code> lista todo comando nativo; <code class="icode">/usage</code> mostra tokens, ocupação da janela e tier. <code class="icode">/rename</code> dá um rótulo + cor à sessão (também define o título da janela do terminal). <code class="icode">/history</code> navega e retoma uma sessão anterior sem sair do Aluy.</p></div></details>
+          <details class="acc"><summary><code>/compact</code> · <code>/clear [full|memory]</code> · <code>/ask</code> · <code>/notify</code> <span class="acc-flag">sessão · contexto</span></summary><div class="acc-body"><p><code class="icode">/compact</code> resume a conversa para encolher a janela. <code class="icode">/clear</code> limpa o contexto; <code class="icode">memory</code>/<code class="icode">full</code> também apagam a memória (confirma). <code class="icode">/ask</code> é uma pergunta paralela somente-leitura. <code class="icode">/notify</code> alterna a campainha de atenção.</p></div></details>
+        </div>
+
+        <h3>Workspace, projeto &amp; config</h3>
+        <div>
+          <details class="acc"><summary><code>/undo</code> · <code>/redo</code> · <code>/rewind</code> <span class="acc-flag">workspace</span></summary><div class="acc-body"><p>Avança/volta a última edição de arquivo do agente pelo journal da sessão. <code class="icode">/rewind</code> (<kbd>Esc Esc</kbd>) volta a um checkpoint anterior — código e/ou conversa.</p></div></details>
+          <details class="acc"><summary><code>/permissions</code> · <code>/tools</code> · <code>/add-dir</code> <span class="acc-flag">workspace</span></summary><div class="acc-body"><p><code class="icode">/permissions</code> mostra as regras (read=allow, write/bash=ask, sempre-perguntar=travado). <code class="icode">/tools</code> é o inventário unificado somente-leitura (nativas, MCP por server, tools de delegação, estado de permissão). <code class="icode">/add-dir</code> autoriza um diretório extra para a sessão.</p></div></details>
+          <details class="acc"><summary><code>/init</code> · <code>/memory</code> · <code>/todo</code> <span class="acc-flag">projeto</span></summary><div class="acc-body"><p><code class="icode">/init</code> analisa o repo e escreve o <code class="icode">AGENT.md</code> (você confirma o diff). <code class="icode">/memory &lt;list|forget|edit|pin|unpin&gt;</code> cura a memória do agente (global + projeto; um fato fixado segue dado, nunca instrução). <code class="icode">/todo</code> gerencia o backlog persistente.</p></div></details>
+          <details class="acc"><summary><code>/model</code> · <code>/provider</code> · <code>/effort</code> · <code>/theme</code> · <code>/lang</code> · <code>/split</code> · <code>/fullscreen</code> <span class="acc-flag">config · ui</span></summary><div class="acc-body"><p><code class="icode">/model</code> troca o tier (mostra só o tier, nunca a credencial); <code class="icode">/provider</code> define o nome do provider para o modo Custom; <code class="icode">/effort</code> define o esforço de raciocínio. <code class="icode">/theme aluy-dark|aluy-light|aluy-slate</code> e <code class="icode">/lang</code> (pt-BR/en) persistem a escolha. <code class="icode">/split</code> e <code class="icode">/fullscreen</code> alternam o painel LOG e o modo Cockpit.</p></div></details>
+        </div>
+
+        <h3>Autonomia &amp; multi-agente</h3>
+        <div>
+          <details class="acc"><summary><code>/cycle &lt;intervalo|--por dur|--auto&gt; "tarefa"</code> <span class="acc-flag">autonomia</span></summary><div class="acc-body"><p>Roda uma tarefa em ciclos até terminar, com tetos duros e parada automática (anti-runaway), pela mesma catraca de permissão. Dois ritmos: fixo (<code class="icode">5m</code> ou <code class="icode">--por &lt;dur&gt;</code>) ou <code class="icode">--auto</code>. Em voo: <code class="icode">pause</code>, <code class="icode">resume</code>, <code class="icode">edit</code>, <code class="icode">status</code>, <code class="icode">stop</code>.</p></div></details>
+          <details class="acc"><summary><code>/cron</code> · <code>/subagent</code> · <code>/back</code> · <code>/rooms</code> <span class="acc-flag">agendamento · multi-agente</span></summary><div class="acc-body"><p><code class="icode">/cron</code> é a forma em-sessão do <code class="icode">aluy cron</code>. <code class="icode">/subagent &lt;nome&gt;</code> abre um foco 1:1 com um perfil; <code class="icode">/back</code> volta. <code class="icode">/rooms &lt;list|new|read|watch&gt;</code> cria e acompanha salas agente-a-agente ao vivo.</p></div></details>
+          <details class="acc"><summary><code>/agents</code> · <code>/skills</code> · <code>/workflows</code> · <code>/mcp</code> <span class="acc-flag">descoberta · ferramentas</span></summary><div class="acc-body"><p>Listagens somente-leitura do que a sessão mapeou no boot. <code class="icode">/workflows run &lt;nome&gt;</code> roda um em sequência; <code class="icode">use</code> ativa o modo fluxo. <code class="icode">/mcp &lt;search|add|list|remove|disable|enable|reconnect|reload&gt;</code> gerencia conectores sem sair da sessão.</p></div></details>
+        </div>
+        <div class="note">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+          <p>Dentro da sessão, digite <code class="icode">/help</code> para a lista ao vivo, ou <kbd>Ctrl+P</kbd> para a paleta de comandos. Os aliases <code class="icode">/view</code> → <code class="icode">/split</code> e <code class="icode">/cockpit</code> → <code class="icode">/fullscreen</code> resolvem automaticamente.</p>
+        </div>
+      </section>
+
+      <!-- 06 STRUCTURE -->
+      <section class="docs-sec" id="sec-structure">
+        <span class="eyebrow eyebrow--sm">06 · referência</span>
+        <h2>Estrutura .aluy/</h2>
+        <p>O Aluy mantém duas casas: uma <b>global</b> em <code class="icode">~/.aluy/</code> (instalação, config, sidecars, memória entre projetos) e uma de <b>projeto</b> — o arquivo de instrução na raiz do repo mais uma pasta <code class="icode">.aluy/</code> opcional. Tudo sob <code class="icode">~/.aluy/</code> é o kernel-cliente confinado: as próprias regras de path-deny do agente o proíbem de ler, editar ou rodar qualquer coisa ali.</p>
+
+        <h3>Projeto: o arquivo de instrução</h3>
+        <p>O arquivo de instrução nativo do projeto é o <code class="icode">AGENT.md</code> na raiz do repo — o que o <code class="icode">/init</code> cria. O Aluy lê três nomes de arquivo como instruções de projeto, nesta precedência, compondo todos os presentes:</p>
+        <div class="tree">&lt;seu-projeto&gt;/
+├── <span class="c">AGENT.md</span>      <span class="cm"># nativo do Aluy (primário — o que o /init escreve)</span>
+├── <span class="c">AGENTS.md</span>     <span class="cm"># Codex / OpenAI</span>
+└── <span class="c">CLAUDE.md</span>     <span class="cm"># Claude Code / Anthropic</span></div>
+        <p>A precedência é <code class="icode">AGENT.md › AGENTS.md › CLAUDE.md</code>. São lidos uma vez na largada e injetados no system prompt, cada um sob um cabeçalho marcando a origem. Symlinks que escapam da raiz do projeto são rejeitados e nada é lido.</p>
+
+        <h3>Projeto: a pasta .aluy/</h3>
+        <div class="tree">&lt;seu-projeto&gt;/.aluy/
+├── agents/<span class="cm">*.md</span>           <span class="cm"># perfis de sub-agente do projeto</span>
+├── commands/<span class="cm">*.md</span>         <span class="cm"># comandos slash custom do projeto</span>
+├── skills/<span class="cm">&lt;nome&gt;/SKILL.md</span> <span class="cm"># skills do projeto</span>
+├── workflows/<span class="cm">*.md</span>        <span class="cm"># definições de workflow do projeto</span>
+└── memory/project.md     <span class="cm"># memória do agente com escopo de projeto</span>
+
+<span class="cm"># também lido (compat Claude Code): .claude/agents · commands · skills · workflows</span></div>
+
+        <h3>Global: ~/.aluy/</h3>
+        <div class="tree">~/.aluy/
+├── config.json           <span class="cm"># tema, tier, lang, split/fullscreen, backend…</span>
+├── providers.json        <span class="cm"># overrides de provider custom compatível com OpenAI</span>
+├── mcp.json              <span class="cm"># configuração global de servers MCP</span>
+├── audit.jsonl           <span class="cm"># log de auditoria de entrada em yolo</span>
+├── sessions/<span class="cm">&lt;id&gt;.json</span>     <span class="cm"># transcrições + metadados das sessões salvas</span>
+├── todos/<span class="cm">&lt;sessionId&gt;.json</span> <span class="cm"># backlog de tarefas por sessão</span>
+├── undo/<span class="cm">&lt;sessionId&gt;/</span>      <span class="cm"># journal de edições + blobs de conteúdo</span>
+├── memory/
+│   ├── global.md         <span class="cm"># memória do agente entre projetos</span>
+│   └── project.md        <span class="cm"># espelho da memória do projeto ativo</span>
+├── agents/ commands/ skills/ workflows/   <span class="cm"># assets .md globais</span>
+├── cron/jobs.json        <span class="cm"># jobs cron agendados</span>
+├── rooms/<span class="cm">&lt;code&gt;.jsonl</span>     <span class="cm"># conversas das salas inter-agente</span>
+├── ollama/               <span class="cm"># sidecar ollama: bin + modelos</span>
+├── mem-venv/             <span class="cm"># venv do sidecar mem0</span>
+└── hr-venv/              <span class="cm"># venv do sidecar headroom</span></div>
+        <div class="note">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+          <p>Os três diretórios de sidecar só aparecem depois que você roda <code class="icode">aluy bootstrap</code> e escolhe provisioná-los. Sem os sidecars o Aluy ainda funciona — só perde memória de longo prazo, fôlego extra de contexto e modelos locais.</p>
+        </div>
+      </section>
+
+      <!-- 07 CYCLE -->
+      <section class="docs-sec" id="sec-cycle">
+        <span class="eyebrow eyebrow--sm">07 · em foco</span>
+        <h2>/cycle — roda até terminar</h2>
+        <p>Com o <code class="icode">/cycle</code>, você descreve a tarefa e o agente trabalha em <b>ciclos por conta própria</b> até terminar — sem babá. É o "dispare e vá fazer outra coisa".</p>
+        <p>Vem com um <b>freio de mão</b>: tetos duros de tempo e de passos, e parada automática se algo sair do trilho. O anti-runaway — nada de robô fugindo do controle.</p>
+        <div class="codeblock"><span class="pr">/cycle</span> <span class="str">"rode a suíte de testes e conserte o que quebrar"</span></div>
+        <ul class="docs-list">
+          <li>Bom para: consertar testes, varreduras em massa, migrações repetitivas, tarefas longas com um critério claro de "pronto".</li>
+          <li>Todo efeito que toca seus arquivos ainda passa pela trava de permissão.</li>
+        </ul>
+      </section>
+
+      <!-- 08 SUBAGENTS -->
+      <section class="docs-sec" id="sec-subagents">
+        <span class="eyebrow eyebrow--sm">08 · em foco</span>
+        <h2>Subagentes</h2>
+        <p>Cada subagente é um <b>perfil</b> (arquivo <code class="icode">.md</code>) com o seu próprio foco. Você <b>pede o especialista e o próprio agente cria</b> o subagente para você — descreva o que precisa ("um revisor de segurança", "um QA de E2E") e ele gera o perfil com o papel, o tom e os limites. Você não escreve o <code class="icode">.md</code> na mão (mas pode editar ou criar um se quiser).</p>
+        <p>Eles trabalham <b>em paralelo, sem misturar contextos</b>: cada subagente tem sua própria sub-sessão dedicada. Uma frota, não um agente sozinho.</p>
+        <div class="codeblock"><span class="pr">/subagent</span> reviewer   <span class="cm"># abre um foco 1:1 com o perfil "reviewer"</span></div>
+      </section>
+
+      <!-- 09 ROOMS -->
+      <section class="docs-sec" id="sec-rooms">
+        <span class="eyebrow eyebrow--sm">09 · em foco</span>
+        <h2>Salas</h2>
+        <p>As salas (<code class="icode">/rooms</code>) colocam <b>vários agentes conversando entre si</b> sobre o mesmo problema — debatendo, dividindo e combinando o trabalho. Você acompanha a conversa <b>em tempo real</b> e entra quando fizer sentido.</p>
+        <div class="codeblock">
+          <div><span class="pr">$</span> /rooms new      <span class="cm"># cria uma sala</span></div>
+          <div><span class="pr">$</span> /rooms list     <span class="cm"># lista as salas ativas</span></div>
+          <div><span class="pr">$</span> /rooms watch    <span class="cm"># observa a frota colaborar ao vivo</span></div>
+        </div>
+      </section>
+
+      <!-- 10 MCP -->
+      <section class="docs-sec" id="sec-mcp">
+        <span class="eyebrow eyebrow--sm">10 · em foco</span>
+        <h2>MCP — conecte ferramentas</h2>
+        <p>Pelo <b>MCP</b> (o padrão aberto de conectores), o agente fala com ferramentas e integrações externas — bancos, APIs, serviços. É o que dá ao agente acesso <b>real</b> ao que você já usa, não só conversa.</p>
+        <div class="codeblock">
+          <div><span class="pr">$</span> /mcp search      <span class="cm"># busca conectores no registro</span></div>
+          <div><span class="pr">$</span> /mcp add         <span class="cm"># adiciona um servidor local</span></div>
+          <div><span class="pr">$</span> /mcp list        <span class="cm"># lista e liga/desliga conectores</span></div>
+        </div>
+      </section>
+
+      <!-- 11 COMPAT -->
+      <section class="docs-sec" id="sec-compat">
+        <span class="eyebrow eyebrow--sm">11 · interoperável</span>
+        <h2>Compatibilidade — Codex &amp; Claude Code</h2>
+        <p><b>Já usa Codex ou Claude Code? O Aluy entende a sua estrutura. Sem reconfig.</b> Aponte o Aluy para o seu projeto e ele lê os mesmos arquivos de instrução e configuração que você já mantém.</p>
+        <h3>Arquivos de instrução do projeto</h3>
+        <ul class="docs-list">
+          <li><code class="icode">AGENT.md</code> — o arquivo nativo do Aluy (o que o <code class="icode">/init</code> escreve), também a convenção genérica de agente.</li>
+          <li><code class="icode">AGENTS.md</code> — o mesmo arquivo que o <b>Codex</b> (OpenAI) usa.</li>
+          <li><code class="icode">CLAUDE.md</code> — o mesmo arquivo que o <b>Claude Code</b> usa.</li>
+        </ul>
+        <p>A precedência é <code class="icode">AGENT.md › AGENTS.md › CLAUDE.md</code> — todos os presentes compõem juntos.</p>
+        <h3>Paridade de estrutura</h3>
+        <ul class="docs-list">
+          <li>Agentes <code class="icode">.md</code> aceitam os <b>nomes de ferramentas do Claude Code</b> — mapeados para os nativos.</li>
+          <li><b>Hooks</b> no formato <code class="icode">settings.json</code> do Claude Code, e <b>comandos de usuário</b> em <code class="icode">.md</code>.</li>
+          <li><code class="icode">/rewind</code> + checkpoints, com paridade ao Claude Code.</li>
+        </ul>
+      </section>
+
+      <!-- 12 SIDECARS -->
+      <section class="docs-sec" id="sec-sidecars">
+        <span class="eyebrow eyebrow--sm">12 · avançado</span>
+        <h2>Sidecars</h2>
+        <p>Sidecars são <b>reforços locais opcionais</b> que rodam na sua máquina (escutando só em <code class="icode">127.0.0.1</code>) para dar ao agente memória de longo prazo, mais fôlego de contexto e modelos locais. O Aluy funciona sem eles — só perde esses recursos. Nada quebra. Ligue com <code class="icode">aluy bootstrap</code>.</p>
+        <div class="swatches">
+          <div class="swatch"><div class="lbl"><b>mem0</b> — memória entre sessões: guarda fatos e preferências e os traz de volta na próxima conversa.</div></div>
+          <div class="swatch"><div class="lbl"><b>headroom</b> — mais fôlego de contexto: condensa o que já passou e mantém a janela do modelo sob controle.</div></div>
+          <div class="swatch"><div class="lbl"><b>ollama</b> — modelos rodando na sua máquina para tarefas internas de apoio, sem mandar nada pra fora.</div></div>
+        </div>
+      </section>
+
+      <!-- 13 ARCHITECTURE -->
+      <section class="docs-sec" id="sec-architecture">
+        <span class="eyebrow eyebrow--sm">13 · avançado</span>
+        <h2>Arquitetura</h2>
+        <p>Por baixo dos panos, o Aluy CLI é <b>um único processo</b> no seu terminal — entrega monolítica, sem servidor escondido. A interface (a TUI) fala com o core, o motor que lê e edita arquivos, roda comandos e decide os próximos passos. Entre o agente e o seu projeto fica a <b>trava de permissão</b>: o único ponto por onde todo efeito passa <b>antes de acontecer</b>.</p>
+        <p>O estado vive na sua máquina: a memória da sessão (e a de longo prazo via <code class="icode">mem0</code>), sua chave no cofre do SO, seus arquivos e sua shell. Sidecars são reforços locais opcionais que escutam só em <code class="icode">127.0.0.1</code>.</p>
+        <ul class="docs-list">
+          <li>As <b>únicas</b> coisas que cruzam a borda são a <b>chamada ao modelo</b> e os <b>conectores MCP que você liga</b>.</li>
+          <li>Sessão, histórico, arquivos, memória e sua chave nunca saem do seu computador.</li>
+        </ul>
+        <div class="note">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+          <p>A trava de permissão é um ponto único: nenhum arquivo é alterado e nenhum comando roda sem passar por ela. É o que mantém você no controle.</p>
+        </div>
+      </section>
+
+      <!-- 14 MEMORY -->
+      <section class="docs-sec" id="sec-memory">
+        <span class="eyebrow eyebrow--sm">14 · avançado</span>
+        <h2>Memória</h2>
+        <p>O agente lembra <b>decisões e contexto do projeto</b> de uma conversa para a outra — fatos globais e por projeto. Você controla tudo com <code class="icode">/memory</code>: veja o que ele guardou, <b>fixe</b> o que importa e <b>esqueça</b> o que não serve mais.</p>
+        <div class="codeblock">
+          <div><span class="pr">$</span> /memory list           <span class="cm"># o que ele lembra aqui</span></div>
+          <div><span class="pr">$</span> /memory pin "..."       <span class="cm"># fixa um fato importante</span></div>
+          <div><span class="pr">$</span> /memory forget "..."    <span class="cm"># esquece um fato</span></div>
+        </div>
+        <ul class="docs-list">
+          <li>A memória de longo prazo depende do sidecar <b>mem0</b>; sem ele, só vale a memória da sessão atual.</li>
+          <li><code class="icode">/clear memory</code> apaga tudo o que o agente guardou (pede confirmação).</li>
+        </ul>
+      </section>
+
+      <!-- 15 THEMES -->
+      <section class="docs-sec" id="sec-themes">
+        <span class="eyebrow eyebrow--sm">15 · avançado</span>
+        <h2>Temas</h2>
+        <p>A sessão vem em três temas — <b>light</b>, <b>dark</b> e <b>slate</b> — para você deixar do jeito que gosta de olhar o dia todo. Troque com <code class="icode">/theme aluy-dark | aluy-light | aluy-slate</code>; a sua escolha é salva.</p>
+        <div class="swatches">
+          <div class="swatch"><div class="prev" style="background:linear-gradient(90deg,#FAF8F5 50%,#C8821E 50%)"></div><div class="lbl"><b>Light</b> · <code class="icode">aluy-light</code> — fundo pedra clara, acento âmbar.</div></div>
+          <div class="swatch"><div class="prev" style="background:linear-gradient(90deg,#070707 50%,#DDA13F 50%)"></div><div class="lbl"><b>Dark</b> · <code class="icode">aluy-dark</code> — quase preto, alto contraste.</div></div>
+          <div class="swatch"><div class="prev" style="background:linear-gradient(90deg,#1A1712 50%,#5BA8A2 50%)"></div><div class="lbl"><b>Slate</b> · <code class="icode">aluy-slate</code> — pedra profunda com fios teal.</div></div>
+        </div>
+        <p>Os temas vêm dos tokens do Aluy Design System: cor, tipografia e densidade saem de variáveis, nunca de estilo cru.</p>
+      </section>
+
+      <!-- 16 DOCTOR -->
+      <section class="docs-sec" id="sec-doctor">
+        <span class="eyebrow eyebrow--sm">16 · avançado</span>
+        <h2>Doctor</h2>
+        <p><code class="icode">/doctor</code> é o diagnóstico <b>somente-leitura</b> da sua instalação: checa modelo, chave, conexão, MCP e config — e aponta uma <b>dica de conserto</b> quando algo está fora do lugar. Não muda nada, só lê.</p>
+        <div class="codeblock">
+          <div><span class="pr">$</span> /doctor</div>
+          <div><span class="str">✓ modelo      ok</span></div>
+          <div><span class="str">✓ chave       no cofre do SO</span></div>
+          <div><span class="str">✓ conexão     ok</span></div>
+          <div><span class="str">✓ MCP         2 conectores ativos</span></div>
+        </div>
+      </section>
+
+      <!-- 17 FAQ -->
+      <section class="docs-sec" id="sec-faq">
+        <span class="eyebrow eyebrow--sm">17 · perguntas</span>
+        <h2>FAQ</h2>
+        <h3>Meus dados vão para a nuvem?</h3>
+        <p>Não. A sessão, o histórico, os arquivos do projeto e a memória ficam na sua máquina. A única coisa que cruza a borda é a <b>chamada ao modelo</b>.</p>
+        <h3>Onde mora a minha chave?</h3>
+        <p>No <b>cofre do SO</b> (Keychain, libsecret, Credential Manager) — nunca em texto, nunca no repo. O Aluy mostra o tier do modelo, nunca a credencial.</p>
+        <h3>Como o Aluy fala com o modelo?</h3>
+        <p>Por padrão, o Aluy cuida da conexão com o modelo — você não configura nada. Se preferir, ligue o seu próprio provider direto, com a sua credencial (API key ou OAuth): é o seu uso, sob o seu controle.</p>
+        <h3>Tem custo?</h3>
+        <p>O Aluy CLI é código aberto, sob MIT. No modo direto, o uso do modelo corre pela sua própria conta no provider. Os sidecars rodam localmente, sem custo de API.</p>
+        <h3>É seguro deixar o /cycle rodando sozinho?</h3>
+        <p>O <code class="icode">/cycle</code> tem tetos duros de tempo e de passos, e parada automática. E toda ação que toca seus arquivos passa por uma trava de permissão.</p>
+        <h3>Posso ler e modificar o código?</h3>
+        <p>Sim — é código aberto sob MIT. Leia, audite, abra issues e faça fork. O que age na sua máquina, você merece poder inspecionar. O Aluy está em beta; espere arestas e iteração rápida.</p>
+        <div class="note">
+          <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+          <p>Não achou a resposta? Comece pela página <a href="comecar.html">Instalar</a> ou rode <code class="icode">/doctor</code> dentro da sessão.</p>
+        </div>
+      </section>
+
+      <!-- footer (inside content panel) -->
+      <footer class="docs-foot">
+        <p class="foot-fine">Aluy <span class="lam">Λ</span> CLI — o time de agentes que vive no seu terminal · código aberto · MIT</p>
+      </footer>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

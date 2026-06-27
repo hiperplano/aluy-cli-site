@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Aluy CLI — o agente que vive no seu terminal. Lê e edita seus arquivos, roda seus comandos, resolve a tarefa de ponta a ponta. Código aberto, MIT. Instale em uma linha." />
+<title>Aluy CLI — o agente que vive no seu terminal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="../site.css" />
+<script src="../lang.js"></script>
+<script defer src="../site.js"></script>
+<script defer src="../install.js"></script>
+</head>
+<body>
+<div class="aurora aurora--hero" aria-hidden="true"></div>
+<div class="page">
+
+  <!-- ===== HEADER ===== -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Aluy CLI — início">
+        <img src="../assets/aluy-wordmark-white.png" alt="Aluy" />
+        <span class="cli">CLI</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="funcionalidades.html">Funcionalidades</a>
+        <a href="comandos.html">Comandos</a>
+        <a href="arquitetura.html">Arquitetura</a>
+        <a href="comecar.html">Instalar</a>
+        <a href="help.html">Docs</a>
+      </nav>
+      <span class="grow"></span>
+      <div class="lang-toggle" role="group" aria-label="Language · idioma">
+        <a href="../index.html" data-lang="en" hreflang="en" aria-current="false">EN</a>
+        <a href="index.html" data-lang="pt" hreflang="pt-BR" aria-current="true">PT</a>
+      </div>
+      <a class="gh-link" href="https://github.com/hiperplano/aluy-cli" aria-label="Ver no GitHub">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.52.1.71-.23.71-.5v-1.95c-2.9.63-3.52-1.24-3.52-1.24-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.93 1.6 2.45 1.13 3.05.86.09-.68.36-1.13.66-1.39-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.41-2.07 1.07-2.8-.11-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a9.9 9.9 0 0 1 5.24 0c2-1.35 2.87-1.07 2.87-1.07.57 1.43.21 2.49.11 2.75.67.73 1.07 1.66 1.07 2.8 0 4.01-2.45 4.9-4.78 5.16.38.32.71.95.71 1.92v2.85c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>
+        GitHub
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero-c">
+      <svg class="hero-mark" width="62" height="62" viewBox="0 0 24 24" fill="none" role="img" aria-label="Aluy">
+        <title>Aluy</title>
+        <path d="M4 20 L12 4" stroke="#DDA13F" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M12 4 L20 20" stroke="#DDA13F" stroke-width="2.6" stroke-linecap="round"/>
+      </svg>
+      <span class="badge"><span class="dot"></span>v1.0.11 · beta · código aberto · MIT</span>
+      <h1>O agente que vive<br/>no seu terminal — <span class="grad">e faz o trabalho</span></h1>
+      <p class="lead">O aluy lê e edita seus arquivos, roda seus comandos e resolve a tarefa de ponta a ponta — sem sair do terminal. Sua sessão, seus dados e sua chave ficam na sua máquina. <b>Só a chamada ao modelo cruza a borda.</b></p>
+    </section>
+
+    <!-- ===== INSTALL BLOCK (single source of truth) ===== -->
+    <section class="section--install" style="margin:34px auto 0;">
+      <div class="install-card">
+        <div class="install-head">
+          <span class="eyebrow eyebrow--sm">instalar — uma linha</span>
+          <span class="grow"></span>
+          <div class="tabs" role="tablist" aria-label="Sistema operacional">
+            <button class="tab" type="button" role="tab" data-os="unix" aria-selected="true">Linux · macOS</button>
+            <button class="tab" type="button" role="tab" data-os="win" aria-selected="false">Windows</button>
+          </div>
+        </div>
+        <div class="terminal" role="tabpanel">
+          <div class="term-head">
+            <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+            <span class="term-title" id="term-title">bash — install aluy</span>
+          </div>
+          <div class="term-body">
+            <span class="ps1">$</span>
+            <code id="cmd">curl -fsSL https://aluy.dev/install.sh | bash</code>
+            <button class="copy-btn" type="button" id="copy" aria-label="Copiar comando">
+              <span class="copy-icon"></span><span class="copy-label">copiar</span>
+            </button>
+          </div>
+        </div>
+        <div class="win-extra" id="win-extra" hidden>
+          <div class="win-extra-label">ou com o cmd tradicional</div>
+          <div class="terminal">
+            <div class="term-head">
+              <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+              <span class="term-title">cmd — install aluy</span>
+            </div>
+            <div class="term-body">
+              <span class="ps1">C:\&gt;</span>
+              <code id="cmd2"></code>
+              <button class="copy-btn" type="button" id="copy2" aria-label="Copiar comando">
+                <span class="copy-icon"></span><span class="copy-label">copiar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="install-meta">
+          <span>1 linha · sem sudo</span><span class="sep">·</span><span>instala em <span class="hi">~/.aluy</span></span><span class="sep">·</span><span>re-rodar atualiza</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== YOUR FIRST MINUTE ===== -->
+    <section class="section--install" style="margin:16px auto 0;">
+      <div class="run-head">
+        <span class="eyebrow eyebrow--sm" style="color:var(--mut2);">seu primeiro minuto</span>
+        <span class="run-rule"></span>
+      </div>
+      <div class="run">
+        <div><span class="pr">$</span> <span style="color:var(--tx)">aluy</span><span class="cm">          # abre uma sessão neste projeto</span></div>
+        <div><span class="adot"></span><span style="color:var(--tx)">/doctor</span><span class="ok">       ✓ modelo · chave · broker · MCP — tudo certo</span></div>
+        <div><span class="adot"></span><span style="color:var(--tx)">/init</span><span class="cm">         cria AGENT.md deste repo</span></div>
+        <div><span class="adot"></span><span style="color:var(--tx)">/cycle</span> <span class="str">"rode os testes e conserte o que quebrar"</span></div>
+        <div class="info" style="padding-left:16px;">rodando em ciclos… para no verde ou no teto ↩</div>
+        <div><span class="adot"></span><span style="color:var(--tx)">/memory list</span><span class="cm">  o que o aluy lembra aqui</span></div>
+      </div>
+      <div class="cta-row">
+        <button class="btn btn-primary" type="button" id="copy-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+          <span class="copy-icon" hidden></span><span class="copy-label">Copiar comando de instalação</span>
+        </button>
+        <a class="btn btn-secondary" href="help.html">Ler a documentação</a>
+      </div>
+    </section>
+
+    <!-- ===== FOUR FRONTS ===== -->
+    <section class="section" style="padding-top:78px;">
+      <div class="block-head">
+        <span class="eyebrow">quatro frentes, um agente</span>
+        <h2>No que você vai colocá-lo para trabalhar.</h2>
+      </div>
+      <div class="grid grid-4">
+        <div class="card">
+          <span class="icon-tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+          <h3>Tarefas</h3>
+          <p class="muted">Renomear em massa, organizar arquivos, gerar relatórios, limpar dados — descreva e ele faz na sua shell.</p>
+        </div>
+        <div class="card">
+          <span class="icon-tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/><path d="M12 7v5l3 2"/></svg></span>
+          <h3>Processos · RPA</h3>
+          <p class="muted">Conecta etapas e ferramentas num processo só. De ponta a ponta, em vez de scripts frágeis que quebram.</p>
+        </div>
+        <div class="card">
+          <span class="icon-tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6M10 2v6.5L5 18a2 2 0 0 0 1.8 3h10.4A2 2 0 0 0 19 18l-5-9.5V2"/></svg></span>
+          <h3>Testes</h3>
+          <p class="muted">Escreve, roda e conserta até passar. Lê o erro, corrige e roda de novo.</p>
+        </div>
+        <div class="card">
+          <span class="icon-tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+          <h3>Desenvolvimento</h3>
+          <p class="muted">Lê o projeto, propõe a mudança, edita os arquivos e roda o build. Você revisa e aprova.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHAT IT DOES DIFFERENTLY ===== -->
+    <section class="section" style="padding-top:64px;">
+      <div class="block-head">
+        <span class="eyebrow">o que ele faz de diferente</span>
+        <h2 class="lg">Não é um chat sobre o seu código. Um time que age.</h2>
+      </div>
+      <div class="grid grid-2">
+        <div class="card card-lg">
+          <div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/><path d="M12 7v5l3 2"/></svg></span><span class="mono-label">/cycle</span></div>
+          <h3>Dispare e vá fazer outra coisa</h3>
+          <p>Trabalha em ciclos por conta própria até a tarefa acabar — com freio de mão. Tetos duros de tempo e de passos, além de parada automática.</p>
+        </div>
+        <div class="card card-lg">
+          <div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 21v-1a6 6 0 0 1 12 0v1M15.5 21v-.5a4.5 4.5 0 0 1 5.5-4.4"/></svg></span><span class="mono-label">/subagent</span></div>
+          <h3>Uma frota de especialistas</h3>
+          <p>Cada subagente é um perfil (<code class="icode">.md</code>) com um foco — um para testes, um para revisão, um para docs. Você delega e eles trabalham em paralelo.</p>
+        </div>
+        <div class="card card-lg">
+          <div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9h8M8 13h5"/><path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-4.5A8 8 0 1 1 21 12z"/></svg></span><span class="mono-label">/rooms</span></div>
+          <h3>Veja a frota colaborar ao vivo</h3>
+          <p>As salas colocam vários agentes conversando entre si sobre o problema — debatendo, dividindo o trabalho. Você acompanha em tempo real e entra quando quiser.</p>
+        </div>
+        <div class="card card-lg">
+          <div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span><span class="mono-label">/mcp</span></div>
+          <h3>Plugue o que você já usa</h3>
+          <p>Pelo MCP, o agente fala com bancos, APIs e serviços. Um ecossistema aberto de conectores para ele usar de verdade — não só conversar.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TRANSPARENCY STRIP ===== -->
+    <section class="section" style="padding-top:64px;">
+      <div class="strip">
+        <div class="strip-head">
+          <span class="eyebrow">o caminho do modelo</span>
+          <h3>Local no que importa, conectado no que precisa.</h3>
+        </div>
+        <div class="grid grid-2">
+          <div class="tile">
+            <div class="tile-head"><span class="ic c-green"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span class="tile-kicker c-green">fica na sua máquina</span></div>
+            <p>A sessão, o histórico, os arquivos do projeto, a memória e a sua chave de provider. O agente roda local, atrás da trava de permissão.</p>
+          </div>
+          <div class="tile tile--dashed">
+            <div class="tile-head"><span class="ic c-mut"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span><span class="tile-kicker c-mut">cruza a borda</span></div>
+            <p>Só a chamada ao modelo: pelo broker por padrão, ou pelo provider que você ligar. No modo direto, é a sua credencial e o seu uso.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <img src="../assets/aluy-wordmark-white.png" alt="Aluy" />
+      <span class="grow"></span>
+      <nav class="foot-nav" aria-label="Rodapé">
+        <a href="funcionalidades.html">Funcionalidades</a>
+        <a href="comandos.html">Comandos</a>
+        <a href="arquitetura.html">Arquitetura</a>
+        <a href="comecar.html">Instalar</a>
+        <a href="help.html">Docs</a>
+        <a href="https://github.com/hiperplano/aluy-cli">GitHub</a>
+      </nav>
+      <p class="foot-fine">Aluy <span class="lam">Λ</span> CLI — o time de agentes que vive no seu terminal · código aberto · MIT</p>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
