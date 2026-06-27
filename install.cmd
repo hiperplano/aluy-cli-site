@@ -34,6 +34,12 @@ echo       pacotes ^(alguns sao binarios nativos do Node^) - costuma levar 1-2 m
 call npm install -g %PKG%
 where aluy >nul 2>nul
 if errorlevel 1 (
+  REM 1a instalacao global: o prefix do npm pode ainda nao estar no PATH desta
+  REM sessao. Adiciona o bin do npm ao PATH (paridade com o install.ps1).
+  for /f "delims=" %%P in ('npm config get prefix 2^>nul') do set "PATH=%%P;%PATH%"
+)
+where aluy >nul 2>nul
+if errorlevel 1 (
   echo [x] aluy nao ficou no PATH. Feche e reabra o terminal e rode: aluy onboard
   exit /b 1
 )
