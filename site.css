@@ -407,6 +407,18 @@ kbd { font-family: var(--mono); font-size: 12px; color: var(--tx); background: v
 .lnk { color: var(--amber); text-decoration: none; }
 .lnk:hover { text-decoration: underline; }
 
+/* ---- legal (terms) -------------------------------------------------------- */
+.legal { max-width: 760px; margin: 0 auto; padding: 0 var(--pad); }
+.legal .upd { font-family: var(--mono); font-size: 12.5px; color: var(--mut2); margin-top: 10px; }
+.legal h2 { font-weight: 600; font-size: 18px; letter-spacing: -.01em; color: var(--tx); margin: 34px 0 0; }
+.legal p { font-size: 15px; line-height: 1.65; color: var(--tx2); margin: 10px 0 0; }
+.legal ul { margin: 10px 0 0; padding-left: 20px; color: var(--tx2); font-size: 15px; line-height: 1.6; }
+.legal li { margin: 5px 0; }
+.legal a { color: var(--amber); text-decoration: none; }
+.legal b, .legal strong { color: var(--tx); }
+.legal .ph { color: var(--amber); background: var(--amber-bg); border: 1px dashed var(--amber-bd); border-radius: 5px; padding: 0 5px; font-family: var(--mono); font-size: 13px; }
+.legal .disclaim { margin-top: 18px; }
+
 /* ---- footer --------------------------------------------------------------- */
 .foot { margin-top: 60px; padding: 30px var(--pad) 44px; border-top: 1px solid var(--bd-09); }
 .foot-inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; max-width: var(--wrap); margin: 0 auto; }
