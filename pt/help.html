@@ -194,7 +194,7 @@
           <details class="acc"><summary><code>--no-subagents</code> <span class="acc-flag">agentes</span></summary><div class="acc-body"><p>Desliga os sub-agentes locais paralelos (a tool <code class="icode">spawn_agent</code>). Por padrão os sub-agentes rodam em paralelo com profundidade ≤ 1, herdando permissões e um teto compartilhado.</p></div></details>
         </div>
 
-        <h3>Sessão, retomada &amp; exibição</h3>
+        <h3>Sessão, retomada e exibição</h3>
         <div>
           <details class="acc"><summary><code>--continue</code> · <code>--resume [&lt;id&gt;]</code> · <code>--new</code> <span class="acc-flag">sessão</span></summary><div class="acc-body"><p><code class="icode">--continue</code> retoma a última sessão deste diretório. <code class="icode">--resume</code> sem id lista as sessões salvas; com um id retoma aquela. <code class="icode">--new</code> começa do zero.</p></div></details>
           <details class="acc"><summary><code>--lang pt-BR|en</code> <span class="acc-flag">ui</span></summary><div class="acc-body"><p>Idioma da TUI. Precedência: flag &gt; config &gt; auto-detect do locale &gt; padrão <code class="icode">pt-BR</code>. Não traduz o output do agente. Troque em runtime com <code class="icode">/lang</code>.</p></div></details>
@@ -227,14 +227,14 @@
         <h2>Comandos slash</h2>
         <p>Dentro de uma sessão em execução, digite <code class="icode">/</code> no início da linha para abrir o menu — filtre enquanto digita, e <kbd>Tab</kbd>/<kbd>Enter</kbd> completa. São comandos que <b>você</b> dá, não tools que o agente invoca. Uma visão compacta e agrupada está na página <a href="comandos.html">Comandos</a>.</p>
 
-        <h3>Conta &amp; sessão</h3>
+        <h3>Conta e sessão</h3>
         <div>
           <details class="acc"><summary><code>/login</code> · <code>/logout</code> · <code>/whoami</code> · <code>/doctor</code> <span class="acc-flag">conta · somente-leitura</span></summary><div class="acc-body"><p>Entra/sai e inspeciona a sessão. <code class="icode">/whoami</code> mostra usuário, org, escopos e uma dica de token redigida — nunca o segredo. <code class="icode">/doctor</code> é o health check somente-leitura (credencial, broker, catálogo, MCP, perfis, config, versão, memória) — cada ✓/⚠/✗ com uma dica de conserto. Ambos rodam em paralelo no meio do turno.</p></div></details>
           <details class="acc"><summary><code>/help</code> · <code>/usage</code> · <code>/rename</code> · <code>/history</code> <span class="acc-flag">sessão</span></summary><div class="acc-body"><p><code class="icode">/help</code> lista todo comando nativo; <code class="icode">/usage</code> mostra tokens, ocupação da janela e tier. <code class="icode">/rename</code> dá um rótulo + cor à sessão (também define o título da janela do terminal). <code class="icode">/history</code> navega e retoma uma sessão anterior sem sair do Aluy.</p></div></details>
           <details class="acc"><summary><code>/compact</code> · <code>/clear [full|memory]</code> · <code>/ask</code> · <code>/notify</code> <span class="acc-flag">sessão · contexto</span></summary><div class="acc-body"><p><code class="icode">/compact</code> resume a conversa para encolher a janela. <code class="icode">/clear</code> limpa o contexto; <code class="icode">memory</code>/<code class="icode">full</code> também apagam a memória (confirma). <code class="icode">/ask</code> é uma pergunta paralela somente-leitura. <code class="icode">/notify</code> alterna a campainha de atenção.</p></div></details>
         </div>
 
-        <h3>Workspace, projeto &amp; config</h3>
+        <h3>Workspace, projeto e config</h3>
         <div>
           <details class="acc"><summary><code>/undo</code> · <code>/redo</code> · <code>/rewind</code> <span class="acc-flag">workspace</span></summary><div class="acc-body"><p>Avança/volta a última edição de arquivo do agente pelo journal da sessão. <code class="icode">/rewind</code> (<kbd>Esc Esc</kbd>) volta a um checkpoint anterior — código e/ou conversa.</p></div></details>
           <details class="acc"><summary><code>/permissions</code> · <code>/tools</code> · <code>/add-dir</code> <span class="acc-flag">workspace</span></summary><div class="acc-body"><p><code class="icode">/permissions</code> mostra as regras (read=allow, write/bash=ask, sempre-perguntar=travado). <code class="icode">/tools</code> é o inventário unificado somente-leitura (nativas, MCP por server, tools de delegação, estado de permissão). <code class="icode">/add-dir</code> autoriza um diretório extra para a sessão.</p></div></details>
@@ -242,7 +242,7 @@
           <details class="acc"><summary><code>/model</code> · <code>/provider</code> · <code>/effort</code> · <code>/theme</code> · <code>/lang</code> · <code>/split</code> · <code>/fullscreen</code> <span class="acc-flag">config · ui</span></summary><div class="acc-body"><p><code class="icode">/model</code> troca o tier (mostra só o tier, nunca a credencial); <code class="icode">/provider</code> define o nome do provider para o modo Custom; <code class="icode">/effort</code> define o esforço de raciocínio. <code class="icode">/theme aluy-dark|aluy-light|aluy-slate</code> e <code class="icode">/lang</code> (pt-BR/en) persistem a escolha. <code class="icode">/split</code> e <code class="icode">/fullscreen</code> alternam o painel LOG e o modo Cockpit.</p></div></details>
         </div>
 
-        <h3>Autonomia &amp; multi-agente</h3>
+        <h3>Autonomia e multi-agente</h3>
         <div>
           <details class="acc"><summary><code>/cycle &lt;intervalo|--por dur|--auto&gt; "tarefa"</code> <span class="acc-flag">autonomia</span></summary><div class="acc-body"><p>Roda uma tarefa em ciclos até terminar, com tetos duros e parada automática (anti-runaway), pela mesma catraca de permissão. Dois ritmos: fixo (<code class="icode">5m</code> ou <code class="icode">--por &lt;dur&gt;</code>) ou <code class="icode">--auto</code>. Em voo: <code class="icode">pause</code>, <code class="icode">resume</code>, <code class="icode">edit</code>, <code class="icode">status</code>, <code class="icode">stop</code>.</p></div></details>
           <details class="acc"><summary><code>/cron</code> · <code>/subagent</code> · <code>/back</code> · <code>/rooms</code> <span class="acc-flag">agendamento · multi-agente</span></summary><div class="acc-body"><p><code class="icode">/cron</code> é a forma em-sessão do <code class="icode">aluy cron</code>. <code class="icode">/subagent &lt;nome&gt;</code> abre um foco 1:1 com um perfil; <code class="icode">/back</code> volta. <code class="icode">/rooms &lt;list|new|read|watch&gt;</code> cria e acompanha salas agente-a-agente ao vivo.</p></div></details>
@@ -351,7 +351,7 @@
       <!-- 11 COMPAT -->
       <section class="docs-sec" id="sec-compat">
         <span class="eyebrow eyebrow--sm">11 · interoperável</span>
-        <h2>Compatibilidade — Codex &amp; Claude Code</h2>
+        <h2>Compatibilidade — Codex e Claude Code</h2>
         <p><b>Já usa Codex ou Claude Code? O Aluy entende a sua estrutura. Sem reconfig.</b> Aponte o Aluy para o seu projeto e ele lê os mesmos arquivos de instrução e configuração que você já mantém.</p>
         <h3>Arquivos de instrução do projeto</h3>
         <ul class="docs-list">
