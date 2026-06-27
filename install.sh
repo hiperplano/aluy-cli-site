@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────────────
-# aluy — bootstrap (Linux / macOS).  curl -fsSL https://<host>/install.sh | bash
+# aluy — bootstrap (Linux / macOS).  curl -fsSL https://aluy.dev/install.sh | bash
 #
 # MÍNIMO de propósito: a única coisa que precisa ser script é garantir o Node e
 # instalar o pacote — porque você não pode rodar um programa Node antes do Node
@@ -27,12 +27,29 @@ else
   say "  Node $(node -v) ok."
 fi
 
-# 2) npm-global user-space (sem sudo)
+# 2) npm-global user-space (sem sudo). Se o prefix default não é gravável, usa
+#    ~/.aluy-npm. SÓ a CRIAÇÃO do prefix fica no `if`; o PATH é tratado SEMPRE abaixo.
+#    (Bug anterior: o `export PATH` vivia DENTRO do `if` → na 2ª instalação o prefix
+#    já existia, o `if` era pulado, o PATH nunca era exportado → "aluy não ficou no
+#    PATH". E nunca persistia no shell → sumia ao resetar o terminal.)
 PREFIX="$(npm config get prefix 2>/dev/null || echo '')"
 if [ -z "$PREFIX" ] || [ ! -w "$PREFIX" ]; then
   PREFIX="$HOME/.aluy-npm"; mkdir -p "$PREFIX"; npm config set prefix "$PREFIX"
-  export PATH="$PREFIX/bin:$PATH"
 fi
+BIN="$PREFIX/bin"
+
+# 2a) PATH no SHELL ATUAL (pro resto deste script achar o `aluy`)…
+case ":$PATH:" in *":$BIN:"*) ;; *) export PATH="$BIN:$PATH";; esac
+# 2b) …E PERSISTIDO (sobrevive ao reset do terminal). Idempotente, nos rc files que existem.
+PERSIST="export PATH=\"$BIN:\$PATH\""
+for RC in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.bash_profile" "$HOME/.profile"; do
+  [ -e "$RC" ] || continue
+  grep -qF "$BIN" "$RC" 2>/dev/null || printf '\n# aluy CLI (PATH)\n%s\n' "$PERSIST" >> "$RC"
+done
+# garante ao menos ~/.profile (sessões de login) se NENHUM rc file existia
+[ -e "$HOME/.bashrc" ] || [ -e "$HOME/.zshrc" ] || [ -e "$HOME/.bash_profile" ] || [ -e "$HOME/.profile" ] || {
+  printf '\n# aluy CLI (PATH)\n%s\n' "$PERSIST" >> "$HOME/.profile"
+}
 
 # 3) instala. Explica O QUE a barra do npm baixa (senão parece "node" cru e opaco).
 say "Passo 2/2 — baixando o aluy e seus componentes…"
@@ -40,20 +57,22 @@ say "  • interface de terminal (Ink/React)  • acesso seguro a credenciais (k
 say "  • protocolo de ferramentas (MCP). A barra abaixo é o npm baixando esses pacotes"
 say "  (alguns são binários nativos do Node) — costuma levar 1–2 min."
 npm install -g "$PKG"
-command -v aluy >/dev/null 2>&1 || die "aluy não ficou no PATH (verifique ${PREFIX}/bin)."
 
-# 4) entrega pro ONBOARD (Node/Ink) reanexado ao TTY real (não ao stdin do pipe),
-#    e depois entra na sessão. É aqui que a splash + idioma + setup acontecem.
+# Resolve o binário pelo caminho ABSOLUTO (não depende do PATH já estar "quente").
+ALUY="$BIN/aluy"
+[ -x "$ALUY" ] || ALUY="$(command -v aluy 2>/dev/null || true)"
+[ -n "$ALUY" ] && [ -x "$ALUY" ] || die "aluy instalou mas não achei o binário em ${BIN} (rode: ls ${BIN})."
+
+# 4) entrega pro ONBOARD (Node/Ink) reanexado ao TTY real (não ao stdin do pipe), e
+#    depois entra na sessão. Usa o caminho ABSOLUTO ($ALUY) p/ não depender do PATH.
 if [ -r /dev/tty ]; then
   clear
-  aluy onboard < /dev/tty || true
-  # provisiona sidecars se profile=turbo (no-op se leve); no Linux baixa os artefatos pinados.
+  "$ALUY" onboard < /dev/tty || true
   clear
-  aluy bootstrap < /dev/tty || true
-  # tela limpa antes de abrir a sessão (cada etapa começa do zero, sem ruído acumulado).
+  "$ALUY" bootstrap < /dev/tty || true
   clear
-  exec aluy < /dev/tty
+  say "pronto. Numa NOVA aba/terminal o comando \`aluy\` já estará no PATH (ou rode: source ~/.bashrc)."
+  exec "$ALUY" < /dev/tty
 else
-  # sem TTY (CI/pipe sem terminal): instala e instrui (não trava).
-  say 'instalado. rode:  aluy onboard'
+  say "instalado. abra um NOVO terminal (ou: source ~/.bashrc) e rode:  aluy onboard"
 fi
