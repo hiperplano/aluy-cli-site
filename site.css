@@ -127,6 +127,15 @@ img { display: block; }
 }
 .gh-link:hover { color: var(--tx); border-color: rgba(255,255,255,.24); }
 
+.ver-pill {
+  display: inline-flex; align-items: center; white-space: nowrap;
+  font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .02em;
+  color: var(--amber); background: var(--amber-bg); border: 1px solid var(--amber-bd);
+  border-radius: 999px; padding: 3px 9px; text-decoration: none;
+  transition: border-color .14s;
+}
+.ver-pill:hover { border-color: var(--amber); }
+
 .nav-toggle {
   display: none; margin-left: auto; color: var(--tx2);
   background: transparent; border: 1px solid var(--bd); border-radius: 8px;
@@ -469,7 +478,7 @@ details.acc .acc-body p { margin: 0; font-size: 13.5px; color: var(--tx2); line-
 }
 @media (max-width: 680px) {
   :root { --pad: 18px; }
-  .nav, .gh-link { display: none; }
+  .nav, .gh-link, .ver-pill { display: none; }
   .nav-toggle { display: inline-flex; }
   .nav.open {
     display: flex; flex-direction: column; align-items: stretch; gap: 2px;
