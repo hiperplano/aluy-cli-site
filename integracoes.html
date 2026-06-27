@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Aluy CLI ecosystem — the model providers it routes to (OpenRouter, TokenRouter, Anthropic, OpenAI, Google/Gemini, DeepSeek) and the open projects it integrates (MCP, Ollama, mem0, headroom, WezTerm, Node, Ink)." />
+<title>Ecosystem — Aluy CLI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="site.css" />
+<script src="lang.js"></script>
+<script defer src="site.js"></script>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+<div class="page">
+
+  <!-- ===== HEADER ===== -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Aluy CLI — home">
+        <img src="assets/aluy-wordmark-white.png" alt="Aluy" />
+        <span class="cli">CLI</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="funcionalidades.html">Features</a>
+        <a href="comandos.html">Commands</a>
+        <a href="arquitetura.html">Architecture</a>
+        <a href="comecar.html">Install</a>
+        <a href="help.html">Docs</a>
+        <a href="integracoes.html" class="active">Ecosystem</a>
+      </nav>
+      <span class="grow"></span>
+      <div class="lang-toggle" role="group" aria-label="Language · idioma">
+        <a href="integracoes.html" data-lang="en" hreflang="en" aria-current="true">EN</a>
+        <a href="pt/integracoes.html" data-lang="pt" hreflang="pt-BR" aria-current="false">PT</a>
+      </div>
+      <a class="ver-pill" data-version="tag" href="https://github.com/hiperplano/aluy-cli/releases" aria-label="Latest release">v1.0.0-rc.1</a>
+      <a class="gh-link" href="https://github.com/hiperplano/aluy-cli" aria-label="View on GitHub">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.52.1.71-.23.71-.5v-1.95c-2.9.63-3.52-1.24-3.52-1.24-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.93 1.6 2.45 1.13 3.05.86.09-.68.36-1.13.66-1.39-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.41-2.07 1.07-2.8-.11-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a9.9 9.9 0 0 1 5.24 0c2-1.35 2.87-1.07 2.87-1.07.57 1.43.21 2.49.11 2.75.67.73 1.07 1.66 1.07 2.8 0 4.01-2.45 4.9-4.78 5.16.38.32.71.95.71 1.92v2.85c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>
+        GitHub
+      </a>
+      <a class="gh-link" href="https://www.npmjs.com/package/@hiperplano/aluy-cli" aria-label="Package on npm">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"/></svg>
+        npm
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <span class="eyebrow">ecosystem</span>
+      <h1>Providers &amp; integrations.</h1>
+      <p class="lead">The Aluy CLI never talks to a model provider directly with your data sitting in the open — the model call goes through the broker (or your own provider) at the edge. Here's everything it connects to: the model providers it routes to, and the open projects it builds on.</p>
+    </section>
+
+    <!-- MODEL PROVIDERS -->
+    <section class="section" style="padding-top:48px;">
+      <div class="block-head">
+        <span class="eyebrow">model providers</span>
+        <h2>Where the model call goes.</h2>
+      </div>
+      <div class="grid grid-3">
+        <a class="card next-card" href="https://openrouter.ai" target="_blank" rel="noopener">
+          <span class="t">OpenRouter</span>
+          <span class="d">The default gateway — multi-provider routing the broker uses out of the box.</span>
+          <span class="go">openrouter.ai →</span>
+        </a>
+        <a class="card next-card" href="https://tokenrouter.io" target="_blank" rel="noopener">
+          <span class="t">TokenRouter</span>
+          <span class="d">Alternative routing gateway (OpenAI-compatible), reachable through the broker.</span>
+          <span class="go">tokenrouter.io →</span>
+        </a>
+        <a class="card next-card" href="https://www.anthropic.com" target="_blank" rel="noopener">
+          <span class="t">Anthropic</span>
+          <span class="d">Claude models — direct provider (BYO key or OAuth).</span>
+          <span class="go">anthropic.com →</span>
+        </a>
+        <a class="card next-card" href="https://openai.com" target="_blank" rel="noopener">
+          <span class="t">OpenAI</span>
+          <span class="d">GPT models — direct provider (BYO key).</span>
+          <span class="go">openai.com →</span>
+        </a>
+        <a class="card next-card" href="https://ai.google.dev" target="_blank" rel="noopener">
+          <span class="t">Google · Gemini</span>
+          <span class="d">Gemini models, reached through the <b>OpenAI-compatible API</b>.</span>
+          <span class="go">ai.google.dev →</span>
+        </a>
+        <a class="card next-card" href="https://www.deepseek.com" target="_blank" rel="noopener">
+          <span class="t">DeepSeek</span>
+          <span class="d">DeepSeek models — direct provider, pairs with the Custom tier.</span>
+          <span class="go">deepseek.com →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- INTEGRATIONS -->
+    <section class="section" style="padding-top:64px;">
+      <div class="block-head">
+        <span class="eyebrow">projects we integrate</span>
+        <h2>The open projects it builds on.</h2>
+      </div>
+      <div class="grid grid-3">
+        <a class="card next-card" href="https://modelcontextprotocol.io" target="_blank" rel="noopener">
+          <span class="t">MCP</span>
+          <span class="d">Model Context Protocol — the open standard for connecting tools.</span>
+          <span class="go">modelcontextprotocol.io →</span>
+        </a>
+        <a class="card next-card" href="https://ollama.com" target="_blank" rel="noopener">
+          <span class="t">Ollama</span>
+          <span class="d">Run models locally — optional sidecar.</span>
+          <span class="go">ollama.com →</span>
+        </a>
+        <a class="card next-card" href="https://mem0.ai" target="_blank" rel="noopener">
+          <span class="t">mem0</span>
+          <span class="d">Long-term memory — optional sidecar.</span>
+          <span class="go">mem0.ai →</span>
+        </a>
+        <a class="card next-card" href="https://github.com/headroomlabs-ai/headroom" target="_blank" rel="noopener">
+          <span class="t">headroom</span>
+          <span class="d">Context-headroom retrieval — optional sidecar.</span>
+          <span class="go">github.com/headroomlabs-ai →</span>
+        </a>
+        <a class="card next-card" href="https://wezterm.org" target="_blank" rel="noopener">
+          <span class="t">WezTerm</span>
+          <span class="d">The recommended terminal for the Aluy CLI.</span>
+          <span class="go">wezterm.org →</span>
+        </a>
+        <a class="card next-card" href="https://nodejs.org" target="_blank" rel="noopener">
+          <span class="t">Node.js</span>
+          <span class="d">The runtime the CLI runs on (Node ≥ 20).</span>
+          <span class="go">nodejs.org →</span>
+        </a>
+        <a class="card next-card" href="https://github.com/vadimdemedes/ink" target="_blank" rel="noopener">
+          <span class="t">Ink</span>
+          <span class="d">The React-based terminal UI behind the TUI.</span>
+          <span class="go">github.com/vadimdemedes/ink →</span>
+        </a>
+        <a class="card next-card" href="https://github.com/openai/codex" target="_blank" rel="noopener">
+          <span class="t">Codex</span>
+          <span class="d">Compatibility — reads <code class="icode">AGENTS.md</code> project files.</span>
+          <span class="go">github.com/openai/codex →</span>
+        </a>
+        <a class="card next-card" href="https://www.anthropic.com/claude-code" target="_blank" rel="noopener">
+          <span class="t">Claude Code</span>
+          <span class="d">Compatibility — reads <code class="icode">CLAUDE.md</code> project files.</span>
+          <span class="go">anthropic.com/claude-code →</span>
+        </a>
+      </div>
+      <div class="cta-row" style="margin-top:34px;">
+        <a class="btn btn-secondary" href="arquitetura.html">See how it all fits →</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <img src="assets/aluy-wordmark-white.png" alt="Aluy" />
+      <span class="grow"></span>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="funcionalidades.html">Features</a>
+        <a href="comandos.html">Commands</a>
+        <a href="arquitetura.html">Architecture</a>
+        <a href="comecar.html">Install</a>
+        <a href="help.html">Docs</a>
+        <a href="integracoes.html">Ecosystem</a>
+        <a href="https://github.com/hiperplano/aluy-cli">GitHub</a>
+        <a href="https://www.npmjs.com/package/@hiperplano/aluy-cli">npm</a>
+      </nav>
+      <p class="foot-fine">Aluy <span class="lam">Λ</span> CLI — the team of agents that lives in your terminal · open source · MIT</p>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
