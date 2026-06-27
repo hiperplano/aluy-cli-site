@@ -116,6 +116,7 @@
           <li><b>Model</b> — pick the tier with <code class="icode">/model</code>; tune the reasoning effort with <code class="icode">/effort</code> when you need to.</li>
         </ul>
         <p>Then send the first task: open the session, describe the goal (or use a <code class="icode">/command</code>) and let the agent work. Every action that touches your files asks for permission.</p>
+        <p>Two flags shape that from the start: <code class="icode">aluy --plan</code> runs read-only (it analyzes and proposes, no effect); <code class="icode">aluy --yolo</code> lets it run unattended, auto-approving every effect — <b>except</b> the always-ask categories (deletion, network, privilege escalation, package installs), which stay locked, and it refuses to run as root. Full details in the <a href="#sec-cli">CLI reference</a>.</p>
         <div class="codeblock">
           <div><span class="pr">$</span> aluy            <span class="cm"># opens the session in this project</span></div>
           <div class="cm">› type a goal, or a /command:</div>

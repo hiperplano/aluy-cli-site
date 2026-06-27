@@ -116,6 +116,7 @@
           <li><b>Modelo</b> — escolha o tier com <code class="icode">/model</code>; ajuste o esforço de raciocínio com <code class="icode">/effort</code> quando precisar.</li>
         </ul>
         <p>Então mande a primeira tarefa: abra a sessão, descreva o objetivo (ou use um <code class="icode">/comando</code>) e deixe o agente trabalhar. Cada ação que toca seus arquivos pede permissão.</p>
+        <p>Duas flags definem isso desde o início: <code class="icode">aluy --plan</code> roda somente-leitura (analisa e propõe, sem efeito); <code class="icode">aluy --yolo</code> deixa rodar sem supervisão, auto-aprovando todo efeito — <b>exceto</b> as categorias sempre-perguntar (exclusão, rede, escalada de privilégio, instalação de pacote), que seguem travadas, e recusa rodar como root. Detalhes na <a href="#sec-cli">referência de CLI</a>.</p>
         <div class="codeblock">
           <div><span class="pr">$</span> aluy            <span class="cm"># abre a sessão neste projeto</span></div>
           <div class="cm">› digite um objetivo, ou um /comando:</div>
