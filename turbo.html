@@ -63,138 +63,121 @@
     </div>
   </header>
 
-  <main>
+  <!-- ===== DOCS LAYOUT ===== -->
+  <div class="docs-wrap">
 
-    <!-- ===== HERO ===== -->
-    <section class="hero">
-      <span class="eyebrow">turbo mode · opt-in · local</span>
-      <h1>Turbo mode.</h1>
-      <p class="lead">Three optional <b>boosters</b> that run on your machine — long-term memory, context headroom and local models. You turn them on with <code>aluy bootstrap</code>; the agent works fine without them. This page: what they are, how to install, what can go wrong and how to fix it.</p>
-    </section>
+    <!-- sidebar -->
+    <nav id="docs-sidebar" aria-label="Turbo sections">
+      <span class="docs-kicker">turbo mode</span>
+      <a href="#sec-overview" class="active"><span class="n">01</span>Overview</a>
+      <a href="#sec-install"><span class="n">02</span>Install</a>
+      <a href="#sec-repair"><span class="n">03</span>Self-repair</a>
+      <a href="#sec-troubleshooting"><span class="n">04</span>Troubleshooting</a>
+      <a href="#sec-manual"><span class="n">05</span>Manual install</a>
+    </nav>
 
-    <!-- ===== THE THREE BOOSTERS ===== -->
-    <section class="section" style="padding-top:48px;">
-      <div class="section-head">
-        <span class="section-label">three boosters</span>
-        <h2>What turbo turns on.</h2>
-      </div>
-      <div class="grid grid-3">
-        <div class="card">
-          <h3>mem0 <span style="font-family:var(--mono);font-size:.7em;color:var(--tx3)">· :11435</span></h3>
-          <p>Persistent memory: the agent stores facts and preferences and recalls them next session. You see, pin or forget them with <code>/memory</code>.</p>
+    <!-- content -->
+    <div id="docs-content">
+      <span class="eyebrow eyebrow--sm">turbo · opt-in</span>
+      <h1>Turbo mode</h1>
+      <p class="docs-intro">Three optional <b>boosters</b> that run on your machine — long-term memory, context headroom and local models. You turn them on with <code class="icode">aluy bootstrap</code>; the agent works fine without them. What they are, how to install, what can go wrong and how to fix it.</p>
+
+      <!-- 01 OVERVIEW -->
+      <section class="docs-sec first" id="sec-overview">
+        <span class="eyebrow eyebrow--sm">01 · what</span>
+        <h2>What turbo turns on</h2>
+        <p>All three bind to <code class="icode">127.0.0.1</code> only and are opt-in — nothing comes up unless you accept it. They rise on boot if already installed; installing is the explicit <code class="icode">aluy bootstrap</code> step. The opposite profile, <b>leve</b>, installs none.</p>
+        <ul class="docs-list">
+          <li><b>mem0</b> <span class="muted">· :11435</span> — persistent memory: the agent stores facts and preferences and recalls them next session. You see, pin or forget them with <code class="icode">/memory</code>.</li>
+          <li><b>headroom</b> <span class="muted">· :8787</span> — context compression: condenses what's already passed and brings back only what matters, keeping the model window under control.</li>
+          <li><b>ollama</b> <span class="muted">· :11434</span> — local model runtime: a small judge (<code class="icode">qwen2.5:0.5b</code>) and an embedder (<code class="icode">nomic-embed-text</code>) for internal tasks that never leave the machine.</li>
+        </ul>
+      </section>
+
+      <!-- 02 INSTALL -->
+      <section class="docs-sec" id="sec-install">
+        <span class="eyebrow eyebrow--sm">02 · install</span>
+        <h2>Two ways to provision</h2>
+        <p>After <code class="icode">npm i -g @hiperplano/aluy-cli</code> and <code class="icode">aluy onboard</code>, run one of:</p>
+        <div class="codeblock">
+          <div><span class="pr">$</span> aluy bootstrap            <span class="cm"># via the agent (default)</span></div>
+          <div><span class="pr">$</span> aluy bootstrap --no-agent <span class="cm"># direct — no model needed</span></div>
         </div>
-        <div class="card">
-          <h3>headroom <span style="font-family:var(--mono);font-size:.7em;color:var(--tx3)">· :8787</span></h3>
-          <p>Context compression: condenses what's already passed and brings back only what matters, keeping the model window under control.</p>
+        <ul class="docs-list">
+          <li><b>Via the agent</b> (default) — aluy detects the OS, installs the missing prerequisites (Python, pip, venv, with <code class="icode">sudo</code> when needed) and the boosters, handling problems as it goes. Runs in <code class="icode">--yolo</code> — opting into turbo is the consent.</li>
+          <li><b>Direct</b> (<code class="icode">--no-agent</code>) — deterministic path: pinned Ollama artifact + venv creation, without using a model. Requires Python already present.</li>
+        </ul>
+        <div class="note">
+          <span class="ic" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+          <p><b>Fresh machine with no model yet?</b> Use <code class="icode">--no-agent</code>. The agent installer needs a working model to think — and if that model is the very Ollama you're about to install, it's circular. From rc.35, <code class="icode">aluy bootstrap</code> detects the model is unreachable and falls back to the direct path on its own.</p>
         </div>
-        <div class="card">
-          <h3>ollama <span style="font-family:var(--mono);font-size:.7em;color:var(--tx3)">· :11434</span></h3>
-          <p>Local model runtime: a small judge (<code>qwen2.5:0.5b</code>) and an embedder (<code>nomic-embed-text</code>) for internal tasks that never leave the machine.</p>
+        <div class="note">
+          <span class="ic" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+          <p><b>Don't run <code class="icode">aluy</code> with <code class="icode">sudo</code>.</b> The sidecars refuse to run as root, and <code class="icode">sudo</code> sends aluy looking for its config in <code class="icode">/root/.aluy</code>. Install as your user; the installer asks for <code class="icode">sudo</code> only on the system steps that need it.</p>
         </div>
-      </div>
-      <div class="note">
-        <span class="ic" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.4 8-8 9-4.6-1-8-4-8-9V7z"/><polyline points="9 12 11 14 15 10"/></svg></span>
-        <p>All three bind to <code>127.0.0.1</code> only and are <b>opt-in</b> — nothing comes up unless you accept it. They rise on boot if already installed; installing is the explicit <code>aluy bootstrap</code> step. The opposite profile, <b>leve</b>, installs none.</p>
-      </div>
-    </section>
+      </section>
 
-    <!-- ===== INSTALL ===== -->
-    <section class="section" style="padding-top:64px;">
-      <div class="section-head">
-        <span class="section-label">install</span>
-        <h2>Two ways to provision.</h2>
-        <p>After <code>npm i -g @hiperplano/aluy-cli</code> and <code>aluy onboard</code>, run one of:</p>
-      </div>
-      <div class="terminal">
-        <div class="term-head"><span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span><span class="term-title">via the agent (default)</span></div>
-        <div class="term-body"><span class="ps1">$</span><code>aluy bootstrap</code></div>
-      </div>
-      <p style="color:var(--tx2);font-size:14px;margin:12px 2px 0;">aluy detects the OS, installs the missing prerequisites (Python, pip, venv, with <code>sudo</code> when needed) and the boosters, handling problems as it goes. Runs in <code>--yolo</code> — opting into turbo is the consent.</p>
-      <div class="terminal" style="margin-top:26px;">
-        <div class="term-head"><span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span><span class="term-title">direct (no model needed)</span></div>
-        <div class="term-body"><span class="ps1">$</span><code>aluy bootstrap --no-agent</code></div>
-      </div>
-      <p style="color:var(--tx2);font-size:14px;margin:12px 2px 0;">Deterministic path: pinned Ollama artifact + venv creation, <b>without using a model</b>. Requires Python already present.</p>
-      <div class="note">
-        <span class="ic" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
-        <p><b>Fresh machine with no model yet?</b> Use <code>--no-agent</code>. The agent installer needs a working model to think — and if that model is the very Ollama you're about to install, it's circular. From rc.35, <code>aluy bootstrap</code> detects the model is unreachable and falls back to the direct path on its own.</p>
-      </div>
-      <div class="note">
-        <span class="ic" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-        <p><b>Don't run <code>aluy</code> with <code>sudo</code>.</b> The sidecars refuse to run as root, and <code>sudo</code> sends aluy looking for its config in <code>/root/.aluy</code>. Install as your user; the installer asks for <code>sudo</code> only on the system steps that need it.</p>
-      </div>
-    </section>
+      <!-- 03 SELF-REPAIR -->
+      <section class="docs-sec" id="sec-repair">
+        <span class="eyebrow eyebrow--sm">03 · self-repair</span>
+        <h2>When something's off, the agent fixes it</h2>
+        <p>In the TUI, <code class="icode">/doctor</code> shows the live health check. If a booster is down it asks — and <code class="icode">/doctor fix</code> hands the repair to the agent itself: it reads <code class="icode">~/.aluy/logs/*.log</code>, runs the bootstrap, installs what's missing and retries until the three are green.</p>
+        <div class="codeblock">
+          <div><span class="pr">/doctor</span>       <span class="cm"># live health check — asks if a booster is down</span></div>
+          <div><span class="pr">/doctor fix</span>   <span class="cm"># the agent reads the logs, bootstraps and repairs</span></div>
+        </div>
+      </section>
 
-    <!-- ===== SELF-REPAIR ===== -->
-    <section class="section" style="padding-top:64px;">
-      <div class="section-head">
-        <span class="section-label">self-repair</span>
-        <h2>When something's off, the agent fixes it.</h2>
-        <p>In the TUI, <code>/doctor</code> shows the live health check. If a booster is down it asks — and <code>/doctor fix</code> hands the repair to the agent itself: it reads <code>~/.aluy/logs/*.log</code>, runs the bootstrap, installs what's missing and retries until the three are green.</p>
-      </div>
-      <div class="terminal">
-        <div class="term-head"><span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span><span class="term-title">aluy — session</span></div>
-        <div class="term-body"><span class="ps1">›</span><code>/doctor&nbsp;&nbsp;→&nbsp;&nbsp;/doctor fix</code></div>
-      </div>
-    </section>
+      <!-- 04 TROUBLESHOOTING -->
+      <section class="docs-sec" id="sec-troubleshooting">
+        <span class="eyebrow eyebrow--sm">04 · troubleshooting</span>
+        <h2>Common problems &amp; fixes</h2>
+        <p>The per-sidecar logs (truncated each boot) live in <code class="icode">~/.aluy/logs/ollama.log</code>, <code class="icode">mem0.log</code>, <code class="icode">headroom.log</code> — the first place to look.</p>
+        <ul class="docs-list">
+          <li><b>mem0 ✗</b> · log <code class="icode">can't open file '…aluy-mem0-server.py'</code> — the server script isn't in the venv. Run <code class="icode">aluy bootstrap</code> (copies it). On rc ≥ 33 the boot also copies it on launch.</li>
+          <li><b>mem0 ✗</b> · log <code class="icode">KeyError: '_type'</code> / <code class="icode">no such column</code> — store from an older version. <code class="icode">mv ~/.aluy/memory{,.bak}; mv ~/.mem0/history.db{,.bak}</code> and reopen. On rc ≥ 29 the server self-heals.</li>
+          <li><b>ollama ✓</b> but <code class="icode">ollama list</code> → command not found — service runs on :11434 but the binary isn't on PATH. rc ≥ 30 symlinks it into <code class="icode">~/.local/bin</code>; or open a new shell.</li>
+          <li><b>bootstrap stuck</b> at <code class="icode">verificando ollama</code> + <code class="icode">erro de broker</code> — agent install with no reachable model. Use <code class="icode">aluy bootstrap --no-agent</code> (rc ≥ 35 falls back automatically).</li>
+          <li><b>headroom ✗</b> · log <code class="icode">No module named 'fastapi'</code> — venv installed <code class="icode">headroom-ai</code> without the <code class="icode">[proxy]</code> extra. <code class="icode">~/.aluy/hr-venv/bin/pip install 'headroom-ai[proxy]==0.25.0'</code>. Fixed at the source in rc ≥ 36.</li>
+          <li><b>all three ✗</b> on a new machine — nothing provisioned yet. <code class="icode">aluy bootstrap --no-agent</code>.</li>
+        </ul>
+      </section>
 
-    <!-- ===== COMMON PROBLEMS ===== -->
-    <section class="section" style="padding-top:64px;">
-      <div class="section-head">
-        <span class="section-label">troubleshooting</span>
-        <h2>Common problems & fixes.</h2>
-        <p>The per-sidecar logs (truncated each boot) live in <code>~/.aluy/logs/ollama.log</code>, <code>mem0.log</code>, <code>headroom.log</code> — the first place to look.</p>
-      </div>
-      <div class="cmd-group" style="border:1px solid var(--bd-08);border-radius:14px;overflow:hidden;margin-top:8px;">
-        <div class="cmd-row"><div class="sig">mem0 ✗ · log <code>can't open file '…aluy-mem0-server.py'</code></div><div class="ds">The server script isn't in the venv. Run <code>aluy bootstrap</code> (copies it). On rc ≥ 33 the boot also copies it on launch.</div></div>
-        <div class="cmd-row"><div class="sig">mem0 ✗ · log <code>KeyError: '_type'</code> / <code>no such column</code></div><div class="ds">Store from an older version. <code>mv ~/.aluy/memory{,.bak}; mv ~/.mem0/history.db{,.bak}</code> and reopen. On rc ≥ 29 the server self-heals.</div></div>
-        <div class="cmd-row"><div class="sig">ollama ✓ but <code>ollama list</code> → command not found</div><div class="ds">Service runs on :11434 but the binary isn't on PATH. rc ≥ 30 symlinks it into <code>~/.local/bin</code>; or open a new shell.</div></div>
-        <div class="cmd-row"><div class="sig">bootstrap stuck at <code>verificando ollama</code> + <code>erro de broker</code></div><div class="ds">Agent install with no reachable model. Use <code>aluy bootstrap --no-agent</code> (rc ≥ 35 falls back automatically).</div></div>
-        <div class="cmd-row"><div class="sig">headroom ✗ · log <code>No module named 'fastapi'</code></div><div class="ds">venv installed <code>headroom-ai</code> without the <code>[proxy]</code> extra. <code>~/.aluy/hr-venv/bin/pip install 'headroom-ai[proxy]==0.25.0'</code>. Fixed at the source in rc ≥ 36.</div></div>
-        <div class="cmd-row"><div class="sig">all three ✗ on a new machine</div><div class="ds">Nothing provisioned yet. <code>aluy bootstrap --no-agent</code>.</div></div>
-      </div>
-    </section>
+      <!-- 05 MANUAL INSTALL -->
+      <section class="docs-sec" id="sec-manual">
+        <span class="eyebrow eyebrow--sm">05 · manual</span>
+        <h2>Provision by hand</h2>
+        <p>If you'd rather set it up yourself (or understand what bootstrap does). Everything lives under <code class="icode">~/.aluy/</code>.</p>
+        <div class="codeblock">
+          <div class="cm"># ollama</div>
+          <div><span class="pr">$</span> curl -fsSL https://ollama.com/install.sh | sh</div>
+          <div><span class="pr">$</span> ollama pull qwen2.5:0.5b</div>
+          <div><span class="pr">$</span> ollama pull nomic-embed-text</div>
+        </div>
+        <div class="codeblock">
+          <div class="cm"># mem0 — Python ≥ 3.10; needs ollama</div>
+          <div><span class="pr">$</span> python3 -m venv ~/.aluy/mem-venv</div>
+          <div><span class="pr">$</span> ~/.aluy/mem-venv/bin/pip install mem0ai==0.1.76 chromadb==0.5.23 ollama==0.4.7</div>
+          <div><span class="pr">$</span> cp "$(npm root -g)/@hiperplano/aluy-cli/assets/mem0/aluy-mem0-server.py" ~/.aluy/mem-venv/</div>
+        </div>
+        <div class="codeblock">
+          <div class="cm"># headroom — Python ≥ 3.10; [proxy] brings fastapi</div>
+          <div><span class="pr">$</span> python3 -m venv ~/.aluy/hr-venv</div>
+          <div><span class="pr">$</span> ~/.aluy/hr-venv/bin/pip install 'headroom-ai[proxy]==0.25.0'</div>
+        </div>
+        <div class="note">
+          <span class="ic" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+          <p>After provisioning by hand, <code class="icode">aluy doctor</code> should show the three green (boot brings them up when the profile is turbo). What's in effect — profile, toggles, where each key comes from — is shown by <code class="icode">aluy config</code>.</p>
+        </div>
+      </section>
 
-    <!-- ===== MANUAL INSTALL ===== -->
-    <section class="section" style="padding-top:64px;">
-      <div class="section-head">
-        <span class="section-label">manual install</span>
-        <h2>Provision by hand.</h2>
-        <p>If you'd rather set it up yourself (or understand what bootstrap does). Everything lives under <code>~/.aluy/</code>.</p>
-      </div>
-      <div class="cmd-group" style="border:1px solid var(--bd-08);border-radius:14px;overflow:hidden;margin-top:8px;">
-        <div class="cmd-row"><div class="sig">ollama</div><div class="ds"><code>curl -fsSL https://ollama.com/install.sh | sh</code><br><code>ollama pull qwen2.5:0.5b</code> &nbsp;·&nbsp; <code>ollama pull nomic-embed-text</code></div></div>
-        <div class="cmd-row"><div class="sig">mem0 <span style="color:var(--tx3)">(Python ≥ 3.10; needs ollama)</span></div><div class="ds"><code>python3 -m venv ~/.aluy/mem-venv</code><br><code>~/.aluy/mem-venv/bin/pip install mem0ai==0.1.76 chromadb==0.5.23 ollama==0.4.7</code><br><code>cp "$(npm root -g)/@hiperplano/aluy-cli/assets/mem0/aluy-mem0-server.py" ~/.aluy/mem-venv/</code></div></div>
-        <div class="cmd-row"><div class="sig">headroom <span style="color:var(--tx3)">(Python ≥ 3.10)</span></div><div class="ds"><code>python3 -m venv ~/.aluy/hr-venv</code><br><code>~/.aluy/hr-venv/bin/pip install 'headroom-ai[proxy]==0.25.0'</code> &nbsp;<span style="color:var(--tx3)">— the <code>[proxy]</code> extra brings fastapi</span></div></div>
-      </div>
-      <div class="note">
-        <span class="ic" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
-        <p>After provisioning by hand, <code>aluy doctor</code> should show the three green (boot brings them up when the profile is turbo). What's in effect — profile, toggles, where each key comes from — is shown by <code>aluy config</code>.</p>
-      </div>
-    </section>
+      <!-- footer (inside content panel) -->
+      <footer class="docs-foot">
+        <p class="foot-fine">Aluy <span class="lam">Λ</span> CLI — your local agent that works at scale · open source · MIT · <a class="lnk" href="https://www.npmjs.com/package/@hiperplano/aluy-cli">npm</a> · <a class="lnk" href="termos.html">Terms</a></p>
+      </footer>
 
-  </main>
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="foot">
-    <div class="foot-inner">
-      <img src="assets/aluy-wordmark-white.png" alt="Aluy" />
-      <span class="grow"></span>
-      <nav class="foot-nav" aria-label="Footer">
-        <a href="funcionalidades.html">Features</a>
-        <a href="comandos.html">Commands</a>
-        <a href="arquitetura.html">Architecture</a>
-        <a href="comecar.html">Install</a>
-        <a href="turbo.html">Turbo</a>
-        <a href="help.html">Docs</a>
-        <a href="integracoes.html">Ecosystem</a>
-        <a href="termos.html">Terms</a>
-        <a href="https://github.com/hiperplano/aluy-cli">GitHub</a>
-        <a href="https://www.npmjs.com/package/@hiperplano/aluy-cli">npm</a>
-      </nav>
-      <p class="foot-fine">Aluy <span class="lam">Λ</span> CLI — your local agent that works at scale · open source · MIT</p>
     </div>
-  </footer>
+  </div>
 
 </div>
 </body>
