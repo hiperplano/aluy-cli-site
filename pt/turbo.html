@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Modo turbo — os complementos locais opcionais do Aluy CLI (mem0, headroom, ollama). Como instalar, problemas comuns e como resolver, e instalação manual. Rodam só na sua máquina; o agente funciona sem eles." />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Aluy CLI" />
+<meta property="og:title" content="Modo turbo — Aluy CLI" />
+<meta property="og:description" content="Os complementos locais opcionais (mem0, headroom, ollama): instalação, problemas e setup manual." />
+<meta property="og:url" content="https://aluy.dev/pt/turbo.html" />
+<meta property="og:image" content="https://aluy.dev/assets/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="pt_BR" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Modo turbo — Aluy CLI" />
+<meta name="twitter:description" content="Os complementos locais opcionais (mem0, headroom, ollama): instalação, problemas e setup manual." />
+<meta name="twitter:image" content="https://aluy.dev/assets/og.png" />
+<title>Modo turbo — Aluy CLI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="stylesheet" href="../site.css" />
+<script src="../lang.js"></script>
+<script defer src="../site.js"></script>
+</head>
+<body>
+<div class="aurora aurora--hero" aria-hidden="true"></div>
+<div class="page">
+
+  <!-- ===== HEADER ===== -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html" aria-label="Aluy CLI — início">
+        <img src="../assets/aluy-wordmark-white.png" alt="Aluy" />
+        <span class="cli">CLI</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="funcionalidades.html">Funcionalidades</a>
+        <a href="comandos.html">Comandos</a>
+        <a href="arquitetura.html">Arquitetura</a>
+        <a href="comecar.html">Instalar</a>
+        <a href="turbo.html" class="active">Turbo</a>
+        <a href="help.html">Docs</a>
+        <a href="integracoes.html">Ecossistema</a>
+      </nav>
+      <span class="grow"></span>
+      <div class="lang-toggle" role="group" aria-label="Language · idioma">
+        <a href="../turbo.html" data-lang="en" hreflang="en" aria-current="false">EN</a>
+        <a href="turbo.html" data-lang="pt" hreflang="pt-BR" aria-current="true">PT</a>
+      </div>
+      <a class="ver-pill" data-version="tag" href="https://github.com/hiperplano/aluy-cli/releases" aria-label="Último release">v1.0.0-rc.1</a>
+      <a class="gh-link" href="https://github.com/hiperplano/aluy-cli" aria-label="Ver no GitHub">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.52.1.71-.23.71-.5v-1.95c-2.9.63-3.52-1.24-3.52-1.24-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.93 1.6 2.45 1.13 3.05.86.09-.68.36-1.13.66-1.39-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.41-2.07 1.07-2.8-.11-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a9.9 9.9 0 0 1 5.24 0c2-1.35 2.87-1.07 2.87-1.07.57 1.43.21 2.49.11 2.75.67.73 1.07 1.66 1.07 2.8 0 4.01-2.45 4.9-4.78 5.16.38.32.71.95.71 1.92v2.85c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>
+        GitHub
+      </a>
+      <a class="gh-link" href="https://www.npmjs.com/package/@hiperplano/aluy-cli" aria-label="Pacote no npm"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"/></svg>npm</a>
+      <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <span class="eyebrow">modo turbo · opcional · local</span>
+      <h1>Modo turbo.</h1>
+      <p class="lead">Três <b>complementos</b> opcionais que rodam na sua máquina — memória de longo prazo, folga de contexto e modelos locais. Você liga com <code>aluy bootstrap</code>; o agente funciona sem eles. Esta página: o que são, como instalar, o que pode dar errado e como resolver.</p>
+    </section>
+
+    <!-- ===== OS TRÊS COMPLEMENTOS ===== -->
+    <section class="section" style="padding-top:48px;">
+      <div class="section-head">
+        <span class="section-label">três complementos</span>
+        <h2>O que o turbo liga.</h2>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>mem0 <span style="font-family:var(--mono);font-size:.7em;color:var(--tx3)">· :11435</span></h3>
+          <p>Memória persistente: o agente guarda fatos e preferências e os relembra na próxima sessão. Você vê, fixa ou esquece com <code>/memory</code>.</p>
+        </div>
+        <div class="card">
+          <h3>headroom <span style="font-family:var(--mono);font-size:.7em;color:var(--tx3)">· :8787</span></h3>
+          <p>Compressão de contexto: condensa o que já passou e traz de volta só o que importa, mantendo a janela do modelo sob controle.</p>
+        </div>
+        <div class="card">
+          <h3>ollama <span style="font-family:var(--mono);font-size:.7em;color:var(--tx3)">· :11434</span></h3>
+          <p>Runtime de modelos locais: um <i>judge</i> pequeno (<code>qwen2.5:0.5b</code>) e um <i>embedder</i> (<code>nomic-embed-text</code>) para tarefas internas que nunca saem da máquina.</p>
+        </div>
+      </div>
+      <div class="note">
+        <span class="ic" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.4 8-8 9-4.6-1-8-4-8-9V7z"/><polyline points="9 12 11 14 15 10"/></svg></span>
+        <p>Os três escutam só em <code>127.0.0.1</code> e são <b>opt-in</b> — nada sobe sem você aceitar. Eles sobem no boot se já instalados; instalar é o passo explícito <code>aluy bootstrap</code>. O perfil oposto, <b>leve</b>, não instala nenhum.</p>
+      </div>
+    </section>
+
+    <!-- ===== INSTALAÇÃO ===== -->
+    <section class="section" style="padding-top:64px;">
+      <div class="section-head">
+        <span class="section-label">instalação</span>
+        <h2>Dois caminhos para provisionar.</h2>
+        <p>Depois de <code>npm i -g @hiperplano/aluy-cli</code> e <code>aluy onboard</code>, rode um destes:</p>
+      </div>
+      <div class="terminal">
+        <div class="term-head"><span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span><span class="term-title">via agente (padrão)</span></div>
+        <div class="term-body"><span class="ps1">$</span><code>aluy bootstrap</code></div>
+      </div>
+      <p style="color:var(--tx2);font-size:14px;margin:12px 2px 0;">O aluy detecta o SO, instala os pré-requisitos que faltam (Python, pip, venv, com <code>sudo</code> quando preciso) e os complementos, tratando os problemas no caminho. Roda em <code>--yolo</code> — optar pelo turbo é o consentimento.</p>
+      <div class="terminal" style="margin-top:26px;">
+        <div class="term-head"><span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span><span class="term-title">direto (sem precisar de modelo)</span></div>
+        <div class="term-body"><span class="ps1">$</span><code>aluy bootstrap --no-agent</code></div>
+      </div>
+      <p style="color:var(--tx2);font-size:14px;margin:12px 2px 0;">Caminho determinístico: artefato pinado do Ollama + criação dos venvs, <b>sem usar modelo</b>. Requer Python já pronto.</p>
+      <div class="note">
+        <span class="ic" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+        <p><b>Máquina do zero, sem modelo ainda?</b> Use <code>--no-agent</code>. O instalador via agente precisa de um modelo para pensar — e se esse modelo é o próprio Ollama que você ainda vai instalar, é circular. A partir da rc.35, o <code>aluy bootstrap</code> detecta que o modelo não responde e cai sozinho no caminho direto.</p>
+      </div>
+      <div class="note">
+        <span class="ic" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+        <p><b>Não rode o <code>aluy</code> com <code>sudo</code>.</b> Os sidecars recusam rodar como root, e o <code>sudo</code> ainda manda o aluy procurar a config em <code>/root/.aluy</code>. Instale como seu usuário; o instalador pede <code>sudo</code> só nos passos de sistema que exigem.</p>
+      </div>
+    </section>
+
+    <!-- ===== AUTO-REPARO ===== -->
+    <section class="section" style="padding-top:64px;">
+      <div class="section-head">
+        <span class="section-label">auto-reparo</span>
+        <h2>Quando algo cai, o agente conserta.</h2>
+        <p>Na TUI, o <code>/doctor</code> mostra o diagnóstico ao vivo. Se um complemento está fora, ele pergunta — e o <code>/doctor fix</code> entrega o conserto ao próprio agente: ele lê os <code>~/.aluy/logs/*.log</code>, roda o bootstrap, instala o que falta e re-tenta até os três ficarem verdes.</p>
+      </div>
+      <div class="terminal">
+        <div class="term-head"><span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span><span class="term-title">aluy — sessão</span></div>
+        <div class="term-body"><span class="ps1">›</span><code>/doctor&nbsp;&nbsp;→&nbsp;&nbsp;/doctor fix</code></div>
+      </div>
+    </section>
+
+    <!-- ===== PROBLEMAS COMUNS ===== -->
+    <section class="section" style="padding-top:64px;">
+      <div class="section-head">
+        <span class="section-label">problemas comuns</span>
+        <h2>Sintomas e conserto.</h2>
+        <p>Os logs de cada sidecar (truncados por boot) ficam em <code>~/.aluy/logs/ollama.log</code>, <code>mem0.log</code>, <code>headroom.log</code> — o primeiro lugar a olhar.</p>
+      </div>
+      <div class="cmd-group" style="border:1px solid var(--bd-08);border-radius:14px;overflow:hidden;margin-top:8px;">
+        <div class="cmd-row"><div class="sig">mem0 ✗ · log <code>can't open file '…aluy-mem0-server.py'</code></div><div class="ds">Falta o script do servidor no venv. Rode <code>aluy bootstrap</code> (copia o script). Em rc ≥ 33 o boot também o copia ao abrir.</div></div>
+        <div class="cmd-row"><div class="sig">mem0 ✗ · log <code>KeyError: '_type'</code> / <code>no such column</code></div><div class="ds">Store de versão anterior. <code>mv ~/.aluy/memory{,.bak}; mv ~/.mem0/history.db{,.bak}</code> e reabra. Em rc ≥ 29 o servidor se auto-cura.</div></div>
+        <div class="cmd-row"><div class="sig">ollama ✓ mas <code>ollama list</code> → command not found</div><div class="ds">Serviço sobe em :11434 mas o binário não está no PATH. rc ≥ 30 cria symlink em <code>~/.local/bin</code>; ou abra um shell novo.</div></div>
+        <div class="cmd-row"><div class="sig">bootstrap trava em <code>verificando ollama</code> + <code>erro de broker</code></div><div class="ds">Instalação via agente sem modelo acessível. Use <code>aluy bootstrap --no-agent</code> (rc ≥ 35 cai nisso sozinho).</div></div>
+        <div class="cmd-row"><div class="sig">headroom ✗ · log <code>No module named 'fastapi'</code></div><div class="ds">O venv instalou <code>headroom-ai</code> sem o extra <code>[proxy]</code>. <code>~/.aluy/hr-venv/bin/pip install 'headroom-ai[proxy]==0.25.0'</code>. Corrigido na fonte em rc ≥ 36.</div></div>
+        <div class="cmd-row"><div class="sig">os três ✗ numa máquina nova</div><div class="ds">Nada provisionado ainda. <code>aluy bootstrap --no-agent</code>.</div></div>
+      </div>
+    </section>
+
+    <!-- ===== INSTALAÇÃO MANUAL ===== -->
+    <section class="section" style="padding-top:64px;">
+      <div class="section-head">
+        <span class="section-label">instalação manual</span>
+        <h2>Provisionar à mão.</h2>
+        <p>Se preferir montar você mesmo (ou entender o que o bootstrap faz). Tudo mora em <code>~/.aluy/</code>.</p>
+      </div>
+      <div class="cmd-group" style="border:1px solid var(--bd-08);border-radius:14px;overflow:hidden;margin-top:8px;">
+        <div class="cmd-row"><div class="sig">ollama</div><div class="ds"><code>curl -fsSL https://ollama.com/install.sh | sh</code><br><code>ollama pull qwen2.5:0.5b</code> &nbsp;·&nbsp; <code>ollama pull nomic-embed-text</code></div></div>
+        <div class="cmd-row"><div class="sig">mem0 <span style="color:var(--tx3)">(Python ≥ 3.10; precisa do ollama)</span></div><div class="ds"><code>python3 -m venv ~/.aluy/mem-venv</code><br><code>~/.aluy/mem-venv/bin/pip install mem0ai==0.1.76 chromadb==0.5.23 ollama==0.4.7</code><br><code>cp "$(npm root -g)/@hiperplano/aluy-cli/assets/mem0/aluy-mem0-server.py" ~/.aluy/mem-venv/</code></div></div>
+        <div class="cmd-row"><div class="sig">headroom <span style="color:var(--tx3)">(Python ≥ 3.10)</span></div><div class="ds"><code>python3 -m venv ~/.aluy/hr-venv</code><br><code>~/.aluy/hr-venv/bin/pip install 'headroom-ai[proxy]==0.25.0'</code> &nbsp;<span style="color:var(--tx3)">— o extra <code>[proxy]</code> traz o fastapi</span></div></div>
+      </div>
+      <div class="note">
+        <span class="ic" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+        <p>Depois de provisionar à mão, o <code>aluy doctor</code> deve mostrar os três verdes (o boot os sobe quando o perfil é turbo). O que está em vigor — perfil, toggles, de onde vem cada chave — você vê com <code>aluy config</code>.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="foot">
+    <div class="foot-inner">
+      <img src="../assets/aluy-wordmark-white.png" alt="Aluy" />
+      <span class="grow"></span>
+      <nav class="foot-nav" aria-label="Rodapé">
+        <a href="funcionalidades.html">Funcionalidades</a>
+        <a href="comandos.html">Comandos</a>
+        <a href="arquitetura.html">Arquitetura</a>
+        <a href="comecar.html">Instalar</a>
+        <a href="turbo.html">Turbo</a>
+        <a href="help.html">Docs</a>
+        <a href="integracoes.html">Ecossistema</a>
+        <a href="termos.html">Termos</a>
+        <a href="https://github.com/hiperplano/aluy-cli">GitHub</a>
+        <a href="https://www.npmjs.com/package/@hiperplano/aluy-cli">npm</a>
+      </nav>
+      <p class="foot-fine">Aluy <span class="lam">Λ</span> CLI — seu agente local que trabalha em escala · código aberto · MIT</p>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
