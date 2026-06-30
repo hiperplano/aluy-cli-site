@@ -25,6 +25,17 @@
       var index = sections.map(function (s) {
         return { a: s.a, text: ((s.a.textContent || "") + " " + (s.sec.textContent || "")).toLowerCase() };
       });
+      var groups = Array.prototype.slice.call(sidebar.querySelectorAll(".docs-group"));
+      function syncGroups() {
+        // hide a group header when every link until the next header is hidden
+        groups.forEach(function (g) {
+          var any = false;
+          for (var n = g.nextElementSibling; n && !n.classList.contains("docs-group"); n = n.nextElementSibling) {
+            if (n.tagName === "A" && !n.hidden) { any = true; break; }
+          }
+          g.hidden = !any;
+        });
+      }
       searchEl.addEventListener("input", function () {
         var q = searchEl.value.trim().toLowerCase();
         var shown = 0;
@@ -33,6 +44,7 @@
           it.a.hidden = !hit;
           if (hit) shown++;
         });
+        syncGroups();
         if (noRes) noRes.hidden = !(q && shown === 0);
       });
       searchEl.addEventListener("keydown", function (e) {

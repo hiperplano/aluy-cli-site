@@ -72,25 +72,39 @@
       <span class="docs-kicker">documentação</span>
       <input class="docs-search" id="docs-search" type="search" placeholder="Buscar nos docs…" aria-label="Buscar na documentação" autocomplete="off" />
       <p class="docs-noresults" id="docs-noresults" hidden>Nenhuma seção encontrada.</p>
+      <div class="docs-group">Ajuda</div>
       <a href="#sec-overview" class="active"><span class="n">01</span>Visão geral</a>
       <a href="#sec-install"><span class="n">02</span>Instalação</a>
       <a href="#sec-first-steps"><span class="n">03</span>Primeiros passos</a>
       <a href="#sec-cli"><span class="n">04</span>Referência de CLI</a>
       <a href="#sec-commands"><span class="n">05</span>Comandos slash</a>
       <a href="#sec-structure"><span class="n">06</span>Estrutura .aluy/</a>
-      <a href="#sec-arquivos"><span class="n">07</span>Construindo os arquivos .aluy/</a>
-      <a href="#sec-cycle"><span class="n">08</span>/cycle</a>
-      <a href="#sec-subagents"><span class="n">09</span>Subagentes</a>
-      <a href="#sec-rooms"><span class="n">10</span>Salas</a>
-      <a href="#sec-mcp"><span class="n">11</span>MCP</a>
-      <a href="#sec-compat"><span class="n">12</span>Compatibilidade</a>
-      <a href="#sec-sidecars"><span class="n">13</span>Sidecars</a>
-      <a href="#sec-turbo"><span class="n">14</span>Modo turbo</a>
-      <a href="#sec-architecture"><span class="n">15</span>Arquitetura</a>
-      <a href="#sec-memory"><span class="n">16</span>Memória</a>
-      <a href="#sec-themes"><span class="n">17</span>Temas</a>
-      <a href="#sec-doctor"><span class="n">18</span>Doctor</a>
-      <a href="#sec-faq"><span class="n">19</span>FAQ</a>
+      <a href="#sec-cycle"><span class="n">07</span>/cycle</a>
+      <a href="#sec-subagents"><span class="n">08</span>Subagentes</a>
+      <a href="#sec-rooms"><span class="n">09</span>Salas</a>
+      <a href="#sec-mcp"><span class="n">10</span>MCP</a>
+      <a href="#sec-compat"><span class="n">11</span>Compatibilidade</a>
+      <a href="#sec-sidecars"><span class="n">12</span>Sidecars</a>
+      <a href="#sec-architecture"><span class="n">13</span>Arquitetura</a>
+      <a href="#sec-memory"><span class="n">14</span>Memória</a>
+      <a href="#sec-themes"><span class="n">15</span>Temas</a>
+      <a href="#sec-doctor"><span class="n">16</span>Doctor</a>
+      <a href="#sec-faq"><span class="n">17</span>FAQ</a>
+      <div class="docs-group">Turbo</div>
+      <a href="#sec-turbo">Modo turbo</a>
+      <a href="#sec-turbo-on">O que o turbo liga</a>
+      <a href="#sec-turbo-provision">Dois caminhos para provisionar</a>
+      <a href="#sec-turbo-fix">Quando algo cai</a>
+      <a href="#sec-turbo-problems">Sintomas e conserto</a>
+      <a href="#sec-turbo-byhand">Provisionar à mão</a>
+      <div class="docs-group">Artefatos</div>
+      <a href="#sec-arquivos">Construindo os arquivos .aluy/</a>
+      <a href="#sec-arq-aluymd">ALUY.md</a>
+      <a href="#sec-arq-agents">agents/</a>
+      <a href="#sec-arq-commands">commands/</a>
+      <a href="#sec-arq-skills">skills/</a>
+      <a href="#sec-arq-workflows">workflows/</a>
+      <a href="#sec-arq-memory">memory/</a>
     </nav>
 
     <!-- content -->
@@ -308,10 +322,10 @@
       <!-- 07 CONSTRUINDO OS ARQUIVOS .aluy/ -->
       <section class="docs-sec" id="sec-arquivos">
         <span class="eyebrow eyebrow--sm">07 · referência</span>
-        <h2>Construindo os arquivos .aluy/</h2>
+        <h2>Artefatos — construindo os arquivos .aluy/</h2>
         <p>A pasta <code class="icode">.aluy/</code> é onde você ensina um projeto. Cada arquivo é Markdown puro, lido uma vez a partir da raiz confinada do workspace — um symlink que escapa da raiz é rejeitado e nada é lido. Os mesmos arquivos também são descobertos sob <code class="icode">.claude/</code> (compat Claude Code); em colisão de nome, <code class="icode">.claude/</code> vence. Abaixo, cada arquivo: o que é, onde fica, o formato exato e um exemplo mínimo.</p>
 
-        <h3>ALUY.md — instruções do projeto</h3>
+        <h3 id="sec-arq-aluymd">ALUY.md — instruções do projeto</h3>
         <p>Fica na <b>raiz do repo</b> (não dentro de <code class="icode">.aluy/</code>). É o arquivo de instrução do projeto — comandos de build/test, convenções, o objetivo — injetado no system prompt na largada. <code class="icode">ALUY.md</code> é o nome nativo (o que o <code class="icode">/init</code> escreve). Outros três nomes são lidos como compat, nesta precedência, compondo todos os presentes:</p>
         <div class="tree">&lt;seu-projeto&gt;/
 ├── <span class="c">ALUY.md</span>       <span class="cm"># nativo do Aluy — primário (o que o /init escreve)</span>
@@ -328,7 +342,7 @@
           <div>Nunca mexa em `infra/` sem perguntar.</div>
         </div>
 
-        <h3>agents/*.md — perfis de sub-agente</h3>
+        <h3 id="sec-arq-agents">agents/*.md — perfis de sub-agente</h3>
         <p>Um <code class="icode">.md</code> por sub-agente nomeado em <code class="icode">.aluy/agents/</code> (lido plano, sem recursão). Frontmatter YAML-mínimo (um <code class="icode">chave: valor</code> por linha) define o agente; o <b>corpo é o system prompt</b>.</p>
         <ul class="docs-list">
           <li><code class="icode">name</code> — a identidade que <code class="icode">/subagent &lt;nome&gt;</code> invoca (normalizada para <code class="icode">[a-z0-9_-]</code>). Obrigatório.</li>
@@ -348,7 +362,7 @@
           <div>e sugira a menor correção segura.</div>
         </div>
 
-        <h3>commands/*.md — comandos slash custom</h3>
+        <h3 id="sec-arq-commands">commands/*.md — comandos slash custom</h3>
         <p>Um <code class="icode">.md</code> por comando em <code class="icode">.aluy/commands/</code>. O <b>nome do arquivo é o nome do comando</b> — <code class="icode">deploy.md</code> vira <code class="icode">/deploy</code>. O corpo é um template de prompt submetido como seu objetivo; o frontmatter opcional <code class="icode">summary</code> alimenta o menu. Placeholders: <code class="icode">$ARGUMENTS</code> (a string inteira de args) e <code class="icode">$1</code>, <code class="icode">$2</code>, … (posicionais). Sem placeholder, os args são anexados.</p>
         <div class="codeblock">
           <div class="cm"># .aluy/commands/revisar.md</div>
@@ -358,7 +372,7 @@
           <div>Revise $1 por correção, depois por estilo. Seja conciso.</div>
         </div>
 
-        <h3>skills/&lt;nome&gt;/SKILL.md — capacidades empacotadas</h3>
+        <h3 id="sec-arq-skills">skills/&lt;nome&gt;/SKILL.md — capacidades empacotadas</h3>
         <p>Uma skill é um <b>diretório</b> sob <code class="icode">.aluy/skills/</code> com um manifesto <code class="icode">SKILL.md</code> (mais recursos auxiliares ao lado). O corpo é injetado sob demanda quando você invoca a skill por nome. Frontmatter <code class="icode">name</code> (cai para o nome do diretório) e <code class="icode">description</code> opcional; o corpo são as instruções e não pode ser vazio.</p>
         <div class="tree">.aluy/skills/
 └── pdf-fill/
@@ -374,7 +388,7 @@
           <div>2) mapeie os campos, 3) escreva a saída.</div>
         </div>
 
-        <h3>workflows/*.md — fluxos de atividades</h3>
+        <h3 id="sec-arq-workflows">workflows/*.md — fluxos de atividades</h3>
         <p>Um <code class="icode">.md</code> por workflow em <code class="icode">.aluy/workflows/</code>. Frontmatter <code class="icode">name</code> (obrigatório) e <code class="icode">description</code> opcional; o corpo é uma lista numerada de atividades. Cada linha é <code class="icode">N. &lt;id&gt; [&lt;agente&gt;] — &lt;objetivo&gt;</code>, onde o <code class="icode">[&lt;agente&gt;]</code> é opcional e o separador é <code class="icode">—</code> ou <code class="icode">-</code>. Pelo menos uma atividade é exigida.</p>
         <div class="codeblock">
           <div class="cm"># .aluy/workflows/estoria.md</div>
@@ -387,7 +401,7 @@
           <div>3. testar [tester] — Rode build/lint/testes; corrija o que quebrar.</div>
         </div>
 
-        <h3>memory/project.md — memória do projeto</h3>
+        <h3 id="sec-arq-memory">memory/project.md — memória do projeto</h3>
         <p>A memória do agente com escopo de projeto fica em <code class="icode">.aluy/memory/project.md</code> (dentro do workspace; a contraparte global é <code class="icode">~/.aluy/memory/global.md</code>). Você não curadora ela à mão como os arquivos acima — o agente lembra fatos sozinho, e você dá o leme de dentro da sessão com <code class="icode">/memory</code>: <code class="icode">/memory</code> para listar, <code class="icode">/memory forget &lt;id&gt;</code>, <code class="icode">/memory edit &lt;id&gt; …</code>, <code class="icode">/memory pin &lt;id&gt;</code> / <code class="icode">unpin</code>. A memória é sempre relembrada como <b>dado</b>, nunca como instrução — fixar é só retenção.</p>
         <div class="note">
           <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
@@ -479,7 +493,7 @@
         <h2>Modo turbo</h2>
         <p>Três <b>complementos</b> opcionais que rodam na sua máquina — memória de longo prazo, folga de contexto e modelos locais. Você liga com <code class="icode">aluy bootstrap</code>; o agente funciona sem eles. O que são, como instalar, o que pode dar errado e como resolver. (O perfil oposto, <b>leve</b>, não instala nenhum.)</p>
 
-        <h3>O que o turbo liga</h3>
+        <h3 id="sec-turbo-on">O que o turbo liga</h3>
         <p>Os três escutam só em <code class="icode">127.0.0.1</code> e são opt-in — nada sobe sem você aceitar. Eles sobem no boot se já instalados; instalar é o passo explícito <code class="icode">aluy bootstrap</code>.</p>
         <ul class="docs-list">
           <li><b>mem0</b> <span class="muted">· :11435</span> — memória persistente: o agente guarda fatos e preferências e os relembra na próxima sessão. Você vê, fixa ou esquece com <code class="icode">/memory</code>.</li>
@@ -487,7 +501,7 @@
           <li><b>ollama</b> <span class="muted">· :11434</span> — runtime de modelos locais: um judge pequeno (<code class="icode">qwen2.5:0.5b</code>) e um embedder (<code class="icode">nomic-embed-text</code>) para tarefas internas que nunca saem da máquina.</li>
         </ul>
 
-        <h3>Dois caminhos para provisionar</h3>
+        <h3 id="sec-turbo-provision">Dois caminhos para provisionar</h3>
         <p>Depois de <code class="icode">npm i -g @hiperplano/aluy-cli</code> e <code class="icode">aluy onboard</code>, rode um destes:</p>
         <div class="codeblock">
           <div><span class="pr">$</span> aluy bootstrap            <span class="cm"># via agente (padrão)</span></div>
@@ -506,14 +520,14 @@
           <p><b>Não rode o <code class="icode">aluy</code> com <code class="icode">sudo</code>.</b> Os sidecars recusam rodar como root, e o <code class="icode">sudo</code> ainda manda o aluy procurar a config em <code class="icode">/root/.aluy</code>. Instale como seu usuário; o instalador pede <code class="icode">sudo</code> só nos passos de sistema que exigem.</p>
         </div>
 
-        <h3>Quando algo cai, o agente conserta</h3>
+        <h3 id="sec-turbo-fix">Quando algo cai, o agente conserta</h3>
         <p>Na TUI, o <code class="icode">/doctor</code> mostra o diagnóstico ao vivo. Se um complemento está fora, ele pergunta — e o <code class="icode">/doctor fix</code> entrega o conserto ao próprio agente: ele lê os <code class="icode">~/.aluy/logs/*.log</code>, roda o bootstrap, instala o que falta e re-tenta até os três ficarem verdes.</p>
         <div class="codeblock">
           <div><span class="pr">/doctor</span>       <span class="cm"># diagnóstico ao vivo — pergunta se um complemento está fora</span></div>
           <div><span class="pr">/doctor fix</span>   <span class="cm"># o agente lê os logs, roda o bootstrap e repara</span></div>
         </div>
 
-        <h3>Sintomas e conserto</h3>
+        <h3 id="sec-turbo-problems">Sintomas e conserto</h3>
         <p>Os logs de cada sidecar (truncados por boot) ficam em <code class="icode">~/.aluy/logs/ollama.log</code>, <code class="icode">mem0.log</code>, <code class="icode">headroom.log</code> — o primeiro lugar a olhar.</p>
         <ul class="docs-list">
           <li><b>mem0 ✗</b> · log <code class="icode">can't open file '…aluy-mem0-server.py'</code> — falta o script do servidor no venv. Rode <code class="icode">aluy bootstrap</code> (copia o script). Em rc ≥ 33 o boot também o copia ao abrir.</li>
@@ -524,7 +538,7 @@
           <li><b>os três ✗</b> numa máquina nova — nada provisionado ainda. <code class="icode">aluy bootstrap --no-agent</code>.</li>
         </ul>
 
-        <h3>Provisionar à mão</h3>
+        <h3 id="sec-turbo-byhand">Provisionar à mão</h3>
         <p>Se preferir montar você mesmo (ou entender o que o bootstrap faz). Tudo mora em <code class="icode">~/.aluy/</code>.</p>
         <div class="codeblock">
           <div class="cm"># ollama</div>
