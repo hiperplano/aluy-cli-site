@@ -155,7 +155,7 @@
           <div><span class="pr">$</span> aluy            <span class="cm"># abre a sessão neste projeto</span></div>
           <div class="cm">› digite um objetivo, ou um /comando:</div>
           <div><span class="pr">/doctor</span>          <span class="cm"># checa a saúde da instalação</span></div>
-          <div><span class="pr">/init</span>            <span class="cm"># cria o AGENT.md do projeto</span></div>
+          <div><span class="pr">/init</span>            <span class="cm"># cria o ALUY.md do projeto</span></div>
           <div><span class="pr">/cycle</span> <span class="str">"rode os testes e conserte o que quebrar"</span></div>
         </div>
         <p>Quer ligar memória de longo prazo, mais fôlego de contexto ou modelos locais? Rode <code class="icode">aluy bootstrap</code> — veja a seção <a href="#sec-sidecars">Sidecars</a>.</p>
@@ -255,7 +255,7 @@
         <div>
           <details class="acc"><summary><code>/undo</code> · <code>/redo</code> · <code>/rewind</code> <span class="acc-flag">workspace</span></summary><div class="acc-body"><p>Avança/volta a última edição de arquivo do agente pelo journal da sessão. <code class="icode">/rewind</code> (<kbd>Esc Esc</kbd>) volta a um checkpoint anterior — código e/ou conversa.</p></div></details>
           <details class="acc"><summary><code>/permissions</code> · <code>/tools</code> · <code>/add-dir</code> <span class="acc-flag">workspace</span></summary><div class="acc-body"><p><code class="icode">/permissions</code> mostra as regras (read=allow, write/bash=ask, sempre-perguntar=travado). <code class="icode">/tools</code> é o inventário unificado somente-leitura (nativas, MCP por server, tools de delegação, estado de permissão). <code class="icode">/add-dir</code> autoriza um diretório extra para a sessão.</p></div></details>
-          <details class="acc"><summary><code>/init</code> · <code>/memory</code> · <code>/todo</code> <span class="acc-flag">projeto</span></summary><div class="acc-body"><p><code class="icode">/init</code> analisa o repo e escreve o <code class="icode">AGENT.md</code> (você confirma o diff). <code class="icode">/memory &lt;list|forget|edit|pin|unpin&gt;</code> cura a memória do agente (global + projeto; um fato fixado segue dado, nunca instrução). <code class="icode">/todo</code> gerencia o backlog persistente.</p></div></details>
+          <details class="acc"><summary><code>/init</code> · <code>/memory</code> · <code>/todo</code> <span class="acc-flag">projeto</span></summary><div class="acc-body"><p><code class="icode">/init</code> analisa o repo e escreve o <code class="icode">ALUY.md</code> (você confirma o diff). <code class="icode">/memory &lt;list|forget|edit|pin|unpin&gt;</code> cura a memória do agente (global + projeto; um fato fixado segue dado, nunca instrução). <code class="icode">/todo</code> gerencia o backlog persistente.</p></div></details>
           <details class="acc"><summary><code>/model</code> · <code>/provider</code> · <code>/effort</code> · <code>/theme</code> · <code>/lang</code> · <code>/split</code> · <code>/fullscreen</code> <span class="acc-flag">config · ui</span></summary><div class="acc-body"><p><code class="icode">/model</code> troca o tier (mostra só o tier, nunca a credencial); <code class="icode">/provider</code> define o nome do provider para o modo Custom; <code class="icode">/effort</code> define o esforço de raciocínio. <code class="icode">/theme aluy-dark|aluy-light|aluy-slate</code> e <code class="icode">/lang</code> (pt-BR/en) persistem a escolha. <code class="icode">/split</code> e <code class="icode">/fullscreen</code> alternam o painel LOG e o modo Cockpit.</p></div></details>
         </div>
 
@@ -278,12 +278,13 @@
         <p>O Aluy mantém duas casas: uma <b>global</b> em <code class="icode">~/.aluy/</code> (instalação, config, sidecars, memória entre projetos) e uma de <b>projeto</b> — o arquivo de instrução na raiz do repo mais uma pasta <code class="icode">.aluy/</code> opcional. Tudo sob <code class="icode">~/.aluy/</code> é o kernel-cliente confinado: as próprias regras de path-deny do agente o proíbem de ler, editar ou rodar qualquer coisa ali.</p>
 
         <h3>Projeto: o arquivo de instrução</h3>
-        <p>O arquivo de instrução nativo do projeto é o <code class="icode">AGENT.md</code> na raiz do repo — o que o <code class="icode">/init</code> cria. O Aluy lê três nomes de arquivo como instruções de projeto, nesta precedência, compondo todos os presentes:</p>
+        <p>O arquivo de instrução nativo do projeto é o <code class="icode">ALUY.md</code> na raiz do repo — o que o <code class="icode">/init</code> cria. O Aluy lê vários nomes de arquivo como instruções de projeto, nesta precedência, compondo todos os presentes:</p>
         <div class="tree">&lt;seu-projeto&gt;/
-├── <span class="c">AGENT.md</span>      <span class="cm"># nativo do Aluy (primário — o que o /init escreve)</span>
+├── <span class="c">ALUY.md</span>       <span class="cm"># nativo do Aluy (primário — o que o /init escreve)</span>
+├── <span class="c">AGENT.md</span>      <span class="cm"># compat — nome anterior/genérico</span>
 ├── <span class="c">AGENTS.md</span>     <span class="cm"># Codex / OpenAI</span>
 └── <span class="c">CLAUDE.md</span>     <span class="cm"># Claude Code / Anthropic</span></div>
-        <p>A precedência é <code class="icode">AGENT.md › AGENTS.md › CLAUDE.md</code>. São lidos uma vez na largada e injetados no system prompt, cada um sob um cabeçalho marcando a origem. Symlinks que escapam da raiz do projeto são rejeitados e nada é lido.</p>
+        <p>A precedência é <code class="icode">ALUY.md › AGENT.md › AGENTS.md › CLAUDE.md</code>. São lidos uma vez na largada e injetados no system prompt, cada um sob um cabeçalho marcando a origem. Symlinks que escapam da raiz do projeto são rejeitados e nada é lido.</p>
 
         <h3>Projeto: a pasta .aluy/</h3>
         <div class="tree">&lt;seu-projeto&gt;/.aluy/
@@ -462,11 +463,12 @@
         <p><b>Já usa Codex ou Claude Code? O Aluy entende a sua estrutura. Sem reconfig.</b> Aponte o Aluy para o seu projeto e ele lê os mesmos arquivos de instrução e configuração que você já mantém.</p>
         <h3>Arquivos de instrução do projeto</h3>
         <ul class="docs-list">
-          <li><code class="icode">AGENT.md</code> — o arquivo nativo do Aluy (o que o <code class="icode">/init</code> escreve), também a convenção genérica de agente.</li>
+          <li><code class="icode">ALUY.md</code> — o arquivo nativo do Aluy (o que o <code class="icode">/init</code> escreve).</li>
+          <li><code class="icode">AGENT.md</code> — alias de compat (nome anterior/genérico de agente).</li>
           <li><code class="icode">AGENTS.md</code> — o mesmo arquivo que o <b>Codex</b> (OpenAI) usa.</li>
           <li><code class="icode">CLAUDE.md</code> — o mesmo arquivo que o <b>Claude Code</b> usa.</li>
         </ul>
-        <p>A precedência é <code class="icode">AGENT.md › AGENTS.md › CLAUDE.md</code> — todos os presentes compõem juntos.</p>
+        <p>A precedência é <code class="icode">ALUY.md › AGENT.md › AGENTS.md › CLAUDE.md</code> — todos os presentes compõem juntos.</p>
         <h3>Paridade de estrutura</h3>
         <ul class="docs-list">
           <li>Agentes <code class="icode">.md</code> aceitam os <b>nomes de ferramentas do Claude Code</b> — mapeados para os nativos.</li>

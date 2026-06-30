@@ -155,7 +155,7 @@
           <div><span class="pr">$</span> aluy            <span class="cm"># opens the session in this project</span></div>
           <div class="cm">› type a goal, or a /command:</div>
           <div><span class="pr">/doctor</span>          <span class="cm"># checks the health of the install</span></div>
-          <div><span class="pr">/init</span>            <span class="cm"># creates the project AGENT.md</span></div>
+          <div><span class="pr">/init</span>            <span class="cm"># creates the project ALUY.md</span></div>
           <div><span class="pr">/cycle</span> <span class="str">"run the tests and fix what breaks"</span></div>
         </div>
         <p>Want to turn on long-term memory, more context headroom or local models? Run <code class="icode">aluy bootstrap</code> — see the <a href="#sec-sidecars">Sidecars</a> section.</p>
@@ -255,7 +255,7 @@
         <div>
           <details class="acc"><summary><code>/undo</code> · <code>/redo</code> · <code>/rewind</code> <span class="acc-flag">workspace</span></summary><div class="acc-body"><p>Step the agent's last file edit backward/forward from the per-session journal. <code class="icode">/rewind</code> (<kbd>Esc Esc</kbd>) goes back to an earlier checkpoint — code and/or conversation.</p></div></details>
           <details class="acc"><summary><code>/permissions</code> · <code>/tools</code> · <code>/add-dir</code> <span class="acc-flag">workspace</span></summary><div class="acc-body"><p><code class="icode">/permissions</code> shows the rules (read=allow, write/bash=ask, always-ask=locked). <code class="icode">/tools</code> is the unified read-only inventory (native, MCP per server, delegation tools, permission state). <code class="icode">/add-dir</code> authorizes an extra directory for the session.</p></div></details>
-          <details class="acc"><summary><code>/init</code> · <code>/memory</code> · <code>/todo</code> <span class="acc-flag">project</span></summary><div class="acc-body"><p><code class="icode">/init</code> analyzes the repo and writes <code class="icode">AGENT.md</code> (you confirm the diff). <code class="icode">/memory &lt;list|forget|edit|pin|unpin&gt;</code> curates the agent's memory (global + project; a pinned fact stays data, never an instruction). <code class="icode">/todo</code> manages the persistent backlog.</p></div></details>
+          <details class="acc"><summary><code>/init</code> · <code>/memory</code> · <code>/todo</code> <span class="acc-flag">project</span></summary><div class="acc-body"><p><code class="icode">/init</code> analyzes the repo and writes <code class="icode">ALUY.md</code> (you confirm the diff). <code class="icode">/memory &lt;list|forget|edit|pin|unpin&gt;</code> curates the agent's memory (global + project; a pinned fact stays data, never an instruction). <code class="icode">/todo</code> manages the persistent backlog.</p></div></details>
           <details class="acc"><summary><code>/model</code> · <code>/provider</code> · <code>/effort</code> · <code>/theme</code> · <code>/lang</code> · <code>/split</code> · <code>/fullscreen</code> <span class="acc-flag">config · ui</span></summary><div class="acc-body"><p><code class="icode">/model</code> switches the tier (shows tier only, never the credential); <code class="icode">/provider</code> sets the provider name for Custom mode; <code class="icode">/effort</code> sets the reasoning effort. <code class="icode">/theme aluy-dark|aluy-light|aluy-slate</code> and <code class="icode">/lang</code> (pt-BR/en) persist the choice. <code class="icode">/split</code> and <code class="icode">/fullscreen</code> toggle the LOG panel and Cockpit mode.</p></div></details>
         </div>
 
@@ -278,12 +278,13 @@
         <p>Aluy keeps two homes: a <b>global</b> one under <code class="icode">~/.aluy/</code> (install, config, sidecars, cross-project memory) and a <b>project</b> one — the instruction file at the repo root plus an optional <code class="icode">.aluy/</code> folder. Everything under <code class="icode">~/.aluy/</code> is the confined client kernel: the agent's own path-deny rules forbid it from reading, editing or running anything in there.</p>
 
         <h3>Project: the instruction file</h3>
-        <p>The native project instruction file is <code class="icode">AGENT.md</code> at the repo root — what <code class="icode">/init</code> creates. Aluy reads three filenames as project instructions, in this precedence, composing all that are present:</p>
+        <p>The native project instruction file is <code class="icode">ALUY.md</code> at the repo root — what <code class="icode">/init</code> creates. Aluy reads several filenames as project instructions, in this precedence, composing all that are present:</p>
         <div class="tree">&lt;your-project&gt;/
-├── <span class="c">AGENT.md</span>      <span class="cm"># native Aluy (primary — what /init writes)</span>
+├── <span class="c">ALUY.md</span>       <span class="cm"># native Aluy (primary — what /init writes)</span>
+├── <span class="c">AGENT.md</span>      <span class="cm"># compat — previous/generic name</span>
 ├── <span class="c">AGENTS.md</span>     <span class="cm"># Codex / OpenAI</span>
 └── <span class="c">CLAUDE.md</span>     <span class="cm"># Claude Code / Anthropic</span></div>
-        <p>Precedence is <code class="icode">AGENT.md › AGENTS.md › CLAUDE.md</code>. They are read once at startup and injected into the system prompt, each under a header marking its source. Symlinks that escape the project root are rejected and nothing is read.</p>
+        <p>Precedence is <code class="icode">ALUY.md › AGENT.md › AGENTS.md › CLAUDE.md</code>. They are read once at startup and injected into the system prompt, each under a header marking its source. Symlinks that escape the project root are rejected and nothing is read.</p>
 
         <h3>Project: the .aluy/ folder</h3>
         <div class="tree">&lt;your-project&gt;/.aluy/
@@ -462,11 +463,12 @@
         <p><b>Already using Codex or Claude Code? Aluy understands your structure. No reconfig.</b> Point Aluy at your project and it reads the same instruction and configuration files you already keep.</p>
         <h3>Project instruction files</h3>
         <ul class="docs-list">
-          <li><code class="icode">AGENT.md</code> — the Aluy native file (what <code class="icode">/init</code> writes), also the generic agent convention.</li>
+          <li><code class="icode">ALUY.md</code> — the Aluy native file (what <code class="icode">/init</code> writes).</li>
+          <li><code class="icode">AGENT.md</code> — compat alias (previous/generic agent name).</li>
           <li><code class="icode">AGENTS.md</code> — the same file <b>Codex</b> (OpenAI) uses.</li>
           <li><code class="icode">CLAUDE.md</code> — the same file <b>Claude Code</b> uses.</li>
         </ul>
-        <p>Precedence is <code class="icode">AGENT.md › AGENTS.md › CLAUDE.md</code> — all that are present compose together.</p>
+        <p>Precedence is <code class="icode">ALUY.md › AGENT.md › AGENTS.md › CLAUDE.md</code> — all that are present compose together.</p>
         <h3>Structure parity</h3>
         <ul class="docs-list">
           <li><code class="icode">.md</code> agents accept the <b>Claude Code tool names</b> — mapped to the native ones.</li>
