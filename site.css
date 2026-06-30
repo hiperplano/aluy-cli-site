@@ -48,7 +48,7 @@
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.16); border-radius: 999px; border: 3px solid transparent; background-clip: padding-box; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.30); border: 3px solid transparent; background-clip: padding-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; zoom: 1.1; }
 body {
   margin: 0;
   background: var(--bg);
@@ -147,7 +147,7 @@ img { display: block; }
 .section, .section--narrow, .section--mid, .section--install { max-width: 1040px; margin: 0 auto; padding: 0 var(--pad); }
 .section--narrow { max-width: 880px; }
 .section--mid { max-width: 760px; }
-.section--install { max-width: 680px; }
+.section--install { max-width: 800px; }
 .center { text-align: center; }
 .eyebrow {
   font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .16em;
@@ -262,6 +262,7 @@ b { color: var(--tx); font-weight: 600; }
 .term-dot { width: 10px; height: 10px; border-radius: 999px; background: rgba(255,255,255,.18); }
 .term-title { font-family: var(--mono); font-size: 11px; color: var(--mut2); margin-left: 8px; }
 .term-body { display: flex; align-items: flex-start; gap: 12px; padding: 17px 16px; background: var(--s2); }
+.term-body #cmd { white-space: nowrap; word-break: normal; overflow-x: auto; }
 .term-body .ps1 { font-family: var(--mono); color: var(--amber); font-weight: 500; }
 .term-body code { font-family: var(--mono); font-size: 14.5px; color: var(--tx); flex: 1; line-height: 1.6; word-break: break-all; }
 .copy-btn {
