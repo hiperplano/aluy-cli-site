@@ -466,7 +466,8 @@ kbd { font-family: var(--mono); font-size: 12px; color: var(--tx); background: v
 #docs-sidebar a.active { color: var(--amber); background: var(--amber-bg); border-left-color: var(--amber); }
 #docs-content { height: 100%; overflow-y: auto; min-width: 0; padding: 34px 28px 0 0; scroll-behavior: smooth; }
 #docs-content > h1 { font-weight: 600; font-size: 40px; line-height: 1.08; margin: 12px 0 0; }
-.docs-sec { scroll-margin-top: 92px; padding: 36px 0 8px; border-top: 1px solid var(--bd-09); }
+.docs-sec, .docs-sec h3[id] { scroll-margin-top: 92px; }
+.docs-sec { padding: 36px 0 8px; border-top: 1px solid var(--bd-09); }
 .docs-sec.first { margin-top: 18px; }
 .docs-sec h2 { font-weight: 600; font-size: 26px; margin: 8px 0 0; }
 .docs-sec h3 { font-weight: 600; font-size: 16px; margin: 20px 0 6px; color: var(--tx); letter-spacing: 0; }

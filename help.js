@@ -17,6 +17,11 @@
       var sec = document.getElementById(a.getAttribute("href").slice(1));
       if (sec) sections.push({ a: a, sec: sec });
     });
+    // TOC order ≠ DOM order (e.g. Turbo/Artifacts groups); the spy walks this
+    // list top-down, so sort by document position
+    sections.sort(function (x, y) {
+      return x.sec.compareDocumentPosition(y.sec) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
+    });
 
     // --- docs search: filter the TOC by section heading + content ---
     var searchEl = document.getElementById("docs-search");
@@ -93,8 +98,9 @@
         var sec = document.getElementById(a.getAttribute("href").slice(1));
         if (!sec) return;
         e.preventDefault();
-        var top = sec.getBoundingClientRect().top - pane.getBoundingClientRect().top + pane.scrollTop - 18;
-        pane.scrollTo({ top: top, behavior: "smooth" });
+        // scrollIntoView + scroll-margin-top (site.css): manual rect math breaks
+        // under the html zoom (rects are zoomed, scrollTop isn't)
+        sec.scrollIntoView({ behavior: "smooth", block: "start" });
         if (history.replaceState) history.replaceState(null, "", a.getAttribute("href"));
       });
     });
@@ -105,8 +111,7 @@
       var match = sections.filter(function (s) { return "#" + s.sec.id === location.hash; })[0];
       if (match) {
         initial = match;
-        var top = match.sec.getBoundingClientRect().top - pane.getBoundingClientRect().top + pane.scrollTop - 18;
-        pane.scrollTop = top;
+        match.sec.scrollIntoView({ behavior: "auto", block: "start" });
       }
     }
     setActive(initial);
