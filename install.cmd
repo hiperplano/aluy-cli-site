@@ -1,58 +1,103 @@
 @echo off
 REM ===========================================================================
 REM  aluy - bootstrap (Windows / cmd.exe)
-REM    curl -fsSL https://<host>/install.cmd -o "%TEMP%\aluy.cmd" ^&^& "%TEMP%\aluy.cmd"
+REM    curl -fsSL https://aluy.dev/install.cmd -o "%TEMP%\aluy.cmd" ^&^& "%TEMP%\aluy.cmd"
 REM
-REM  Minimo de proposito: so garante o Node e instala o pacote. Todo o resto
-REM  (splash, idioma, backend, provider, chave, modelo, sidecars) e o
-REM  `aluy onboard` (Node + Ink). ASCII puro de proposito (o .bat nao sofre o
-REM  encoding do .ps1/irm; a UI bonita vive no onboard, em Node).
+REM  Minimal by design: this only ensures Node exists and installs the package.
+REM  Everything else (splash, language, backend, provider, key, model, sidecars)
+REM  is `aluy onboard` (Node + Ink). The VISUAL mirrors the brand: bi-tone Aluy
+REM  wordmark + amber numbered steps, rendered with ANSI truecolor on Windows 10+
+REM  (VT). Degrades clean to plain ASCII markers on older consoles.
 REM ===========================================================================
-setlocal
+setlocal EnableExtensions
 chcp 65001 >nul
 if defined ALUY_PKG (set "PKG=%ALUY_PKG%") else (set "PKG=@hiperplano/aluy-cli")
 
-REM 1) Node (unico pre-requisito)
-echo [*] Passo 1/2 - verificando o Node ^(o aluy roda sobre ele^)...
+REM -- Brand palette + ANSI VT detection (truecolor works on Windows 10+) -------
+set "ANSI=0"
+for /f "tokens=2 delims=[]" %%v in ('ver') do set "VERSTR=%%v"
+for /f "tokens=2 delims= " %%v in ("%VERSTR%") do set "VERNUM=%%v"
+for /f "tokens=1 delims=." %%v in ("%VERNUM%") do set "MAJOR=%%v"
+if not defined MAJOR set "MAJOR=0"
+if %MAJOR% GEQ 10 set "ANSI=1"
+
+REM defaults (no color / ASCII markers)
+set "AMBER=" & set "LUY=" & set "DIM=" & set "BOLD=" & set "RESET="
+set "TRI=[*]" & set "CK=[ok]" & set "CR=[x]"
+
+if "%ANSI%"=="1" for /f %%a in ('echo prompt $E ^| cmd') do set "ESC=%%a"
+if "%ANSI%"=="1" (
+  set "AMBER=%ESC%[38;2;221;161;63m"
+  set "LUY=%ESC%[38;2;200;130;30m"
+  set "DIM=%ESC%[38;2;125;116;104m"
+  set "BOLD=%ESC%[1m"
+  set "RESET=%ESC%[0m"
+  set "TRI=%ESC%[38;2;221;161;63m▸%ESC%[0m"
+  set "CK=%ESC%[38;2;122;184;120m✓%ESC%[0m"
+  set "CR=%ESC%[38;2;207;83;83m✗%ESC%[0m"
+)
+
+REM -- wordmark (ANSI/truecolor on Windows 10+; plain text otherwise) ----------
+echo(
+if "%ANSI%"=="1" (
+  echo   %AMBER%      ██      %RESET% %LUY%██                %RESET%
+  echo   %AMBER%     ████     %RESET% %LUY%██  ██  ██  ██  ██%RESET%
+  echo   %AMBER%   ███  ███   %RESET% %LUY%██  ██  ██  ██  ██%RESET%
+  echo   %AMBER% ███      ███ %RESET% %LUY%██  ██  ██   █████%RESET%
+  echo   %AMBER%███        ███%RESET% %LUY%██   █████      ██%RESET%
+  echo   %AMBER%              %RESET% %LUY%            ████  %RESET%
+  echo.
+  echo   %DIM%terminal agent · runs on your machine · with your own LLM provider%RESET%
+) else (
+  echo   Aluy
+)
+echo(
+
+REM 1) Node (only prerequisite)
+echo(
+echo   %BOLD%%AMBER%1/2%RESET%  Node - aluy runs on it
 where node >nul 2>nul
 if errorlevel 1 (
   where winget >nul 2>nul
   if errorlevel 1 (
-    echo [x] Node.js nao encontrado. Instale o Node ^>= 20 ^(https://nodejs.org^) e rode de novo.
+    echo   %CR% Node.js not found. Install Node ^>= 20 ^(https://nodejs.org^) and run again.
     exit /b 1
   )
-  echo     Node nao encontrado - baixando o Node LTS via winget. A barra abaixo e o
-  echo     download do Node ^(pode levar alguns minutos^).
+  echo   %TRI% Node not found - installing Node LTS via winget.
+  echo       %DIM%the bar below is the Node download ^(may take a few minutes^).%RESET%
   winget install -e --id OpenJS.NodeJS.LTS --accept-source-agreements --accept-package-agreements
 )
 
-REM 2) instala. Explica O QUE a barra do npm baixa (senao parece "node" cru e opaco).
-echo [*] Passo 2/2 - baixando o aluy e seus componentes...
-echo       . interface de terminal ^(Ink/React^)   . acesso seguro a credenciais ^(keychain^)
-echo       . protocolo de ferramentas ^(MCP^). A barra abaixo e o npm baixando esses
-echo       pacotes ^(alguns sao binarios nativos do Node^) - costuma levar 1-2 min.
+REM 2) install. Explain WHAT the npm bar is downloading (else it looks opaque).
+echo(
+echo   %BOLD%%AMBER%2/2%RESET%  downloading aluy and its components
+echo       %DIM%- terminal UI (Ink/React)   - secure credential access (keychain)%RESET%
+echo       %DIM%- tool protocol (MCP)%RESET%
+echo       %DIM%the bar below is npm downloading these packages (some are native Node%RESET%
+echo       %DIM%binaries) - usually takes 1-2 min.%RESET%
 call npm install -g %PKG%
 where aluy >nul 2>nul
 if errorlevel 1 (
-  REM 1a instalacao global: o prefix do npm pode ainda nao estar no PATH desta
-  REM sessao. Adiciona o bin do npm ao PATH (paridade com o install.ps1).
+  REM First global install: the npm prefix may not be on this session's PATH yet.
+  REM Prepend the npm bin dir (parity with install.ps1 / install.sh).
   for /f "delims=" %%P in ('npm config get prefix 2^>nul') do set "PATH=%%P;%PATH%"
 )
 where aluy >nul 2>nul
 if errorlevel 1 (
-  echo [x] aluy nao ficou no PATH. Feche e reabra o terminal e rode: aluy onboard
+  echo   %CR% aluy is not on PATH. Close and reopen the terminal, then run: aluy onboard
   exit /b 1
 )
+echo   %CK% aluy installed.
 
-REM 3) entrega pro ONBOARD (Node/Ink). No cmd o stdin JA e o console, entao o Ink
-REM    le o teclado direto (sem Start-Process). Depois entra na sessao.
+REM 3) hand off to ONBOARD (Node/Ink). In cmd, stdin IS already the console, so Ink
+REM    reads the keyboard directly (no Start-Process). Then open the session.
 cls
 call aluy onboard
-REM TURBO: provisiona os sidecars via o agente (no-op se o perfil for leve).
-REM No Windows nao ha artefato pinado: o agente instala (winget/pip). Respeita o perfil.
+REM TURBO: provisions the sidecars via the agent (no-op for a light profile). On
+REM Windows there is no pinned artifact: the agent installs (winget/pip). Honors the profile.
 cls
 call aluy bootstrap --agent
-REM tela limpa antes de abrir a sessao (cada etapa comeca do zero, sem ruido acumulado).
+REM clear before the session (each step starts clean, no accumulated noise).
 cls
 aluy
 endlocal
