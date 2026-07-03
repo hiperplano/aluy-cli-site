@@ -45,8 +45,7 @@ if "%ANSI%"=="1" (
   echo   %AMBER%   ███  ███   %RESET% %LUY%██  ██  ██  ██  ██%RESET%
   echo   %AMBER% ███      ███ %RESET% %LUY%██  ██  ██   █████%RESET%
   echo   %AMBER%███        ███%RESET% %LUY%██   █████      ██%RESET%
-  echo   %AMBER%              %RESET% %LUY%                ██%RESET%
-  echo   %AMBER%              %RESET% %LUY%            █████ %RESET%
+  echo   %AMBER%              %RESET% %LUY%            ████  %RESET%
   echo.
   echo   %DIM%terminal agent · runs on your machine · with your own LLM provider%RESET%
 ) else (

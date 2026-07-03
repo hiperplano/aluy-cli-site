@@ -40,8 +40,7 @@ banner() {
   printf '  %s   ███  ███   %s %s██  ██  ██  ██  ██%s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
   printf '  %s ███      ███ %s %s██  ██  ██   █████%s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
   printf '  %s███        ███%s %s██   █████      ██%s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
-  printf '  %s              %s %s                ██%s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
-  printf '  %s              %s %s            █████ %s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
+  printf '  %s              %s %s            ████  %s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
   printf '\n'
   printf '  %sagente de terminal · roda na sua máquina · com o seu provider de LLM%s\n' "$DIM" "$RESET"
   printf '\n'

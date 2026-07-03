@@ -83,7 +83,6 @@ function Banner {
     "   $f$f$f  $f$f$f   ",
     " $f$f$f      $f$f$f ",
     "$f$f$f        $f$f$f",
-    "              ",
     "              "
   )
   $R = @(
@@ -92,11 +91,10 @@ function Banner {
     "$f$f  $f$f  $f$f  $f$f  $f$f",
     "$f$f  $f$f  $f$f   $f$f$f$f$f",
     "$f$f   $f$f$f$f$f      $f$f",
-    "                $f$f",
-    "            $f$f$f$f$f "
+    "            $f$f$f$f  "
   )
   Write-Host ''
-  for ($i = 0; $i -lt 7; $i++) {
+  for ($i = 0; $i -lt 6; $i++) {
     if ($UseAnsi) {
       Write-Host "  $AMBER$($L[$i])$RESET $LUY$($R[$i])$RESET"
     } else {
