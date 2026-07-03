@@ -40,12 +40,13 @@ if "%ANSI%"=="1" (
 REM -- wordmark (ANSI/truecolor on Windows 10+; plain text otherwise) ----------
 echo(
 if "%ANSI%"=="1" (
-  echo   %AMBER%  ██   %RESET% %LUY%██                %RESET%
-  echo   %AMBER% ████  %RESET% %LUY%██  ██  ██  ██  ██%RESET%
-  echo   %AMBER% ██ ██ %RESET% %LUY%██  ██  ██  ██  ██%RESET%
-  echo   %AMBER%██   ██%RESET% %LUY%██  ██  ██   █████%RESET%
-  echo   %AMBER%██   ██%RESET% %LUY%██   █████      ██%RESET%
-  echo   %AMBER%       %RESET% %LUY%                ██%RESET%
+  echo   %AMBER%      ██      %RESET% %LUY%██                %RESET%
+  echo   %AMBER%     ████     %RESET% %LUY%██  ██  ██  ██  ██%RESET%
+  echo   %AMBER%   ███  ███   %RESET% %LUY%██  ██  ██  ██  ██%RESET%
+  echo   %AMBER% ███      ███ %RESET% %LUY%██  ██  ██   █████%RESET%
+  echo   %AMBER%███        ███%RESET% %LUY%██   █████      ██%RESET%
+  echo   %AMBER%              %RESET% %LUY%                ██%RESET%
+  echo   %AMBER%              %RESET% %LUY%            █████ %RESET%
   echo.
   echo   %DIM%terminal agent · runs on your machine · with your own LLM provider%RESET%
 ) else (

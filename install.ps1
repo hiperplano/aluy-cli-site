@@ -78,12 +78,13 @@ $Mid  = [char]0x00B7   # ·
 function Banner {
   $f = $Blk
   $L = @(
-    "  $f$f   ",
-    " $f$f$f$f  ",
-    " $f$f $f$f ",
-    "$f$f   $f$f",
-    "$f$f   $f$f",
-    "       "
+    "      $f$f      ",
+    "     $f$f$f$f     ",
+    "   $f$f$f  $f$f$f   ",
+    " $f$f$f      $f$f$f ",
+    "$f$f$f        $f$f$f",
+    "              ",
+    "              "
   )
   $R = @(
     "$f$f                ",
@@ -91,10 +92,11 @@ function Banner {
     "$f$f  $f$f  $f$f  $f$f  $f$f",
     "$f$f  $f$f  $f$f   $f$f$f$f$f",
     "$f$f   $f$f$f$f$f      $f$f",
-    "                $f$f"
+    "                $f$f",
+    "            $f$f$f$f$f "
   )
   Write-Host ''
-  for ($i = 0; $i -lt 6; $i++) {
+  for ($i = 0; $i -lt 7; $i++) {
     if ($UseAnsi) {
       Write-Host "  $AMBER$($L[$i])$RESET $LUY$($R[$i])$RESET"
     } else {
