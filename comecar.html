@@ -36,7 +36,7 @@
   <header class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="index.html" aria-label="Aluy CLI — home">
-        <img src="assets/aluy-wordmark-white.png" alt="Aluy" />
+        <img src="assets/aluy-wordmark-ink.png" alt="Aluy" />
         <span class="cli">CLI</span>
       </a>
       <nav class="nav" aria-label="Main">
@@ -139,23 +139,23 @@
       </div>
       <p class="lead">On the first run, a wizard opens. You choose the provider, paste the key and pick the model — in that order.</p>
 
-      <div class="grid grid-2">
+      <div class="grid grid-3">
         <div class="card">
           <span class="cfg-kicker">a · provider</span>
           <p>Broker by default, or a direct provider (with your own credential). Switch later with <code class="icode">/provider</code>.</p>
         </div>
         <div class="card">
           <span class="cfg-kicker">b · key</span>
-          <p>The credential goes straight to the OS vault — <span class="cfg-card">never in plain text, never in the repo</span>. You won't type it again.</p>
+          <p>The credential goes straight to the OS vault — <b>never in plain text, never in the repo</b>. You won't type it again.</p>
         </div>
         <div class="card">
           <span class="cfg-kicker">c · model</span>
           <p>Pick the tier with <code class="icode">/model</code>. Tune reasoning effort with <code class="icode">/effort</code> when needed.</p>
         </div>
-        <div class="card">
-          <span class="cfg-kicker">validate · /doctor</span>
-          <p>Run <code class="icode">/doctor</code> to confirm model, key, connection and tools — read-only, with a fix hint.</p>
-        </div>
+      </div>
+      <div class="note" style="margin-top:13px;">
+        <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+        <p><b>Check it before the first task:</b> run <code class="icode">/doctor</code> to confirm model, key, connection and tools — read-only, with a fix hint when something is out of place.</p>
       </div>
 
       <!-- ===== STEP 3 — FIRST COMMANDS ===== -->
@@ -200,7 +200,7 @@
   <!-- ===== FOOTER ===== -->
   <footer class="foot">
     <div class="foot-inner">
-      <img src="assets/aluy-wordmark-white.png" alt="Aluy" />
+      <img src="assets/aluy-wordmark-ink.png" alt="Aluy" />
       <span class="grow"></span>
       <nav class="foot-nav" aria-label="Footer">
         <a href="termos.html">Terms</a>
