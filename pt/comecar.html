@@ -36,7 +36,7 @@
   <header class="topbar">
     <div class="topbar-inner">
       <a class="brand" href="index.html" aria-label="Aluy CLI — início">
-        <img src="../assets/aluy-wordmark-white.png" alt="Aluy" />
+        <img src="../assets/aluy-wordmark-ink.png" alt="Aluy" />
         <span class="cli">CLI</span>
       </a>
       <nav class="nav" aria-label="Principal">
@@ -139,23 +139,23 @@
       </div>
       <p class="lead">No primeiro run, um assistente abre. Você escolhe o provider, cola a chave e seleciona o modelo — nessa ordem.</p>
 
-      <div class="grid grid-2">
+      <div class="grid grid-3">
         <div class="card">
           <span class="cfg-kicker">a · provider</span>
           <p>Broker por padrão, ou um provider direto (com a sua credencial). Troque depois com <code class="icode">/provider</code>.</p>
         </div>
         <div class="card">
           <span class="cfg-kicker">b · chave</span>
-          <p>A credencial vai direto pro cofre do SO — <span class="cfg-card">nunca em texto, nunca no repo</span>. Você não digita de novo.</p>
+          <p>A credencial vai direto pro cofre do SO — <b>nunca em texto, nunca no repo</b>. Você não digita de novo.</p>
         </div>
         <div class="card">
           <span class="cfg-kicker">c · modelo</span>
           <p>Escolha o tier com <code class="icode">/model</code>. Ajuste o esforço de raciocínio com <code class="icode">/effort</code> quando precisar.</p>
         </div>
-        <div class="card">
-          <span class="cfg-kicker">validar · /doctor</span>
-          <p>Rode <code class="icode">/doctor</code> para confirmar modelo, chave, conexão e ferramentas — read-only, com dica de conserto.</p>
-        </div>
+      </div>
+      <div class="note" style="margin-top:13px;">
+        <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+        <p><b>Confira antes da primeira tarefa:</b> rode <code class="icode">/doctor</code> para checar modelo, chave, conexão e ferramentas — somente-leitura, com dica de conserto quando algo está fora do lugar.</p>
       </div>
 
       <!-- ===== PASSO 3 — PRIMEIROS COMANDOS ===== -->
@@ -200,7 +200,7 @@
   <!-- ===== FOOTER ===== -->
   <footer class="foot">
     <div class="foot-inner">
-      <img src="../assets/aluy-wordmark-white.png" alt="Aluy" />
+      <img src="../assets/aluy-wordmark-ink.png" alt="Aluy" />
       <span class="grow"></span>
       <nav class="foot-nav" aria-label="Rodapé">
         <a href="termos.html">Termos</a>
