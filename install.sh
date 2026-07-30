@@ -90,7 +90,16 @@ npm_target_writable() {
 
 PREFIX="$(npm config get prefix 2>/dev/null || echo '')"
 if ! npm_target_writable "$PREFIX"; then
-  PREFIX="$HOME/.aluy-npm"; mkdir -p "$PREFIX"; npm config set prefix "$PREFIX"
+  PREFIX="$HOME/.aluy-npm"; mkdir -p "$PREFIX"
+  # `--location=user` é OBRIGATÓRIO aqui. Sem ele, no npm empacotado do Debian
+  # (que traz `globalconfig=/etc/npmrc` + `prefix=/usr/local` no npmrc BUILTIN), o
+  # `npm config set prefix …` retorna exit 0 e NÃO ESCREVE NADA: `~/.npmrc` nem é
+  # criado e `npm config get prefix` segue devolvendo `/usr/local`. A guarda acima
+  # disparava certo e o efeito dela era descartado em silêncio — o `npm i -g` ia p/
+  # `/usr/local` e estourava EACCES do mesmo jeito. Medido: com `--location=user` o
+  # arquivo é criado e o prefix passa a valer; sem ele, nada acontece.
+  # Best-effort: se falhar, o `--prefix` do install abaixo ainda garante o destino.
+  npm config set prefix "$PREFIX" --location=user 2>/dev/null || true
 fi
 BIN="$PREFIX/bin"
 
@@ -113,7 +122,10 @@ sub "• interface de terminal (Ink/React)   • acesso seguro a credenciais (ke
 sub "• protocolo de ferramentas (MCP)"
 sub "a barra abaixo é o npm baixando esses pacotes (alguns são binários nativos"
 sub "do Node) — costuma levar 1–2 min."
-npm install -g "$PKG"
+# `--prefix "$PREFIX"` é a GARANTIA (não depende de config persistida): passa o destino
+# NA PRÓPRIA chamada. É o que blinda contra o no-op do `npm config set` descrito acima —
+# se por qualquer razão o prefix não persistir, o install AINDA vai p/ o lugar certo.
+npm install -g --prefix "$PREFIX" "$PKG"
 
 # Resolve o binário pelo caminho ABSOLUTO (não depende do PATH já estar "quente").
 ALUY="$BIN/aluy"
