@@ -72,8 +72,24 @@ fi
 #    (Bug anterior: o `export PATH` vivia DENTRO do `if` → na 2ª instalação o prefix
 #    já existia, o `if` era pulado, o PATH nunca era exportado → "aluy não ficou no
 #    PATH". E nunca persistia no shell → sumia ao resetar o terminal.)
+#
+#    O TESTE é no ALVO REAL, não no prefix: o `npm i -g` escreve em
+#    `$PREFIX/lib/node_modules` (e em `$PREFIX/bin`), não em `$PREFIX`. Um
+#    `/usr/local` gravável com `lib/node_modules` do root passava no `-w "$PREFIX"`
+#    e estourava EACCES no meio do download. Como o diretório pode ainda não existir,
+#    subimos até o primeiro ancestral EXISTENTE e testamos nele.
+npm_target_writable() {
+  [ -n "${1:-}" ] || return 1
+  for sub in lib/node_modules bin; do
+    d="$1/$sub"
+    while [ ! -e "$d" ] && [ "$d" != "/" ] && [ "$d" != "." ]; do d="$(dirname "$d")"; done
+    [ -w "$d" ] || return 1
+  done
+  return 0
+}
+
 PREFIX="$(npm config get prefix 2>/dev/null || echo '')"
-if [ -z "$PREFIX" ] || [ ! -w "$PREFIX" ]; then
+if ! npm_target_writable "$PREFIX"; then
   PREFIX="$HOME/.aluy-npm"; mkdir -p "$PREFIX"; npm config set prefix "$PREFIX"
 fi
 BIN="$PREFIX/bin"
@@ -106,11 +122,41 @@ ALUY="$BIN/aluy"
 
 good "aluy instalado."
 
+# 3a) INSTALAÇÃO ÓRFÃ (com root) SOMBREANDO a nova. Cenário real: uma instalação
+#     antiga feita com `sudo npm i -g` mora em `/usr/local/lib/node_modules` (dono
+#     root). Como nós caímos para `~/.aluy-npm` (o prefix do root não é gravável), a
+#     ANTIGA continua existindo e o `aluy` de `/usr/local/bin` segue no PATH. Nós
+#     prependamos `$BIN`, então normalmente a nova ganha — mas basta um shell que
+#     carregue os rc files em outra ordem (ou um PATH herdado por serviço/cron) p/ o
+#     usuário rodar a VERSÃO VELHA sem perceber e reportar bugs já corrigidos.
+#     Avisamos com o comando exato; NÃO removemos por conta própria (é `sudo`, e
+#     apagar coisa do root sem pedir não é papel de um instalador).
+SHADOWS="$(type -aP aluy 2>/dev/null | grep -vxF "$ALUY" || true)"
+if [ -n "$SHADOWS" ]; then
+  printf '\n'
+  printf '  %s!%s  há outra instalação do aluy no PATH, além desta:\n' "$RED" "$RESET"
+  printf '%s\n' "$SHADOWS" | while IFS= read -r s; do
+    [ -n "$s" ] || continue
+    v="$("$s" --version 2>/dev/null | head -1 || true)"
+    sub "• $s${v:+  ($v)}"
+  done
+  sub "esta instalação: $ALUY"
+  sub "a antiga pode SOMBREAR a nova em outros shells (você rodaria a versão velha)."
+  sub "para remover a antiga (feita com sudo):  sudo npm rm -g $PKG"
+fi
+
 # 4) entrega pro ONBOARD (Node/Ink) reanexado ao TTY real (não ao stdin do pipe), e
 #    depois entra na sessão. Usa o caminho ABSOLUTO ($ALUY) p/ não depender do PATH.
+#    ALUY_ONBOARD_NO_LAUNCH=1 — a partir da rc.107 o `aluy onboard` PASSA a rodar o
+#    bootstrap (perfil turbo) e a ABRIR a sessão ao final, cumprindo o "enter p/ entrar
+#    no aluy" que a tela dele promete. Aqui a cadeia é NOSSA (as três etapas abaixo,
+#    cada uma reanexada ao /dev/tty), então pedimos ao onboard p/ NÃO duplicá-la —
+#    senão o bootstrap roda 2× e a sessão abre 2× em sequência.
+#    Seguro contra skew de versão: um CLI ANTIGO simplesmente IGNORA a variável e a
+#    cadeia daqui continua fazendo tudo, como sempre fez.
 if [ -r /dev/tty ]; then
   clear
-  "$ALUY" onboard < /dev/tty || true
+  ALUY_ONBOARD_NO_LAUNCH=1 "$ALUY" onboard < /dev/tty || true
   clear
   "$ALUY" bootstrap < /dev/tty || true
   clear
