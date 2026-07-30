@@ -11,21 +11,27 @@
   var isPt = (document.documentElement.getAttribute("lang") || "en")
     .toLowerCase().indexOf("pt") === 0;
   var L = isPt
-    ? { copy: "copiar", copied: "copiado", bash: "bash — instalar aluy", ps: "powershell — instalar aluy" }
-    : { copy: "copy", copied: "copied", bash: "bash — install aluy", ps: "powershell — install aluy" };
+    ? { copy: "copiar", copied: "copiado", bash: "bash — instalar aluy", ps: "powershell — instalar aluy", npm: "npm — instalar aluy" }
+    : { copy: "copy", copied: "copied", bash: "bash — install aluy", ps: "powershell — install aluy", npm: "npm — install aluy" };
 
   var CMD = {
     unix: "curl -fsSL https://" + HOST + "/install.sh | bash",
     win:  "irm https://" + HOST + "/install.ps1 | iex",
-    winCmd: 'curl -fsSL https://' + HOST + '/install.cmd -o "%TEMP%\\aluy.cmd" && "%TEMP%\\aluy.cmd"'
+    winCmd: 'curl -fsSL https://' + HOST + '/install.cmd -o "%TEMP%\\aluy.cmd" && "%TEMP%\\aluy.cmd"',
+    npm:  "npm install -g @hiperplano/aluy-cli",
+    onboard: "aluy onboard"
   };
+
+  var TITLE = { unix: L.bash, win: L.ps, npm: L.npm };
 
   var cmdEl = document.getElementById("cmd");
   if (!cmdEl) return; // page has no install block
 
   var titleEl  = document.getElementById("term-title");
   var winExtra = document.getElementById("win-extra");
+  var npmExtra = document.getElementById("npm-extra");
   var cmd2El   = document.getElementById("cmd2");
+  var cmd3El   = document.getElementById("cmd3");
   var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
   var current = "unix";
 
@@ -33,12 +39,14 @@
   var ICON_CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 
   if (cmd2El) cmd2El.textContent = CMD.winCmd;
+  if (cmd3El) cmd3El.textContent = CMD.onboard;
 
   function render(os) {
     current = os;
-    cmdEl.textContent = (os === "unix") ? CMD.unix : CMD.win;
-    if (titleEl) titleEl.textContent = (os === "unix") ? L.bash : L.ps;
+    cmdEl.textContent = CMD[os] || CMD.unix;
+    if (titleEl) titleEl.textContent = TITLE[os] || L.bash;
     if (winExtra) winExtra.hidden = (os !== "win");
+    if (npmExtra) npmExtra.hidden = (os !== "npm");
     tabs.forEach(function (t) {
       t.setAttribute("aria-selected", t.dataset.os === os ? "true" : "false");
     });
@@ -84,9 +92,10 @@
   }
 
   // primary copy (main terminal) + the CTA "copy install command" button
-  wireCopy("copy",     function () { return current === "unix" ? CMD.unix : CMD.win; });
-  wireCopy("copy-cta", function () { return current === "unix" ? CMD.unix : CMD.win; });
+  wireCopy("copy",     function () { return CMD[current] || CMD.unix; });
+  wireCopy("copy-cta", function () { return CMD[current] || CMD.unix; });
   wireCopy("copy2",    function () { return CMD.winCmd; });
+  wireCopy("copy3",    function () { return CMD.onboard; });
 
   tabs.forEach(function (t) {
     t.addEventListener("click", function () { render(t.dataset.os); });
