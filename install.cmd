@@ -11,7 +11,16 @@ REM  (VT). Degrades clean to plain ASCII markers on older consoles.
 REM ===========================================================================
 setlocal EnableExtensions
 chcp 65001 >nul
-if defined ALUY_PKG (set "PKG=%ALUY_PKG%") else (set "PKG=@hiperplano/aluy-cli")
+REM PKG = o pacote (mensagens e limpeza); SPEC = o que vai no `npm install`.
+REM Separados DE PROPOSITO: o `@latest` so entra no DEFAULT - se alguem fixou
+REM ALUY_PKG para testar uma versao especifica, grudar `@latest` sobrescreveria a
+REM escolha. `npm i -g pkg` ja significa `pkg@latest`; escrever explicito deixa a
+REM intencao no comando (conferido no registro: o dist-tag `latest` aponta para a
+REM rc mais nova, entao NAO e o registro que entrega versao antiga).
+set "PKG=@hiperplano/aluy-cli"
+set "SPEC=@hiperplano/aluy-cli@latest"
+if defined ALUY_PKG set "PKG=%ALUY_PKG%"
+if defined ALUY_PKG set "SPEC=%ALUY_PKG%"
 
 REM -- Brand palette + ANSI VT detection (truecolor works on Windows 10+) -------
 set "ANSI=0"
@@ -62,16 +71,40 @@ REM 1) Node (only prerequisite)
 echo(
 echo   %BOLD%%AMBER%1/2%RESET%  Node - aluy runs on it
 where node >nul 2>nul
+if not errorlevel 1 goto :node_found
+where winget >nul 2>nul
 if errorlevel 1 (
-  where winget >nul 2>nul
-  if errorlevel 1 (
-    echo   %CR% Node.js not found. Install Node ^>= 20 ^(https://nodejs.org^) and run again.
-    exit /b 1
-  )
-  echo   %TRI% Node not found - installing Node LTS via winget.
-  echo       %DIM%the bar below is the Node download ^(may take a few minutes^).%RESET%
-  winget install -e --id OpenJS.NodeJS.LTS --accept-source-agreements --accept-package-agreements
+  echo   %CR% Node.js not found. Install Node ^>= 20 ^(https://nodejs.org^) and run again.
+  exit /b 1
 )
+echo   %TRI% Node not found - installing Node LTS via winget.
+echo       %DIM%the bar below is the Node download ^(may take a few minutes^).%RESET%
+winget install -e --id OpenJS.NodeJS.LTS --accept-source-agreements --accept-package-agreements
+REM O winget instala o Node mas NAO atualiza o PATH DESTA sessao. Sem isto, o
+REM `npm install` la embaixo morria com "'npm' nao e reconhecido" - e o script SEGUIA
+REM adiante, terminando com uma mensagem de sucesso sem ter instalado nada. O
+REM install.ps1 ja recarregava o PATH depois do winget; aqui nao havia equivalente.
+set "PATH=%ProgramFiles%\nodejs;%APPDATA%\npm;%PATH%"
+where node >nul 2>nul
+if not errorlevel 1 goto :node_found
+echo   %CR% Node was installed but is not visible in this session.
+echo       %DIM%close this terminal, open a new one, and run the installer again.%RESET%
+exit /b 1
+
+:node_found
+REM Versao minima - paridade com o install.ps1, que ja exigia Node ^>= 20. Um Node
+REM antigo instala o pacote sem reclamar e so quebra ao ABRIR o aluy: o erro chega
+REM tarde e sem relacao aparente com a instalacao. Se a leitura falhar, seguimos em
+REM frente - nunca bloquear por nao ter conseguido MEDIR.
+set "NODEMAJOR="
+for /f "tokens=1 delims=." %%v in ('node -p process.version 2^>nul') do set "NODEMAJOR=%%v"
+if not defined NODEMAJOR goto :node_ok
+set "NODEMAJOR=%NODEMAJOR:v=%"
+if %NODEMAJOR% LSS 20 (
+  echo   %CR% Node %NODEMAJOR% is too old - aluy needs Node ^>= 20. See https://nodejs.org
+  exit /b 1
+)
+:node_ok
 
 REM 2) install. Explain WHAT the npm bar is downloading (else it looks opaque).
 echo(
@@ -80,29 +113,112 @@ echo       %DIM%- terminal UI (Ink/React)   - secure credential access (keychain
 echo       %DIM%- tool protocol (MCP)%RESET%
 echo       %DIM%the bar below is npm downloading these packages (some are native Node%RESET%
 echo       %DIM%binaries) - usually takes 1-2 min.%RESET%
-call npm install -g %PKG%
-where aluy >nul 2>nul
-if errorlevel 1 (
-  REM First global install: the npm prefix may not be on this session's PATH yet.
-  REM Prepend the npm bin dir (parity with install.ps1 / install.sh).
-  for /f "delims=" %%P in ('npm config get prefix 2^>nul') do set "PATH=%%P;%PATH%"
-)
-where aluy >nul 2>nul
-if errorlevel 1 (
-  echo   %CR% aluy is not on PATH. Close and reopen the terminal, then run: aluy onboard
-  exit /b 1
-)
-echo   %CK% aluy installed.
+REM Onde o npm VAI escrever. No Windows o prefix global E o proprio diretorio dos
+REM atalhos - %APPDATA%\npm - e nao um `bin\` dentro dele; por isso o PATH recebe o
+REM prefix cru. Guardamos ANTES do install para depois resolver o binario pelo caminho
+REM ABSOLUTO, como o install.sh ja faz com "$BIN/aluy".
+set "NPMPREFIX="
+for /f "delims=" %%P in ('npm config get prefix 2^>nul') do set "NPMPREFIX=%%P"
 
+call npm install -g "%SPEC%"
+if not errorlevel 1 goto :npm_ok
+
+REM DEFEITO REAL, capturado no log do dono: o `npm install` FALHOU e o script seguiu
+REM ate imprimir "aluy installed". O npm nao conseguiu apagar a instalacao anterior
+REM - EPERM em arquivos travados pelo Windows - e abortou com EEXIST no atalho
+REM `%APPDATA%\npm\aluy`. A versao ANTIGA continuou no lugar, o `where aluy` achou
+REM ELA, o instalador declarou sucesso e abriu a versao velha - e por isso que o
+REM onboarding dele mostrava a tela de outra versao. Sem checar o errorlevel, QUALQUER
+REM falha do npm virava sucesso silencioso.
+echo(
+echo   %TRI% npm failed - on Windows this is usually a locked previous install: EEXIST/EPERM.
+echo       %DIM%removing the leftovers of the previous install and trying once more.%RESET%
+REM Remedio que o proprio npm sugere ao dar EEXIST: remover o que sobrou e instalar de
+REM novo. Apagamos SO o que e nosso - os tres atalhos `aluy*` e a pasta do pacote.
+REM Nunca `--force`: aquilo manda o npm sobrescrever arquivo de qualquer dono, as cegas.
+if defined NPMPREFIX del /f /q "%NPMPREFIX%\aluy" >nul 2>nul
+if defined NPMPREFIX del /f /q "%NPMPREFIX%\aluy.cmd" >nul 2>nul
+if defined NPMPREFIX del /f /q "%NPMPREFIX%\aluy.ps1" >nul 2>nul
+if defined NPMPREFIX rd /s /q "%NPMPREFIX%\node_modules\%PKG:/=\%" >nul 2>nul
+call npm install -g "%SPEC%"
+if not errorlevel 1 goto :npm_ok
+
+echo(
+echo   %CR% npm could not install aluy - nothing was launched.
+echo       %DIM%1. close every window running aluy or node - Windows locks those files%RESET%
+echo       %DIM%2. delete "%NPMPREFIX%\aluy" and "%NPMPREFIX%\node_modules\@hiperplano"%RESET%
+echo       %DIM%3. run again: npm install -g %SPEC%%RESET%
+exit /b 1
+
+:npm_ok
+REM PATH: prepend SEMPRE o prefix do npm. Antes isto so acontecia quando o `where
+REM aluy` FALHAVA - o inverso do necessario: havendo um `aluy` ANTIGO noutra pasta do
+REM PATH, o `where` acha ELE, o prefix novo nunca entra na frente, e a sessao abre na
+REM versao velha.
+if defined NPMPREFIX set "PATH=%NPMPREFIX%;%PATH%"
+
+REM Resolve o binario pelo caminho ABSOLUTO. Chamar `aluy` pelo nome entrega a decisao
+REM ao PATH, que e exatamente onde mora o problema. O `where` so entra como ultimo
+REM recurso - quando nem o prefix conseguimos ler.
+set "ALUY="
+if defined NPMPREFIX if exist "%NPMPREFIX%\aluy.cmd" set "ALUY=%NPMPREFIX%\aluy.cmd"
+if not defined ALUY for /f "delims=" %%A in ('where aluy.cmd 2^>nul') do if not defined ALUY set "ALUY=%%A"
+if defined ALUY goto :aluy_found
+echo   %CR% aluy is not on PATH. Close and reopen the terminal, then run: aluy onboard
+exit /b 1
+
+:aluy_found
+echo   %CK% aluy installed:
+REM Imprime a versao RECEM-instalada. E o jeito mais barato de o usuario ver, na hora,
+REM que nao esta abrindo uma instalacao velha - foi exatamente o que passou despercebido.
+call "%ALUY%" --version
+
+REM Instalacao ORFA sombreando a nova. No Windows e comum conviverem %APPDATA%\npm e um
+REM prefix proprio: a antiga vence o PATH em qualquer terminal novo e o usuario roda a
+REM versao velha sem perceber - reportando defeito ja corrigido. O install.sh avisa
+REM disso desde a correcao #4; no Windows nao havia equivalente. Comparamos a PASTA, nao
+REM o arquivo: o `where` lista `aluy` E `aluy.cmd` do MESMO diretorio, e isso e UMA
+REM instalacao so. Avisamos com o comando exato; nao removemos nada por conta propria.
+if not defined NPMPREFIX goto :shadow_done
+set "OURDIR=%NPMPREFIX%\"
+set "SHADOW="
+for /f "delims=" %%A in ('where aluy 2^>nul') do if /i not "%%~dpA"=="%OURDIR%" set "SHADOW=1"
+if not defined SHADOW goto :shadow_done
+echo(
+echo   %CR% there is ANOTHER aluy on your PATH:
+for /f "delims=" %%A in ('where aluy 2^>nul') do if /i not "%%~dpA"=="%OURDIR%" echo       %%A
+echo       %DIM%this install: %ALUY%%RESET%
+echo       %DIM%the old one can shadow this one in other terminals - remove it with: npm rm -g %PKG%%RESET%
+:shadow_done
+
+REM O onboarding e Ink - React no terminal - e precisa de um CONSOLE de verdade. Com a
+REM saida redirecionada para arquivo, ou num terminal que nao e console do Windows como
+REM o Git Bash/MinTTY, `process.stdout.isTTY` e falso: o `aluy onboard` sai na hora
+REM dizendo que precisa de terminal interativo, o `aluy` sai com "sem objetivo e sem
+REM TTY", e a instalacao termina SEM configurar nada. Foi o que apareceu no log do dono.
+REM Detectamos AQUI e dizemos o que fazer, em vez de encadear tres comandos que
+REM desistem, cada um com uma linha cifrada.
+node -e "if(!process.stdout.isTTY)process.exit(1);if(!process.stdin.isTTY)process.exit(1)"
+if not errorlevel 1 goto :interactive
+echo(
+echo   %TRI% aluy is installed, but this terminal is not an interactive console.
+echo       %DIM%open Command Prompt or Windows Terminal and run:  aluy onboard%RESET%
+exit /b 0
+
+:interactive
 REM 3) hand off to ONBOARD (Node/Ink). In cmd, stdin IS already the console, so Ink
 REM    reads the keyboard directly (no Start-Process). Then open the session.
+REM NOTA: `cls` com a saida redirecionada nao limpa nada - escreve um form feed, 0x0C,
+REM dentro do arquivo. E esse byte que aparecia como um simbolo estranho no comeco de
+REM algumas linhas do log do dono; nao era defeito de codificacao das mensagens. So
+REM chegamos aqui com console de verdade, entao aqui o `cls` limpa mesmo.
 cls
-call aluy onboard
+call "%ALUY%" onboard
 REM TURBO: provisions the sidecars via the agent (no-op for a light profile). On
 REM Windows there is no pinned artifact: the agent installs (winget/pip). Honors the profile.
 cls
-call aluy bootstrap --agent
+call "%ALUY%" bootstrap --agent
 REM clear before the session (each step starts clean, no accumulated noise).
 cls
-aluy
+call "%ALUY%"
 endlocal
