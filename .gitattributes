@@ -1,0 +1,13 @@
+# Fim de linha por arquivo.
+#
+# ORDEM IMPORTA: no git, a ÚLTIMA regra que casa vence. O padrão geral vem PRIMEIRO e as
+# exceções depois — invertido, o `*` anula as específicas e o defeito volta calado (o git
+# chega a avisar "CRLF will be replaced by LF", fácil de não ler no meio de um commit).
+* text=auto eol=lf
+
+# `cmd.exe` e o PowerShell EXIGEM CRLF: com LF sozinho o interpretador funde e corta linhas.
+# O sintoma não é um erro claro — são comandos inventados a partir de pedaços de linhas
+# (`set "VERSTR=…"` virou `'ERSTR' não é reconhecido`, e três `set` numa linha viraram
+# `AMBERRESETLUYRESET`). Pior: o script SEGUE adiante meio quebrado.
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
