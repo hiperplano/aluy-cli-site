@@ -67,7 +67,8 @@ if ($UseAnsi) {
 }
 
 # Glyphs (built from code points — see NOTE above).
-$Blk  = [char]0x2588   # █
+$Blk  = [char]0x2588   # U+2588 FULL BLOCK
+$Shd  = [char]0x2592   # U+2592 MEDIUM SHADE - a drop-shadow do wordmark do CLI
 $GTri = [char]0x25B8   # ▸
 $GOk  = [char]0x2713   # ✓
 $GNo  = [char]0x2717   # ✗
@@ -76,33 +77,32 @@ $Mid  = [char]0x00B7   # ·
 
 # ── UI helpers ───────────────────────────────────────────────────────────────
 function Banner {
-  $f = $Blk
+  # LOGO IDENTICO ao do CLI (`composeShadowedWordmark`, wordmark-3d.ts): a marca plana
+  # daqui divergia da que o usuario ve ao rodar o aluy — duas caras para a mesma marca no
+  # intervalo de um minuto (instalar, abrir).
+  #
+  # Montado por VARIAVEL, nunca com o caractere literal: o fonte precisa seguir ASCII puro
+  # (ver NOTE no topo). Colar `##` e `##` direto no arquivo quebra o `irm | iex` quando o
+  # host nao decodifica como UTF-8 — foi o que produziu os blocos corrompidos na tela do
+  # Windows. Se o wordmark mudar no CLI, regerar aqui; a fonte da verdade e o componente.
+  $b = $Blk
+  $s = $Shd
   $L = @(
-    "      $f$f      ",
-    "     $f$f$f$f     ",
-    "   $f$f$f  $f$f$f   ",
-    " $f$f$f      $f$f$f ",
-    "$f$f$f        $f$f$f",
-    "              "
-  )
-  $R = @(
-    "$f$f                ",
-    "$f$f  $f$f  $f$f  $f$f  $f$f",
-    "$f$f  $f$f  $f$f  $f$f  $f$f",
-    "$f$f  $f$f  $f$f   $f$f$f$f$f",
-    "$f$f   $f$f$f$f$f      $f$f",
-    "            $f$f$f$f  "
+    "      $b$b       $b$b",
+    "     $b$b$b$b      $b$b$s $b$b  $b$b  $b$b  $b$b",
+    "   $b$b$b$s$s$b$b$b    $b$b$s $b$b$s $b$b$s $b$b$s $b$b$s",
+    " $b$b$b$s$s$s  $s$b$b$b  $b$b$s $b$b$s $b$b$s  $b$b$b$b$b$s",
+    "$b$b$b$s$s      $b$b$b $b$b$s  $b$b$b$b$b$s   $s$s$b$b$s",
+    " $s$s$s        $s$s$s $s$s   $s$s$s$s$s  $b$b$b$b$s$s",
+    "                             $s$s$s$s"
   )
   Write-Host ''
-  for ($i = 0; $i -lt 6; $i++) {
-    if ($UseAnsi) {
-      Write-Host "  $AMBER$($L[$i])$RESET $LUY$($R[$i])$RESET"
-    } else {
-      Write-Host '  ' -NoNewline
-      Write-Host $L[$i] -NoNewline -ForegroundColor Yellow
-      Write-Host ' ' -NoNewline
-      Write-Host $R[$i] -ForegroundColor DarkYellow
-    }
+  # Uma cor só: no wordmark do CLI a sombra e a marca são o MESMO âmbar em intensidades
+  # diferentes, e isso já está no desenho (`$b` cheio, `$s` meio-tom). Pintar as metades com
+  # cores distintas, como o banner plano fazia, brigaria com a própria sombra.
+  foreach ($ln in $L) {
+    if ($UseAnsi) { Write-Host "  $AMBER$ln$RESET" }
+    else { Write-Host "  $ln" -ForegroundColor DarkYellow }
   }
   Write-Host ''
   $tag = "terminal agent $Mid runs on your machine $Mid with your own LLM provider"

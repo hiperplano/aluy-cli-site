@@ -40,12 +40,17 @@ if "%ANSI%"=="1" (
 REM -- wordmark (ANSI/truecolor on Windows 10+; plain text otherwise) ----------
 echo(
 if "%ANSI%"=="1" (
-  echo   %AMBER%      ██      %RESET% %LUY%██                %RESET%
-  echo   %AMBER%     ████     %RESET% %LUY%██  ██  ██  ██  ██%RESET%
-  echo   %AMBER%   ███  ███   %RESET% %LUY%██  ██  ██  ██  ██%RESET%
-  echo   %AMBER% ███      ███ %RESET% %LUY%██  ██  ██   █████%RESET%
-  echo   %AMBER%███        ███%RESET% %LUY%██   █████      ██%RESET%
-  echo   %AMBER%              %RESET% %LUY%            ████  %RESET%
+  REM Wordmark IDENTICO ao do CLI (wordmark-3d.ts) — a marca plana daqui divergia da
+  REM que o usuario ve ao abrir o aluy. Uma cor so: a sombra e a marca sao o mesmo
+  REM ambar em intensidades diferentes, e isso ja esta no desenho (bloco cheio vs meio-tom).
+  REM Depende do `chcp 65001` la em cima — sem ele o cmd le em cp850 e isto vira lixo.
+  echo   %AMBER%      ██       ██%RESET%
+  echo   %AMBER%     ████      ██▒ ██  ██  ██  ██%RESET%
+  echo   %AMBER%   ███▒▒███    ██▒ ██▒ ██▒ ██▒ ██▒%RESET%
+  echo   %AMBER% ███▒▒▒  ▒███  ██▒ ██▒ ██▒  █████▒%RESET%
+  echo   %AMBER%███▒▒      ███ ██▒  █████▒   ▒▒██▒%RESET%
+  echo   %AMBER% ▒▒▒        ▒▒▒ ▒▒   ▒▒▒▒▒  ████▒▒%RESET%
+  echo   %AMBER%                             ▒▒▒▒%RESET%
   echo.
   echo   %DIM%terminal agent · runs on your machine · with your own LLM provider%RESET%
 ) else (

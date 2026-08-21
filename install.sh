@@ -35,12 +35,17 @@ fi
 #    accent, "luy" em depth). Impresso uma vez, no topo, p/ dar cara de marca. ────
 banner() {
   printf '\n'
-  printf '  %s      ██      %s %s██                %s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
-  printf '  %s     ████     %s %s██  ██  ██  ██  ██%s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
-  printf '  %s   ███  ███   %s %s██  ██  ██  ██  ██%s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
-  printf '  %s ███      ███ %s %s██  ██  ██   █████%s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
-  printf '  %s███        ███%s %s██   █████      ██%s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
-  printf '  %s              %s %s            ████  %s\n'  "$AMBER" "$RESET" "$LUY" "$RESET"
+  # LOGO IDÊNTICO ao do CLI (`composeShadowedWordmark` do wordmark-3d.ts) — a marca
+  # plana daqui divergia da que o usuário vê ao rodar o aluy: mesma silhueta, SEM a
+  # drop-shadow `▒`. Duas caras para a mesma marca no mesmo minuto (instalar → abrir).
+  # Se o wordmark mudar lá, regerar aqui — a fonte da verdade é o componente.
+  printf '  %s      ██       ██%s\n' "$AMBER" "$RESET"
+  printf '  %s     ████      ██▒ ██  ██  ██  ██%s\n' "$AMBER" "$RESET"
+  printf '  %s   ███▒▒███    ██▒ ██▒ ██▒ ██▒ ██▒%s\n' "$AMBER" "$RESET"
+  printf '  %s ███▒▒▒  ▒███  ██▒ ██▒ ██▒  █████▒%s\n' "$AMBER" "$RESET"
+  printf '  %s███▒▒      ███ ██▒  █████▒   ▒▒██▒%s\n' "$AMBER" "$RESET"
+  printf '  %s ▒▒▒        ▒▒▒ ▒▒   ▒▒▒▒▒  ████▒▒%s\n' "$AMBER" "$RESET"
+  printf '  %s                             ▒▒▒▒%s\n' "$AMBER" "$RESET"
   printf '\n'
   printf '  %sagente de terminal · roda na sua máquina · com o seu provider de LLM%s\n' "$DIM" "$RESET"
   printf '\n'
@@ -53,6 +58,36 @@ die()  { printf '  %s✗%s %s\n' "$RED" "$RESET" "$*" >&2; exit 1; }
 step() { printf '\n  %s%s%s  %s\n' "$BOLD$AMBER" "$1" "$RESET" "$2"; }
 
 banner
+
+# 0) WINDOWS — este script é o de Unix. Sair CEDO e apontar o certo.
+#
+#    O que acontecia sem isto (relatado pelo dono, com Node v24 instalado e npm 11
+#    funcionando): rodar `curl … install.sh | bash` no Windows caía no passo 1, o
+#    `command -v node` falhava (num bash do Windows o executável é `node.exe`; e num
+#    WSL o Node do Windows não está no PATH do Linux), o script anunciava "Node não
+#    encontrado — instalando", procurava `fnm`/`brew` que não existem ali, e morria
+#    mandando INSTALAR O QUE JÁ ESTAVA INSTALADO. A mensagem apontava para o lugar
+#    errado e não havia como o usuário adivinhar que o problema era o instalador.
+#
+#    Detecta pelo `uname` (MINGW/MSYS/CYGWIN = bash do Windows) e por `WSL_DISTRO_NAME`
+#    combinado com a AUSÊNCIA de `node` — no WSL puro o instalador Unix é o correto, e
+#    só é o errado quando a pessoa quer o aluy do lado Windows.
+_uname="$(uname -s 2>/dev/null || echo desconhecido)"
+case "$_uname" in
+  MINGW*|MSYS*|CYGWIN*)
+    printf '\n  %s✗%s este é o instalador de Linux/macOS — no Windows use o PowerShell:\n' "$RED" "$RESET" >&2
+    printf '\n      %sirm https://aluy.dev/install.ps1 | iex%s\n' "$BOLD" "$RESET" >&2
+    printf '\n    ou, se já tem Node ≥ %s: %snpm i -g @hiperplano/aluy-cli%s\n\n' "$MIN_NODE" "$BOLD" "$RESET" >&2
+    exit 1
+    ;;
+esac
+if [ -n "${WSL_DISTRO_NAME:-}" ] && ! command -v node >/dev/null 2>&1; then
+  printf '\n  %s✗%s você está no WSL (%s) e não há Node AQUI dentro.\n' "$RED" "$RESET" "$WSL_DISTRO_NAME" >&2
+  printf '    O Node do Windows não vale para o WSL — são dois sistemas.\n' >&2
+  printf '\n    Para o aluy no WSL:     %ssudo apt install nodejs%s (ou fnm/nvm) e rode de novo\n' "$BOLD" "$RESET" >&2
+  printf '    Para o aluy no Windows: %sirm https://aluy.dev/install.ps1 | iex%s (no PowerShell)\n\n' "$BOLD" "$RESET" >&2
+  exit 1
+fi
 
 # 1) Node ≥ 20 (o único pré-requisito; instala via fnm/brew se faltar)
 step "1/2" "Node — o aluy roda sobre ele"
