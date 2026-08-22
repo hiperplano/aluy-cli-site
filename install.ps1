@@ -111,7 +111,7 @@ function Banner {
     else { Write-Host "  $ln" -ForegroundColor DarkYellow }
   }
   Write-Host ''
-  $tag = "terminal agent $Mid runs on your machine $Mid with your own LLM provider"
+  $tag = T 'banner_tag'
   if ($UseAnsi) { Write-Host "  $DIM$tag$RESET" } else { Write-Host "  $tag" -ForegroundColor DarkGray }
   Write-Host ''
 }
@@ -126,11 +126,162 @@ function Step ($n, $m) {
   else { Write-Host "  $n" -NoNewline -ForegroundColor Yellow; Write-Host "  $m" }
 }
 
+# ── LANGUAGE ─────────────────────────────────────────────────────────────────
+# Toda mensagem do instalador (inclusive termos e erros) passa por T(chave) daqui
+# pra baixo. Catálogo único por chave, não por trecho espalhado: assim a escolha
+# de idioma vale para a tela INTEIRA, não só para as mensagens "normais" — foi
+# fácil esquecer um Write-Host solto numa refatoração anterior (a de cores).
+$MSG = @{
+  'en' = @{
+    'banner_tag'           = "terminal agent $Mid runs on your machine $Mid with your own LLM provider"
+    'terms_header'         = 'Terms of Use - {0}'
+    'terms_b1'             = '* BETA software, provided "as is", WITHOUT warranty'
+    'terms_b2'             = '* runs on YOUR machine, under your responsibility'
+    'terms_b3'             = '* you use YOUR OWN provider credentials (BYO); they never pass through us'
+    'terms_b4'             = '* free to use, including commercially; open-source, no charge'
+    'terms_accepted_env'   = 'terms accepted via ALUY_ACCEPT_TERMS=1 - {0}'
+    'terms_fetch_fail'     = 'could not fetch the terms right now - read them at {0}'
+    'terms_prompt'         = '  accept the terms? [y] yes / [r] read in full / [n] no'
+    'terms_noninteractive' = 'non-interactive install - proceeding implies ACCEPTING the terms above.'
+    'terms_bad_answer'     = 'answer y, r or n.'
+    'terms_declined'       = 'installation cancelled - nothing was downloaded.'
+    'terms_no_answer'      = 'no answer received - proceeding implies ACCEPTING the terms above.'
+    'step1'                = "Node $Dash aluy runs on it"
+    'node_installing'      = 'Node not found - installing Node LTS via winget.'
+    'node_bar'             = 'the bar below is the Node download (may take a few minutes).'
+    'node_fail'            = 'install Node >= 20 (https://nodejs.org) and run again.'
+    'node_ready'           = 'Node {0} ready.'
+    'step2'                = 'downloading aluy and its components'
+    'step2_sub1'           = '- terminal UI (Ink/React)   - secure credential access (keychain)'
+    'step2_sub2'           = '- tool protocol (MCP)'
+    'step2_sub3'           = 'the bar below is npm downloading these packages (some are native Node'
+    'step2_sub4'           = 'binaries) - usually takes 1-2 min.'
+    'npm_failed'           = 'npm failed - on Windows this is usually a locked previous install (EEXIST/EPERM).'
+    'npm_removing'         = 'removing the leftovers of the previous install and trying once more.'
+    'npm_fail_final'       = 'npm could not install aluy - nothing was launched.'
+    'npm_fail_1'           = '1. close every window running aluy or node - Windows locks those files'
+    'npm_fail_2'           = '2. delete {0} and {1}'
+    'npm_fail_3'           = '3. run again: npm install -g {0}'
+    'aluy_not_on_path'     = 'aluy is not on PATH - close and reopen the terminal, then run `aluy onboard`.'
+    'aluy_installed'       = 'aluy installed:'
+    'shadow_header'        = 'there is ANOTHER aluy on your PATH:'
+    'shadow_this_install'  = 'this install: {0}'
+    'shadow_remove'        = 'the old one can shadow this one in other terminals - remove it with: npm rm -g {0}'
+    'not_interactive'      = 'aluy is installed, but this terminal is not an interactive console.'
+    'not_interactive_hint' = 'open Windows Terminal or PowerShell and run:  aluy onboard'
+    'bootstrap_fallback'   = 'preparing the environment - continuing to the session.'
+  }
+  'pt' = @{
+    'banner_tag'           = "agente de terminal $Mid roda na sua máquina $Mid com o seu provider de LLM"
+    'terms_header'         = 'Termos de Uso - {0}'
+    'terms_b1'             = '* software em BETA, fornecido "como está", SEM garantia'
+    'terms_b2'             = '* roda na SUA máquina, sob sua responsabilidade'
+    'terms_b3'             = '* você usa suas PRÓPRIAS credenciais de provider (BYO); elas nunca passam por nós'
+    'terms_b4'             = '* uso livre, inclusive comercial; open-source, sem cobrança'
+    'terms_accepted_env'   = 'termos aceitos via ALUY_ACCEPT_TERMS=1 - {0}'
+    'terms_fetch_fail'     = 'não consegui baixar os termos agora - leia em {0}'
+    'terms_prompt'         = '  aceita os termos? [s] sim / [l] ler na íntegra / [n] não'
+    'terms_noninteractive' = 'instalação não interativa - prosseguir implica ACEITAR os termos acima.'
+    'terms_bad_answer'     = 'responda s, l ou n.'
+    'terms_declined'       = 'instalação cancelada - nada foi baixado.'
+    'terms_no_answer'      = 'nenhuma resposta recebida - prosseguir implica ACEITAR os termos acima.'
+    'step1'                = "Node $Dash o aluy roda sobre ele"
+    'node_installing'      = 'Node não encontrado - instalando Node LTS via winget.'
+    'node_bar'             = 'a barra abaixo é o download do Node (pode levar alguns minutos).'
+    'node_fail'            = 'instale o Node >= 20 (https://nodejs.org) e rode novamente.'
+    'node_ready'           = 'Node {0} pronto.'
+    'step2'                = 'baixando o aluy e seus componentes'
+    'step2_sub1'           = '- interface de terminal (Ink/React)   - acesso seguro a credenciais (keychain)'
+    'step2_sub2'           = '- protocolo de ferramentas (MCP)'
+    'step2_sub3'           = 'a barra abaixo é o npm baixando esses pacotes (alguns são binários nativos'
+    'step2_sub4'           = 'do Node) - costuma levar 1-2 min.'
+    'npm_failed'           = 'npm falhou - no Windows isso costuma ser uma instalação anterior travada (EEXIST/EPERM).'
+    'npm_removing'         = 'removendo os restos da instalação anterior e tentando mais uma vez.'
+    'npm_fail_final'       = 'npm não conseguiu instalar o aluy - nada foi aberto.'
+    'npm_fail_1'           = '1. feche toda janela rodando aluy ou node - o Windows trava esses arquivos'
+    'npm_fail_2'           = '2. apague {0} e {1}'
+    'npm_fail_3'           = '3. rode novamente: npm install -g {0}'
+    'aluy_not_on_path'     = 'aluy não está no PATH - feche e reabra o terminal, depois rode `aluy onboard`.'
+    'aluy_installed'       = 'aluy instalado:'
+    'shadow_header'        = 'existe OUTRO aluy no seu PATH:'
+    'shadow_this_install'  = 'esta instalação: {0}'
+    'shadow_remove'        = 'a antiga pode encobrir esta em outros terminais - remova com: npm rm -g {0}'
+    'not_interactive'      = 'aluy está instalado, mas este terminal não é um console interativo.'
+    'not_interactive_hint' = 'abra o Windows Terminal ou PowerShell e rode:  aluy onboard'
+    'bootstrap_fallback'   = 'preparando o ambiente - seguindo para a sessão.'
+  }
+}
+
+# Busca T(chave[, argumentos]) — cai para 'en' se $Lang tiver algum valor fora do
+# catálogo (não deveria acontecer, já que Select-Language só devolve 'pt'/'en',
+# mas uma chave nova esquecida num dos dois idiomas não pode virar tela em branco).
+function T {
+  param([Parameter(Mandatory)][string]$Key, [object[]]$Fmt)
+  $tbl = $MSG[$Lang]
+  if (-not $tbl -or -not $tbl.ContainsKey($Key)) { $tbl = $MSG['en'] }
+  $s = $tbl[$Key]
+  if ($Fmt -and $Fmt.Count -gt 0) { return ($s -f $Fmt) }
+  return $s
+}
+
+function Get-DefaultLang {
+  # Só o PADRÃO da pergunta abaixo — o usuário sempre pode trocar na hora. O
+  # `Get-Culture` reflete o idioma de UI do Windows (Painel de Controle > Região),
+  # que é a mesma fonte que o próprio Windows usa para se anunciar — não o layout
+  # de teclado, que não diz nada sobre o idioma que a pessoa lê.
+  try {
+    if ((Get-Culture).TwoLetterISOLanguageName -eq 'pt') { return 'pt' }
+  } catch {}
+  return 'en'
+}
+
+function Select-Language {
+  param([string]$Default)
+
+  # Bilíngue de propósito: esta pergunta PRECEDE a escolha de idioma, então ela
+  # mesma não pode assumir um dos dois para se anunciar.
+  Say "idioma / language?  [1] Português  [2] English  (enter = $Default)"
+
+  # Mesmo cuidado do Confirm-Terms, e pelo mesmo motivo real:
+  # [Environment]::UserInteractive NÃO detecta `-NonInteractive` (testado: o
+  # Read-Host devolve string vazia em vez de lançar exceção nesse modo) — quem
+  # realmente evita o laço é o teto de tentativas abaixo, não este `if`. Ele só
+  # evita imprimir um prompt inútil quando já sabemos, de outra forma, que não
+  # há console nenhum do outro lado (serviço, conta de sistema).
+  if (-not [Environment]::UserInteractive) { return $Default }
+
+  $tries = 0
+  while ($tries -lt 5) {
+    $tries++
+    $ans = $null
+    try { $ans = Read-Host '  [enter/1/2]' } catch { $ans = $null }
+    if ($null -eq $ans -or $ans.Trim() -eq '') { return $Default }  # Enter = aceita o detectado
+    switch -Regex ($ans.Trim().ToLower()) {
+      '^(1|pt|p|portugues|português)$' { return 'pt' }
+      '^(2|en|english)$'               { return 'en' }
+      default                          { Sub '1, 2 or enter / ou enter.' }
+    }
+  }
+  return $Default  # 5 respostas não reconhecidas: não é pessoa digitando, é máquina.
+}
+
+$Lang = Select-Language (Get-DefaultLang)
+
 # -- TERMS OF USE ---------------------------------------------------------------
 # Consent comes BEFORE any download - including step 1, which may install Node.
 # "Before downloading the components" means before the first byte, not merely
 # before the npm install.
-$TermsUrl = 'https://aluy.dev/termos.html'
+#
+# A URL muda com o idioma (o site tem os termos publicados nos dois): pt manda
+# para a versão traduzida, en fica na raiz. Calculado DEPOIS da escolha acima -
+# antes disso não há $Lang para decidir.
+$TermsUrl = if ($Lang -eq 'pt') { 'https://aluy.dev/pt/termos.html' } else { 'https://aluy.dev/termos.html' }
+
+# Propaga a escolha para o CLI: onboard/bootstrap (Node/Ink, i18n próprio) abrem
+# no MESMO idioma que o instalador usou, em vez de perguntar de novo ou cair no
+# padrão deles. `pt-BR` é o código que o aluy espera para português; `en` cobre
+# o resto.
+$env:ALUY_LANG = if ($Lang -eq 'pt') { 'pt-BR' } else { 'en' }
 
 # Prints the terms IN THE TERMINAL. Deliberately does NOT open a browser: this
 # script is often run over RDP, on a fresh VM or in a bare console where no
@@ -141,7 +292,7 @@ function Show-Terms {
     $html = (Invoke-WebRequest -UseBasicParsing -Uri $TermsUrl -TimeoutSec 15).Content
   } catch {
     Write-Host ''
-    Sub "could not fetch the terms right now - read them at $TermsUrl"
+    Sub (T 'terms_fetch_fail' @($TermsUrl))
     Write-Host ''
     return
   }
@@ -164,22 +315,22 @@ function Confirm-Terms {
   # Escape hatch for automation (CI, Dockerfile, provisioning) and for whoever
   # already read them.
   if ($env:ALUY_ACCEPT_TERMS -eq '1') {
-    Sub "terms accepted via ALUY_ACCEPT_TERMS=1 - $TermsUrl"
+    Sub (T 'terms_accepted_env' @($TermsUrl))
     return
   }
   Write-Host ''
-  Say "Terms of Use - $TermsUrl"
-  Sub '* BETA software, provided "as is", WITHOUT warranty'
-  Sub '* runs on YOUR machine, under your responsibility'
-  Sub '* you use YOUR OWN provider credentials (BYO); they never pass through us'
-  Sub '* free to use, including commercially; open-source, no charge'
+  Say (T 'terms_header' @($TermsUrl))
+  Sub (T 'terms_b1')
+  Sub (T 'terms_b2')
+  Sub (T 'terms_b3')
+  Sub (T 'terms_b4')
   Write-Host ''
 
   # No console to answer with (-NonInteractive, CI runner, service account).
   # Blocking here would break the install line documented on the site, so we
   # proceed - saying plainly that proceeding is accepting.
   if (-not [Environment]::UserInteractive) {
-    Sub 'non-interactive install - proceeding implies ACCEPTING the terms above.'
+    Sub (T 'terms_noninteractive')
     Write-Host ''
     return
   }
@@ -192,7 +343,7 @@ function Confirm-Terms {
     $tries++
     $ans = $null
     try {
-      $ans = Read-Host '  accept the terms? [y] yes / [r] read in full / [n] no'
+      $ans = Read-Host (T 'terms_prompt')
     } catch {
       $ans = $null
     }
@@ -200,11 +351,11 @@ function Confirm-Terms {
     switch -Regex ($ans.Trim().ToLower()) {
       '^(y|yes|s|sim)$'  { Write-Host ''; return }
       '^(r|read|l|ler)$' { Show-Terms; $tries = 0 }
-      '^(n|no|nao)$'     { Write-Host ''; Sub 'installation cancelled - nothing was downloaded.'; exit 1 }
-      default            { Sub 'answer y, r or n.' }
+      '^(n|no|nao)$'     { Write-Host ''; Sub (T 'terms_declined'); exit 1 }
+      default            { Sub (T 'terms_bad_answer') }
     }
   }
-  Sub 'no answer received - proceeding implies ACCEPTING the terms above.'
+  Sub (T 'terms_no_answer')
   Write-Host ''
 }
 
@@ -212,30 +363,30 @@ Banner
 Confirm-Terms
 
 # 1) Node >= 20 (the only prerequisite; installed via winget if missing)
-Step '1/2' "Node $Dash aluy runs on it"
+Step '1/2' (T 'step1')
 $nodeOk = $false
 try { $v = (node -v) -replace '^v(\d+).*', '$1'; if ([int]$v -ge $MinNode) { $nodeOk = $true } } catch {}
 if (-not $nodeOk) {
   if (Get-Command winget -ErrorAction SilentlyContinue) {
-    Say 'Node not found - installing Node LTS via winget.'
-    Sub 'the bar below is the Node download (may take a few minutes).'
+    Say (T 'node_installing')
+    Sub (T 'node_bar')
     winget install -e --id OpenJS.NodeJS.LTS --accept-source-agreements --accept-package-agreements
     $env:Path = [Environment]::GetEnvironmentVariable('Path', 'Machine') + ';' +
                 [Environment]::GetEnvironmentVariable('Path', 'User')
   } else {
-    Fail 'install Node >= 20 (https://nodejs.org) and run again.'
+    Fail (T 'node_fail')
   }
 } else {
-  Good "Node $((node -v)) ready."
+  Good (T 'node_ready' @((node -v)))
 }
 
 # 2) install (visible output). Explain WHAT the npm bar is downloading — otherwise
 #    it just looks like a raw, opaque "node download" (owner's finding).
-Step '2/2' 'downloading aluy and its components'
-Sub '- terminal UI (Ink/React)   - secure credential access (keychain)'
-Sub '- tool protocol (MCP)'
-Sub 'the bar below is npm downloading these packages (some are native Node'
-Sub 'binaries) - usually takes 1-2 min.'
+Step '2/2' (T 'step2')
+Sub (T 'step2_sub1')
+Sub (T 'step2_sub2')
+Sub (T 'step2_sub3')
+Sub (T 'step2_sub4')
 # Onde o npm VAI escrever. No Windows o prefix global É o próprio diretório dos atalhos
 # (%APPDATA%\npm) — não existe um `bin\` dentro dele; por isso o PATH recebe o prefix
 # cru. Lido ANTES do install para depois resolver o binário pelo caminho ABSOLUTO, como
@@ -267,8 +418,8 @@ npm install -g $Spec
 $code = $LASTEXITCODE
 $ErrorActionPreference = $prevEap
 if ($code -ne 0) {
-  Say 'npm failed - on Windows this is usually a locked previous install (EEXIST/EPERM).'
-  Sub 'removing the leftovers of the previous install and trying once more.'
+  Say (T 'npm_failed')
+  Sub (T 'npm_removing')
   # Remédio que o próprio npm sugere ao dar EEXIST: remover o que sobrou e instalar de
   # novo. Apagamos SÓ o que é nosso — os três atalhos `aluy*` e a pasta do pacote. Nunca
   # `--force`: aquilo manda o npm sobrescrever arquivo de qualquer dono, às cegas.
@@ -286,11 +437,11 @@ if ($code -ne 0) {
 }
 if ($code -ne 0) {
   Write-Host ''
-  if ($UseAnsi) { Write-Host "  $RED$GNo$RESET npm could not install aluy - nothing was launched." }
-  else { Write-Host "  $GNo " -NoNewline -ForegroundColor Red; Write-Host 'npm could not install aluy - nothing was launched.' }
-  Sub '1. close every window running aluy or node - Windows locks those files'
-  if ($Prefix) { Sub ('2. delete ' + (Join-Path $Prefix 'aluy') + ' and ' + (Join-Path $Prefix 'node_modules\@hiperplano')) }
-  Sub "3. run again: npm install -g $Spec"
+  if ($UseAnsi) { Write-Host "  $RED$GNo$RESET $(T 'npm_fail_final')" }
+  else { Write-Host "  $GNo " -NoNewline -ForegroundColor Red; Write-Host (T 'npm_fail_final') }
+  Sub (T 'npm_fail_1')
+  if ($Prefix) { Sub (T 'npm_fail_2' @((Join-Path $Prefix 'aluy'), (Join-Path $Prefix 'node_modules\@hiperplano'))) }
+  Sub (T 'npm_fail_3' @($Spec))
   exit 1
 }
 
@@ -310,9 +461,9 @@ if ($Prefix -and (Test-Path -LiteralPath (Join-Path $Prefix 'aluy.cmd'))) {
   if ($c) { $Aluy = $c.Source }
 }
 if (-not $Aluy) {
-  Fail 'aluy is not on PATH - close and reopen the terminal, then run `aluy onboard`.'
+  Fail (T 'aluy_not_on_path')
 }
-Good 'aluy installed:'
+Good (T 'aluy_installed')
 # Mostra a versão RECÉM-instalada. É o jeito mais barato de o usuário ver, na hora, que
 # não está abrindo uma instalação velha — foi exatamente o que passou despercebido.
 & $Aluy --version
@@ -328,11 +479,11 @@ $others = @(Get-Command aluy -All -ErrorAction SilentlyContinue |
             Where-Object { $_ -and (Split-Path $_ -Parent) -ne (Split-Path $Aluy -Parent) })
 if ($others.Count -gt 0) {
   Write-Host ''
-  if ($UseAnsi) { Write-Host "  $RED$GNo$RESET there is ANOTHER aluy on your PATH:" }
-  else { Write-Host "  $GNo " -NoNewline -ForegroundColor Red; Write-Host 'there is ANOTHER aluy on your PATH:' }
+  if ($UseAnsi) { Write-Host "  $RED$GNo$RESET $(T 'shadow_header')" }
+  else { Write-Host "  $GNo " -NoNewline -ForegroundColor Red; Write-Host (T 'shadow_header') }
   foreach ($o in $others) { Sub $o }
-  Sub "this install: $Aluy"
-  Sub "the old one can shadow this one in other terminals - remove it with: npm rm -g $Pkg"
+  Sub (T 'shadow_this_install' @($Aluy))
+  Sub (T 'shadow_remove' @($Pkg))
 }
 
 # O onboarding é Ink (React no terminal) e precisa de um CONSOLE de verdade. Com a saída
@@ -348,8 +499,8 @@ try {
 } catch {}
 if (-not $interactive) {
   Write-Host ''
-  Say 'aluy is installed, but this terminal is not an interactive console.'
-  Sub 'open Windows Terminal or PowerShell and run:  aluy onboard'
+  Say (T 'not_interactive')
+  Sub (T 'not_interactive_hint')
   exit 0
 }
 
@@ -367,8 +518,8 @@ Clear-Host
 Clear-Host
 $ErrorActionPreference = 'Continue'
 try { & $Aluy bootstrap --agent } catch {
-  if ($UseAnsi) { Write-Host "  $AMBER$GTri$RESET preparing the environment - continuing to the session." }
-  else { Write-Host "  $GTri preparing the environment - continuing to the session." -ForegroundColor Yellow }
+  if ($UseAnsi) { Write-Host "  $AMBER$GTri$RESET $(T 'bootstrap_fallback')" }
+  else { Write-Host "  $GTri $(T 'bootstrap_fallback')" -ForegroundColor Yellow }
 }
 # clear before the session (each step starts clean, no accumulated noise).
 Clear-Host
