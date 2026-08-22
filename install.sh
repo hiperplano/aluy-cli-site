@@ -57,7 +57,72 @@ good() { printf '  %s✓%s %s\n' "$OK" "$RESET" "$*"; }
 die()  { printf '  %s✗%s %s\n' "$RED" "$RESET" "$*" >&2; exit 1; }
 step() { printf '\n  %s%s%s  %s\n' "$BOLD$AMBER" "$1" "$RESET" "$2"; }
 
+# ── TERMOS DE USO ──────────────────────────────────────────────────────────────
+# O aceite vem ANTES de qualquer download — inclusive antes do passo 1, que pode
+# instalar o Node. "Antes de baixar os componentes" significa antes do primeiro
+# byte, não antes do `npm install`.
+TERMS_URL="https://aluy.dev/pt/termos.html"
+
+# Mostra os termos NO TERMINAL. Não abre navegador de propósito: quem instala por
+# `curl | sh` costuma estar em SSH/servidor/WSL, onde não há navegador — e um
+# comando que "abre" nada seria pior que não oferecer a leitura.
+show_terms() {
+  _t=""
+  if   command -v curl >/dev/null 2>&1; then _t="$(curl -fsSL --max-time 15 "$TERMS_URL" 2>/dev/null || true)"
+  elif command -v wget >/dev/null 2>&1; then _t="$(wget -qO- --timeout=15 "$TERMS_URL" 2>/dev/null || true)"
+  fi
+  if [ -z "$_t" ]; then
+    printf '\n'; sub "não consegui baixar os termos agora — leia em $TERMS_URL"; printf '\n'
+    return 0
+  fi
+  # `<main>` delimita o conteúdo; sem isso o menu de navegação do site vem junto.
+  printf '\n%s\n\n' "$(printf '%s' "$_t" \
+    | sed -n '/<main>/,/<\/main>/p' \
+    | sed -e 's/<script[^>]*>.*<\/script>//g' -e 's/<style[^>]*>.*<\/style>//g' -e 's/<[^>]*>//g' \
+    | sed -e 's/&amp;/\&/g' -e 's/&lt;/</g' -e 's/&gt;/>/g' -e "s/&#39;/'/g" -e 's/&quot;/"/g' -e 's/&nbsp;/ /g' \
+    | sed -e 's/^[[:space:]]*//' -e '/^$/d')"
+}
+
+accept_terms() {
+  # Escotilha para automação (CI, Dockerfile, provisionamento) e p/ quem já leu.
+  if [ "${ALUY_ACCEPT_TERMS:-}" = "1" ]; then
+    sub "termos aceitos via ALUY_ACCEPT_TERMS=1 — $TERMS_URL"
+    return 0
+  fi
+  printf '\n'
+  say "Termos de Uso — $TERMS_URL"
+  sub "• software em BETA, fornecido \"como está\", SEM garantia"
+  sub "• roda na SUA máquina, sob sua responsabilidade"
+  sub "• você usa as SUAS credenciais de provider (BYO); elas nunca passam por nós"
+  sub "• uso livre, inclusive corporativo; open-source, sem cobrança"
+  printf '\n'
+  # SEM terminal (curl | sh dentro de CI, container sem tty): não há quem responda.
+  # Travar aqui quebraria o método de instalação DOCUMENTADO na home do site, então
+  # seguimos — mas dizendo, sem rodeio, que prosseguir é aceitar.
+  # `[ -r /dev/tty ]` NÃO serve: num container de CI o nó existe e é "legível", mas o
+  # open falha com ENXIO — o teste passava, o `read` morria e o instalador CANCELAVA
+  # (pego no teste desta função). A pergunta certa é "consigo ABRIR?", e ela se faz
+  # tentando, num SUBSHELL: se a redireção falhar no shell corrente, `exec` derruba o
+  # processo inteiro.
+  if ! (: < /dev/tty) 2>/dev/null; then
+    sub "instalação não interativa — prosseguir implica ACEITAR os termos acima."
+    printf '\n'
+    return 0
+  fi
+  while :; do
+    printf '  %s▸%s aceita os termos? [s] sim · [l] ler na íntegra · [n] não: ' "$AMBER" "$RESET"
+    read -r _ans < /dev/tty || _ans="n"
+    case "$(printf '%s' "$_ans" | tr 'A-Z' 'a-z')" in
+      s|sim|y|yes) printf '\n'; return 0 ;;
+      l|ler|r)     show_terms ;;
+      n|nao|no)    printf '\n'; sub "instalação cancelada — nada foi baixado."; exit 1 ;;
+      *)           sub "responda s, l ou n." ;;
+    esac
+  done
+}
+
 banner
+accept_terms
 
 # 0) WINDOWS — este script é o de Unix. Sair CEDO e apontar o certo.
 #

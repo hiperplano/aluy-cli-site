@@ -67,6 +67,64 @@ if "%ANSI%"=="1" (
 )
 echo(
 
+REM -- TERMS OF USE --------------------------------------------------------------
+REM Consent comes BEFORE any download - including step 1, which may install Node
+REM via winget. "Before downloading the components" means before the first byte.
+set "TERMS_URL=https://aluy.dev/termos.html"
+if "%ALUY_ACCEPT_TERMS%"=="1" (
+  echo       %DIM%terms accepted via ALUY_ACCEPT_TERMS=1 - %TERMS_URL%%RESET%
+  goto :terms_ok
+)
+echo(
+echo   %TRI% Terms of Use - %TERMS_URL%
+echo       %DIM%* BETA software, provided "as is", WITHOUT warranty%RESET%
+echo       %DIM%* runs on YOUR machine, under your responsibility%RESET%
+echo       %DIM%* you use YOUR OWN provider credentials ^(BYO^); they never pass through us%RESET%
+echo       %DIM%* free to use, including commercially; open-source, no charge%RESET%
+echo(
+set "TERMS_TRIES=0"
+
+:terms_ask
+set /a TERMS_TRIES+=1
+REM Teto de tentativas: um console sem ninguem do outro lado devolve VAZIO para
+REM sempre no `set /p` (nao da erro) - sem este teto o instalador giraria em laco
+REM infinito. Cinco silencios nao e uma pessoa digitando; e uma maquina.
+if %TERMS_TRIES% GTR 5 goto :terms_noanswer
+set "TERMS_ANS="
+set /p "TERMS_ANS=  accept the terms? [y] yes / [r] read in full / [n] no: "
+if not defined TERMS_ANS goto :terms_ask
+if /i "%TERMS_ANS%"=="y"    goto :terms_ok
+if /i "%TERMS_ANS%"=="yes"  goto :terms_ok
+if /i "%TERMS_ANS%"=="s"    goto :terms_ok
+if /i "%TERMS_ANS%"=="r"    goto :terms_read
+if /i "%TERMS_ANS%"=="read" goto :terms_read
+if /i "%TERMS_ANS%"=="l"    goto :terms_read
+if /i "%TERMS_ANS%"=="n"    goto :terms_no
+if /i "%TERMS_ANS%"=="no"   goto :terms_no
+echo       %DIM%answer y, r or n.%RESET%
+goto :terms_ask
+
+:terms_read
+REM PowerShell existe em todo Windows suportado: usamos ele p/ baixar e tirar as
+REM tags, imprimindo NO TERMINAL. Nao abrimos navegador de proposito - a janela
+REM pode estar num RDP ou numa VM recem-criada sem browser configurado. Se a rede
+REM falhar, cai no `start` (navegador) e, em ultimo caso, sobra a URL na tela.
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& { $h=(Invoke-WebRequest -UseBasicParsing '%TERMS_URL%' -TimeoutSec 15).Content; $m=[regex]::Match($h,'(?s)<main>(.*?)</main>'); if($m.Success){$b=$m.Groups[1].Value}else{$b=$h}; $b=[regex]::Replace($b,'(?s)<(script|style)[^>]*>.*?</\1>',''); $b=[regex]::Replace($b,'<[^>]+>',''); $b=$b -replace '&amp;','&' -replace '&nbsp;',' '; foreach($l in ($b -split [char]10)){ $t=$l.Trim(); if($t -ne ''){ Write-Host ('  '+$t) } } }"
+if errorlevel 1 start "" "%TERMS_URL%"
+echo(
+set "TERMS_TRIES=0"
+goto :terms_ask
+
+:terms_no
+echo(
+echo       %DIM%installation cancelled - nothing was downloaded.%RESET%
+exit /b 1
+
+:terms_noanswer
+echo       %DIM%no answer received - proceeding implies ACCEPTING the terms above.%RESET%
+
+:terms_ok
+echo(
 REM 1) Node (only prerequisite)
 echo(
 echo   %BOLD%%AMBER%1/2%RESET%  Node - aluy runs on it

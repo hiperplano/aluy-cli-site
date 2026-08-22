@@ -126,7 +126,90 @@ function Step ($n, $m) {
   else { Write-Host "  $n" -NoNewline -ForegroundColor Yellow; Write-Host "  $m" }
 }
 
+# -- TERMS OF USE ---------------------------------------------------------------
+# Consent comes BEFORE any download - including step 1, which may install Node.
+# "Before downloading the components" means before the first byte, not merely
+# before the npm install.
+$TermsUrl = 'https://aluy.dev/termos.html'
+
+# Prints the terms IN THE TERMINAL. Deliberately does NOT open a browser: this
+# script is often run over RDP, on a fresh VM or in a bare console where no
+# browser is configured, and a "read" option that opens nothing would be worse
+# than not offering one at all.
+function Show-Terms {
+  try {
+    $html = (Invoke-WebRequest -UseBasicParsing -Uri $TermsUrl -TimeoutSec 15).Content
+  } catch {
+    Write-Host ''
+    Sub "could not fetch the terms right now - read them at $TermsUrl"
+    Write-Host ''
+    return
+  }
+  # <main> delimits the content; without it the site navigation comes along.
+  $m = [regex]::Match($html, '(?s)<main>(.*?)</main>')
+  $body = if ($m.Success) { $m.Groups[1].Value } else { $html }
+  $body = [regex]::Replace($body, '(?s)<(script|style)[^>]*>.*?</\1>', '')
+  $body = [regex]::Replace($body, '<[^>]+>', '')
+  $body = $body -replace '&amp;', '&' -replace '&lt;', '<' -replace '&gt;', '>'
+  $body = $body -replace '&#39;', "'" -replace '&quot;', '"' -replace '&nbsp;', ' '
+  Write-Host ''
+  foreach ($ln in ($body -split "`n")) {
+    $t = $ln.Trim()
+    if ($t -ne '') { Write-Host "  $t" }
+  }
+  Write-Host ''
+}
+
+function Confirm-Terms {
+  # Escape hatch for automation (CI, Dockerfile, provisioning) and for whoever
+  # already read them.
+  if ($env:ALUY_ACCEPT_TERMS -eq '1') {
+    Sub "terms accepted via ALUY_ACCEPT_TERMS=1 - $TermsUrl"
+    return
+  }
+  Write-Host ''
+  Say "Terms of Use - $TermsUrl"
+  Sub '* BETA software, provided "as is", WITHOUT warranty'
+  Sub '* runs on YOUR machine, under your responsibility'
+  Sub '* you use YOUR OWN provider credentials (BYO); they never pass through us'
+  Sub '* free to use, including commercially; open-source, no charge'
+  Write-Host ''
+
+  # No console to answer with (-NonInteractive, CI runner, service account).
+  # Blocking here would break the install line documented on the site, so we
+  # proceed - saying plainly that proceeding is accepting.
+  if (-not [Environment]::UserInteractive) {
+    Sub 'non-interactive install - proceeding implies ACCEPTING the terms above.'
+    Write-Host ''
+    return
+  }
+
+  # Attempt cap: a host that returns empty forever (instead of throwing) would
+  # spin this loop until the end of time. Five silent answers is not a person
+  # typing - it is a machine, and we treat it as the non-interactive case.
+  $tries = 0
+  while ($tries -lt 5) {
+    $tries++
+    $ans = $null
+    try {
+      $ans = Read-Host '  accept the terms? [y] yes / [r] read in full / [n] no'
+    } catch {
+      $ans = $null
+    }
+    if ($null -eq $ans -or $ans.Trim() -eq '') { continue }
+    switch -Regex ($ans.Trim().ToLower()) {
+      '^(y|yes|s|sim)$'  { Write-Host ''; return }
+      '^(r|read|l|ler)$' { Show-Terms; $tries = 0 }
+      '^(n|no|nao)$'     { Write-Host ''; Sub 'installation cancelled - nothing was downloaded.'; exit 1 }
+      default            { Sub 'answer y, r or n.' }
+    }
+  }
+  Sub 'no answer received - proceeding implies ACCEPTING the terms above.'
+  Write-Host ''
+}
+
 Banner
+Confirm-Terms
 
 # 1) Node >= 20 (the only prerequisite; installed via winget if missing)
 Step '1/2' "Node $Dash aluy runs on it"
