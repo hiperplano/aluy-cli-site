@@ -47,8 +47,6 @@ banner() {
   printf '  %s ▒▒▒        ▒▒▒ ▒▒   ▒▒▒▒▒  ████▒▒%s\n' "$AMBER" "$RESET"
   printf '  %s                             ▒▒▒▒%s\n' "$AMBER" "$RESET"
   printf '\n'
-  printf '  %sagente de terminal · roda na sua máquina · com o seu provider de LLM%s\n' "$DIM" "$RESET"
-  printf '\n'
 }
 
 say()  { printf '  %s▸%s %s\n' "$AMBER" "$RESET" "$*"; }
@@ -57,22 +55,130 @@ good() { printf '  %s✓%s %s\n' "$OK" "$RESET" "$*"; }
 die()  { printf '  %s✗%s %s\n' "$RED" "$RESET" "$*" >&2; exit 1; }
 step() { printf '\n  %s%s%s  %s\n' "$BOLD$AMBER" "$1" "$RESET" "$2"; }
 
+# ── IDIOMA ─────────────────────────────────────────────────────────────────────
+# A escolha vem ANTES dos termos — de nada adianta oferecer a leitura dos termos
+# num idioma que a pessoa não lê. Ela governa TODA mensagem daqui p/ baixo,
+# inclusive as de erro, e é propagada ao CLI (`ALUY_LANG`) p/ o onboard já abrir
+# no mesmo idioma em vez de perguntar de novo.
+ALUY_UI_LANG=""
+
+# Padrão = idioma do sistema. `LC_ALL` > `LC_MESSAGES` > `LANG` é a precedência do
+# próprio POSIX; respeitá-la evita "detectar" pt numa conta configurada em inglês.
+detect_lang() {
+  case "${LC_ALL:-${LC_MESSAGES:-${LANG:-}}}" in
+    pt*|PT*) printf 'pt' ;;
+    *)       printf 'en' ;;
+  esac
+}
+
+# Catálogo. Chave prefixada pelo idioma p/ as duas versões ficarem LADO A LADO —
+# num arquivo com dois blocos separados, uma tradução esquecida some sem barulho.
+t() {
+  case "$ALUY_UI_LANG:$1" in
+    pt:tagline)   printf 'agente de terminal · roda na sua máquina · com o seu provider de LLM' ;;
+    en:tagline)   printf 'terminal agent · runs on your machine · with your own LLM provider' ;;
+    pt:win)       printf 'este é o instalador de Linux/macOS — no Windows use o PowerShell:' ;;
+    en:win)       printf 'this is the Linux/macOS installer — on Windows use PowerShell:' ;;
+    pt:win2)      printf 'ou, se já tem Node ≥' ;;
+    en:win2)      printf 'or, if you already have Node ≥' ;;
+    pt:terms.t)   printf 'Termos de Uso' ;;
+    en:terms.t)   printf 'Terms of Use' ;;
+    pt:terms.1)   printf '• software em BETA, fornecido "como está", SEM garantia' ;;
+    en:terms.1)   printf '• BETA software, provided "as is", WITHOUT warranty' ;;
+    pt:terms.2)   printf '• roda na SUA máquina, sob sua responsabilidade' ;;
+    en:terms.2)   printf '• runs on YOUR machine, under your responsibility' ;;
+    pt:terms.3)   printf '• você usa as SUAS credenciais de provider (BYO); elas nunca passam por nós' ;;
+    en:terms.3)   printf '• you use YOUR OWN provider credentials (BYO); they never pass through us' ;;
+    pt:terms.4)   printf '• uso livre, inclusive corporativo; open-source, sem cobrança' ;;
+    en:terms.4)   printf '• free to use, including commercially; open-source, no charge' ;;
+    pt:terms.ask) printf 'aceita os termos? [s] sim · [l] ler na íntegra · [n] não: ' ;;
+    en:terms.ask) printf 'accept the terms? [y] yes · [r] read in full · [n] no: ' ;;
+    pt:terms.bad) printf 'responda s, l ou n.' ;;
+    en:terms.bad) printf 'answer y, r or n.' ;;
+    pt:terms.no)  printf 'instalação cancelada — nada foi baixado.' ;;
+    en:terms.no)  printf 'installation cancelled — nothing was downloaded.' ;;
+    pt:terms.ni)  printf 'instalação não interativa — prosseguir implica ACEITAR os termos acima.' ;;
+    en:terms.ni)  printf 'non-interactive install — proceeding implies ACCEPTING the terms above.' ;;
+    pt:terms.env) printf 'termos aceitos via ALUY_ACCEPT_TERMS=1 —' ;;
+    en:terms.env) printf 'terms accepted via ALUY_ACCEPT_TERMS=1 —' ;;
+    pt:terms.err) printf 'não consegui baixar os termos agora — leia em' ;;
+    en:terms.err) printf 'could not fetch the terms right now — read them at' ;;
+    pt:s1)        printf 'Node — o aluy roda sobre ele' ;;
+    en:s1)        printf 'Node — aluy runs on it' ;;
+    pt:s1.miss)   printf 'Node não encontrado — instalando (a barra abaixo é o download do Node)…' ;;
+    en:s1.miss)   printf 'Node not found — installing (the bar below is the Node download)…' ;;
+    pt:s1.ok)     printf 'ok.' ;;
+    en:s1.ok)     printf 'ok.' ;;
+    pt:s2)        printf 'baixando o aluy e seus componentes' ;;
+    en:s2)        printf 'downloading aluy and its components' ;;
+    pt:s2.a)      printf '• interface de terminal (Ink/React)   • acesso seguro a credenciais (keychain)' ;;
+    en:s2.a)      printf '• terminal interface (Ink/React)   • secure credential access (keychain)' ;;
+    pt:s2.b)      printf '• protocolo de ferramentas (MCP)' ;;
+    en:s2.b)      printf '• tool protocol (MCP)' ;;
+    pt:s2.c)      printf 'a barra abaixo é o npm baixando esses pacotes (alguns são binários nativos' ;;
+    en:s2.c)      printf 'the bar below is npm fetching those packages (some are native Node' ;;
+    pt:s2.d)      printf 'do Node) — costuma levar 1–2 min.' ;;
+    en:s2.d)      printf 'binaries) — usually takes 1–2 min.' ;;
+    pt:done)      printf 'aluy instalado.' ;;
+    en:done)      printf 'aluy installed.' ;;
+    pt:shadow)    printf 'a antiga pode SOMBREAR a nova em outros shells (você rodaria a versão velha).' ;;
+    en:shadow)    printf 'the old one may SHADOW the new one in other shells (you would run the old version).' ;;
+    pt:shadow2)   printf 'para remover a antiga (feita com sudo):  sudo npm rm -g' ;;
+    en:shadow2)   printf 'to remove the old one (installed with sudo):  sudo npm rm -g' ;;
+    pt:this)      printf 'esta instalação:' ;;
+    en:this)      printf 'this install:' ;;
+    pt:ready)     printf 'pronto. Numa NOVA aba/terminal o comando `aluy` já estará no PATH (ou rode: source ~/.bashrc).' ;;
+    en:ready)     printf 'done. In a NEW tab/terminal the `aluy` command will be on PATH (or run: source ~/.bashrc).' ;;
+    pt:ready2)    printf 'instalado. abra um NOVO terminal (ou: source ~/.bashrc) e rode:  aluy onboard' ;;
+    en:ready2)    printf 'installed. open a NEW terminal (or: source ~/.bashrc) and run:  aluy onboard' ;;
+    *)            printf '%s' "$1" ;;
+  esac
+}
+
+# Pergunta o idioma. A pergunta é BILÍNGUE de propósito: ela vem ANTES da escolha,
+# então não pode assumir nenhum dos dois.
+choose_lang() {
+  _def="$(detect_lang)"
+  ALUY_UI_LANG="$_def"
+  # Escotilha p/ automação e p/ quem quer forçar: ALUY_LANG=pt|en|pt-BR.
+  case "${ALUY_LANG:-}" in
+    pt*|PT*) ALUY_UI_LANG="pt"; return 0 ;;
+    en*|EN*) ALUY_UI_LANG="en"; return 0 ;;
+  esac
+  # Sem terminal ⇒ fica o detectado, sem travar (mesma razão do aceite dos termos).
+  (: < /dev/tty) 2>/dev/null || return 0
+  printf '\n'
+  printf '  %s▸%s idioma / language?  [1] Português  [2] English  (enter = %s)\n' "$AMBER" "$RESET" "$_def"
+  printf '  %s▸%s > ' "$AMBER" "$RESET"
+  read -r _l < /dev/tty || _l=""
+  case "$_l" in
+    1|pt|PT|Pt|br|BR) ALUY_UI_LANG="pt" ;;
+    2|en|EN|En)       ALUY_UI_LANG="en" ;;
+  esac
+}
+
 # ── TERMOS DE USO ──────────────────────────────────────────────────────────────
 # O aceite vem ANTES de qualquer download — inclusive antes do passo 1, que pode
 # instalar o Node. "Antes de baixar os componentes" significa antes do primeiro
 # byte, não antes do `npm install`.
-TERMS_URL="https://aluy.dev/pt/termos.html"
+# A URL segue o IDIOMA escolhido — oferecer a leitura dos termos numa língua que a
+# pessoa não lê é oferecer nada. Função, não variável: `choose_lang` roda DEPOIS
+# deste ponto do arquivo, então um valor fixado aqui congelaria o idioma errado.
+terms_url() {
+  if [ "$ALUY_UI_LANG" = "pt" ]; then printf 'https://aluy.dev/pt/termos.html'
+  else printf 'https://aluy.dev/termos.html'; fi
+}
 
 # Mostra os termos NO TERMINAL. Não abre navegador de propósito: quem instala por
 # `curl | sh` costuma estar em SSH/servidor/WSL, onde não há navegador — e um
 # comando que "abre" nada seria pior que não oferecer a leitura.
 show_terms() {
   _t=""
-  if   command -v curl >/dev/null 2>&1; then _t="$(curl -fsSL --max-time 15 "$TERMS_URL" 2>/dev/null || true)"
-  elif command -v wget >/dev/null 2>&1; then _t="$(wget -qO- --timeout=15 "$TERMS_URL" 2>/dev/null || true)"
+  if   command -v curl >/dev/null 2>&1; then _t="$(curl -fsSL --max-time 15 "$(terms_url)" 2>/dev/null || true)"
+  elif command -v wget >/dev/null 2>&1; then _t="$(wget -qO- --timeout=15 "$(terms_url)" 2>/dev/null || true)"
   fi
   if [ -z "$_t" ]; then
-    printf '\n'; sub "não consegui baixar os termos agora — leia em $TERMS_URL"; printf '\n'
+    printf '\n'; sub "$(t terms.err) $(terms_url)"; printf '\n'
     return 0
   fi
   # `<main>` delimita o conteúdo; sem isso o menu de navegação do site vem junto.
@@ -86,15 +192,15 @@ show_terms() {
 accept_terms() {
   # Escotilha para automação (CI, Dockerfile, provisionamento) e p/ quem já leu.
   if [ "${ALUY_ACCEPT_TERMS:-}" = "1" ]; then
-    sub "termos aceitos via ALUY_ACCEPT_TERMS=1 — $TERMS_URL"
+    sub "$(t terms.env) $(terms_url)"
     return 0
   fi
   printf '\n'
-  say "Termos de Uso — $TERMS_URL"
-  sub "• software em BETA, fornecido \"como está\", SEM garantia"
-  sub "• roda na SUA máquina, sob sua responsabilidade"
-  sub "• você usa as SUAS credenciais de provider (BYO); elas nunca passam por nós"
-  sub "• uso livre, inclusive corporativo; open-source, sem cobrança"
+  say "$(t terms.t) — $(terms_url)"
+  sub "$(t terms.1)"
+  sub "$(t terms.2)"
+  sub "$(t terms.3)"
+  sub "$(t terms.4)"
   printf '\n'
   # SEM terminal (curl | sh dentro de CI, container sem tty): não há quem responda.
   # Travar aqui quebraria o método de instalação DOCUMENTADO na home do site, então
@@ -105,23 +211,29 @@ accept_terms() {
   # tentando, num SUBSHELL: se a redireção falhar no shell corrente, `exec` derruba o
   # processo inteiro.
   if ! (: < /dev/tty) 2>/dev/null; then
-    sub "instalação não interativa — prosseguir implica ACEITAR os termos acima."
+    sub "$(t terms.ni)"
     printf '\n'
     return 0
   fi
   while :; do
-    printf '  %s▸%s aceita os termos? [s] sim · [l] ler na íntegra · [n] não: ' "$AMBER" "$RESET"
+    printf '  %s▸%s %s' "$AMBER" "$RESET" "$(t terms.ask)"
     read -r _ans < /dev/tty || _ans="n"
     case "$(printf '%s' "$_ans" | tr 'A-Z' 'a-z')" in
       s|sim|y|yes) printf '\n'; return 0 ;;
       l|ler|r)     show_terms ;;
-      n|nao|no)    printf '\n'; sub "instalação cancelada — nada foi baixado."; exit 1 ;;
-      *)           sub "responda s, l ou n." ;;
+      n|nao|no)    printf '\n'; sub "$(t terms.no)"; exit 1 ;;
+      *)           sub "$(t terms.bad)" ;;
     esac
   done
 }
 
 banner
+choose_lang
+printf '  %s%s%s\n\n' "$DIM" "$(t tagline)" "$RESET"
+# O CLI herda o idioma escolhido — sem isto o `aluy onboard` logo abaixo abriria
+# noutro idioma e perguntaria de novo o que a pessoa acabou de responder.
+ALUY_LANG="$( [ "$ALUY_UI_LANG" = "pt" ] && printf 'pt-BR' || printf 'en' )"
+export ALUY_LANG
 accept_terms
 
 # 0) WINDOWS — este script é o de Unix. Sair CEDO e apontar o certo.
@@ -140,7 +252,7 @@ accept_terms
 _uname="$(uname -s 2>/dev/null || echo desconhecido)"
 case "$_uname" in
   MINGW*|MSYS*|CYGWIN*)
-    printf '\n  %s✗%s este é o instalador de Linux/macOS — no Windows use o PowerShell:\n' "$RED" "$RESET" >&2
+    printf '\n  %s✗%s %s\n' "$RED" "$RESET" "$(t win)" >&2
     printf '\n      %sirm https://aluy.dev/install.ps1 | iex%s\n' "$BOLD" "$RESET" >&2
     printf '\n    ou, se já tem Node ≥ %s: %snpm i -g @hiperplano/aluy-cli%s\n\n' "$MIN_NODE" "$BOLD" "$RESET" >&2
     exit 1
@@ -155,16 +267,16 @@ if [ -n "${WSL_DISTRO_NAME:-}" ] && ! command -v node >/dev/null 2>&1; then
 fi
 
 # 1) Node ≥ 20 (o único pré-requisito; instala via fnm/brew se faltar)
-step "1/2" "Node — o aluy roda sobre ele"
+step "1/2" "$(t s1)"
 node_major() { node -v 2>/dev/null | sed -E 's/^v([0-9]+).*/\1/'; }
 if ! command -v node >/dev/null 2>&1 || [ "$(node_major)" -lt "$MIN_NODE" ]; then
-  say "Node não encontrado — instalando (a barra abaixo é o download do Node)…"
+  say "$(t s1.miss)"
   if   command -v fnm  >/dev/null 2>&1; then fnm install "$MIN_NODE" && fnm use "$MIN_NODE"
   elif command -v brew >/dev/null 2>&1; then brew install "node@${MIN_NODE}"
   else die "instale o Node ≥ ${MIN_NODE} (https://nodejs.org) e rode de novo."
   fi
 else
-  good "Node $(node -v) ok."
+  good "Node $(node -v) $(t s1.ok)"
 fi
 
 # 2) npm-global user-space (sem sudo). Se o prefix default não é gravável, usa
@@ -217,11 +329,11 @@ done
 }
 
 # 3) instala. Explica O QUE a barra do npm baixa (senão parece "node" cru e opaco).
-step "2/2" "baixando o aluy e seus componentes"
-sub "• interface de terminal (Ink/React)   • acesso seguro a credenciais (keychain)"
-sub "• protocolo de ferramentas (MCP)"
-sub "a barra abaixo é o npm baixando esses pacotes (alguns são binários nativos"
-sub "do Node) — costuma levar 1–2 min."
+step "2/2" "$(t s2)"
+sub "$(t s2.a)"
+sub "$(t s2.b)"
+sub "$(t s2.c)"
+sub "$(t s2.d)"
 # `--prefix "$PREFIX"` é a GARANTIA (não depende de config persistida): passa o destino
 # NA PRÓPRIA chamada. É o que blinda contra o no-op do `npm config set` descrito acima —
 # se por qualquer razão o prefix não persistir, o install AINDA vai p/ o lugar certo.
@@ -232,7 +344,7 @@ ALUY="$BIN/aluy"
 [ -x "$ALUY" ] || ALUY="$(command -v aluy 2>/dev/null || true)"
 [ -n "$ALUY" ] && [ -x "$ALUY" ] || die "aluy instalou mas não achei o binário em ${BIN} (rode: ls ${BIN})."
 
-good "aluy instalado."
+good "$(t done)"
 
 # 3a) INSTALAÇÃO ÓRFÃ (com root) SOMBREANDO a nova. Cenário real: uma instalação
 #     antiga feita com `sudo npm i -g` mora em `/usr/local/lib/node_modules` (dono
@@ -252,9 +364,9 @@ if [ -n "$SHADOWS" ]; then
     v="$("$s" --version 2>/dev/null | head -1 || true)"
     sub "• $s${v:+  ($v)}"
   done
-  sub "esta instalação: $ALUY"
-  sub "a antiga pode SOMBREAR a nova em outros shells (você rodaria a versão velha)."
-  sub "para remover a antiga (feita com sudo):  sudo npm rm -g $PKG"
+  sub "$(t this) $ALUY"
+  sub "$(t shadow)"
+  sub "$(t shadow2) $PKG"
 fi
 
 # 4) entrega pro ONBOARD (Node/Ink) reanexado ao TTY real (não ao stdin do pipe), e
@@ -272,8 +384,8 @@ if [ -r /dev/tty ]; then
   clear
   "$ALUY" bootstrap < /dev/tty || true
   clear
-  good "pronto. Numa NOVA aba/terminal o comando \`aluy\` já estará no PATH (ou rode: source ~/.bashrc)."
+  good "$(t ready)"
   exec "$ALUY" < /dev/tty
 else
-  good "instalado. abra um NOVO terminal (ou: source ~/.bashrc) e rode:  aluy onboard"
+  good "$(t ready2)"
 fi
