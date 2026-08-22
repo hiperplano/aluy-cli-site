@@ -111,6 +111,12 @@ function Banner {
     else { Write-Host "  $ln" -ForegroundColor DarkYellow }
   }
   Write-Host ''
+}
+
+# A tagline saiu do Banner: ela e LOCALIZADA, e o banner e desenhado ANTES da
+# escolha de idioma (o dono quis a arte primeiro). Fica como funcao propria,
+# chamada depois que $Lang existe.
+function BannerTag {
   $tag = T 'banner_tag'
   if ($UseAnsi) { Write-Host "  $DIM$tag$RESET" } else { Write-Host "  $tag" -ForegroundColor DarkGray }
   Write-Host ''
@@ -145,6 +151,13 @@ $MSG = @{
     'terms_noninteractive' = 'non-interactive install - proceeding implies ACCEPTING the terms above.'
     'terms_bad_answer'     = 'answer y, r or n.'
     'terms_declined'       = 'installation cancelled - nothing was downloaded.'
+    'go_title'             = 'confirm the installation of aluy and its components?'
+    'go_1'                 = '* Node 20+ (installed if missing)   * aluy CLI (npm, global)'
+    'go_2'                 = '* terminal interface, credential vault, MCP protocol'
+    'go_ask'               = '  install now? [y] yes / [n] no'
+    'go_bad'               = 'answer y or n.'
+    'go_declined'          = 'installation cancelled - nothing was downloaded.'
+    'go_no_answer'         = 'no answer received - proceeding with the installation.'
     'terms_no_answer'      = 'no answer received - proceeding implies ACCEPTING the terms above.'
     'step1'                = "Node $Dash aluy runs on it"
     'node_installing'      = 'Node not found - installing Node LTS via winget.'
@@ -184,6 +197,13 @@ $MSG = @{
     'terms_noninteractive' = 'instalação não interativa - prosseguir implica ACEITAR os termos acima.'
     'terms_bad_answer'     = 'responda s, l ou n.'
     'terms_declined'       = 'instalação cancelada - nada foi baixado.'
+    'go_title'             = 'confirma a instalação do aluy e seus componentes?'
+    'go_1'                 = '* Node 20+ (instalado se faltar)   * aluy CLI (npm, global)'
+    'go_2'                 = '* interface de terminal, cofre de credenciais, protocolo MCP'
+    'go_ask'               = '  instalar agora? [s] sim / [n] não'
+    'go_bad'               = 'responda s ou n.'
+    'go_declined'          = 'instalação cancelada - nada foi baixado.'
+    'go_no_answer'         = 'sem resposta - seguindo com a instalação.'
     'terms_no_answer'      = 'nenhuma resposta recebida - prosseguir implica ACEITAR os termos acima.'
     'step1'                = "Node $Dash o aluy roda sobre ele"
     'node_installing'      = 'Node não encontrado - instalando Node LTS via winget.'
@@ -265,7 +285,41 @@ function Select-Language {
   return $Default  # 5 respostas não reconhecidas: não é pessoa digitando, é máquina.
 }
 
+
+# CONFIRMACAO DE INSTALACAO - pedido do dono: depois dos termos, um passo explicito.
+# Aceitar os termos e concordar com as REGRAS; instalar e uma SEGUNDA decisao, e juntar
+# as duas numa pergunta so prenderia a instalar quem so queria ler os termos.
+#
+# Lista o que entra: quem confirma precisa saber o que esta autorizando, e
+# "componentes" sem nomes nao e informacao.
+function Confirm-Install {
+  if ($env:ALUY_ACCEPT_TERMS -eq '1') { return }
+  Write-Host ''
+  Say (T 'go_title')
+  Sub (T 'go_1')
+  Sub (T 'go_2')
+  Write-Host ''
+  # Mesmo teto de tentativas do Confirm-Terms: `UserInteractive` NAO detecta
+  # `-NonInteractive` (Read-Host devolve vazio em vez de lancar) e o laco giraria.
+  $tries = 0
+  while ($tries -lt 5) {
+    $tries++
+    $ans = $null
+    try { $ans = Read-Host (T 'go_ask') } catch { $ans = $null }
+    if ($null -eq $ans -or $ans.Trim() -eq '') { continue }
+    switch -Regex ($ans.Trim().ToLower()) {
+      '^(y|yes|s|sim)$' { Write-Host ''; return }
+      '^(n|no|nao)$'    { Write-Host ''; Sub (T 'go_declined'); exit 1 }
+      default           { Sub (T 'go_bad') }
+    }
+  }
+  Sub (T 'go_no_answer')
+  Write-Host ''
+}
+
+Banner
 $Lang = Select-Language (Get-DefaultLang)
+BannerTag
 
 # -- TERMS OF USE ---------------------------------------------------------------
 # Consent comes BEFORE any download - including step 1, which may install Node.
@@ -359,8 +413,8 @@ function Confirm-Terms {
   Write-Host ''
 }
 
-Banner
 Confirm-Terms
+Confirm-Install
 
 # 1) Node >= 20 (the only prerequisite; installed via winget if missing)
 Step '1/2' (T 'step1')

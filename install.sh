@@ -103,6 +103,20 @@ t() {
     en:terms.env) printf 'terms accepted via ALUY_ACCEPT_TERMS=1 —' ;;
     pt:terms.err) printf 'não consegui baixar os termos agora — leia em' ;;
     en:terms.err) printf 'could not fetch the terms right now — read them at' ;;
+    pt:go.t)      printf 'confirma a instalação do aluy e seus componentes?' ;;
+    en:go.t)      printf 'confirm the installation of aluy and its components?' ;;
+    pt:go.1)      printf '• Node ≥ 20 (instalado se faltar)   • aluy CLI (npm, global)' ;;
+    en:go.1)      printf '• Node ≥ 20 (installed if missing)   • aluy CLI (npm, global)' ;;
+    pt:go.2)      printf '• interface de terminal, cofre de credenciais, protocolo MCP' ;;
+    en:go.2)      printf '• terminal interface, credential vault, MCP protocol' ;;
+    pt:go.ask)    printf 'instalar agora? [s] sim · [n] não: ' ;;
+    en:go.ask)    printf 'install now? [y] yes · [n] no: ' ;;
+    pt:go.bad)    printf 'responda s ou n.' ;;
+    en:go.bad)    printf 'answer y or n.' ;;
+    pt:go.no)     printf 'instalação cancelada — nada foi baixado.' ;;
+    en:go.no)     printf 'installation cancelled — nothing was downloaded.' ;;
+    pt:go.ni)     printf 'instalação não interativa — seguindo sem confirmar.' ;;
+    en:go.ni)     printf 'non-interactive install — proceeding without confirmation.' ;;
     pt:s1)        printf 'Node — o aluy roda sobre ele' ;;
     en:s1)        printf 'Node — aluy runs on it' ;;
     pt:s1.miss)   printf 'Node não encontrado — instalando (a barra abaixo é o download do Node)…' ;;
@@ -155,6 +169,36 @@ choose_lang() {
     1|pt|PT|Pt|br|BR) ALUY_UI_LANG="pt" ;;
     2|en|EN|En)       ALUY_UI_LANG="en" ;;
   esac
+}
+
+# ── CONFIRMAÇÃO DE INSTALAÇÃO ──────────────────────────────────────────────────
+# Pedido do dono: depois dos termos, um "confirma a instalação?" explícito. Aceitar
+# os termos é concordar com as REGRAS; instalar é uma segunda decisão, e juntá-las
+# numa pergunta só faria quem quer ler os termos ficar preso a instalar.
+#
+# Lista o que vai entrar: quem confirma precisa saber o que está autorizando, e
+# "componentes" sem nomes não é informação.
+confirm_install() {
+  if [ "${ALUY_ACCEPT_TERMS:-}" = "1" ]; then return 0; fi
+  printf '\n'
+  say "$(t go.t)"
+  sub "$(t go.1)"
+  sub "$(t go.2)"
+  printf '\n'
+  if ! (: < /dev/tty) 2>/dev/null; then
+    sub "$(t go.ni)"
+    printf '\n'
+    return 0
+  fi
+  while :; do
+    printf '  %s▸%s %s' "$AMBER" "$RESET" "$(t go.ask)"
+    read -r _g < /dev/tty || _g="n"
+    case "$(printf '%s' "$_g" | tr 'A-Z' 'a-z')" in
+      s|sim|y|yes) printf '\n'; return 0 ;;
+      n|nao|no)    printf '\n'; sub "$(t go.no)"; exit 1 ;;
+      *)           sub "$(t go.bad)" ;;
+    esac
+  done
 }
 
 # ── TERMOS DE USO ──────────────────────────────────────────────────────────────
@@ -235,6 +279,7 @@ printf '  %s%s%s\n\n' "$DIM" "$(t tagline)" "$RESET"
 ALUY_LANG="$( [ "$ALUY_UI_LANG" = "pt" ] && printf 'pt-BR' || printf 'en' )"
 export ALUY_LANG
 accept_terms
+confirm_install
 
 # 0) WINDOWS — este script é o de Unix. Sair CEDO e apontar o certo.
 #

@@ -45,6 +45,25 @@ if "%ANSI%"=="1" (
   set "CK=%ESC%[38;2;122;184;120m✓%ESC%[0m"
   set "CR=%ESC%[38;2;207;83;83m✗%ESC%[0m"
 )
+REM -- wordmark (ANSI/truecolor on Windows 10+; plain text otherwise) ----------
+echo(
+if "%ANSI%"=="1" (
+  REM Wordmark IDENTICO ao do CLI (wordmark-3d.ts) — a marca plana daqui divergia da
+  REM que o usuario ve ao abrir o aluy. Uma cor so: a sombra e a marca sao o mesmo
+  REM ambar em intensidades diferentes, e isso ja esta no desenho (bloco cheio vs meio-tom).
+  REM Depende do `chcp 65001` la em cima — sem ele o cmd le em cp850 e isto vira lixo.
+  echo   %AMBER%      ██       ██%RESET%
+  echo   %AMBER%     ████      ██▒ ██  ██  ██  ██%RESET%
+  echo   %AMBER%   ███▒▒███    ██▒ ██▒ ██▒ ██▒ ██▒%RESET%
+  echo   %AMBER% ███▒▒▒  ▒███  ██▒ ██▒ ██▒  █████▒%RESET%
+  echo   %AMBER%███▒▒      ███ ██▒  █████▒   ▒▒██▒%RESET%
+  echo   %AMBER% ▒▒▒        ▒▒▒ ▒▒   ▒▒▒▒▒  ████▒▒%RESET%
+  echo   %AMBER%                             ▒▒▒▒%RESET%
+) else (
+  echo   Aluy
+)
+echo(
+
 
 REM -- LANGUAGE ------------------------------------------------------------------
 REM Toda mensagem do instalador (inclusive termos e erros) sai de uma variavel
@@ -101,6 +120,11 @@ REM :msgs_pt, quando roda, so sobrescreve.
 call :msgs_en
 if /i "%LANG%"=="pt" call :msgs_pt
 
+REM A tagline e LOCALIZADA e o banner e desenhado ANTES da escolha de idioma (o
+REM dono quis a arte primeiro), entao ela sai aqui, ja com o catalogo carregado.
+if "%ANSI%"=="1" echo   %DIM%%MSG_BANNER_TAG%%RESET%
+echo(
+
 REM URL dos termos muda com o idioma (o site publica os dois); a mensagem em si
 REM e a mesma variavel MSG_TERMS_HEADER pros dois casos, so a URL muda.
 set "TERMS_URL=https://aluy.dev/termos.html"
@@ -112,26 +136,6 @@ REM pra portugues; `en` cobre o resto.
 set "ALUY_LANG=en"
 if /i "%LANG%"=="pt" set "ALUY_LANG=pt-BR"
 
-REM -- wordmark (ANSI/truecolor on Windows 10+; plain text otherwise) ----------
-echo(
-if "%ANSI%"=="1" (
-  REM Wordmark IDENTICO ao do CLI (wordmark-3d.ts) — a marca plana daqui divergia da
-  REM que o usuario ve ao abrir o aluy. Uma cor so: a sombra e a marca sao o mesmo
-  REM ambar em intensidades diferentes, e isso ja esta no desenho (bloco cheio vs meio-tom).
-  REM Depende do `chcp 65001` la em cima — sem ele o cmd le em cp850 e isto vira lixo.
-  echo   %AMBER%      ██       ██%RESET%
-  echo   %AMBER%     ████      ██▒ ██  ██  ██  ██%RESET%
-  echo   %AMBER%   ███▒▒███    ██▒ ██▒ ██▒ ██▒ ██▒%RESET%
-  echo   %AMBER% ███▒▒▒  ▒███  ██▒ ██▒ ██▒  █████▒%RESET%
-  echo   %AMBER%███▒▒      ███ ██▒  █████▒   ▒▒██▒%RESET%
-  echo   %AMBER% ▒▒▒        ▒▒▒ ▒▒   ▒▒▒▒▒  ████▒▒%RESET%
-  echo   %AMBER%                             ▒▒▒▒%RESET%
-  echo.
-  echo   %DIM%%MSG_BANNER_TAG%%RESET%
-) else (
-  echo   Aluy
-)
-echo(
 
 REM -- TERMS OF USE --------------------------------------------------------------
 REM Consent comes BEFORE any download - including step 1, which may install Node
@@ -192,6 +196,47 @@ exit /b 1
 echo       %DIM%%MSG_TERMS_NO_ANSWER%%RESET%
 
 :terms_ok
+echo(
+
+REM -- CONFIRMACAO DE INSTALACAO ------------------------------------------------
+REM Pedido do dono: depois dos termos, um passo explicito. Aceitar os termos e
+REM concordar com as REGRAS; instalar e uma SEGUNDA decisao, e juntar as duas numa
+REM pergunta so prenderia a instalar quem so queria ler os termos.
+REM Lista o que entra: quem confirma precisa saber o que esta autorizando.
+if "%ALUY_ACCEPT_TERMS%"=="1" goto :go_ok
+echo   %TRI% %MSG_GO_TITLE%
+echo       %DIM%%MSG_GO_1%%RESET%
+echo       %DIM%%MSG_GO_2%%RESET%
+echo(
+set "GO_TRIES=0"
+
+:go_ask
+set /a GO_TRIES+=1
+REM Mesmo teto do :terms_ask: um console sem ninguem do outro lado devolve VAZIO
+REM pra sempre no `set /p`, e sem teto isto giraria em laco infinito.
+if %GO_TRIES% GTR 5 goto :go_noanswer
+set "GO_ANS="
+set /p "GO_ANS=%MSG_GO_ASK%"
+if not defined GO_ANS goto :go_ask
+if /i "%GO_ANS%"=="y"   goto :go_ok
+if /i "%GO_ANS%"=="yes" goto :go_ok
+if /i "%GO_ANS%"=="s"   goto :go_ok
+if /i "%GO_ANS%"=="sim" goto :go_ok
+if /i "%GO_ANS%"=="n"   goto :go_no
+if /i "%GO_ANS%"=="no"  goto :go_no
+if /i "%GO_ANS%"=="nao" goto :go_no
+echo       %DIM%%MSG_GO_BAD%%RESET%
+goto :go_ask
+
+:go_no
+echo(
+echo       %DIM%%MSG_GO_DECLINED%%RESET%
+exit /b 1
+
+:go_noanswer
+echo       %DIM%%MSG_GO_NOANSWER%%RESET%
+
+:go_ok
 echo(
 REM 1) Node (only prerequisite)
 echo(
@@ -372,6 +417,13 @@ set "MSG_TERMS_B4=* free to use, including commercially; open-source, no charge"
 set "MSG_TERMS_PROMPT=  accept the terms? [y] yes / [r] read in full / [n] no: "
 set "MSG_TERMS_BAD_ANSWER=answer y, r or n."
 set "MSG_TERMS_DECLINED=installation cancelled - nothing was downloaded."
+set "MSG_GO_TITLE=confirm the installation of aluy and its components?"
+set "MSG_GO_1=* Node 20+ (installed if missing)   * aluy CLI (npm, global)"
+set "MSG_GO_2=* terminal interface, credential vault, MCP protocol"
+set "MSG_GO_ASK=  install now? [y] yes / [n] no: "
+set "MSG_GO_BAD=answer y or n."
+set "MSG_GO_DECLINED=installation cancelled - nothing was downloaded."
+set "MSG_GO_NOANSWER=no answer received - proceeding with the installation."
 set "MSG_TERMS_NO_ANSWER=no answer received - proceeding implies ACCEPTING the terms above."
 set "MSG_STEP1=Node - aluy runs on it"
 set "MSG_NODE_MISSING=Node.js not found. Install Node 20+ (https://nodejs.org) and run again."
@@ -412,6 +464,13 @@ set "MSG_TERMS_B4=* uso livre, inclusive comercial; open-source, sem cobranca"
 set "MSG_TERMS_PROMPT=  aceita os termos? [s] sim / [l] ler na integra / [n] nao: "
 set "MSG_TERMS_BAD_ANSWER=responda s, l ou n."
 set "MSG_TERMS_DECLINED=instalacao cancelada - nada foi baixado."
+set "MSG_GO_TITLE=confirma a instalacao do aluy e seus componentes?"
+set "MSG_GO_1=* Node 20+ (instalado se faltar)   * aluy CLI (npm, global)"
+set "MSG_GO_2=* interface de terminal, cofre de credenciais, protocolo MCP"
+set "MSG_GO_ASK=  instalar agora? [s] sim / [n] nao: "
+set "MSG_GO_BAD=responda s ou n."
+set "MSG_GO_DECLINED=instalacao cancelada - nada foi baixado."
+set "MSG_GO_NOANSWER=sem resposta - seguindo com a instalacao."
 set "MSG_TERMS_NO_ANSWER=nenhuma resposta recebida - prosseguir implica ACEITAR os termos acima."
 set "MSG_STEP1=Node - o aluy roda sobre ele"
 set "MSG_NODE_MISSING=Node.js nao encontrado. Instale o Node 20+ (https://nodejs.org) e rode novamente."
