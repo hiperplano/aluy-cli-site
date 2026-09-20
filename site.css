@@ -34,10 +34,9 @@
   /* text */
   --tx:        #171512;
   --tx2:       #6B6459;
-  --mut:       #7A7268;
-  --mut2:      #8A8279;
-  --faint:     #8A8279;
-  --faint2:    #A39A8D;
+  /* mut/mut2: corrigidos para passar em 4.5:1 sobre --bg (eram 4.43 e 3.54) */
+  --mut:       #675F54;
+  --mut2:      #6A6358;
   /* semantic */
   --green:     #2F6B48;
   --green-br:  #82CF9E;   /* on dark code surfaces */
@@ -48,15 +47,23 @@
   --ui:   'Inter Tight', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   /* layout */
-  --wrap: 1200px;
+  --wrap: 1040px;   /* trilho unico: header, conteudo, rodape e docs */
   --pad:  28px;
+  /* superfícies dependentes de tema (o tema escuro troca só os tokens) */
+  --bg-blur:     rgba(251,247,240,.86);
+  --bg-blur-9:   rgba(251,247,240,.97);
+  --warm:        #FDF6E8;   /* superficie quente: .note e .strip */
+  --warm-bd:     #F0E0BE;
+  --scroll:      rgba(23,21,18,.20);
+  --scroll-hov:  rgba(23,21,18,.34);
+  --logo-invert: 0;
 }
 
-* { box-sizing: border-box; scrollbar-width: thin; scrollbar-color: rgba(23,21,18,.20) transparent; }
+* { box-sizing: border-box; scrollbar-width: thin; scrollbar-color: var(--scroll) transparent; }
 ::-webkit-scrollbar { width: 11px; height: 11px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(23,21,18,.20); border-radius: 999px; border: 3px solid transparent; background-clip: padding-box; }
-::-webkit-scrollbar-thumb:hover { background: rgba(23,21,18,.34); border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb { background: var(--scroll); border-radius: 999px; border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--scroll-hov); border: 3px solid transparent; background-clip: padding-box; }
 
 html { scroll-behavior: smooth; zoom: 1.1; }
 body {
@@ -92,13 +99,13 @@ img { display: block; }
 /* ---- header --------------------------------------------------------------- */
 .topbar {
   position: sticky; top: 0; z-index: 20;
-  background: rgba(251,247,240,.86);
+  background: var(--bg-blur);
   backdrop-filter: saturate(1.4) blur(14px);
   -webkit-backdrop-filter: saturate(1.4) blur(14px);
   border-bottom: 1px solid var(--bd-09);
 }
 .topbar-inner {
-  display: flex; align-items: center; gap: 18px;
+  display: flex; align-items: center; gap: 14px;
   max-width: var(--wrap); margin: 0 auto; padding: 14px var(--pad); min-height: 62px;
 }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
@@ -107,10 +114,10 @@ img { display: block; }
   font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .04em;
   color: var(--tx2); border: 1px solid var(--bd-strong); border-radius: 999px; padding: 2px 8px;
 }
-.nav { display: flex; align-items: center; gap: 2px; margin-left: 8px; }
+.nav { display: flex; align-items: center; gap: 0; margin-left: 4px; }
 .nav a {
   font-size: 15px; font-weight: 500; color: var(--tx2);
-  padding: 9px 14px; border-radius: 999px; text-decoration: none;
+  padding: 8px 11px; border-radius: 999px; text-decoration: none; white-space: nowrap;
   transition: color .14s, background .14s;
 }
 .nav a:hover { color: var(--tx); background: var(--s3); }
@@ -155,8 +162,11 @@ img { display: block; }
 /* ---- generic layout helpers ----------------------------------------------- */
 /* base layout applies to the modifiers too, so they work standalone */
 .section, .section--narrow, .section--mid, .section--install { max-width: 1040px; margin: 0 auto; padding: 0 var(--pad); }
-.section--narrow { max-width: 880px; }
-.section--mid { max-width: 760px; }
+/* as variantes estreitas vinham do trilho antigo e brigavam com o herói:
+   na referência de comandos o título começava em x=94 e a lista em x=151.
+   Agora seguem o trilho; quem cuida da linha de leitura é o texto (ch). */
+.section--narrow { max-width: var(--wrap); }
+.section--mid { max-width: var(--wrap); }
 .section--install { max-width: 800px; }
 .center { text-align: center; }
 .eyebrow {
@@ -171,8 +181,8 @@ h1, h2, h3 { font-family: var(--ui); margin: 0; letter-spacing: -.02em; }
 .lead { font-size: 19px; line-height: 1.55; color: var(--tx2); margin: 14px 0 0; }
 
 /* hero — left aligned (Features/Commands/Architecture/Install) */
-.hero { max-width: 880px; margin: 0 auto; padding: 56px var(--pad) 8px; }
-.hero h1 { font-weight: 700; font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: 14px 0 0; overflow-wrap: break-word; }
+.hero { max-width: var(--wrap); margin: 0 auto; padding: 56px var(--pad) 8px; }
+.hero h1 { font-weight: 700; font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: 14px 0 0; max-width: 20ch; overflow-wrap: break-word; }
 .hero .lead { max-width: 64ch; }
 
 /* hero — Install page (shares the step column width; no extra side padding) */
@@ -181,7 +191,7 @@ h1, h2, h3 { font-family: var(--ui); margin: 0; letter-spacing: -.02em; }
 .ihero .lead { max-width: 64ch; }
 
 /* hero — centered (Home) */
-.hero-c { text-align: center; padding: 66px var(--pad) 8px; max-width: 920px; margin: 0 auto; }
+.hero-c { text-align: center; padding: 66px var(--pad) 8px; max-width: var(--wrap); margin: 0 auto; }
 .hero-mark { display: block; margin: 0 auto 22px; filter: drop-shadow(0 8px 22px rgba(221,161,63,.18)); }
 .hero-c h1 { font-weight: 700; font-size: clamp(40px, 7vw, 68px); line-height: .99; letter-spacing: -.035em; overflow-wrap: break-word; }
 .hero-c .lead { font-size: 21px; max-width: 48ch; margin: 20px auto 0; }
@@ -288,7 +298,7 @@ b { color: var(--tx); font-weight: 600; }
   display: flex; align-items: center; gap: 9px; flex-wrap: wrap; margin-top: 15px;
   font-family: var(--mono); font-size: 12.5px; color: #6F675D;
 }
-.install-meta .sep { color: #D4CBBC; }
+.install-meta .sep { color: var(--bd-strong); }
 .install-meta .hi { color: var(--tx2); }
 
 /* ---- "your first minute" terminal block ----------------------------------- */
@@ -308,7 +318,7 @@ b { color: var(--tx); font-weight: 600; }
 
 /* ---- transparency strip --------------------------------------------------- */
 .strip {
-  background: linear-gradient(180deg, #FDF6E8, var(--s1));
+  background: linear-gradient(180deg, var(--warm), var(--s1));
   border: 1px solid var(--bd); border-radius: 26px; padding: 34px;
 }
 .strip-head { text-align: center; margin-bottom: 22px; }
@@ -336,7 +346,7 @@ b { color: var(--tx); font-weight: 600; }
 .cmd-desc .sub { color: var(--mut2); }
 .note {
   display: flex; align-items: flex-start; gap: 10px;
-  background: #FDF6E8; border: 1px solid #F0E0BE;
+  background: var(--warm); border: 1px solid var(--warm-bd);
   border-radius: 16px; padding: 15px 17px;
 }
 .note .ic { color: var(--amber); margin-top: 1px; display: flex; }
@@ -372,7 +382,7 @@ kbd { font-family: var(--mono); font-size: 13px; color: var(--tx); background: v
 .tag { font-family: var(--mono); font-size: 12px; color: var(--amber); background: var(--amber-bg); padding: 1px 6px; border-radius: 4px; font-weight: 500; }
 .arrow { display: flex; align-items: center; justify-content: center; }
 .gate { background: linear-gradient(180deg, rgba(44,110,106,.18), transparent), var(--s1); border: 1.5px solid var(--teal-deep); }
-.gate .ic { background: var(--teal-deep); color: #FBF7F0; }
+.gate .ic { background: var(--teal-deep); color: var(--s1); }
 .gate h4 { font-size: 15.5px; }
 .gate p { color: var(--tx2); }
 .pill-ghost { font-family: var(--mono); font-size: 10px; letter-spacing: .04em; color: var(--green); border: 1px solid var(--bd-strong); border-radius: 999px; padding: 2px 8px; }
@@ -421,11 +431,11 @@ kbd { font-family: var(--mono); font-size: 13px; color: var(--tx); background: v
 .lnk:hover { text-decoration: underline; }
 
 /* ---- legal (terms) -------------------------------------------------------- */
-.legal { max-width: 760px; margin: 0 auto; padding: 0 var(--pad); }
+.legal { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); }
 .legal .upd { font-family: var(--mono); font-size: 12.5px; color: var(--mut2); margin-top: 10px; }
-.legal h2 { font-weight: 600; font-size: 21px; letter-spacing: -.01em; color: var(--tx); margin: 34px 0 0; }
-.legal p { font-size: 16.5px; line-height: 1.65; color: var(--tx2); margin: 10px 0 0; }
-.legal ul { margin: 10px 0 0; padding-left: 20px; color: var(--tx2); font-size: 16.5px; line-height: 1.6; }
+.legal h2 { font-weight: 600; font-size: 21px; letter-spacing: -.01em; color: var(--tx); margin: 34px 0 0; max-width: 72ch; }
+.legal p { font-size: 16.5px; line-height: 1.65; color: var(--tx2); margin: 10px 0 0; max-width: 72ch; }
+.legal ul { margin: 10px 0 0; padding-left: 20px; color: var(--tx2); font-size: 16.5px; line-height: 1.6; max-width: 72ch; }
 .legal li { margin: 5px 0; }
 .legal a { color: var(--amber); text-decoration: none; }
 .legal b, .legal strong { color: var(--tx); }
@@ -445,9 +455,12 @@ kbd { font-family: var(--mono); font-size: 13px; color: var(--tx); background: v
 /* ---- docs (split layout) -------------------------------------------------- */
 .docs-wrap {
   max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad);
-  height: calc(100vh - 64px); display: grid; grid-template-columns: 236px minmax(0,1fr); gap: 40px;
+  display: grid; grid-template-columns: 236px minmax(0,1fr); gap: 40px;
 }
-#docs-sidebar { height: 100%; overflow-y: auto; padding: 24px 10px 24px 0; }
+#docs-sidebar {
+  position: sticky; top: 70px; align-self: start;
+  max-height: calc(100vh - 86px); overflow-y: auto; padding: 24px 10px 24px 0;
+}
 .docs-kicker {
   display: block; padding: 0 12px 10px; font-family: var(--mono); font-weight: 500; font-size: 10px;
   letter-spacing: .16em; text-transform: uppercase; color: var(--mut2);
@@ -475,7 +488,7 @@ kbd { font-family: var(--mono); font-size: 13px; color: var(--tx); background: v
 #docs-sidebar a .n { font-family: var(--mono); font-size: 10.5px; color: var(--mut2); min-width: 16px; }
 #docs-sidebar a:hover { color: var(--tx); }
 #docs-sidebar a.active { color: var(--amber); background: var(--amber-bg); border-left-color: var(--amber-solid); }
-#docs-content { height: 100%; overflow-y: auto; min-width: 0; padding: 34px 28px 0 0; scroll-behavior: smooth; }
+#docs-content { min-width: 0; padding: 34px 28px 0 0; }
 #docs-content > h1 { font-weight: 700; font-size: 46px; line-height: 1.08; margin: 12px 0 0; }
 .docs-sec, .docs-sec h3[id] { scroll-margin-top: 92px; }
 .docs-sec { padding: 36px 0 8px; border-top: 1px solid var(--bd-09); }
@@ -525,12 +538,12 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
 }
 @media (max-width: 680px) {
   :root { --pad: 18px; }
-  .nav, .gh-link, .ver-pill { display: none; }
+  .nav, .gh-link { display: none; }
   .nav-toggle { display: inline-flex; }
   .nav.open {
     display: flex; flex-direction: column; align-items: stretch; gap: 2px;
     position: absolute; left: 0; right: 0; top: 62px; margin: 0;
-    background: rgba(251,247,240,.97); border-bottom: 1px solid var(--bd-09); padding: 8px var(--pad) 14px;
+    background: var(--bg-blur-9); border-bottom: 1px solid var(--bd-09); padding: 8px var(--pad) 14px;
   }
   .hero h1, .hero-c h1 { font-size: 34px; }
   .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
@@ -538,3 +551,343 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
   .cta-row { flex-direction: column; align-items: stretch; }
   .foot-inner { flex-direction: column; align-items: flex-start; }
 }
+
+/* ============================================================================
+   ONDA 1 — escala, contraste e tema escuro (proposta de 2026-09-20)
+   ========================================================================== */
+
+/* --- escala: 7 tamanhos de texto, espaçamento em múltiplos de 8 ------------ */
+:root {
+  --fs-display: 56px; --fs-h1: 40px; --fs-h2: 28px; --fs-h3: 20px;
+  --fs-body: 17px;    --fs-support: 15px; --fs-micro: 13px;
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-6: 24px;
+  --sp-8: 32px; --sp-12: 48px; --sp-16: 64px; --sp-24: 96px;
+}
+/* ritmo vertical das seções: substitui os paddings escritos no HTML */
+.section--flow    { padding-top: var(--sp-24); }
+.section--flow-sm { padding-top: var(--sp-16); }
+.section--flow-xs { padding-top: var(--sp-8); }
+@media (max-width: 860px) {
+  .section--flow    { padding-top: var(--sp-16); }
+  .section--flow-sm { padding-top: var(--sp-12); }
+}
+
+/* o wordmark é monocromático: no tema escuro ele inverte */
+.brand img, .foot-inner img { filter: invert(var(--logo-invert)); }
+
+/* --- bloco de prova (gravação do produto rodando) -------------------------- */
+.proof { display: flex; flex-direction: column; gap: var(--sp-6); }
+.proof-head { display: flex; align-items: baseline; gap: var(--sp-4); }
+.proof-rule { flex: 1; height: 1px; background: var(--bd); }
+.proof h2 { font-size: var(--fs-h2); font-weight: 600; line-height: 1.2; }
+.proof-frame {
+  position: relative; aspect-ratio: 16 / 9; border-radius: 14px;
+  background: var(--code-bg); border: 1px solid var(--code-head);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--sp-4); text-align: center; padding: var(--sp-6);
+}
+.proof-play {
+  width: 64px; height: 64px; border-radius: 999px; border: 1px solid var(--code-dot);
+  display: inline-flex; align-items: center; justify-content: center; color: var(--code-tx);
+}
+.proof-cap { font-family: var(--mono); font-size: var(--fs-micro); color: var(--code-tx2); }
+.proof-sub { font-size: 14px; color: var(--code-cm); }
+.proof p { margin: 0; font-size: var(--fs-support); line-height: 1.55; color: var(--mut); }
+
+/* --- o que não é ----------------------------------------------------------- */
+.nots {
+  background: var(--s2); border: 1px solid var(--bd); border-radius: 16px;
+  padding: var(--sp-6) var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-3);
+}
+.nots-list { display: flex; flex-direction: column; gap: 10px; font-size: 16px; line-height: 1.5; }
+.nots-list b { font-weight: 600; }
+.nots-list span { color: var(--tx2); }
+
+/* --- rodapé: versão, changelog, issues, licença ---------------------------- */
+.foot-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-4);
+  font-family: var(--mono); font-size: 12px; color: var(--mut2);
+}
+.foot-meta a { color: var(--mut2); text-decoration: none; }
+.foot-meta a:hover { color: var(--tx); }
+
+/* --- botão de tema --------------------------------------------------------- */
+.theme-toggle {
+  width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;
+  color: var(--mut); background: var(--s1); border: 1px solid var(--bd-20);
+  border-radius: 9px; cursor: pointer;
+}
+.theme-toggle:hover { color: var(--tx); border-color: var(--bd-strong); }
+.theme-toggle .ic-dark { display: none; }
+:root[data-theme="dark"] .theme-toggle .ic-dark { display: block; }
+:root[data-theme="dark"] .theme-toggle .ic-light { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .ic-dark { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .ic-light { display: none; }
+}
+
+/* --- tema escuro: só tokens ------------------------------------------------ */
+:root[data-theme="dark"] {
+  --bg: #14120F; --s1: #1B1814; --s2: #211E19; --s3: #262119;
+  --bd: #2A251E; --bd-08: #231F19; --bd-09: #2A251E; --bd-strong: #3A342B; --bd-20: #3A342B;
+  --code-bg: #0E0C0A; --code-head: #171512;
+  --amber: #E8B765; --amber-bg: #2A2013; --amber-bd: #4A3A1E;
+  --amber-grad: linear-gradient(180deg,#F0CE93,#DDA13F);
+  --tx: #F7F3EC; --tx2: #CFC8BE; --mut: #A79F93; --mut2: #A79F93;
+  --green: #82CF9E; --teal: #5BA8A2;
+  --bg-blur: rgba(20,18,15,.86); --bg-blur-9: rgba(20,18,15,.97);
+  --scroll: rgba(247,243,236,.22); --scroll-hov: rgba(247,243,236,.34);
+  --warm: #241C10; --warm-bd: #3D3016;
+  --logo-invert: 1;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14120F; --s1: #1B1814; --s2: #211E19; --s3: #262119;
+    --bd: #2A251E; --bd-08: #231F19; --bd-09: #2A251E; --bd-strong: #3A342B; --bd-20: #3A342B;
+    --code-bg: #0E0C0A; --code-head: #171512;
+    --amber: #E8B765; --amber-bg: #2A2013; --amber-bd: #4A3A1E;
+    --amber-grad: linear-gradient(180deg,#F0CE93,#DDA13F);
+    --tx: #F7F3EC; --tx2: #CFC8BE; --mut: #A79F93; --mut2: #A79F93;
+    --green: #82CF9E; --teal: #5BA8A2;
+    --bg-blur: rgba(20,18,15,.86); --bg-blur-9: rgba(20,18,15,.97);
+    --scroll: rgba(247,243,236,.22); --scroll-hov: rgba(247,243,236,.34);
+    --warm: #241C10; --warm-bd: #3D3016;
+    --logo-invert: 1;
+  }
+}
+
+/* --- simetria e respiro nas páginas internas -------------------------------
+   Tudo o que estava em pixel solto passa a usar a escala. As quatro páginas do
+   menu (Instalar, Comandos, Docs, Ecossistema) ficam com o mesmo ritmo. */
+.section--flow-md { padding-top: var(--sp-12); }   /* 48 */
+@media (max-width: 860px) { .section--flow-md { padding-top: var(--sp-8); } }
+
+/* hero das páginas internas: mesma respiração em todas */
+.hero  { padding: var(--sp-16) var(--pad) var(--sp-2); }
+.ihero { padding: var(--sp-16) 0 var(--sp-2); }
+.hero h1, .ihero h1 { margin-top: var(--sp-4); }
+.lead { margin-top: var(--sp-4); }
+
+/* blocos: respiro por dentro e entre eles */
+.card { padding: var(--sp-6); }
+.grid { gap: var(--sp-4); }
+.grid-4 { gap: var(--sp-4); }
+.block-head { margin-bottom: var(--sp-8); }
+.cta-row { gap: var(--sp-3); margin-top: var(--sp-6); }
+.cta-row--flow { margin-top: var(--sp-8); }
+.note--flow { margin-top: var(--sp-3); }
+
+/* título de três linhas: um pouco menor para a primeira dobra não estourar */
+.hero-c h1 { font-size: clamp(36px, 5.6vw, 60px); }
+
+
+/* --- rodape: links com icone (changelog, problema, npm) -------------------- */
+.foot-meta { gap: var(--sp-2); }
+.foot-ic {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: .01em;
+  color: var(--mut2); text-decoration: none;
+  padding: 7px 13px; border-radius: 999px;
+  border: 1px solid var(--bd-20); background: var(--s1);
+  transition: color .14s, border-color .14s, background .14s;
+}
+.foot-ic svg { width: 14px; height: 14px; flex: none; }
+.foot-ic:hover { color: var(--tx); border-color: var(--bd-strong); background: var(--s2); }
+.foot-ic:hover svg { color: var(--amber); }
+
+
+/* ============================================================================
+   REFERENCIA DE COMANDOS (comandos.html) — bloco novo, so APPEND.
+   Substitui a apresentacao .cmd-row/.cmd-name/.arg/.cmd-desc/.sub nessa pagina.
+   O que estava ruidoso e o que muda aqui:
+     1. nome e argumento disputavam a mesma linha  -> o argumento desce para uma
+        linha propria, menor e em tom mudo: so o nome tem peso;
+     2. a descricao corria a largura inteira       -> teto de 54ch;
+     3. os subcomandos viravam texto corrido no fim -> viram fichas (.ref-subs);
+     4. default/observacao viravam mais uma frase   -> saem para .ref-meta.
+   Nenhuma regra anterior foi tocada; tudo aqui e classe nova (.ref-*).
+   Tokens existentes so — o tema escuro ja troca os tokens, entao acompanha.
+   ========================================================================== */
+
+.ref-group { margin-bottom: var(--sp-12); }
+.ref-head {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px;
+  margin-bottom: var(--sp-3);
+}
+.ref-head .ic { color: var(--amber); display: flex; align-self: center; }
+.ref-title {
+  font-family: var(--ui); font-weight: 600; font-size: 19px;
+  letter-spacing: -.01em; color: var(--tx); margin: 0;
+}
+.ref-cap { font-size: 14.5px; line-height: 1.4; color: var(--mut2); }
+
+.ref-table {
+  background: var(--s1); border: 1px solid var(--bd);
+  border-radius: 18px; overflow: hidden;
+}
+.ref-row {
+  display: grid; grid-template-columns: minmax(170px, 250px) minmax(0, 1fr);
+  gap: 22px; padding: 16px 20px; align-items: start;
+}
+.ref-row + .ref-row { border-top: 1px solid var(--bd-08); }
+
+/* the signature: the name is the only strong element of the row */
+.ref-sig { min-width: 0; }
+.ref-nm {
+  display: block; font-family: var(--mono); font-weight: 600; font-size: 14.5px;
+  line-height: 1.45; color: var(--amber); overflow-wrap: anywhere;
+}
+.ref-nm .alt { color: var(--mut2); font-weight: 400; }
+.ref-arg {
+  display: block; margin-top: 4px;
+  font-family: var(--mono); font-weight: 400; font-size: 12px; line-height: 1.55;
+  color: var(--mut2); overflow-wrap: anywhere;
+}
+
+/* the definition: short reading line, no matter how wide the viewport */
+.ref-def { min-width: 0; }
+.ref-desc { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--tx2); max-width: 54ch; }
+.ref-desc + .ref-subs, .ref-desc + .ref-meta, .ref-subs + .ref-meta { margin-top: 10px; }
+.ref-meta {
+  margin: 0; font-family: var(--mono); font-size: 11.5px; line-height: 1.5;
+  color: var(--mut2); max-width: 54ch;
+}
+
+/* subcommands and options: discrete tokens, not a sentence */
+.ref-subs { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; list-style: none; margin: 0; padding: 0; }
+.ref-subs .k {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--mut2); margin-right: 3px;
+}
+.ref-subs li {
+  font-family: var(--mono); font-size: 11.5px; line-height: 1; color: var(--tx2);
+  background: var(--s3); border: 1px solid var(--bd);
+  border-radius: 999px; padding: 5px 9px; white-space: nowrap;
+}
+.ref-subs li::before { content: none; }
+
+@media (max-width: 760px) {
+  .ref-row { grid-template-columns: 1fr; gap: 9px; padding: 15px 16px; }
+  .ref-desc, .ref-meta { max-width: none; }
+  .ref-arg { margin-top: 2px; }
+}
+
+/* --- referencia: tabela de 3 colunas (variaveis de ambiente) ---------------
+   A secao existe pra mostrar o PAREAMENTO variavel <-> flag, entao ela ganha
+   uma coluna propria pra flag e uma faixa de cabecalho nomeando as tres.
+   Continua so APPEND; nada acima foi tocado. */
+.ref-hrow {
+  display: grid; grid-template-columns: minmax(150px, 232px) minmax(84px, 132px) minmax(0, 1fr);
+  gap: 18px; padding: 10px 20px;
+  background: var(--s2); border-bottom: 1px solid var(--bd);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--mut2);
+}
+.ref-row--env { grid-template-columns: minmax(150px, 232px) minmax(84px, 132px) minmax(0, 1fr); gap: 18px; }
+.ref-flag {
+  font-family: var(--mono); font-size: 12px; line-height: 1.45;
+  color: var(--mut2); overflow-wrap: anywhere;
+}
+.ref-flag--none { color: var(--bd-20); }
+.ref-nm .fam { color: var(--mut2); font-weight: 400; }
+
+@media (max-width: 760px) {
+  .ref-hrow { display: none; }
+  .ref-row--env { grid-template-columns: 1fr; gap: 7px; }
+  .ref-flag::before { content: "flag: "; letter-spacing: .08em; text-transform: uppercase; font-size: 10px; }
+  .ref-flag--none { display: none; }
+}
+
+/* --- cabeçalho: faixa morta entre o menu hambúrguer e o trilho cheio -------
+   Os sete elementos do topo somam ~954px com os vãos, mas o menu compacto só
+   entrava em 680px. Entre 700 e 960 o GitHub ficava pendurado fora da caixa.
+   Agora eles saem por ordem de importância, do menos essencial para o mais. */
+@media (max-width: 1039px) {
+  .gh-link { display: none; }          /* o GitHub continua no rodapé */
+}
+@media (max-width: 1199px) {
+  .ver-pill { display: none; }        /* a versão volta assim que couber */
+}
+
+@media (max-width: 999px) {
+  .nav { display: none; }
+  .nav-toggle { display: inline-flex; }
+  .nav.open {
+    display: flex; flex-direction: column; align-items: stretch; gap: 2px;
+    position: absolute; left: 0; right: 0; top: 62px; margin: 0;
+    background: var(--bg-blur-9); border-bottom: 1px solid var(--bd-09); padding: 8px var(--pad) 14px;
+  }
+}
+
+/* telefone estreito: o crachá "CLI" ao lado da marca é redundante e custa os
+   pixels que faltavam — em 360px a página rolava na horizontal. */
+@media (max-width: 430px) {
+  .topbar-inner { gap: 10px; }
+  .brand .cli { display: none; }
+}
+
+/* --- referencia: bloco de terminal com espacos preservados -----------------
+   O .codeblock normal deixa o HTML colapsar espacos repetidos, entao coluna
+   alinhada a mao (comentario, arte ASCII) so alinha no fonte, nunca na tela.
+   Este modificador preserva o espaco NOS FILHOS (nao no container, senao as
+   quebras entre <div> viram linha em branco). Usado na anatomia da linha de
+   comando. So APPEND. */
+.codeblock--pre > div { white-space: pre; }
+
+/* --- o alinhamento dos blocos de comando só existia no fonte ---------------
+   `.codeblock` tinha overflow-x mas nunca teve white-space, então o HTML
+   colapsava os espaços e as colunas de comentário desalinhavam — em 103
+   blocos, nas duas línguas. A `.tree` logo acima sempre teve `pre`; aqui
+   faltou. Vai nos filhos, não no container: no container as quebras entre
+   os <div> viram linhas em branco. */
+.codeblock > div { white-space: pre; }
+/* o bloco rola por dentro; ele não pode empurrar a página */
+.codeblock, .tree { max-width: 100%; }
+#docs-content, .docs-sec { min-width: 0; }
+
+/* --- celular: a régua de sistemas do cartão de instalação -------------------
+   `.install-head` é uma linha flex (rótulo + espaçador + abas). Abaixo de
+   ~560px as três abas somam mais do que sobra e a PÁGINA inteira rolava para
+   o lado — 97px de estouro na home e na instalação. Agora a régua quebra para
+   a linha de baixo e ocupa a largura toda. */
+@media (max-width: 560px) {
+  .install-head { flex-wrap: wrap; }
+  .install-head .grow { display: none; }
+  .tabs { width: 100%; justify-content: space-between; }
+  .tab { flex: 1; justify-content: center; padding: 7px 8px; }
+}
+/* nenhum título pode empurrar a página: no celular estreito o h1 da
+   documentação estourava a caixa por não ter quebra de palavra. */
+h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
+
+/* --- exemplo de verdade em cada linha da referência ------------------------
+   Uma assinatura com marcadores (`<intervalo> "<tarefa>"`) diz a gramática e
+   não ensina a montar o comando. Cada linha que aceita argumento ganha uma
+   linha que dá para copiar e colar. */
+.ref-ex {
+  margin-top: 9px; padding: 8px 12px; border-radius: 10px;
+  background: var(--code-bg); color: var(--code-tx);
+  font-family: var(--mono); font-size: 13px; line-height: 1.7;
+  white-space: pre; overflow-x: auto; max-width: 100%;
+}
+.ref-ex .pr { color: var(--amber-solid); }
+.ref-ex .cm { color: var(--code-cm); }
+
+/* --- a sequência instalar + onboard cabe numa moldura só -------------------
+   Eram duas caixas de terminal empilhadas, cada uma com moldura, título e
+   botão, para dois comandos que se rodam em seguida. Agora é uma caixa com
+   duas linhas e um botão que copia as duas. */
+.term-body--next { padding-top: 0; }
+.term-body[hidden] { display: none; }
+
+/* --- comprimento de linha: o que fazia o texto parecer apertado ------------
+   A entrelinha estava certa em toda parte; o que cansava era a linha correndo
+   a largura inteira do trilho. Medido com a largura real do caractere, havia
+   linha de 139 caracteres. O conforto de leitura fica entre 60 e 75. Quem
+   cuida disso é o TEXTO, não o container — o trilho continua um só. */
+.lead        { max-width: 68ch; }
+.hint        { max-width: 72ch; }
+.note p      { max-width: 72ch; }
+.proof p     { max-width: 72ch; }
+.foot-fine   { max-width: 88ch; }
+.docs-sec p, .docs-intro { max-width: 72ch; }

@@ -29,9 +29,9 @@
 
   var titleEl  = document.getElementById("term-title");
   var winExtra = document.getElementById("win-extra");
-  var npmExtra = document.getElementById("npm-extra");
   var cmd2El   = document.getElementById("cmd2");
-  var cmd3El   = document.getElementById("cmd3");
+  var nextRow  = document.getElementById("term-next");
+  var nextEl   = document.getElementById("cmd-next");
   var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
   var current = "unix";
 
@@ -39,14 +39,21 @@
   var ICON_CHECK = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
 
   if (cmd2El) cmd2El.textContent = CMD.winCmd;
-  if (cmd3El) cmd3El.textContent = CMD.onboard;
+  if (nextEl) nextEl.textContent = CMD.onboard;
+
+  // o npm nao dispara o onboarding sozinho: as duas linhas sao uma sequencia,
+  // entao moram na mesma moldura e o botao copia as duas.
+  function textoCompleto() {
+    var base = CMD[current] || CMD.unix;
+    return (current === "npm") ? base + "\n" + CMD.onboard : base;
+  }
 
   function render(os) {
     current = os;
     cmdEl.textContent = CMD[os] || CMD.unix;
     if (titleEl) titleEl.textContent = TITLE[os] || L.bash;
     if (winExtra) winExtra.hidden = (os !== "win");
-    if (npmExtra) npmExtra.hidden = (os !== "npm");
+    if (nextRow) nextRow.hidden = (os !== "npm");
     tabs.forEach(function (t) {
       t.setAttribute("aria-selected", t.dataset.os === os ? "true" : "false");
     });
@@ -58,11 +65,14 @@
     var lbl  = btn.querySelector(".copy-label");
     var icon = btn.querySelector(".copy-icon");
     var timer = null;
+    // o rótulo escrito no HTML manda: o terminal diz "copiar", o CTA do hero
+    // diz "Copiar comando de instalação".
+    var base = (lbl && lbl.textContent.trim()) || L.copy;
     function reset() {
       if (timer) { clearTimeout(timer); timer = null; }
       btn.classList.remove("copied");
       if (icon) icon.innerHTML = ICON_COPY;
-      if (lbl) lbl.textContent = L.copy;
+      if (lbl) lbl.textContent = base;
     }
     function done() {
       btn.classList.add("copied");
@@ -92,10 +102,9 @@
   }
 
   // primary copy (main terminal) + the CTA "copy install command" button
-  wireCopy("copy",     function () { return CMD[current] || CMD.unix; });
-  wireCopy("copy-cta", function () { return CMD[current] || CMD.unix; });
+  wireCopy("copy",     textoCompleto);
+  wireCopy("copy-cta", textoCompleto);
   wireCopy("copy2",    function () { return CMD.winCmd; });
-  wireCopy("copy3",    function () { return CMD.onboard; });
 
   tabs.forEach(function (t) {
     t.addEventListener("click", function () { render(t.dataset.os); });

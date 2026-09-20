@@ -1,5 +1,7 @@
-/* aluy CLI — docs (split layout). Scroll-spy on the CONTENT pane (#docs-content),
-   not the window: highlights the active TOC link in #docs-sidebar, smooth-scrolls
+/* aluy CLI — docs (split layout). Scroll-spy na JANELA: quem rola e a pagina,
+   e a barra lateral fica grudada (position:sticky). Antes rolava o painel, e o
+   rodape ficava preso dentro dele.
+   O spy: highlights the active TOC link in #docs-sidebar, smooth-scrolls
    the pane on click (offset -18px), and keeps the active link in view. */
 (function () {
   "use strict";
@@ -9,12 +11,20 @@
     var sidebar = document.getElementById("docs-sidebar");
     if (!pane || !sidebar) return;
 
-    var links = Array.prototype.slice.call(sidebar.querySelectorAll('a[href^="#"]'));
+    // The sidebar mixes local anchors with cross-page links (the reference on
+    // comandos.html). Only the local ones drive the scroll-spy; all of them
+    // stay searchable and clickable.
+    var allLinks = Array.prototype.slice.call(sidebar.querySelectorAll("a[href]"));
+    function localHash(a) {
+      var href = a.getAttribute("href") || "";
+      return href.charAt(0) === "#" ? href.slice(1) : null;
+    }
+    var links = allLinks.filter(function (a) { return localHash(a); });
     if (!links.length) return;
 
     var sections = [];
     links.forEach(function (a) {
-      var sec = document.getElementById(a.getAttribute("href").slice(1));
+      var sec = document.getElementById(localHash(a));
       if (sec) sections.push({ a: a, sec: sec });
     });
     // TOC order ≠ DOM order (e.g. Turbo/Artifacts groups); the spy walks this
@@ -27,8 +37,12 @@
     var searchEl = document.getElementById("docs-search");
     var noRes = document.getElementById("docs-noresults");
     if (searchEl) {
-      var index = sections.map(function (s) {
-        return { a: s.a, text: ((s.a.textContent || "") + " " + (s.sec.textContent || "")).toLowerCase() };
+      // index every sidebar link: local ones by their section's text, the
+      // cross-page ones by their own label
+      var index = allLinks.map(function (a) {
+        var id = localHash(a);
+        var sec = id ? document.getElementById(id) : null;
+        return { a: a, text: ((a.textContent || "") + " " + (sec ? sec.textContent : "")).toLowerCase() };
       });
       var groups = Array.prototype.slice.call(sidebar.querySelectorAll(".docs-group"));
       function syncGroups() {
@@ -73,10 +87,10 @@
     var ticking = false;
     function compute() {
       ticking = false;
-      var line = pane.getBoundingClientRect().top + 110; // reading line near pane top
+      var line = 130; // linha de leitura, medida da borda de cima da janela
       var current = sections[0];
       // bottom of pane → force last section
-      if (pane.scrollTop + pane.clientHeight >= pane.scrollHeight - 4) {
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
         current = sections[sections.length - 1];
       } else {
         for (var i = 0; i < sections.length; i++) {
@@ -90,12 +104,12 @@
       if (!ticking) { ticking = true; window.requestAnimationFrame(compute); }
     }
 
-    pane.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
 
     links.forEach(function (a) {
       a.addEventListener("click", function (e) {
-        var sec = document.getElementById(a.getAttribute("href").slice(1));
+        var sec = document.getElementById(localHash(a));
         if (!sec) return;
         e.preventDefault();
         // scrollIntoView + scroll-margin-top (site.css): manual rect math breaks

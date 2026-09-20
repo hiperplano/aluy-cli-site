@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Aluy CLI — your local agent that works at scale. Reads and edits your files, runs your commands, takes the task end to end. Open source, MIT. Install in one line." />
+<meta name="description" content="Aluy CLI — a single agent that puts thousands of models to work for you. Reads and edits your files, runs your commands, takes the task end to end. Install in one line, with your own model provider." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Aluy CLI" />
-<meta property="og:title" content="Aluy CLI — your local agent that works at scale" />
-<meta property="og:description" content="Aluy CLI — your local agent that works at scale. Reads and edits your files, runs your commands, takes the task end to end. Open source, MIT. Install in one line." />
+<meta property="og:title" content="Aluy CLI — a single agent that puts thousands of models to work for you" />
+<meta property="og:description" content="Aluy CLI — a single agent that puts thousands of models to work for you. Reads and edits your files, runs your commands, takes the task end to end. Install in one line, with your own model provider." />
 <meta property="og:url" content="https://aluy.dev/" />
 <meta property="og:image" content="https://aluy.dev/assets/og.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Aluy CLI — your local agent that works at scale" />
-<meta name="twitter:description" content="Aluy CLI — your local agent that works at scale. Reads and edits your files, runs your commands, takes the task end to end. Open source, MIT. Install in one line." />
+<meta name="twitter:title" content="Aluy CLI — a single agent that puts thousands of models to work for you" />
+<meta name="twitter:description" content="Aluy CLI — a single agent that puts thousands of models to work for you. Reads and edits your files, runs your commands, takes the task end to end. Install in one line, with your own model provider." />
 <meta name="twitter:image" content="https://aluy.dev/assets/og.png" />
-<title>Aluy CLI — your local agent that works at scale</title>
+<title>Aluy CLI — a single agent that puts thousands of models to work for you</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -39,13 +39,13 @@
         <img src="assets/aluy-wordmark-ink.png" alt="Aluy" />
         <span class="cli">CLI</span>
       </a>
+      <a class="ver-pill" href="https://github.com/hiperplano/aluy-cli/blob/main/CHANGELOG.md" data-version="tag" title="Current release — open the changelog">v1.0.0-rc.180</a>
       <nav class="nav" aria-label="Main">
         <a href="funcionalidades.html">Features</a>
-        <a href="comandos.html">Commands</a>
-        <a href="arquitetura.html">Architecture</a>
         <a href="comecar.html">Install</a>
-        <a href="help.html#sec-turbo">Turbo</a>
+        <a href="comandos.html">Commands</a>
         <a href="help.html">Docs</a>
+        <a href="arquitetura.html">Architecture</a>
         <a href="integracoes.html">Ecosystem</a>
       </nav>
       <span class="grow"></span>
@@ -53,12 +53,10 @@
         <a href="index.html" data-lang="en" hreflang="en" aria-current="true">EN</a>
         <a href="pt/index.html" data-lang="pt" hreflang="pt-BR" aria-current="false">PT</a>
       </div>
-      <a class="ver-pill" data-version="tag" href="https://github.com/hiperplano/aluy-cli/releases" aria-label="Latest release">v1.0.0-rc.1</a>
-      <a class="gh-link" href="https://github.com/hiperplano/aluy-cli" aria-label="View on GitHub">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.52.1.71-.23.71-.5v-1.95c-2.9.63-3.52-1.24-3.52-1.24-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.93 1.6 2.45 1.13 3.05.86.09-.68.36-1.13.66-1.39-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.41-2.07 1.07-2.8-.11-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a9.9 9.9 0 0 1 5.24 0c2-1.35 2.87-1.07 2.87-1.07.57 1.43.21 2.49.11 2.75.67.73 1.07 1.66 1.07 2.8 0 4.01-2.45 4.9-4.78 5.16.38.32.71.95.71 1.92v2.85c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>
-        GitHub
-      </a>
-      <a class="gh-link" href="https://www.npmjs.com/package/@hiperplano/aluy-cli" aria-label="Package on npm"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"/></svg>npm</a>
+      <button class="theme-toggle" type="button" aria-label="Switch light and dark theme">
+        <svg class="ic-light" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="ic-dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
       <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -73,13 +71,19 @@
         <path d="M4 20 L12 4" stroke="#DDA13F" stroke-width="2.6" stroke-linecap="round"/>
         <path d="M12 4 L20 20" stroke="#DDA13F" stroke-width="2.6" stroke-linecap="round"/>
       </svg>
-      <span class="badge"><span class="dot"></span><span data-version>v1.0.0-rc.1 · beta</span> · open source · MIT</span>
-      <h1>Your local agent<br/>that works <span class="grad">at scale</span></h1>
-      <p class="lead">A local agent that reads and edits your files, runs your commands and takes the task end to end — then scales into a fleet of subagents, running in cycles until it’s done. Your session, data and key stay on your machine. <b>Only the model call crosses the edge.</b></p>
+      <span class="badge"><span class="dot"></span><span data-version="beta">beta</span></span>
+      <h1>A single agent that puts<br/><span class="grad">thousands of models</span><br/>to work for you</h1>
+      <p class="lead">It reads and edits your files, runs your commands and takes the task to the end &mdash; with the provider you already use, local models included. Your session, your data and your key stay on your machine.</p>
+      <div class="cta-row">
+        <button class="btn btn-primary" type="button" id="copy-cta">
+          <span class="copy-icon"></span><span class="copy-label">Copy install command</span>
+        </button>
+        <a class="btn btn-secondary" href="help.html">Read the docs</a>
+      </div>
     </section>
 
     <!-- ===== INSTALL BLOCK (single source of truth) ===== -->
-    <section class="section--install" style="margin:34px auto 0;">
+    <section class="section--install section--flow-xs">
       <div class="install-card">
         <div class="install-head">
           <span class="eyebrow eyebrow--sm">install — one line</span>
@@ -101,6 +105,10 @@
               <span class="copy-icon"></span><span class="copy-label">copy</span>
             </button>
           </div>
+          <div class="term-body term-body--next" id="term-next" hidden>
+            <span class="ps1">$</span>
+            <code id="cmd-next"></code>
+          </div>
         </div>
         <div class="win-extra" id="win-extra" hidden>
           <div class="win-extra-label">or with the classic cmd</div>
@@ -118,22 +126,6 @@
             </div>
           </div>
         </div>
-        <div class="win-extra" id="npm-extra" hidden>
-          <div class="win-extra-label">then run the onboarding</div>
-          <div class="terminal">
-            <div class="term-head">
-              <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
-              <span class="term-title">aluy — onboard</span>
-            </div>
-            <div class="term-body">
-              <span class="ps1">$</span>
-              <code id="cmd3"></code>
-              <button class="copy-btn" type="button" id="copy3" aria-label="Copy command">
-                <span class="copy-icon"></span><span class="copy-label">copy</span>
-              </button>
-            </div>
-          </div>
-        </div>
         <div class="install-meta">
           <span>1 line · no sudo</span><span class="sep">·</span><span>installs to <span class="hi">~/.aluy</span></span><span class="sep">·</span><span>re-run to update</span>
         </div>
@@ -141,31 +133,41 @@
       <p class="hint" style="text-align:center;">Best experience in <a class="lnk" href="https://wezterm.org" target="_blank" rel="noopener">WezTerm</a> — the terminal best suited to run the Aluy CLI.</p>
     </section>
 
+    <!-- ===== PROOF (real recording) ===== -->
+    <section class="section--narrow section--flow">
+      <div class="proof">
+        <div class="proof-head">
+          <span class="eyebrow eyebrow--sm">see it run</span>
+          <span class="proof-rule"></span>
+        </div>
+        <h2>A real cycle: from broken test to green.</h2>
+        <div class="proof-frame">
+          <span class="proof-play"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
+          <span class="proof-cap">[RECORDING &mdash; /cycle fixing a broken test &middot; 18s]</span>
+          <span class="proof-sub">asciinema or GIF, recorded in a real session</span>
+        </div>
+        <p>The agent runs the tests, reads the output, fixes and repeats until it passes or hits the ceiling you set.</p>
+      </div>
+    </section>
+
     <!-- ===== YOUR FIRST MINUTE ===== -->
-    <section class="section--install" style="margin:16px auto 0;">
+    <section class="section--install section--flow-xs">
       <div class="run-head">
         <span class="eyebrow eyebrow--sm" style="color:var(--mut2);">your first minute</span>
         <span class="run-rule"></span>
       </div>
       <div class="run">
         <div><span class="pr">$</span> <span class="fg">aluy</span><span class="cm">          # opens a session in this project</span></div>
-        <div><span class="adot"></span><span class="fg">/doctor</span><span class="ok">       ✓ model · key · broker · MCP — all good</span></div>
+        <div><span class="adot"></span><span class="fg">/doctor</span><span class="ok">       ✓ model · key · MCP — all good</span></div>
         <div><span class="adot"></span><span class="fg">/init</span><span class="cm">         creates ALUY.md for this repo</span></div>
         <div><span class="adot"></span><span class="fg">/cycle</span> <span class="str">"run the tests and fix what breaks"</span></div>
         <div class="info" style="padding-left:16px;">working in cycles… stops on green or at the cap ↩</div>
         <div><span class="adot"></span><span class="fg">/memory list</span><span class="cm">  what aluy remembers here</span></div>
       </div>
-      <div class="cta-row">
-        <button class="btn btn-primary" type="button" id="copy-cta">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-          <span class="copy-icon" hidden></span><span class="copy-label">Copy install command</span>
-        </button>
-        <a class="btn btn-secondary" href="help.html">Read the docs</a>
-      </div>
     </section>
 
     <!-- ===== FOUR FRONTS ===== -->
-    <section class="section" style="padding-top:78px;">
+    <section class="section section--flow">
       <div class="block-head">
         <span class="eyebrow">one agent, at scale</span>
         <h2>What you'll put it to work on.</h2>
@@ -195,7 +197,7 @@
     </section>
 
     <!-- ===== WHAT IT DOES DIFFERENTLY ===== -->
-    <section class="section" style="padding-top:64px;">
+    <section class="section section--flow">
       <div class="block-head">
         <span class="eyebrow">what it does differently</span>
         <h2 class="lg">Not a chat about your code. A team that acts.</h2>
@@ -225,7 +227,7 @@
     </section>
 
     <!-- ===== TRANSPARENCY STRIP ===== -->
-    <section class="section" style="padding-top:64px;">
+    <section class="section section--flow">
       <div class="strip">
         <div class="strip-head">
           <span class="eyebrow">the model's path</span>
@@ -238,15 +240,26 @@
           </div>
           <div class="tile tile--dashed">
             <div class="tile-head"><span class="ic c-mut"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span><span class="tile-kicker c-mut">crosses the edge</span></div>
-            <p>Only the model call: through the broker by default, or the provider you connect. In direct mode, it's your credential and your usage.</p>
+            <p>Only the model call, and it goes straight to the provider you configured, with your key. No middleman and no metering.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- ===== TURBO LINK ===== -->
-    <section class="section" style="padding-top:44px;text-align:center;">
+    <section class="section section--flow-sm center">
       <p class="lead" style="margin:0 auto;">Optional local boosters — persistent memory, local models and context headroom — come with <a href="help.html#sec-turbo" style="color:var(--amber);font-weight:600;text-decoration:none;">turbo</a> mode.</p>
+    </section>
+    <!-- ===== WHAT IT IS NOT ===== -->
+    <section class="section--narrow section--flow">
+      <div class="nots">
+        <span class="eyebrow eyebrow--sm">no overselling</span>
+        <div class="nots-list">
+          <div><b>Not an IDE.</b> <span>It runs in your terminal, on the project you already have.</span></div>
+          <div><b>Not a model.</b> <span>You bring your provider, local models included.</span></div>
+          <div><b>Still beta.</b> <span>Things break, and the changelog says what changed.</span></div>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -257,9 +270,15 @@
       <span class="grow"></span>
       <nav class="foot-nav" aria-label="Footer">
         <a href="termos.html">Terms</a>
+        <a href="help.html#sec-turbo">Turbo</a>
         <a href="https://github.com/hiperplano/aluy-cli">GitHub</a>
       </nav>
-      <p class="foot-fine">Aluy <span class="lam">Λ</span> CLI — your local agent that works at scale · open source · MIT</p>
+      <div class="foot-meta">
+        <a class="foot-ic" href="https://github.com/hiperplano/aluy-cli/blob/main/CHANGELOG.md" aria-label="Changelog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg><span>changelog</span></a>
+        <a class="foot-ic" href="https://github.com/hiperplano/aluy-cli/issues/new" aria-label="Report a problem"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5"/><path d="M12 16.5h.01"/></svg><span>report a problem</span></a>
+        <a class="foot-ic" href="https://www.npmjs.com/package/@hiperplano/aluy-cli" aria-label="npm"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"/></svg><span>npm</span></a>
+      </div>
+      <p class="foot-fine">Aluy <span class="lam">Λ</span> CLI &mdash; a single agent that puts thousands of models to work for you</p>
     </div>
   </footer>
 
