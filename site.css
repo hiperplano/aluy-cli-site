@@ -1034,3 +1034,19 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
 .note p { max-width: 72ch; }
 /* a abertura encostava na grade */
 .lead + .grid { margin-top: var(--sp-6); }
+
+/* --- o parágrafo que vem depois do título de seção -------------------------
+   `.block-head` é centralizado. Todo parágrafo solto logo abaixo dele ficava
+   alinhado à esquerda e correndo a largura inteira — título no meio, texto
+   encostado na margem. São 13 casos em 5 páginas; a regra conserta todos.
+   Medida de leitura junto, senão centralizar piora: linha longa centralizada
+   é pior de ler que linha longa à esquerda. */
+.block-head + .lead,
+.block-head + .hint,
+.block-head + .lead + .hint,
+.block-head + p {
+  text-align: center;
+  max-width: 62ch;
+  margin-left: auto;
+  margin-right: auto;
+}
