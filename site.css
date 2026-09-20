@@ -1062,3 +1062,10 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
   margin-left: auto;
   margin-right: auto;
 }
+
+/* --- as ligações entre as zonas do mapa -----------------------------------
+   Saíam de dentro da caixa e uma era tracejada sem motivo: pareciam risco
+   solto, não ligação. Agora é um tronco só, que parte da borda direita da
+   caixa DAS PORTAS — que é o ponto da afirmação — com a derivação marcada. */
+.z-tronco { fill: none; stroke: var(--amber-solid); stroke-width: 1.8; }
+.z-no { fill: var(--amber-solid); }
