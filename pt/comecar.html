@@ -22,11 +22,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="../site.css?v=d985dca7" />
-<script src="../lang.js?v=b7823272"></script>
+<link rel="stylesheet" href="../site.css?v=12643088" />
+<script src="../lang.js?v=dfbd8e05"></script>
 <script defer src="../site.js?v=9ecc00f5"></script>
 <script defer src="../install.js?v=d1356c76"></script>
-<script src="../consent.js?v=d4a725b4" defer></script>
+<script src="../consent.js?v=b90dbe6e" defer></script>
 </head>
 <body>
 <div class="aurora" aria-hidden="true"></div>
@@ -69,7 +69,7 @@
       <div class="ihero">
         <span class="eyebrow">do zero à primeira tarefa</span>
         <h1>Comece em minutos.</h1>
-        <p class="lead">Três passos: instalar, configurar provider e chave, e rodar os primeiros comandos. No fim, um mapa de para onde ir. Sem segredo.</p>
+        <p class="lead">Três passos: instalar, configurar provider e chave, e rodar os primeiros comandos. No fim, um mapa de para onde ir.</p>
       </div>
     </section>
 
@@ -123,7 +123,7 @@
           </div>
         </div>
         <div class="install-meta">
-          <span>1 linha · sem sudo</span><span class="sep">·</span><span>instala em <span class="hi">~/.aluy</span></span><span class="sep">·</span><span>re-rodar atualiza</span>
+          <span>1 linha · sem senha de administrador</span><span class="sep">·</span><span>instala em <span class="hi">~/.aluy</span></span><span class="sep">·</span><span>re-rodar atualiza</span>
         </div>
       </div>
 
@@ -131,30 +131,30 @@
         <span class="ck">Linux · macOS · Windows</span>
         <span class="ck">Node ≥ 20</span>
         <span class="ck">~150 MB livres</span>
-        <span class="ck">conexão no 1º run</span>
+        <span class="ck">internet na primeira vez</span>
       </div>
 
-      <p class="hint">Terminal recomendado: <a class="lnk" href="https://wezterm.org" target="_blank" rel="noopener">WezTerm</a> — o terminal mais adequado para usar o Aluy CLI (melhor renderização dos glifos da TUI; ou rode com <code class="icode">--ascii</code>).</p>
+      <p class="hint">Terminal recomendado: <a class="lnk" href="https://wezterm.org" target="_blank" rel="noopener">WezTerm</a> — é onde a interface do Aluy desenha melhor. Em outros terminais alguns ícones podem virar quadradinhos vazios; nesse caso rode com <code class="icode">--ascii</code>, que troca tudo por sinais simples.</p>
 
       <!-- ===== PASSO 2 — CONFIGURAR ===== -->
       <div class="step-head">
         <span class="step-num">2</span>
         <h2>Configurar — provider, chave e modelo</h2>
       </div>
-      <p class="lead">No primeiro run, um assistente abre. Você escolhe o provider, cola a chave e seleciona o modelo — nessa ordem.</p>
+      <p class="lead">Na primeira vez que você abre, um assistente aparece. Você escolhe o provider, cola a chave e seleciona o modelo — nessa ordem.</p>
 
       <div class="grid grid-3">
         <div class="card cfg-card">
           <span class="cfg-kicker">provider</span>
-          <p>O seu provider, com a sua credencial — é o padrão. Troque depois com <code class="icode">/provider</code>.</p>
+          <p>O seu provider, com a sua credencial. É assim que vem de fábrica. Troque depois com <code class="icode">/provider</code>.</p>
         </div>
         <div class="card cfg-card">
           <span class="cfg-kicker">chave</span>
-          <p>A credencial vai direto pro cofre do SO — ou um arquivo cifrado, se a máquina não tiver um. <b>Nunca em texto, nunca no repo</b>. Você não digita de novo.</p>
+          <p>A chave vai direto para o cofre de senhas do seu sistema — o mesmo que guarda as senhas do navegador. Se a máquina não tiver cofre, ela vai para um arquivo criptografado. <b>Nunca num arquivo que dê para abrir e ler, e nunca dentro do projeto</b>. Você não digita de novo.</p>
         </div>
         <div class="card cfg-card">
           <span class="cfg-kicker">modelo</span>
-          <p>Escolha o tier com <code class="icode">/model</code>. Ajuste o esforço de raciocínio com <code class="icode">/effort</code> quando precisar.</p>
+          <p>Escolha o tier — a faixa de modelo, que define o quanto ele é potente e o quanto custa — com <code class="icode">/model</code>. Ajuste o esforço de raciocínio com <code class="icode">/effort</code> quando precisar.</p>
         </div>
       </div>
       <div class="note note--flow">
@@ -170,11 +170,11 @@
       <div class="run">
         <div><span class="pr">$</span> aluy<span class="cm">          abre a sessão neste projeto</span></div>
         <div><span class="adot"></span>/doctor<span class="cm">       checa a saúde da instalação</span></div>
-        <div><span class="adot"></span>/init<span class="cm">         prepara as deps e o ALUY.md do projeto</span></div>
+        <div><span class="adot"></span>/init<span class="cm">         lê o projeto e escreve o ALUY.md</span></div>
         <div><span class="adot"></span>/cycle <span class="str">"rode os testes e conserte o que quebrar"</span></div>
         <div><span class="adot"></span>/memory list<span class="cm">  o que o agente já lembra aqui</span></div>
       </div>
-      <p class="hint"><code class="icode">/</code> abre o menu · <code class="icode">Ctrl+P</code> abre a paleta · <code class="icode">/help</code> lista tudo</p>
+      <p class="hint"><code class="icode">/</code> abre o menu · <code class="icode">Ctrl+P</code> abre a mesma lista numa busca rápida · <code class="icode">/help</code> lista tudo</p>
 
       <!-- ===== PASSO 4 — CONTINUAR ===== -->
       <div class="step-head">
@@ -194,7 +194,7 @@
         </a>
         <a class="next-card" href="https://github.com/hiperplano/aluy-cli">
           <span class="t">GitHub</span>
-          <span class="d">O código está público no GitHub — leia, audite e abra issues.</span>
+          <span class="d">O código está público no GitHub — leia, audite e relate problemas.</span>
           <span class="go">abrir →</span>
         </a>
       </div>

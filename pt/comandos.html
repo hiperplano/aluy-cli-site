@@ -22,10 +22,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="../site.css?v=d985dca7" />
-<script src="../lang.js?v=b7823272"></script>
+<link rel="stylesheet" href="../site.css?v=12643088" />
+<script src="../lang.js?v=dfbd8e05"></script>
 <script defer src="../site.js?v=9ecc00f5"></script>
-<script src="../consent.js?v=d4a725b4" defer></script>
+<script src="../consent.js?v=b90dbe6e" defer></script>
 </head>
 <body>
 <div class="aurora" aria-hidden="true"></div>
@@ -141,7 +141,7 @@
           <span class="ref-nm">--plan</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Modo plano: o agente lê, analisa e propõe, e não produz efeito nenhum. Se vier junto com <code class="icode">--yolo</code>, este vence.</p>
+          <p class="ref-desc">Modo planejamento: o agente lê, analisa e propõe, e não produz efeito nenhum. Se vier junto com <code class="icode">--yolo</code>, este vence.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --plan "onde está o gargalo do checkout?"</div>
         </div>
       </div>
@@ -150,7 +150,7 @@
           <span class="ref-nm">--yolo<br>--unsafe</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Aprova todo efeito sozinho. Exclusão, rede, escalada de privilégio e instalação de pacote continuam perguntando, e o Aluy recusa rodar como root.</p>
+          <p class="ref-desc">Aprova todo efeito sozinho. Cinco categorias de comando continuam perguntando — apagar coisas, acessar a rede, virar administrador, instalar pacote e mexer nos arquivos que rodam quando o computador liga — e toda ferramenta que vier de um servidor MCP também. O Aluy recusa rodar como root.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --yolo "roda a migração e conserta o que quebrar"</div>
           <p class="ref-meta">--unsafe é o nome antigo e emite aviso.</p>
         </div>
@@ -161,14 +161,14 @@
         </div>
         <div class="ref-def">
           <p class="ref-desc">Desliga os subagentes paralelos, ou seja, a ferramenta <code class="icode">spawn_agent</code>.</p>
-          <p class="ref-meta">Por padrão rodam em paralelo com profundidade máxima 1, herdando as suas permissões.</p>
+          <p class="ref-meta">Por padrão eles rodam ao mesmo tempo, com as mesmas permissões que você deu ao agente principal — e um subagente não pode abrir outro.</p>
         </div>
       </div>
       </div>
     </div>
 
     <div class="ref-group">
-      <div class="ref-head"><h2 class="ref-title">Rodar sem sessão</h2><span class="ref-cap">— script, pipe e CI. Todos precisam do <code class="icode">-p</code>.</span></div>
+      <div class="ref-head"><h2 class="ref-title">Rodar sem sessão</h2><span class="ref-cap">— script, encadeamento de comandos e automação de build (CI). Todos precisam do <code class="icode">-p</code>.</span></div>
       <div class="ref-table">
       <div class="ref-row">
         <div class="ref-sig">
@@ -186,7 +186,7 @@
           <span class="ref-arg">text|json|stream-json</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">O formato do que sai. <code class="icode">text</code> é o padrão; <code class="icode">stream-json</code> emite um fluxo NDJSON ao vivo.</p>
+          <p class="ref-desc">O formato do que sai. <code class="icode">text</code> é o padrão; <code class="icode">stream-json</code> emite um evento JSON por linha, ao vivo.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy -p "liste os TODOs" --output-format json</div>
         </div>
       </div>
@@ -207,7 +207,7 @@
         <div class="ref-def">
           <p class="ref-desc">Roda o objetivo em ciclos, sozinho — a forma sem interface do <code class="icode">/cycle</code>. Exige um teto.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy -p "conserte o lint" --cycles 20</div>
-          <p class="ref-meta">Os dois são cortados no máximo permitido.</p>
+          <p class="ref-meta">Se você pedir mais que o máximo, o Aluy corta no máximo e avisa.</p>
         </div>
       </div>
       </div>
@@ -224,7 +224,7 @@
         <div class="ref-def">
           <p class="ref-desc">A faixa de modelo da sessão. Dá para trocar com a sessão aberta, pelo <code class="icode">/model</code>.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --tier sonnet</div>
-          <p class="ref-meta">custom sem --model é erro de uso.</p>
+          <p class="ref-meta">Se você pedir o tier custom sem dizer qual modelo, o Aluy recusa e explica.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -255,7 +255,7 @@
           <span class="ref-arg">local|broker</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc"><b><code class="icode">local</code> é o padrão</b>: fala direto com o seu provider, sem intermediário e sem medição. <code class="icode">broker</code> rotearia por um backend central, hoje indisponível.</p>
+          <p class="ref-desc"><b><code class="icode">local</code> é o padrão</b>: fala direto com o seu provider, sem ninguém no meio e sem ninguém contando quanto você usou. <code class="icode">broker</code> rotearia por um backend central, hoje indisponível.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --backend local</div>
         </div>
       </div>
@@ -298,14 +298,14 @@
         <div class="ref-def">
           <p class="ref-desc">O endereço a chamar, para um provider compatível com OpenAI ou um modelo rodando na sua máquina.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --local-base-url https://api.exemplo.com/v1</div>
-          <p class="ref-meta">Protegido contra redirecionamento para a sua rede interna.</p>
+          <p class="ref-meta">A conexão não aceita ser desviada para dentro da sua rede interna.</p>
         </div>
       </div>
       </div>
     </div>
 
     <div class="ref-group">
-      <div class="ref-head"><h2 class="ref-title">Definir os tetos</h2><span class="ref-cap">— para um run não varar a noite na sua conta.</span></div>
+      <div class="ref-head"><h2 class="ref-title">Definir os tetos</h2><span class="ref-cap">— para uma execução não varar a noite na sua conta.</span></div>
       <div class="ref-table">
       <div class="ref-row">
         <div class="ref-sig">
@@ -313,9 +313,9 @@
           <span class="ref-arg">&lt;N&gt;</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">O total de tokens da sessão.</p>
+          <p class="ref-desc">O total de tokens da sessão — tokens são os pedaços de texto que o modelo cobra.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --max-tokens 250000</div>
-          <p class="ref-meta">padrão 1000000</p>
+          <p class="ref-meta">padrão 1.000.000</p>
         </div>
       </div>
       <div class="ref-row">
@@ -346,7 +346,7 @@
         <div class="ref-def">
           <p class="ref-desc">Liga e desliga o corte automático de gasto da sessão.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --no-budget</div>
-          <p class="ref-meta">Vem desligado no modo padrão, ilimitado por desenho.</p>
+          <p class="ref-meta">Vem desligado no modo padrão: ali não existe teto de gasto, de propósito.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -356,7 +356,7 @@
         <div class="ref-def">
           <p class="ref-desc">Força a autoverificação, ligada ou desligada: antes de dizer "pronto", o agente volta ao objetivo e confere.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --self-check</div>
-          <p class="ref-meta">Sem a flag é automático: tiers mais fracos ligam.</p>
+          <p class="ref-meta">Sem a flag, o Aluy decide: nos tiers mais fracos ele liga sozinho.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -367,7 +367,7 @@
         <div class="ref-def">
           <p class="ref-desc">O quanto a janela do modelo pode encher antes de o Aluy resumir a conversa.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --autocompact-at 70%</div>
-          <p class="ref-meta">padrão 0.85 · --no-autocompact é atalho para off</p>
+          <p class="ref-meta">padrão: 85% da janela cheia · --no-autocompact desliga</p>
         </div>
       </div>
       </div>
@@ -468,7 +468,7 @@
         <div class="ref-def">
           <p class="ref-desc">Guarda a sua credencial no cofre.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy login --provider anthropic</div>
-          <p class="ref-meta">OAuth de assinatura em cliente não oficial é zona cinzenta nos termos do provider — a escolha é sua.</p>
+          <p class="ref-meta">Alguns providers não deixam claro se a assinatura mensal deles pode ser usada por um programa que não é o oficial. O Aluy não é o oficial. Se você entrar por login em vez de chave, o risco é seu.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -476,7 +476,7 @@
           <span class="ref-nm">aluy logout<br>aluy whoami</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Encerra a sessão e apaga a credencial do cofre. O <code class="icode">whoami</code> mostra conta, organização e escopos, nunca o segredo.</p>
+          <p class="ref-desc">Encerra a sessão e apaga a credencial do cofre. O <code class="icode">whoami</code> mostra a conta, a organização e o que a credencial autoriza — nunca o segredo em si.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy whoami</div>
         </div>
       </div>
@@ -494,7 +494,7 @@
         <div class="ref-def">
           <p class="ref-desc">Confere a instalação: credencial, se o provider responde, servidores MCP, perfis, configuração, versão e memória.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy doctor --deep --json</div>
-          <p class="ref-meta">--deep testa o tier ao vivo e gasta uma chamada. Sai diferente de zero se algo falhar.</p>
+          <p class="ref-meta">--deep faz uma chamada de verdade ao modelo para testar — ou seja, consome uma chamada da sua conta. Se algo falhar, o comando termina com código de erro, o que serve para scripts.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -592,7 +592,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_TOKEN</span></div>
         <div class="ref-flag">--token</div>
-        <div class="ref-def"><p class="ref-desc">Personal Access Token, para entrar sem prompt.</p></div>
+        <div class="ref-def"><p class="ref-desc">Token de acesso pessoal, para entrar sem que ninguém precise digitar nada — útil em automação.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_ORG</span></div>
@@ -654,7 +654,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_MAX_TOKENS</span></div>
         <div class="ref-flag">--max-tokens</div>
-        <div class="ref-def"><p class="ref-desc">O total de tokens da sessão. Padrão 1000000.</p></div>
+        <div class="ref-def"><p class="ref-desc">O total de tokens da sessão. Padrão 1.000.000.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_MAX_ITERATIONS</span></div>
@@ -739,7 +739,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_MEM_PRESSURE_AT</span></div>
         <div class="ref-flag ref-flag--none">—</div>
-        <div class="ref-def"><p class="ref-desc">A que distância desse teto o Aluy começa a aliviar a carga. Padrão 0.85.</p></div>
+        <div class="ref-def"><p class="ref-desc">A partir de quanto do teto o Aluy começa a soltar o que não precisa mais. Padrão: 85%.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_MEM_PRESSURE_OFF</span></div>
@@ -801,7 +801,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_CONT_GIVEUP_AT</span></div>
         <div class="ref-flag ref-flag--none">—</div>
-        <div class="ref-def"><p class="ref-desc">A partir de quando ele desiste e devolve o turno.</p></div>
+        <div class="ref-def"><p class="ref-desc">A partir de quando ele desiste e devolve a palavra para você.</p></div>
       </div>
       </div>
     </div>
@@ -853,7 +853,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_NO_ANIM</span></div>
         <div class="ref-flag ref-flag--none">—</div>
-        <div class="ref-def"><p class="ref-desc">Sem giradores e sem piscar — a preferência de movimento reduzido.</p></div>
+        <div class="ref-def"><p class="ref-desc">Sem animação de carregando e sem nada piscando, para quem prefere a tela parada.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_NOTIFY</span></div>
@@ -888,7 +888,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_SYNC_OUTPUT</span></div>
         <div class="ref-flag ref-flag--none">—</div>
-        <div class="ref-def"><p class="ref-desc">Saída sincronizada, que evita o terminal rasgar no meio do redesenho.</p></div>
+        <div class="ref-def"><p class="ref-desc">Desenha a tela de uma vez só, para a imagem não sair partida enquanto atualiza.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_SET_BG</span></div>
@@ -930,7 +930,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_ROOM_BACKEND</span></div>
         <div class="ref-flag ref-flag--none">—</div>
-        <div class="ref-def"><p class="ref-desc">Onde as salas agente-a-agente ficam guardadas.</p></div>
+        <div class="ref-def"><p class="ref-desc">Onde ficam guardadas as conversas entre agentes.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_MEM0_URL</span></div>
@@ -951,28 +951,28 @@
     </div>
 
     <div class="ref-group">
-      <div class="ref-head"><h2 class="ref-title">Caixa de areia, atualização e depuração</h2><span class="ref-cap">— saídas de emergência. Você não deveria precisar delas no dia a dia.</span></div>
+      <div class="ref-head"><h2 class="ref-title">Sandbox, atualização e depuração</h2><span class="ref-cap">— a sandbox é um cercado: o comando roda, mas não alcança o resto da máquina. Saídas de emergência; você não deveria precisar delas no dia a dia.</span></div>
       <div class="ref-table">
       <div class="ref-hrow"><span>variável</span><span>flag</span><span>o que faz</span></div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_SANDBOX_BASH</span></div>
         <div class="ref-flag ref-flag--none">—</div>
-        <div class="ref-def"><p class="ref-desc">Roda os comandos de shell dentro da caixa de areia.</p></div>
+        <div class="ref-def"><p class="ref-desc">Roda os comandos de shell dentro da sandbox.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_SANDBOX_MCP</span></div>
         <div class="ref-flag ref-flag--none">—</div>
-        <div class="ref-def"><p class="ref-desc">Roda os servidores MCP dentro da caixa de areia.</p></div>
+        <div class="ref-def"><p class="ref-desc">Roda os servidores MCP dentro da sandbox.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_UNSAFE_NO_SANDBOX</span></div>
         <div class="ref-flag ref-flag--none">—</div>
-        <div class="ref-def"><p class="ref-desc">Desliga a caixa de areia. O nome é o aviso.</p></div>
+        <div class="ref-def"><p class="ref-desc">Desliga a sandbox: os comandos passam a alcançar a máquina inteira. O nome da flag é o aviso.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_ENV</span></div>
         <div class="ref-flag ref-flag--none">—</div>
-        <div class="ref-def"><p class="ref-desc">O nome do ambiente, que decide com que rigor uma falha de caixa de areia é tratada.</p></div>
+        <div class="ref-def"><p class="ref-desc">O nome do ambiente, que decide com que rigor uma falha da sandbox é tratada.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_NATIVE_TOOLS_OFF</span></div>
@@ -1017,7 +1017,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_OVERWRITE_RENDER</span></div>
         <div class="ref-flag ref-flag--none">—</div>
-        <div class="ref-def"><p class="ref-desc">Redesenha no lugar em vez de acrescentar, para diagnosticar tremulação.</p></div>
+        <div class="ref-def"><p class="ref-desc">Redesenha no lugar em vez de acrescentar, para diagnosticar quando a tela pisca.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_DIR</span></div>
@@ -1145,7 +1145,7 @@
           <span class="ref-arg">&lt;search|add|list|remove&gt;</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Conectores MCP: busca no registro aberto, adiciona um servidor local, liga e desliga.</p>
+          <p class="ref-desc">Conectores MCP: procura no catálogo público, adiciona um servidor local, liga e desliga.</p>
           <div class="ref-ex"><span class="pr">$</span> /mcp add postgres -- npx @modelcontextprotocol/server-postgres</div>
           <ul class="ref-subs"><li class="k">também</li><li>enable</li><li>disable</li><li>reconnect</li><li>reload</li></ul>
         </div>
@@ -1185,7 +1185,7 @@
           <span class="ref-arg">[run &lt;nome&gt;|use]</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Fluxos de atividades que coordenam o agente.</p>
+          <p class="ref-desc">Sequências de etapas fixas, cada uma no especialista certo — entender, implementar, testar.</p>
           <div class="ref-ex"><span class="pr">$</span> /workflows run sdlc-estoria</div>
         </div>
       </div>
@@ -1281,7 +1281,7 @@
         <div class="ref-def">
           <p class="ref-desc">Vê, fixa ou esquece o que o agente lembra, global e por projeto.</p>
           <div class="ref-ex"><span class="pr">$</span> /memory forget 4</div>
-          <p class="ref-meta">A memória volta como dado, nunca como instrução.</p>
+          <p class="ref-meta">A memória volta como informação, nunca como ordem.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -1300,7 +1300,7 @@
         </div>
         <div class="ref-def">
           <p class="ref-desc">As regras em vigor: modo, autorizações já dadas e ferramentas seguras.</p>
-          <p class="ref-meta">As categorias sempre-perguntar ficam travadas.</p>
+          <p class="ref-meta">As categorias que sempre perguntam não podem ser liberadas por aqui.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -1366,7 +1366,7 @@
         </div>
         <div class="ref-def">
           <p class="ref-desc">Lista todos os comandos nativos, ao vivo.</p>
-          <p class="ref-meta">Ctrl+P abre a paleta.</p>
+          <p class="ref-meta">Ctrl+P abre a mesma lista numa busca rápida.</p>
         </div>
       </div>
       <div class="ref-row">

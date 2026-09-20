@@ -31,8 +31,15 @@ REF = re.compile(r'((?:href|src)=")((?:\.\./)?)([\w.-]+\.(?:css|js))(?:\?v=[0-9a
 
 
 def versao(caminho: pathlib.Path) -> str:
-    """Oito dígitos do sha-256 do conteúdo. Muda o arquivo, muda a URL."""
-    return hashlib.sha256(caminho.read_bytes()).hexdigest()[:8]
+    """Oito dígitos do sha-256 do conteúdo. Muda o arquivo, muda a URL.
+
+    As quebras de linha são normalizadas antes: o `.gitattributes` deste repo
+    usa `eol=lf`, então o git REESCREVE o arquivo no disco ao trocar de branch.
+    Sem normalizar, o carimbo mudava sozinho a cada checkout, sem ninguém ter
+    tocado no conteúdo — e um carimbo instável não carimba nada.
+    """
+    dados = caminho.read_bytes().replace(bytes([13,10]), bytes([10]))
+    return hashlib.sha256(dados).hexdigest()[:8]
 
 
 def paginas():

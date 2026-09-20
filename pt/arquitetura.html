@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Como o Aluy CLI é construído — um único processo no seu terminal. Sessão, memória e a sua chave ficam locais, atrás da trava de permissão. Só a chamada ao modelo cruza a borda." />
+<meta name="description" content="Como o Aluy CLI é construído — um único processo no seu terminal. Sessão, memória e a sua chave ficam na sua máquina, atrás da catraca de permissão. Aqui está a lista inteira do que sai dela." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Aluy CLI" />
 <meta property="og:title" content="Arquitetura — Aluy CLI" />
-<meta property="og:description" content="Como o Aluy CLI é construído — um único processo no seu terminal. Sessão, memória e a sua chave ficam locais, atrás da trava de permissão. Só a chamada ao modelo cruza a borda." />
+<meta property="og:description" content="Como o Aluy CLI é construído — um único processo no seu terminal. Sessão, memória e a sua chave ficam na sua máquina, atrás da catraca de permissão. Aqui está a lista inteira do que sai dela." />
 <meta property="og:url" content="https://aluy.dev/pt/arquitetura.html" />
 <meta property="og:image" content="https://aluy.dev/assets/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -15,17 +15,17 @@
 <meta property="og:locale" content="pt_BR" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Arquitetura — Aluy CLI" />
-<meta name="twitter:description" content="Como o Aluy CLI é construído — um único processo no seu terminal. Sessão, memória e a sua chave ficam locais, atrás da trava de permissão. Só a chamada ao modelo cruza a borda." />
+<meta name="twitter:description" content="Como o Aluy CLI é construído — um único processo no seu terminal. Sessão, memória e a sua chave ficam na sua máquina, atrás da catraca de permissão. Aqui está a lista inteira do que sai dela." />
 <meta name="twitter:image" content="https://aluy.dev/assets/og.png" />
 <title>Arquitetura — Aluy CLI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="../site.css?v=d985dca7" />
-<script src="../lang.js?v=b7823272"></script>
+<link rel="stylesheet" href="../site.css?v=12643088" />
+<script src="../lang.js?v=dfbd8e05"></script>
 <script defer src="../site.js?v=9ecc00f5"></script>
-<script src="../consent.js?v=d4a725b4" defer></script>
+<script src="../consent.js?v=b90dbe6e" defer></script>
 </head>
 <body>
 <div class="aurora aurora--hero" aria-hidden="true"></div>
@@ -98,7 +98,7 @@
           <g class="f-no">
             <rect x="96" y="140" width="300" height="72" rx="10" />
             <text class="f-tit" x="116" y="170">o contexto é montado</text>
-            <text class="f-sub" x="116" y="192">remontado a cada volta, nunca acumulado</text>
+            <text class="f-sub" x="116" y="192">remontado a cada turno, nunca acumulado</text>
           </g>
           <g class="f-entrada">
             <text x="416" y="158">memória do projeto e global</text>
@@ -130,7 +130,7 @@
           <g class="f-catraca">
             <rect x="60" y="476" width="372" height="76" rx="12" />
             <text class="f-catraca-tit" x="246" y="508">A CATRACA</text>
-            <text class="f-catraca-sub" x="246" y="532">um único ponto, cinco caminhos entram, nenhum desvia</text>
+            <text class="f-catraca-sub" x="246" y="532">um único ponto — cinco caminhos entram, nenhum desvia</text>
           </g>
 
           <!-- três saídas -->
@@ -183,7 +183,7 @@
       <div class="grid grid-3">
         <div class="card card-gar">
           <span class="cfg-kicker">passa direto</span>
-          <p>Só o que lê e não muda nada: <code>ler arquivo</code>, <code>grep</code>, <code>glob</code> e <code>listar</code>. Mais gravar uma memória e falar numa sala.</p>
+          <p>Só o que lê e não muda nada: abrir um arquivo, procurar um texto, procurar um arquivo pelo nome e listar uma pasta. Mais gravar uma memória e falar numa sala.</p>
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">sempre pergunta</span>
@@ -191,18 +191,15 @@
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">nega, não pergunta</span>
-          <p>Ler <code>~/.ssh</code>, <code>~/.aws</code>, <code>~/.gnupg</code>, chaves privadas e certificados. E a própria pasta <code>~/.aluy/</code>, nos dois sentidos.</p>
+          <p>Ler <code>~/.ssh</code>, <code>~/.aws</code>, <code>~/.gnupg</code>, chaves privadas e certificados. E a própria pasta <code>~/.aluy/</code> — nem para ler, nem para escrever.</p>
         </div>
       </div>
 
-      <div class="note note--flow">
-        <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg></span>
-        <p><b>Cinco categorias não dá para relaxar</b>, nem editando a configuração: comando destrutivo, comando de rede, escalada de privilégio, instalação de pacote e escrita em arquivo de inicialização. O painel <code class="icode">/permissions</code> só consegue mexer em duas ferramentas de leitura — o resto aparece travado.</p>
-      </div>
+      <p class="hint"><b>Cinco categorias de comando não dá para afrouxar</b>, nem mexendo na configuração: apagar coisas, acessar a rede, virar administrador, instalar pacote e mexer nos arquivos que rodam quando o computador liga. Toda ferramenta que vier de um servidor MCP entra numa categoria à parte, e também sempre pergunta. O painel <code class="icode">/permissions</code> só consegue mexer em duas ferramentas de leitura — o resto aparece travado.</p>
 
       <div class="note note--flow">
         <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
-        <p><b>E a exceção, dita por inteiro:</b> o <code class="icode">--yolo</code> devolve <i>permite</i> antes de tudo isso. Sob ele o agente alcança a própria pasta <code class="icode">~/.aluy/</code> — a configuração de MCP, os hooks, o diário de desfazer e o cofre da credencial. É uma decisão deliberada do modo, não um furo. Fora dele, o piso vale.</p>
+        <p><b>E a exceção, dita por inteiro:</b> com o <code class="icode">--yolo</code> tudo é aprovado antes mesmo de chegar nessas checagens. Sob ele o agente alcança a própria pasta <code class="icode">~/.aluy/</code> — a configuração de MCP, os hooks, o diário de desfazer e o cofre da credencial. É uma decisão deliberada do modo, não um furo. Fora do <code class="icode">--yolo</code>, essas regras valem sempre.</p>
       </div>
     </section>
 
@@ -210,7 +207,7 @@
     <section class="section section--flow-md" id="modulos">
       <div class="block-head">
         <span class="eyebrow">os módulos</span>
-        <h2>Duas metades, com uma fronteira que o compilador cobra.</h2>
+        <h2>Duas metades, com uma fronteira que a esteira de testes cobra.</h2>
       </div>
 
       <div class="fluxo fluxo--comp">
@@ -275,18 +272,6 @@
         </svg>
       </div>
 
-      <div class="grid grid-2">
-        <div class="card card-gar">
-          <span class="cfg-kicker">o miolo · sem terminal</span>
-          <p>O ciclo do turno, a montagem de contexto, a catraca, as ferramentas nativas, o contrato do modelo, o MCP e o diário cifrado. Não sabe o que é uma tela.</p>
-          <p class="foot-note">A fronteira não é combinado: uma regra de lint proíbe importar a biblioteca de terminal aqui dentro, e um teste falha se alguém tentar.</p>
-        </div>
-        <div class="card card-gar">
-          <span class="cfg-kicker">a casca · tudo que toca o mundo</span>
-          <p>A interface, os arquivos, o shell, a busca, o keychain, os servidores MCP, os sidecars, os serviços e o Telegram. É aqui que o abstrato vira efeito.</p>
-          <p class="foot-note">Quem depende de quem: a casca conhece o miolo. O miolo não conhece a casca — e é isso que deixa o ciclo testável sem abrir um terminal.</p>
-        </div>
-      </div>
     </section>
 
     <!-- ===== ESTADO ===== -->
@@ -302,7 +287,7 @@
         <div class="minitile"><h4>diário de desfazer</h4><p>O estado anterior de cada arquivo, <b>cifrado</b>. A chave é da sessão e morre com o processo — o desfazer não atravessa um reinício.</p></div>
         <div class="minitile"><h4>memória</h4><p>Markdown: um global e um por projeto. Um fato por linha, editável à mão.</p></div>
         <div class="minitile"><h4>credencial</h4><p>No cofre do sistema, ou num arquivo cifrado onde não houver — com a chave derivada da máquina, nunca escrita.</p></div>
-        <div class="minitile"><h4>configuração</h4><p>Tema, modelo, backend, perfil, serviços. Mais os hooks e os servidores MCP, cada um no seu arquivo.</p></div>
+        <div class="minitile"><h4>configuração</h4><p>Tema, modelo, por onde a chamada sai, perfil e serviços. Mais os hooks e os servidores MCP, cada um no seu arquivo.</p></div>
         <div class="minitile"><h4>o que você escreve</h4><p>Agentes, comandos, skills, workflows e plugins: arquivos <code>.md</code> que você versiona se quiser.</p></div>
       </div>
     </section>
@@ -318,7 +303,7 @@
       <div class="grid grid-2">
         <div class="card card-gar">
           <span class="cfg-kicker">a chamada ao modelo</span>
-          <p>Para o provider que você configurou, com a sua chave. Nove no catálogo, mais qualquer endereço que você declarar. A conexão é fixada no IP resolvido e recusa redirecionamento.</p>
+          <p>Para o provider que você configurou, com a sua chave. Nove no catálogo, mais qualquer endereço que você declarar. Descoberto o endereço do provider, a conexão não aceita ser desviada para outro lugar no meio do caminho.</p>
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">a busca na web</span>
@@ -326,23 +311,23 @@
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">os servidores MCP</span>
-          <p>Só locais, conversando por entrada e saída padrão — sem porta aberta. O ambiente que eles recebem é mínimo: a sua credencial não vai junto.</p>
+          <p>Rodam só na sua máquina, e o Aluy conversa com eles direto, sem abrir nenhuma porta de rede. O ambiente que eles recebem é mínimo: a sua credencial não vai junto.</p>
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">os sidecars</span>
-          <p>Memória de longo prazo, fôlego de contexto e modelos locais. Só no laço local, cada um numa porta que o CLI confere antes de reusar, e nenhum recebe credencial.</p>
+          <p>Memória de longo prazo, conversas longas sem perder o fio, e modelos rodando na sua máquina. Só a sua própria máquina os alcança, e o Aluy confere que é mesmo o serviço dele antes de reusar a porta. Nenhum recebe credencial.</p>
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">o Telegram</span>
-          <p>Se você conectar. O endereço do serviço é constante no código, e o destino da mensagem <b>não é argumento do modelo</b> — ele responde sempre no chat corrente. Só os chats que você autorizar viram instrução.</p>
+          <p>Se você conectar. O endereço do serviço é constante no código, e o destino da mensagem <b>não é argumento do modelo</b> — ele responde sempre no chat corrente. O agente só obedece aos chats que você autorizou; o que vier de qualquer outro ele lê como texto, nunca como ordem.</p>
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">a checagem de versão</span>
-          <p>No npm. E ela <b>instala a atualização sozinha</b>, por decisão de projeto — até você desligar com <code>ALUY_AUTO_UPDATE=0</code>.</p>
+          <p>No npm. E ela <b>instala a atualização sozinha</b>. Foi uma escolha deliberada, e você desliga com <code>ALUY_AUTO_UPDATE=0</code>.</p>
         </div>
       </div>
 
-      <p class="hint">Um serviço em segundo plano não abre porta de rede: quem quiser acompanhar entra por um canal que existe só dentro da máquina, e só para quem está logado como você. E um backend central é opcional — o código existe, o serviço ainda não está no ar.</p>
+      <p class="hint">Um serviço em segundo plano não abre porta de rede: quem quiser acompanhar entra por um canal que existe só dentro da máquina, e só para quem está logado como você. E um servidor central da Aluy é opcional — o código existe, o serviço ainda não está no ar.</p>
     </section>
 
     <section class="section section--flow-sm center">

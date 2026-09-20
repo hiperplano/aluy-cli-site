@@ -22,11 +22,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="../site.css?v=d985dca7" />
-<script src="../lang.js?v=b7823272"></script>
+<link rel="stylesheet" href="../site.css?v=12643088" />
+<script src="../lang.js?v=dfbd8e05"></script>
 <script defer src="../site.js?v=9ecc00f5"></script>
 <script defer src="../install.js?v=d1356c76"></script>
-<script src="../consent.js?v=d4a725b4" defer></script>
+<script src="../consent.js?v=b90dbe6e" defer></script>
 </head>
 <body>
 <div class="aurora aurora--hero" aria-hidden="true"></div>
@@ -127,10 +127,10 @@
           </div>
         </div>
         <div class="install-meta">
-          <span>1 linha · sem sudo</span><span class="sep">·</span><span>instala em <span class="hi">~/.aluy</span></span><span class="sep">·</span><span>re-rodar atualiza</span>
+          <span>1 linha · sem senha de administrador</span><span class="sep">·</span><span>instala em <span class="hi">~/.aluy</span></span><span class="sep">·</span><span>re-rodar atualiza</span>
         </div>
       </div>
-      <p class="hint" style="text-align:center;">Melhor experiência no <a class="lnk" href="https://wezterm.org" target="_blank" rel="noopener">WezTerm</a> — o terminal mais adequado para usar o Aluy CLI.</p>
+      <p class="hint" style="text-align:center;">O Aluy desenha melhor no <a class="lnk" href="https://wezterm.org" target="_blank" rel="noopener">WezTerm</a>: os ícones e as bordas saem certos. Em outros terminais funciona igual, só fica mais simples de ver.</p>
     </section>
 
     <!-- ===== PROVA (gravação real) ===== -->
@@ -149,7 +149,7 @@
             Seu navegador não toca vídeo. <a href="../assets/demo.mp4">Baixe a gravação</a>.
           </video>
         </div>
-        <p>O agente roda os testes, lê a saída, corrige e repete até passar ou bater o teto que você definiu.</p>
+        <p>O agente roda os testes, lê a saída, corrige e repete até passar, ou até bater o limite de tempo que você deu.</p>
       </div>
     </section>
 
@@ -164,7 +164,7 @@
         <div><span class="adot"></span><span class="fg">/doctor</span><span class="ok">       ✓ modelo · chave · MCP — tudo certo</span></div>
         <div><span class="adot"></span><span class="fg">/init</span><span class="cm">         cria ALUY.md deste repo</span></div>
         <div><span class="adot"></span><span class="fg">/cycle</span> <span class="str">"rode os testes e conserte o que quebrar"</span></div>
-        <div class="info" style="padding-left:16px;">rodando em ciclos… para no verde ou no teto ↩</div>
+        <div class="info" style="padding-left:16px;">rodando em ciclos… para quando os testes passam, ou no limite que você deu ↩</div>
         <div><span class="adot"></span><span class="fg">/memory list</span><span class="cm">  o que o aluy lembra aqui</span></div>
       </div>
     </section>
@@ -183,7 +183,7 @@
         </div>
         <div class="card">
           <span class="icon-tile"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/><path d="M12 7v5l3 2"/></svg></span>
-          <h3>Processos · RPA</h3>
+          <h3>Processos · automação de rotina</h3>
           <p class="muted">Conecta etapas e ferramentas num processo só. De ponta a ponta, em vez de scripts frágeis que quebram.</p>
         </div>
         <div class="card">
@@ -209,12 +209,12 @@
         <div class="card card-lg">
           <div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/><path d="M12 7v5l3 2"/></svg></span><span class="mono-label">/cycle</span></div>
           <h3>Dispare e vá fazer outra coisa</h3>
-          <p>Trabalha em ciclos por conta própria até a tarefa acabar — com freio de mão. Tetos duros de tempo e de passos, além de parada automática.</p>
+          <p>Trabalha em ciclos por conta própria até a tarefa acabar — com freio de mão: você diz em quantos minutos e em quantos passos ele tem que parar, e ele para sozinho se começar a andar em círculo.</p>
         </div>
         <div class="card card-lg">
           <div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 21v-1a6 6 0 0 1 12 0v1M15.5 21v-.5a4.5 4.5 0 0 1 5.5-4.4"/></svg></span><span class="mono-label">/subagent</span></div>
           <h3>Uma frota de especialistas</h3>
-          <p>Cada subagente é um perfil (<code class="icode">.md</code>) com um foco — um para testes, um para revisão, um para docs. Você delega e eles trabalham em paralelo.</p>
+          <p>Cada subagente é um perfil, um arquivo de texto (<code class="icode">.md</code>), com um foco — um para testes, um para revisão, um para docs. Você delega e eles trabalham em paralelo.</p>
         </div>
         <div class="card card-lg">
           <div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9h8M8 13h5"/><path d="M21 12a8 8 0 0 1-8 8H7l-4 3v-4.5A8 8 0 1 1 21 12z"/></svg></span><span class="mono-label">/rooms</span></div>
@@ -224,7 +224,7 @@
         <div class="card card-lg">
           <div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span><span class="mono-label">/mcp</span></div>
           <h3>Plugue o que você já usa</h3>
-          <p>Pelo MCP, o agente fala com bancos, APIs e serviços. Um ecossistema aberto de conectores para ele usar de verdade — não só conversar.</p>
+          <p>Pelo MCP — o padrão aberto de conectores — o agente fala com bancos, APIs e serviços. Um ecossistema aberto de conectores para ele usar de verdade — não só conversar.</p>
         </div>
       </div>
     </section>
@@ -239,11 +239,11 @@
         <div class="grid grid-2">
           <div class="tile">
             <div class="tile-head"><span class="ic c-green"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span class="tile-kicker c-green">fica na sua máquina</span></div>
-            <p>A sessão, o histórico, os arquivos do projeto, a memória e a sua chave de provider. O agente roda local, atrás da trava de permissão.</p>
+            <p>A sessão, o histórico, os arquivos do projeto, a memória e a sua chave de provider. O agente roda na sua máquina, e nada acontece sem passar pela catraca de permissão.</p>
           </div>
           <div class="tile tile--dashed">
-            <div class="tile-head"><span class="ic c-mut"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span><span class="tile-kicker c-mut">cruza a borda</span></div>
-            <p>Só a chamada ao modelo, e ela vai direto para o provider que você configurou, com a sua chave. Sem intermediário e sem medição.</p>
+            <div class="tile-head"><span class="ic c-mut"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span><span class="tile-kicker c-mut">sai da sua máquina</span></div>
+            <p>Só a chamada ao modelo, e ela vai direto para o provider que você configurou, com a sua chave. Ninguém no meio, e ninguém contando quanto você usou.</p>
           </div>
         </div>
       </div>
@@ -251,7 +251,7 @@
 
     <!-- ===== LINK TURBO ===== -->
     <section class="section section--flow-sm center">
-      <p class="lead" style="margin:0 auto;">Complementos locais opcionais — memória persistente, modelos locais e folga de contexto — vêm com o modo <a href="help.html#sec-turbo" style="color:var(--amber);font-weight:600;text-decoration:none;">turbo</a>.</p>
+      <p class="lead" style="margin:0 auto;">Complementos locais opcionais — o agente lembra do projeto de um dia para o outro, roda modelos na sua máquina e aguenta conversas longas sem perder o fio — vêm com o modo <a href="help.html#sec-turbo" style="color:var(--amber);font-weight:600;text-decoration:none;">turbo</a>.</p>
     </section>
     <!-- ===== O QUE NÃO É ===== -->
     <section class="section--narrow section--flow">

@@ -22,10 +22,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="../site.css?v=d985dca7" />
-<script src="../lang.js?v=b7823272"></script>
+<link rel="stylesheet" href="../site.css?v=12643088" />
+<script src="../lang.js?v=dfbd8e05"></script>
 <script defer src="../site.js?v=9ecc00f5"></script>
-<script src="../consent.js?v=d4a725b4" defer></script>
+<script src="../consent.js?v=b90dbe6e" defer></script>
 </head>
 <body>
 <div class="aurora" aria-hidden="true"></div>
@@ -67,7 +67,7 @@
     <section class="hero">
       <span class="eyebrow">o que o Aluy CLI faz</span>
       <h1>Um agente de verdade, na sua máquina.</h1>
-      <p class="lead">Não é um chat que sugere código para você copiar e colar. Um agente que age no seu projeto, sob as suas regras de permissão. Tudo roda local; o modelo entra pela borda.</p>
+      <p class="lead">Não é um chat que sugere código para você copiar e colar. Um agente que age no seu projeto, sob as suas regras de permissão. Tudo roda na sua máquina; a chamada ao modelo é o que sai dela.</p>
     </section>
 
     <!-- ===== HIGHLIGHTS ===== -->
@@ -79,7 +79,7 @@
             <span class="mono-label mono-label--lg">/cycle</span>
       </div>
           <h3>Roda até terminar</h3>
-          <p>Descreva a tarefa e o agente trabalha em ciclos por conta própria até concluir. Com freio de mão: tetos duros de tempo e de passos, e parada automática se sair do trilho. "Rode os testes e conserte o que quebrar" — e vá tomar um café.</p>
+          <p>Descreva a tarefa e o agente trabalha em ciclos por conta própria até concluir. Com freio de mão: você diz em quantos minutos e em quantos passos ele tem que parar, e ele para sozinho se começar a andar em círculo. "Rode os testes e conserte o que quebrar" — e vá tomar um café.</p>
         </div>
         <div class="card card-hl">
           <div class="card-row">
@@ -87,7 +87,7 @@
             <span class="mono-label mono-label--lg">subagents</span>
           </div>
           <h3>Uma frota trabalhando pra você</h3>
-          <p>Cada subagente é um perfil (<code class="icode">.md</code>) com um foco. Monte a sua equipe: um para testes, um para revisão, um para docs. Você delega e cada um cuida da sua parte — em paralelo, sem misturar contextos.</p>
+          <p>Cada subagente é um perfil (<code class="icode">.md</code>) com um foco. Monte a sua equipe: um para testes, um para revisão, um para docs. Você delega e cada um cuida da sua parte, ao mesmo tempo, sem que a conversa de um contamine a do outro.</p>
         </div>
         <div class="card card-hl">
           <div class="card-row">
@@ -103,7 +103,7 @@
             <span class="mono-label mono-label--lg">MCP</span>
           </div>
           <h3>Conecte suas ferramentas</h3>
-          <p>O agente fala com ferramentas e integrações externas pelo MCP — o padrão aberto de conectores. Adicione um servidor, busque no registro, ligue e desligue. Acesso real ao que você já usa.</p>
+          <p>O agente fala com ferramentas e integrações externas pelo MCP — o padrão aberto de conectores. Adicione um conector, procure no catálogo público, ligue e desligue. Com isso ele consulta e altera essas ferramentas de verdade, em vez de só falar sobre elas.</p>
         </div>
         <div class="card card-hl">
           <div class="card-row">
@@ -111,7 +111,7 @@
             <span class="mono-label mono-label--lg">/service</span>
           </div>
           <h3>Um agente com rotina</h3>
-          <p>Um serviço acorda na hora marcada, trabalha dentro do orçamento que você deu, reporta no seu canal e volta a dormir. O manifesto diz o que ele pode — horário, orçamento, autonomia, canal — e o que é teto duro é aplicado por código, nunca pedido ao modelo.</p>
+          <p>Um serviço acorda na hora marcada, trabalha até o limite de gasto que você deu, reporta no seu canal e volta a dormir. Uma ficha de configuração diz o que ele pode: a que horas acorda, quanto pode gastar, o quanto decide sozinho e onde ele te avisa. Esses limites o modelo não consegue furar, nem se resolver tentar.</p>
         </div>
         <div class="card card-hl">
           <div class="card-row">
@@ -119,7 +119,7 @@
             <span class="mono-label mono-label--lg">/telegram</span>
           </div>
           <h3>O agente no seu celular</h3>
-          <p>Conecte um bot e o agente te alcança fora do terminal: ele reporta quando termina, pergunta quando precisa de uma decisão sua, e espera. Só os chats que você autorizar — a allowlist começa fechada, e o que vem de fora dela nunca vira instrução.</p>
+          <p>Conecte um bot e o agente te alcança fora do terminal: ele reporta quando termina, pergunta quando precisa de uma decisão sua, e espera. Só os chats que você autorizar, um por um: nenhum vem liberado. Mensagem de qualquer outro chat o agente lê como texto solto, nunca como uma ordem a cumprir.</p>
         </div>
       </div>
     </section>
@@ -133,15 +133,15 @@
       <div class="grid grid-3">
         <div class="card">
           <h3>Roda local</h3>
-          <p class="muted">O processo vive na sua máquina: sessão, dados e contexto nunca saem dela. A chave fica no cofre do SO — nunca em texto.</p>
+          <p class="muted">O processo vive na sua máquina: sessão, dados e contexto nunca saem dela. A chave fica no cofre de senhas do seu sistema, o mesmo que guarda as senhas do navegador — nunca num arquivo que dê para abrir e ler.</p>
         </div>
         <div class="card">
           <h3>O modelo é sua escolha</h3>
-          <p class="muted">Direto no seu provider, com a sua credencial — chave de API, OAuth ou um modelo local. Você decide qual.</p>
+          <p class="muted">Direto no seu provider, com a sua credencial: a chave que ele te deu, um login pela conta que você já tem lá, ou um modelo rodando na sua máquina. Você decide qual.</p>
         </div>
         <div class="card">
           <h3>Edita, roda, conecta</h3>
-          <p class="muted">Lê e edita arquivos, roda comandos e fala com ferramentas via MCP — num ciclo, até resolver. Cada efeito passa por uma trava de permissão.</p>
+          <p class="muted">Lê e edita arquivos, roda comandos e fala com ferramentas via MCP — num ciclo, até resolver. Toda vez que ele vai mudar alguma coisa, ele para e pergunta.</p>
         </div>
         <div class="card">
           <h3>Memória entre sessões</h3>
@@ -149,7 +149,7 @@
         </div>
         <div class="card">
           <h3>Diagnóstico na hora</h3>
-          <p class="muted"><code class="icode">/doctor</code> confere modelo, chave, conexão e ferramentas — read-only, com dica de conserto quando algo está fora do lugar.</p>
+          <p class="muted"><code class="icode">/doctor</code> confere modelo, chave, conexão e ferramentas. Ele só lê, não muda nada, e diz o que fazer para consertar.</p>
         </div>
         <div class="card">
           <h3>Temas para o seu terminal</h3>
@@ -168,11 +168,11 @@
         <div class="grid grid-2">
           <div class="tile">
             <div class="tile-head"><span class="ic c-green"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span><span class="tile-kicker c-green">fica na sua máquina</span></div>
-            <p>A sessão, o histórico, os arquivos do projeto, a memória e a sua chave de provider. O agente roda local, atrás da trava de permissão.</p>
+            <p>A sessão, o histórico, os arquivos do projeto, a memória e a sua chave de provider. O agente roda na sua máquina, e nada acontece sem passar pela catraca de permissão.</p>
           </div>
           <div class="tile tile--dashed">
-            <div class="tile-head"><span class="ic c-mut"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span><span class="tile-kicker c-mut">cruza a borda</span></div>
-            <p>Só a chamada ao modelo, e ela vai direto para o provider que você configurou, com a sua chave. Sem intermediário e sem medição.</p>
+            <div class="tile-head"><span class="ic c-mut"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span><span class="tile-kicker c-mut">sai da sua máquina</span></div>
+            <p>Só a chamada ao modelo, e ela vai direto para o provider que você configurou, com a sua chave. Ninguém no meio, e ninguém contando quanto você usou.</p>
           </div>
         </div>
       </div>
