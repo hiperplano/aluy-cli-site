@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="../site.css?v=763d8ce1" />
+<link rel="stylesheet" href="../site.css?v=8be35f3f" />
 <script src="../lang.js?v=dfbd8e05"></script>
 <script defer src="../site.js?v=9ecc00f5"></script>
 <script src="../consent.js?v=b90dbe6e" defer></script>
@@ -78,12 +78,12 @@
       </div>
 
       <div class="fluxo">
-        <svg class="fluxo-svg" viewBox="0 0 880 720" role="img" aria-labelledby="fluxo-t fluxo-d">
+        <svg class="fluxo-svg" viewBox="0 0 880 764" role="img" aria-labelledby="fluxo-t fluxo-d">
           <title id="fluxo-t">O ciclo de um turno no Aluy CLI</title>
           <desc id="fluxo-d">Você digita um objetivo. O contexto é montado com a memória, as instruções do projeto e a lista de ferramentas. A chamada sai para o modelo, que é a única etapa fora da sua máquina. A resposta vira uma proposta de ferramenta, que passa pela catraca de permissão. A catraca nega, pergunta ou permite. A ferramenta roda e o resultado volta para o modelo como observação, fechando o ciclo.</desc>
 
           <!-- laço de retorno -->
-          <path class="f-volta" d="M 96 596 L 40 596 Q 20 596 20 576 L 20 96 Q 20 76 40 76 L 96 76" />
+          <path class="f-volta" d="M 76 715 L 40 715 Q 20 715 20 695 L 20 96 Q 20 76 40 76 L 96 76" />
           <text class="f-volta-rot" x="26" y="330" transform="rotate(-90 26 330)">observação volta ao contexto</text>
 
           <!-- 1 · você digita -->
@@ -146,13 +146,11 @@
           <text class="f-sub f-sub--c" x="246" y="646">espera você.</text>
           <text class="f-sub f-sub--c" x="246" y="663">sem humano, bloqueia</text>
           <text class="f-sub f-sub--c" x="362" y="646">a ferramenta roda</text>
-
-          <!-- efeito -->
-          <path class="f-seta" d="M 362 676 L 362 692 L 246 692" marker-end="url(#ptc)" />
-          <path class="f-volta-curta" d="M 130 676 L 130 692 L 240 692" />
+          <!-- o que muda de verdade -->
+          <path class="f-seta" d="M 362 624 L 362 692" marker-end="url(#pta)" />
           <g class="f-no f-no--efeito">
-            <rect x="96" y="672" width="150" height="40" rx="8" />
-            <text class="f-tit f-tit--sm" x="171" y="697">o arquivo muda, o comando roda</text>
+            <rect x="76" y="692" width="340" height="46" rx="9" />
+            <text class="f-tit f-tit--sm" x="246" y="721">o arquivo muda, o comando roda</text>
           </g>
 
           <defs>
@@ -267,7 +265,7 @@
           <g class="f-no">
             <rect x="36" y="596" width="560" height="64" rx="9" />
             <text class="f-tit" x="52" y="622">as portas</text>
-            <text class="f-sub" x="52" y="642">shell · arquivos · busca · rede · cofre da credencial</text>
+            <text class="f-sub" x="52" y="642">shell · arquivos · busca · rede · cofre — tudo que sai passa por aqui</text>
           </g>
 
 
@@ -305,17 +303,17 @@
             <text class="z-tit z-tit--fora" x="668" y="454">FORA DA SUA MÁQUINA</text>
             <text class="z-sub" x="668" y="473">o que atravessa a rede</text>
           </g>
-          <g class="f-no f-no--borda">
+          <g class="f-no">
             <rect x="668" y="494" width="296" height="56" rx="9" />
             <text class="f-tit" x="684" y="520">o seu provider de modelo</text>
             <text class="f-sub" x="684" y="540">nove no catálogo, mais o que você declarar</text>
           </g>
-          <g class="f-no f-no--borda">
+          <g class="f-no">
             <rect x="668" y="562" width="296" height="56" rx="9" />
             <text class="f-tit" x="684" y="588">a busca na web</text>
             <text class="f-sub" x="684" y="608">o buscador, e o web_fetch que você aprovar</text>
           </g>
-          <g class="f-no f-no--borda">
+          <g class="f-no">
             <rect x="668" y="618" width="296" height="56" rx="9" />
             <text class="f-tit" x="684" y="644">o Telegram · o npm</text>
             <text class="f-sub" x="684" y="664">se você conectar; e a checagem de versão</text>
@@ -325,7 +323,6 @@
           <!-- ligacoes: so as portas cruzam -->
           <path class="f-seta" d="M 616 636 L 648 636 L 648 300" marker-end="url(#zpa)" />
           <path class="f-seta f-seta--tracejada" d="M 616 652 L 632 652 L 632 560 L 648 560" marker-end="url(#zpa)" />
-          <text class="z-liga" x="632" y="430" transform="rotate(-90 632 430)">só as portas cruzam</text>
 
           <defs>
             <marker id="zpa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -335,6 +332,7 @@
         </svg>
       </div>
 
+      <p class="hint">Três coisas que o desenho não cabe: a conexão com o seu provider é <b>fixada no IP</b> que resolveu e recusa redirecionamento; o destino de uma mensagem do Telegram <b>não é argumento do modelo</b>, então uma instrução injetada não consegue mandar nada para outro lugar; e a checagem de versão <b>instala a atualização sozinha</b> até você desligar com <code>ALUY_AUTO_UPDATE=0</code>.</p>
     </section>
 
     <!-- ===== ESTADO ===== -->
@@ -355,17 +353,6 @@
       </div>
     </section>
 
-    <!-- ===== BORDAS ===== -->
-    <section class="section section--flow-sm" id="bordas">
-      <div class="block-head">
-        <span class="eyebrow">as bordas</span>
-        <h2>Tudo que sai da máquina — a lista inteira.</h2>
-      </div>
-      <p class="lead">Sem asterisco e sem "apenas". Se abre conexão, está aqui.</p>
-
-
-      <p class="hint">O desenho acima nomeia cada borda. Três coisas que ele não cabe: a conexão com o seu provider é <b>fixada no IP</b> que resolveu e recusa redirecionamento; o destino de uma mensagem do Telegram <b>não é argumento do modelo</b>, então uma instrução injetada não consegue mandar nada para outro lugar; e a checagem de versão <b>instala a atualização sozinha</b> até você desligar com <code>ALUY_AUTO_UPDATE=0</code>.</p>
-    </section>
 
     <section class="section section--flow-sm center">
       <a class="btn btn-secondary" href="help.html">Ler a documentação →</a>

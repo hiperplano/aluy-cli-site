@@ -167,7 +167,13 @@ img { display: block; }
    Agora seguem o trilho; quem cuida da linha de leitura é o texto (ch). */
 .section--narrow { max-width: var(--wrap); }
 .section--mid { max-width: var(--wrap); }
-.section--install { max-width: 800px; }
+/* Esta ficou para trás quando unifiquei o trilho: 800px centrados num
+   trilho de 1040 jogam o bloco de instalação e tudo dentro dele 132px
+   para a direita de todo o resto da página. Era esse o "alinhamento
+   estranho à esquerda". Quem limita a largura agora é o cartão. */
+.section--install { max-width: var(--wrap); }
+.section--install .install-card,
+.section--install .codeblock { max-width: 820px; }
 .center { text-align: center; }
 .eyebrow {
   font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .16em;
@@ -223,7 +229,13 @@ b { color: var(--tx); font-weight: 600; }
 .grid-4 { grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-2 { grid-template-columns: 1fr 1fr; }
-.block-head { text-align: center; margin-bottom: 32px; }
+/* O título de seção era centralizado em toda página. Nas que têm o herói à
+   esquerda — arquitetura, comandos, ecossistema, funcionalidades — isso
+   quebrava a âncora da margem no meio da leitura: título no centro, tudo o
+   mais encostado na esquerda. Agora cada página é coerente consigo mesma, e
+   só a home, que é centrada de ponta a ponta, mantém o centro. */
+.block-head { text-align: left; margin-bottom: 32px; }
+.block-head--centro { text-align: center; }
 .block-head h2 { font-weight: 700; font-size: 36px; margin: 12px 0 0; }
 .block-head h2.lg { font-size: 40px; }
 
@@ -1041,10 +1053,10 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
    encostado na margem. São 13 casos em 5 páginas; a regra conserta todos.
    Medida de leitura junto, senão centralizar piora: linha longa centralizada
    é pior de ler que linha longa à esquerda. */
-.block-head + .lead,
-.block-head + .hint,
-.block-head + .lead + .hint,
-.block-head + p {
+.block-head--centro + .lead,
+.block-head--centro + .hint,
+.block-head--centro + .lead + .hint,
+.block-head--centro + p {
   text-align: center;
   max-width: 62ch;
   margin-left: auto;
