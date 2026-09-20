@@ -69,335 +69,15 @@
     <section class="hero">
       <span class="eyebrow">reference</span>
       <h1>Every command, in one place.</h1>
-      <p class="lead">Two surfaces. <b>Slash commands</b> are what you type inside a running session. <b>Flags and subcommands</b> are what you type before it starts. This page is the complete list of both, grouped by what you are trying to do. If you are still learning what to reach for, start with the <a class="lnk" href="help.html">guide</a>.</p>
+      <p class="lead">Two surfaces, in the order you meet them. In your shell you call <code class="icode">aluy</code> with subcommands and flags. Once a session is open, <b>slash commands</b> are what you type inside it. This page is the complete list of both, grouped by what you are trying to do. If you are still learning what to reach for, start with the <a class="lnk" href="help.html">guide</a>.</p>
+          <div class="cta-row">
+        <a class="btn btn-secondary" href="#ref-cli">The command line</a>
+        <a class="btn btn-secondary" href="#ref-slash">Session commands</a>
+      </div>
     </section>
 
     <!-- ===== SLASH COMMANDS ===== -->
-    <section class="section section--narrow section--flow-xs" id="ref-slash">
-      <div class="block-head">
-        <span class="eyebrow">inside a session</span>
-        <h2>Slash commands</h2>
-      </div>
-
-    <div class="ref-group">
-      <div class="ref-head"><h2 class="ref-title">Put the agent to work</h2><span class="ref-cap">— start something and walk away.</span></div>
-      <div class="ref-table">
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/cycle</span>
-          <span class="ref-arg">&lt;interval&gt; "&lt;task&gt;" [--por &lt;dur&gt;] [--auto]</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Runs a task in autonomous cycles until it is done, with hard ceilings and an automatic stop.</p>
-          <div class="ref-ex"><span class="pr">$</span> /cycle 30m "fix the tests that are failing"</div>
-          <ul class="ref-subs"><span class="k">rhythm</span><li>5m</li><li>--por &lt;dur&gt;</li><li>--auto</li></ul>
-          <ul class="ref-subs"><span class="k">in flight</span><li>pause</li><li>resume</li><li>edit</li><li>status</li><li>stop</li></ul>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/cron</span>
-          <span class="ref-arg">&lt;when&gt; "&lt;task&gt;"</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Schedules a task to run on its own, on your machine, whether or not a session is open.</p>
-          <ul class="ref-subs"><span class="k">subcommands</span><li>add</li><li>list</li><li>edit</li><li>enable</li><li>disable</li><li>rm</li><li>run</li></ul>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/service</span>
-          <span class="ref-arg">&lt;sub&gt;</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Agents with a routine: they wake on schedule, work inside a budget and report on your channel.</p>
-          <ul class="ref-subs"><span class="k">subcommands</span><li>create</li><li>list</li><li>status</li><li>install</li><li>uninstall</li><li>start</li><li>stop</li><li>logs</li><li>attach</li></ul>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/todo</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Manages the session’s persistent backlog of tasks.</p>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <div class="ref-group">
-      <div class="ref-head"><h2 class="ref-title">Work with more than one agent</h2><span class="ref-cap">— your fleet, and the rooms they talk in.</span></div>
-      <div class="ref-table">
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/subagent</span>
-          <span class="ref-arg">&lt;profile&gt;</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Opens a focused 1:1 sub-session with one profile. Each subagent keeps its own context, so a long task does not crowd out yours.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/back</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Leaves the subagent focus and returns to the main session.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/rooms</span>
-          <span class="ref-arg">[new|list|read|watch]</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Creates and follows rooms where several agents talk to each other about the same problem, live.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/agents</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Lists the mapped agent profiles, global and project, valid and rejected with the reason.</p>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <div class="ref-group">
-      <div class="ref-head"><h2 class="ref-title">Connect it to what you use</h2><span class="ref-cap">— external tools and the phone.</span></div>
-      <div class="ref-table">
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/mcp</span>
-          <span class="ref-arg">&lt;search|add|list|remove&gt;</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Manages MCP connectors without leaving the session: search the open registry, add a local server, list what is mapped.</p>
-          <ul class="ref-subs"><span class="k">also</span><li>disable</li><li>enable</li><li>reconnect</li><li>reload</li></ul>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/telegram</span>
-          <span class="ref-arg">&lt;sub&gt;</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">The agent on your phone: it reports when work ends, asks when it needs a decision, and warns when it pauses. Only the chats you allow.</p>
-          <ul class="ref-subs"><span class="k">subcommands</span><li>login</li><li>logout</li><li>allow</li><li>deny</li><li>status</li></ul>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/tools</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">The unified inventory of the agent’s tools — native, MCP per server, and the permission state of each. Read-only.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/skills</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Lists the mapped SKILL.md skills, global and project, valid and rejected.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/workflows</span>
-          <span class="ref-arg">[run &lt;name&gt;|use]</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Activity flows that coordinate the agent. Bare, it lists them.</p>
-          <ul class="ref-subs"><span class="k">subcommands</span><li>run &lt;name&gt;</li><li>use</li></ul>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <div class="ref-group">
-      <div class="ref-head"><h2 class="ref-title">Undo, and keep the context clean</h2><span class="ref-cap">— when it went wrong, or the session got long.</span></div>
-      <div class="ref-table">
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/undo <span class="alt">·</span> /redo</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Steps the agent’s last file edit backward or forward, from the per-session journal.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/rewind</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Goes back to an earlier checkpoint — the code, the conversation, or both. <kbd>Esc</kbd> <kbd>Esc</kbd> opens it.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/compact</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Summarizes the conversation to free room in the model’s window, without losing the thread.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/clear</span>
-          <span class="ref-arg">[full|memory]</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Clears the session context.</p>
-          <ul class="ref-subs"><span class="k">also wipes memory</span><li>memory</li><li>full</li></ul>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/usage</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Tokens used, how full the model’s window is, and the current tier.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/history</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Browses earlier sessions and resumes one without leaving Aluy.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/ask</span>
-          <span class="ref-arg">"&lt;question&gt;"</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">A parallel, read-only question that does not interrupt the work in progress.</p>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <div class="ref-group">
-      <div class="ref-head"><h2 class="ref-title">Set it up</h2><span class="ref-cap">— project, model, permissions and looks.</span></div>
-      <div class="ref-table">
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/init</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Reads the repository and writes the project’s ALUY.md. You see the diff and confirm it.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/memory</span>
-          <span class="ref-arg">&lt;list|forget|edit|pin|unpin&gt;</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">See, edit, pin or forget what the agent remembers — global and per project. A pinned fact is kept, never promoted to an instruction.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/model <span class="alt">·</span> /provider <span class="alt">·</span> /effort</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Switches the model tier, sets the provider name in direct mode, and tunes the reasoning effort. Shows the tier, never the credential.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/permissions</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">What the agent may do without asking: mode, grants and safe tools. The always-ask gate stays locked.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/add-dir</span>
-          <span class="ref-arg">&lt;path&gt;</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Authorizes one extra directory for this session, outside the project root.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/theme <span class="alt">·</span> /lang</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Switches theme and interface language. Both auto-detect on boot and persist.</p>
-          <ul class="ref-subs"><span class="k">values</span><li>aluy-dark</li><li>aluy-light</li><li>aluy-slate</li><li>pt-BR</li><li>en</li></ul>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/split <span class="alt">·</span> /fullscreen</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Toggles the side-by-side LOG panel and Cockpit mode. Both persist to config.</p>
-          <ul class="ref-subs"><span class="k">aliases</span><li>/view → /split</li><li>/cockpit → /fullscreen</li></ul>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/login <span class="alt">·</span> /logout <span class="alt">·</span> /whoami</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Signs in and out, and shows the current account, org and scopes — never the secret.</p>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <div class="ref-group">
-      <div class="ref-head"><h2 class="ref-title">When something is off</h2><span class="ref-cap">— read-only; it changes nothing.</span></div>
-      <div class="ref-table">
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/doctor</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Checks the install end to end — credential, provider, catalog, MCP, profiles, config, version and memory — and prints a fix hint next to whatever failed.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/help</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Lists every native command, live, inside the session.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/rename</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Gives the session a label and a color. It also sets the terminal window title.</p>
-        </div>
-      </div>
-      <div class="ref-row">
-        <div class="ref-sig">
-          <span class="ref-nm">/notify</span>
-        </div>
-        <div class="ref-def">
-          <p class="ref-desc">Toggles the bell that calls you when the agent needs attention.</p>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    </section>
-
-    <!-- ===== COMMAND LINE ===== -->
-    <section class="section section--narrow section--flow-sm" id="ref-cli">
+    <section class="section section--narrow section--flow-xs" id="ref-cli">
       <div class="block-head">
         <span class="eyebrow">in your shell</span>
         <h2>The aluy command line</h2>
@@ -1328,6 +1008,330 @@
       <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
       <p>Exit codes: <code class="icode">0</code> success · <code class="icode">1</code> error · <code class="icode">2</code> usage error — on a usage error it exits without mounting a session.</p>
     </div>
+    </section>
+
+    <!-- ===== COMMAND LINE ===== -->
+    <section class="section section--narrow section--flow-sm" id="ref-slash">
+      <div class="block-head">
+        <span class="eyebrow">inside a session</span>
+        <h2>Slash commands</h2>
+      </div>
+
+    <div class="ref-group">
+      <div class="ref-head"><h2 class="ref-title">Put the agent to work</h2><span class="ref-cap">— start something and walk away.</span></div>
+      <div class="ref-table">
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/cycle</span>
+          <span class="ref-arg">&lt;interval&gt; "&lt;task&gt;" [--por &lt;dur&gt;] [--auto]</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Runs a task in autonomous cycles until it is done, with hard ceilings and an automatic stop.</p>
+          <div class="ref-ex"><span class="pr">$</span> /cycle 30m "fix the tests that are failing"</div>
+          <ul class="ref-subs"><span class="k">rhythm</span><li>5m</li><li>--por &lt;dur&gt;</li><li>--auto</li></ul>
+          <ul class="ref-subs"><span class="k">in flight</span><li>pause</li><li>resume</li><li>edit</li><li>status</li><li>stop</li></ul>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/cron</span>
+          <span class="ref-arg">&lt;when&gt; "&lt;task&gt;"</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Schedules a task to run on its own, on your machine, whether or not a session is open.</p>
+          <ul class="ref-subs"><span class="k">subcommands</span><li>add</li><li>list</li><li>edit</li><li>enable</li><li>disable</li><li>rm</li><li>run</li></ul>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/service</span>
+          <span class="ref-arg">&lt;sub&gt;</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Agents with a routine: they wake on schedule, work inside a budget and report on your channel.</p>
+          <ul class="ref-subs"><span class="k">subcommands</span><li>create</li><li>list</li><li>status</li><li>install</li><li>uninstall</li><li>start</li><li>stop</li><li>logs</li><li>attach</li></ul>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/todo</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Manages the session’s persistent backlog of tasks.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-head"><h2 class="ref-title">Work with more than one agent</h2><span class="ref-cap">— your fleet, and the rooms they talk in.</span></div>
+      <div class="ref-table">
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/subagent</span>
+          <span class="ref-arg">&lt;profile&gt;</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Opens a focused 1:1 sub-session with one profile. Each subagent keeps its own context, so a long task does not crowd out yours.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/back</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Leaves the subagent focus and returns to the main session.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/rooms</span>
+          <span class="ref-arg">[new|list|read|watch]</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Creates and follows rooms where several agents talk to each other about the same problem, live.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/agents</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Lists the mapped agent profiles, global and project, valid and rejected with the reason.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-head"><h2 class="ref-title">Connect it to what you use</h2><span class="ref-cap">— external tools and the phone.</span></div>
+      <div class="ref-table">
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/mcp</span>
+          <span class="ref-arg">&lt;search|add|list|remove&gt;</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Manages MCP connectors without leaving the session: search the open registry, add a local server, list what is mapped.</p>
+          <ul class="ref-subs"><span class="k">also</span><li>disable</li><li>enable</li><li>reconnect</li><li>reload</li></ul>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/telegram</span>
+          <span class="ref-arg">&lt;sub&gt;</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">The agent on your phone: it reports when work ends, asks when it needs a decision, and warns when it pauses. Only the chats you allow.</p>
+          <ul class="ref-subs"><span class="k">subcommands</span><li>login</li><li>logout</li><li>allow</li><li>deny</li><li>status</li></ul>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/tools</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">The unified inventory of the agent’s tools — native, MCP per server, and the permission state of each. Read-only.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/skills</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Lists the mapped SKILL.md skills, global and project, valid and rejected.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/workflows</span>
+          <span class="ref-arg">[run &lt;name&gt;|use]</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Activity flows that coordinate the agent. Bare, it lists them.</p>
+          <ul class="ref-subs"><span class="k">subcommands</span><li>run &lt;name&gt;</li><li>use</li></ul>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-head"><h2 class="ref-title">Undo, and keep the context clean</h2><span class="ref-cap">— when it went wrong, or the session got long.</span></div>
+      <div class="ref-table">
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/undo <span class="alt">·</span> /redo</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Steps the agent’s last file edit backward or forward, from the per-session journal.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/rewind</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Goes back to an earlier checkpoint — the code, the conversation, or both. <kbd>Esc</kbd> <kbd>Esc</kbd> opens it.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/compact</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Summarizes the conversation to free room in the model’s window, without losing the thread.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/clear</span>
+          <span class="ref-arg">[full|memory]</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Clears the session context.</p>
+          <ul class="ref-subs"><span class="k">also wipes memory</span><li>memory</li><li>full</li></ul>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/usage</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Tokens used, how full the model’s window is, and the current tier.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/history</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Browses earlier sessions and resumes one without leaving Aluy.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/ask</span>
+          <span class="ref-arg">"&lt;question&gt;"</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">A parallel, read-only question that does not interrupt the work in progress.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-head"><h2 class="ref-title">Set it up</h2><span class="ref-cap">— project, model, permissions and looks.</span></div>
+      <div class="ref-table">
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/init</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Reads the repository and writes the project’s ALUY.md. You see the diff and confirm it.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/memory</span>
+          <span class="ref-arg">&lt;list|forget|edit|pin|unpin&gt;</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">See, edit, pin or forget what the agent remembers — global and per project. A pinned fact is kept, never promoted to an instruction.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/model <span class="alt">·</span> /provider <span class="alt">·</span> /effort</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Switches the model tier, sets the provider name in direct mode, and tunes the reasoning effort. Shows the tier, never the credential.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/permissions</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">What the agent may do without asking: mode, grants and safe tools. The always-ask gate stays locked.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/add-dir</span>
+          <span class="ref-arg">&lt;path&gt;</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Authorizes one extra directory for this session, outside the project root.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/theme <span class="alt">·</span> /lang</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Switches theme and interface language. Both auto-detect on boot and persist.</p>
+          <ul class="ref-subs"><span class="k">values</span><li>aluy-dark</li><li>aluy-light</li><li>aluy-slate</li><li>pt-BR</li><li>en</li></ul>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/split <span class="alt">·</span> /fullscreen</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Toggles the side-by-side LOG panel and Cockpit mode. Both persist to config.</p>
+          <ul class="ref-subs"><span class="k">aliases</span><li>/view → /split</li><li>/cockpit → /fullscreen</li></ul>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/login <span class="alt">·</span> /logout <span class="alt">·</span> /whoami</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Signs in and out, and shows the current account, org and scopes — never the secret.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-head"><h2 class="ref-title">When something is off</h2><span class="ref-cap">— read-only; it changes nothing.</span></div>
+      <div class="ref-table">
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/doctor</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Checks the install end to end — credential, provider, catalog, MCP, profiles, config, version and memory — and prints a fix hint next to whatever failed.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/help</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Lists every native command, live, inside the session.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/rename</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Gives the session a label and a color. It also sets the terminal window title.</p>
+        </div>
+      </div>
+      <div class="ref-row">
+        <div class="ref-sig">
+          <span class="ref-nm">/notify</span>
+        </div>
+        <div class="ref-def">
+          <p class="ref-desc">Toggles the bell that calls you when the agent needs attention.</p>
+        </div>
+      </div>
+      </div>
+    </div>
+
     </section>
   </main>
 
