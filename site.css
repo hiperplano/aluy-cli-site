@@ -174,9 +174,10 @@ img { display: block; }
 .section--install { max-width: var(--wrap); }
 .section--install .install-card,
 .section--install .codeblock { max-width: 820px; margin-inline: auto; }
-/* a dica e irma do cartao: sem isto ela encosta no trilho (158) enquanto
-   o cartao comeca em 240, e a secao passa a ter duas bordas esquerdas. */
-.section--install .hint { max-width: 48ch; margin-left: max(0px, calc(50% - 410px)); margin-right: auto; }
+/* a secao inteira e centrada: heroi, botoes e cartao dividem o eixo 650.
+   A dica encostava no trilho (158) enquanto o cartao comecava em 240, e
+   depois ficou a esquerda DELE — os tres eixos discordavam. Agora e um so. */
+.section--install .hint { max-width: 48ch; margin-inline: auto; text-align: center; }
 .center { text-align: center; }
 .eyebrow {
   font-family: var(--mono); font-weight: 500; font-size: var(--fs-micro); letter-spacing: .16em;
