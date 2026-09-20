@@ -66,106 +66,225 @@
     <!-- ===== HERO ===== -->
     <section class="hero">
       <span class="eyebrow">arquitetura</span>
-      <h1>Como o Aluy CLI é construído.</h1>
-      <p class="lead">O Aluy CLI é um único processo que roda no seu terminal — sem nenhum daemon que você não pediu, sem nuvem no meio do seu projeto. Ele lê e edita arquivos, roda comandos e guarda a sessão, a memória e a sua chave na sua máquina. Para a internet saem a chamada ao modelo, a busca na web, o <code>web_fetch</code> que você aprovar, os conectores MCP que você ligar, o Telegram se você conectar — e a checagem de versão no npm, que <b>instala a atualização sozinha</b> até você desligar.</p>
+      <h1>Um ponto decide tudo.</h1>
+      <p class="lead">O Aluy CLI é um processo no seu terminal. Ele lê e edita arquivos, roda comandos e guarda a sessão, a memória e a sua chave na sua máquina. Entre o modelo propor uma ação e a ação acontecer existe exatamente <b>uma</b> função — e não há caminho que desvie dela.</p>
     </section>
 
-    <!-- ===== LEGEND ===== -->
-    <div class="legend">
-      <span class="chip"><span class="sw sw--amber"></span>na sua máquina</span>
-      <span class="chip"><span class="sw sw--teal"></span>a trava de permissão</span>
-      <span class="chip"><span class="sw sw--dashed"></span>o que sai da máquina</span>
-    </div>
-
-    <!-- ===== DIAGRAM ===== -->
-    <div class="diagram">
-
-      <!-- machine zone -->
-      <div class="zone">
-        <span class="zone-badge">na sua máquina <span class="loc">· 127.0.0.1</span></span>
-
-        <!-- flow: TUI -> core -> gate -->
-        <div class="flow">
-          <div class="flow-node">
-            <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></span>
-            <div><h4>TUI <span class="tag">no seu terminal</span></h4><p>A interface onde você digita. Temas, painéis, o menu de slash.</p></div>
-          </div>
-          <div class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DDA13F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></div>
-          <div class="flow-node">
-            <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg></span>
-            <div><h4>Core engine <span class="tag">@hiperplano/aluy-cli-core</span></h4><p>Lê e edita arquivos, roda comandos e decide o próximo passo — o ciclo ler → agir → observar.</p></div>
-          </div>
-          <div class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DDA13F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></div>
-          <!-- gate -->
-          <div class="flow-node gate">
-            <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span>
-            <div><h4>A trava de permissão <span class="pill-ghost">ponto único</span></h4><p>Todo efeito passa por aqui <b>antes de acontecer</b>. Ler = permite, escrever/rodar = pergunta, sempre-perguntar = travado.</p></div>
-          </div>
-        </div>
-
-        <!-- local state -->
-        <div class="zone-sub">
-          <span class="subhead">estado local — nunca sai</span>
-          <div class="grid grid-2">
-            <div class="minitile"><h4>Sessão e histórico</h4><p>Transcrições, diário de undo, checkpoints.</p></div>
-            <div class="minitile"><h4>Memória</h4><p>Fatos globais + por projeto que você controla.</p></div>
-            <div class="minitile"><h4>Arquivos do projeto</h4><p>Seu repo — lido e editado no lugar.</p></div>
-            <div class="minitile"><h4 class="sc">Chave de provider</h4><p>No cofre do SO, ou num arquivo cifrado onde não houver — nunca em texto.</p></div>
-          </div>
-        </div>
-
-        <!-- sidecars -->
-        <div class="zone-sub">
-          <span class="subhead">sidecars — locais, depois que você instala o turbo</span>
-          <div class="grid grid-3">
-            <div class="minitile"><h4 class="sc">mem0</h4><p>memória de longo prazo</p></div>
-            <div class="minitile"><h4 class="sc">headroom</h4><p>fôlego de contexto</p></div>
-            <div class="minitile"><h4 class="sc">ollama</h4><p>modelos locais, sem chave</p></div>
-          </div>
-        </div>
+    <!-- ===== O TURNO ===== -->
+    <section class="section section--flow-md" id="turno">
+      <div class="block-head">
+        <span class="eyebrow">o turno</span>
+        <h2>O que acontece entre o enter e a resposta.</h2>
       </div>
 
-      <!-- edge column -->
-      <div class="edge">
-        <div class="edge-rule" aria-hidden="true"></div>
-        <span class="subhead">o que sai da máquina</span>
-        <div class="edge-card">
-          <h4><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span>Chamada ao modelo</h4>
-          <p>Direto no <b>seu provider</b>, com a <b>sua credencial</b> — esse é o padrão. Um backend central é opcional: o código está pronto, o serviço ainda não está no ar.</p>
-          <div class="chips">
-            <span class="chip">Claude</span><span class="chip">GPT</span><span class="chip">Gemini</span><span class="chip">Grok</span><span class="chip">DeepSeek</span><span class="chip">Llama</span>
-          </div>
-          <div class="providers">nove providers no catálogo — e qualquer endpoint compatível com a OpenAI que você declarar</div>
-        </div>
-        <div class="edge-card">
-          <h4><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span>Conectores MCP</h4>
-          <p>Só os que <b>você liga</b>. Bancos, APIs, serviços que você escolhe alcançar.</p>
-        </div>
-      </div>
-    </div>
+      <div class="fluxo">
+        <svg class="fluxo-svg" viewBox="0 0 880 720" role="img" aria-labelledby="fluxo-t fluxo-d">
+          <title id="fluxo-t">O ciclo de um turno no Aluy CLI</title>
+          <desc id="fluxo-d">Você digita um objetivo. O contexto é montado com a memória, as instruções do projeto e a lista de ferramentas. A chamada sai para o modelo, que é a única etapa fora da sua máquina. A resposta vira uma proposta de ferramenta, que passa pela catraca de permissão. A catraca nega, pergunta ou permite. O efeito acontece e o resultado volta para o modelo como observação, fechando o ciclo.</desc>
 
-    <!-- ===== THREE GUARANTEES ===== -->
-    <section class="section section--flow-xs">
+          <!-- laço de retorno -->
+          <path class="f-volta" d="M 96 596 L 40 596 Q 20 596 20 576 L 20 96 Q 20 76 40 76 L 96 76" />
+          <text class="f-volta-rot" x="26" y="330" transform="rotate(-90 26 330)">observação volta ao contexto</text>
+
+          <!-- 1 · você digita -->
+          <g class="f-no">
+            <rect x="96" y="52" width="300" height="48" rx="10" />
+            <text class="f-tit" x="116" y="82">você digita o objetivo</text>
+          </g>
+          <text class="f-nota" x="416" y="82">ou o <tspan class="f-mono">!comando</tspan>, que segue o mesmo caminho</text>
+          <path class="f-seta" d="M 246 100 L 246 140" marker-end="url(#pta)" />
+
+          <!-- 2 · contexto -->
+          <g class="f-no">
+            <rect x="96" y="140" width="300" height="72" rx="10" />
+            <text class="f-tit" x="116" y="170">o contexto é montado</text>
+            <text class="f-sub" x="116" y="192">remontado a cada volta, nunca acumulado</text>
+          </g>
+          <g class="f-entrada">
+            <text x="416" y="158">memória do projeto e global</text>
+            <text x="416" y="178">ALUY.md e as raízes autorizadas</text>
+            <text x="416" y="198">a lista de ferramentas do momento</text>
+          </g>
+          <path class="f-seta-fina" d="M 410 172 L 400 172" marker-end="url(#ptb)" />
+          <path class="f-seta" d="M 246 212 L 246 252" marker-end="url(#pta)" />
+
+          <!-- 3 · modelo (borda) -->
+          <g class="f-no f-no--borda">
+            <rect x="96" y="252" width="300" height="72" rx="10" />
+            <text class="f-tit" x="116" y="282">a chamada ao modelo</text>
+            <text class="f-sub" x="116" y="304">o seu provider, com a sua credencial</text>
+          </g>
+          <text class="f-borda-rot" x="416" y="288">única etapa fora da sua máquina</text>
+          <path class="f-seta" d="M 246 324 L 246 364" marker-end="url(#pta)" />
+
+          <!-- 4 · proposta -->
+          <g class="f-no">
+            <rect x="96" y="364" width="300" height="72" rx="10" />
+            <text class="f-tit" x="116" y="394">a resposta vira proposta</text>
+            <text class="f-sub" x="116" y="416">por tool-call nativa ou por bloco no texto</text>
+          </g>
+          <text class="f-nota" x="416" y="400">os dois caminhos desembocam no mesmo lugar</text>
+          <path class="f-seta" d="M 246 436 L 246 476" marker-end="url(#pta)" />
+
+          <!-- 5 · a catraca -->
+          <g class="f-catraca">
+            <rect x="60" y="476" width="372" height="76" rx="12" />
+            <text class="f-catraca-tit" x="246" y="508">A CATRACA</text>
+            <text class="f-catraca-sub" x="246" y="532">um único ponto, cinco caminhos entram, nenhum desvia</text>
+          </g>
+
+          <!-- três saídas -->
+          <path class="f-seta" d="M 130 552 L 130 584" marker-end="url(#pta)" />
+          <path class="f-seta" d="M 246 552 L 246 584" marker-end="url(#pta)" />
+          <path class="f-seta" d="M 362 552 L 362 584" marker-end="url(#pta)" />
+          <g class="f-saida f-saida--nega"><rect x="80" y="584" width="100" height="40" rx="8" /><text x="130" y="609">nega</text></g>
+          <g class="f-saida f-saida--pergunta"><rect x="196" y="584" width="100" height="40" rx="8" /><text x="246" y="609">pergunta</text></g>
+          <g class="f-saida f-saida--permite"><rect x="312" y="584" width="100" height="40" rx="8" /><text x="362" y="609">permite</text></g>
+
+          <text class="f-sub f-sub--c" x="130" y="646">vira observação,</text>
+          <text class="f-sub f-sub--c" x="130" y="663">sem efeito</text>
+          <text class="f-sub f-sub--c" x="246" y="646">espera você.</text>
+          <text class="f-sub f-sub--c" x="246" y="663">sem humano, bloqueia</text>
+          <text class="f-sub f-sub--c" x="362" y="646">a ferramenta roda</text>
+
+          <!-- efeito -->
+          <path class="f-seta" d="M 362 676 L 362 692 L 246 692" marker-end="url(#ptc)" />
+          <path class="f-volta-curta" d="M 130 676 L 130 692 L 240 692" />
+          <g class="f-no f-no--efeito">
+            <rect x="96" y="672" width="150" height="40" rx="8" />
+            <text class="f-tit f-tit--sm" x="171" y="697">o efeito acontece</text>
+          </g>
+
+          <defs>
+            <marker id="pta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="f-ponta" d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+            <marker id="ptb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path class="f-ponta" d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+            <marker id="ptc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="f-ponta" d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
+      <p class="hint">O <code>!comando</code> que você digita no prompt não é atalho: ele monta a mesma proposta de ferramenta e passa pela mesma decisão. O mesmo vale para os sub-agentes, para os hooks e para o <code>/init</code>.</p>
+    </section>
+
+    <!-- ===== A CATRACA ===== -->
+    <section class="section section--flow-md" id="catraca">
+      <div class="block-head">
+        <span class="eyebrow">a catraca</span>
+        <h2>O que ela deixa passar, e o que ela trava.</h2>
+      </div>
+      <p class="lead">A regra base é negar. O que passa está escrito em código, não no prompt — então não há texto que convença o modelo do contrário.</p>
+
       <div class="grid grid-3">
         <div class="card card-gar">
-          <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
-          <h3>Um binário, nada escondido</h3>
-          <p>Você instala um binário, <code>aluy</code>. Nada roda em background a menos que <b>você</b> suba um serviço — e aí ele aparece no <code>aluy service list</code>.</p>
+          <span class="cfg-kicker">passa direto</span>
+          <p>Só o que lê e não muda nada: <code>ler arquivo</code>, <code>grep</code>, <code>glob</code> e <code>listar</code>. Mais gravar uma memória e falar numa sala.</p>
         </div>
         <div class="card card-gar">
-          <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          <h3>Ele não encosta na própria instalação</h3>
-          <p>O agente não escreve em <code>~/.aluy/</code>, onde moram a instalação dele, a config e as chaves. A regra está no código, não no prompt — e cai por terra no <code>--yolo</code>, que libera tudo de propósito.</p>
+          <span class="cfg-kicker">sempre pergunta</span>
+          <p>Rodar comando, editar e escrever arquivo. E <b>qualquer ferramenta que ela não conheça</b> — incluindo toda ferramenta que vier de um servidor MCP.</p>
         </div>
         <div class="card card-gar">
-          <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2"/></svg></div>
-          <h3>Tetos sempre; sandbox se você ligar</h3>
-          <p>Os tetos de tempo, passos e tokens valem sempre. Já o confinamento de sistema operacional para o shell é <b>opcional e vem desligado</b> — e só existe no Linux.</p>
+          <span class="cfg-kicker">nega, não pergunta</span>
+          <p>Ler <code>~/.ssh</code>, <code>~/.aws</code>, <code>~/.gnupg</code>, chaves privadas e certificados. E a própria pasta <code>~/.aluy/</code>, nos dois sentidos.</p>
         </div>
       </div>
-      <div style="text-align:center; margin-top:26px;">
-        <a class="btn btn-secondary" href="help.html">Ler a documentação →</a>
+
+      <div class="note note--flow">
+        <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg></span>
+        <p><b>Cinco categorias não dá para relaxar</b>, nem editando a configuração: comando destrutivo, comando de rede, escalada de privilégio, instalação de pacote e escrita em arquivo de inicialização. O painel <code class="icode">/permissions</code> só consegue mexer em duas ferramentas de leitura — o resto aparece travado.</p>
       </div>
+
+      <div class="note note--flow">
+        <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
+        <p><b>E a exceção, dita por inteiro:</b> o <code class="icode">--yolo</code> devolve <i>permite</i> antes de tudo isso. Sob ele o agente alcança a própria pasta <code class="icode">~/.aluy/</code> — a configuração de MCP, os hooks, o diário de desfazer e o cofre da credencial. É uma decisão deliberada do modo, não um furo. Fora dele, o piso vale.</p>
+      </div>
+    </section>
+
+    <!-- ===== MÓDULOS ===== -->
+    <section class="section section--flow-md" id="modulos">
+      <div class="block-head">
+        <span class="eyebrow">os módulos</span>
+        <h2>Duas metades, com uma fronteira que o compilador cobra.</h2>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card card-gar">
+          <span class="cfg-kicker">o miolo · sem terminal</span>
+          <p>O ciclo do turno, a montagem de contexto, a catraca, as ferramentas nativas, o contrato do modelo, o MCP e o diário cifrado. Não sabe o que é uma tela.</p>
+          <p class="foot-note">A fronteira não é combinado: uma regra de lint proíbe importar a biblioteca de terminal aqui dentro, e um teste falha se alguém tentar.</p>
+        </div>
+        <div class="card card-gar">
+          <span class="cfg-kicker">a casca · tudo que toca o mundo</span>
+          <p>A interface, os arquivos, o shell, a busca, o keychain, os servidores MCP, os sidecars, os serviços e o Telegram. É aqui que o abstrato vira efeito.</p>
+          <p class="foot-note">Quem depende de quem: a casca conhece o miolo. O miolo não conhece a casca — e é isso que deixa o ciclo testável sem abrir um terminal.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ESTADO ===== -->
+    <section class="section section--flow-md" id="estado">
+      <div class="block-head">
+        <span class="eyebrow">o estado</span>
+        <h2>Onde cada coisa mora.</h2>
+      </div>
+      <p class="lead">Tudo em <code class="icode">~/.aluy/</code>, com pasta 700 e arquivo 600. Não existe banco de dados em lugar nenhum: o índice da memória é um arquivo Markdown que você pode abrir e editar.</p>
+
+      <div class="grid grid-2">
+        <div class="minitile"><h4>sessão e transcrição</h4><p>Um JSON por sessão, com os blocos da conversa e o que você rodou.</p></div>
+        <div class="minitile"><h4>diário de desfazer</h4><p>O estado anterior de cada arquivo, <b>cifrado</b>. A chave é da sessão e morre com o processo — o desfazer não atravessa um reinício.</p></div>
+        <div class="minitile"><h4>memória</h4><p>Markdown: um global e um por projeto. Um fato por linha, editável à mão.</p></div>
+        <div class="minitile"><h4>credencial</h4><p>No cofre do sistema, ou num arquivo cifrado onde não houver — com a chave derivada da máquina, nunca escrita.</p></div>
+        <div class="minitile"><h4>configuração</h4><p>Tema, modelo, backend, perfil, serviços. Mais os hooks e os servidores MCP, cada um no seu arquivo.</p></div>
+        <div class="minitile"><h4>o que você escreve</h4><p>Agentes, comandos, skills, workflows e plugins: arquivos <code>.md</code> que você versiona se quiser.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== BORDAS ===== -->
+    <section class="section section--flow-md" id="bordas">
+      <div class="block-head">
+        <span class="eyebrow">as bordas</span>
+        <h2>Tudo que sai da máquina — a lista inteira.</h2>
+      </div>
+      <p class="lead">Sem asterisco e sem "apenas". Se abre conexão, está aqui.</p>
+
+      <div class="grid grid-2">
+        <div class="card card-gar">
+          <span class="cfg-kicker">a chamada ao modelo</span>
+          <p>Para o provider que você configurou, com a sua chave. Nove no catálogo, mais qualquer endereço que você declarar. A conexão é fixada no IP resolvido e recusa redirecionamento.</p>
+        </div>
+        <div class="card card-gar">
+          <span class="cfg-kicker">a busca na web</span>
+          <p>Um buscador fixo no código para a ferramenta de busca, e o <code>web_fetch</code> para o endereço que o modelo pedir — esse, com a sua aprovação a cada vez.</p>
+        </div>
+        <div class="card card-gar">
+          <span class="cfg-kicker">os servidores MCP</span>
+          <p>Só locais, conversando por entrada e saída padrão — sem porta aberta. O ambiente que eles recebem é mínimo: a sua credencial não vai junto.</p>
+        </div>
+        <div class="card card-gar">
+          <span class="cfg-kicker">os sidecars</span>
+          <p>Memória de longo prazo, fôlego de contexto e modelos locais. Só no laço local, cada um numa porta que o CLI confere antes de reusar, e nenhum recebe credencial.</p>
+        </div>
+        <div class="card card-gar">
+          <span class="cfg-kicker">o Telegram</span>
+          <p>Se você conectar. O endereço do serviço é constante no código, e o destino da mensagem <b>não é argumento do modelo</b> — ele responde sempre no chat corrente. Só os chats que você autorizar viram instrução.</p>
+        </div>
+        <div class="card card-gar">
+          <span class="cfg-kicker">a checagem de versão</span>
+          <p>No npm. E ela <b>instala a atualização sozinha</b>, por decisão de projeto — até você desligar com <code>ALUY_AUTO_UPDATE=0</code>.</p>
+        </div>
+      </div>
+
+      <p class="hint">Um serviço em segundo plano não abre porta de rede: quem quiser acompanhar entra por um soquete local, com permissão de dono. E um backend central é opcional — o código existe, o serviço ainda não está no ar.</p>
+    </section>
+
+    <section class="section section--flow-sm center">
+      <a class="btn btn-secondary" href="help.html">Ler a documentação →</a>
     </section>
   </main>
 
