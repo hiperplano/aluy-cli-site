@@ -47,7 +47,7 @@
   --ui:   'Inter Tight', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   /* layout */
-  --wrap: 1200px;
+  --wrap: 1040px;   /* trilho unico: header, conteudo, rodape e docs */
   --pad:  28px;
   /* superfícies dependentes de tema (o tema escuro troca só os tokens) */
   --bg-blur:     rgba(251,247,240,.86);
@@ -178,8 +178,8 @@ h1, h2, h3 { font-family: var(--ui); margin: 0; letter-spacing: -.02em; }
 .lead { font-size: 19px; line-height: 1.55; color: var(--tx2); margin: 14px 0 0; }
 
 /* hero — left aligned (Features/Commands/Architecture/Install) */
-.hero { max-width: 880px; margin: 0 auto; padding: 56px var(--pad) 8px; }
-.hero h1 { font-weight: 700; font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: 14px 0 0; overflow-wrap: break-word; }
+.hero { max-width: var(--wrap); margin: 0 auto; padding: 56px var(--pad) 8px; }
+.hero h1 { font-weight: 700; font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: 14px 0 0; max-width: 20ch; overflow-wrap: break-word; }
 .hero .lead { max-width: 64ch; }
 
 /* hero — Install page (shares the step column width; no extra side padding) */
@@ -188,7 +188,7 @@ h1, h2, h3 { font-family: var(--ui); margin: 0; letter-spacing: -.02em; }
 .ihero .lead { max-width: 64ch; }
 
 /* hero — centered (Home) */
-.hero-c { text-align: center; padding: 66px var(--pad) 8px; max-width: 920px; margin: 0 auto; }
+.hero-c { text-align: center; padding: 66px var(--pad) 8px; max-width: var(--wrap); margin: 0 auto; }
 .hero-mark { display: block; margin: 0 auto 22px; filter: drop-shadow(0 8px 22px rgba(221,161,63,.18)); }
 .hero-c h1 { font-weight: 700; font-size: clamp(40px, 7vw, 68px); line-height: .99; letter-spacing: -.035em; overflow-wrap: break-word; }
 .hero-c .lead { font-size: 21px; max-width: 48ch; margin: 20px auto 0; }
@@ -428,11 +428,11 @@ kbd { font-family: var(--mono); font-size: 13px; color: var(--tx); background: v
 .lnk:hover { text-decoration: underline; }
 
 /* ---- legal (terms) -------------------------------------------------------- */
-.legal { max-width: 760px; margin: 0 auto; padding: 0 var(--pad); }
+.legal { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); }
 .legal .upd { font-family: var(--mono); font-size: 12.5px; color: var(--mut2); margin-top: 10px; }
-.legal h2 { font-weight: 600; font-size: 21px; letter-spacing: -.01em; color: var(--tx); margin: 34px 0 0; }
-.legal p { font-size: 16.5px; line-height: 1.65; color: var(--tx2); margin: 10px 0 0; }
-.legal ul { margin: 10px 0 0; padding-left: 20px; color: var(--tx2); font-size: 16.5px; line-height: 1.6; }
+.legal h2 { font-weight: 600; font-size: 21px; letter-spacing: -.01em; color: var(--tx); margin: 34px 0 0; max-width: 72ch; }
+.legal p { font-size: 16.5px; line-height: 1.65; color: var(--tx2); margin: 10px 0 0; max-width: 72ch; }
+.legal ul { margin: 10px 0 0; padding-left: 20px; color: var(--tx2); font-size: 16.5px; line-height: 1.6; max-width: 72ch; }
 .legal li { margin: 5px 0; }
 .legal a { color: var(--amber); text-decoration: none; }
 .legal b, .legal strong { color: var(--tx); }
@@ -691,3 +691,79 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
 
 /* pilula de versao: some so no telefone estreito */
 @media (max-width: 460px) { .ver-pill { display: none; } }
+
+/* ============================================================================
+   REFERENCIA DE COMANDOS (comandos.html) — bloco novo, so APPEND.
+   Substitui a apresentacao .cmd-row/.cmd-name/.arg/.cmd-desc/.sub nessa pagina.
+   O que estava ruidoso e o que muda aqui:
+     1. nome e argumento disputavam a mesma linha  -> o argumento desce para uma
+        linha propria, menor e em tom mudo: so o nome tem peso;
+     2. a descricao corria a largura inteira       -> teto de 54ch;
+     3. os subcomandos viravam texto corrido no fim -> viram fichas (.ref-subs);
+     4. default/observacao viravam mais uma frase   -> saem para .ref-meta.
+   Nenhuma regra anterior foi tocada; tudo aqui e classe nova (.ref-*).
+   Tokens existentes so — o tema escuro ja troca os tokens, entao acompanha.
+   ========================================================================== */
+
+.ref-group { margin-bottom: var(--sp-12); }
+.ref-head {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px;
+  margin-bottom: var(--sp-3); padding-left: 2px;
+}
+.ref-head .ic { color: var(--amber); display: flex; align-self: center; }
+.ref-title {
+  font-family: var(--ui); font-weight: 600; font-size: 19px;
+  letter-spacing: -.01em; color: var(--tx); margin: 0;
+}
+.ref-cap { font-size: 14.5px; line-height: 1.4; color: var(--mut2); }
+
+.ref-table {
+  background: var(--s1); border: 1px solid var(--bd);
+  border-radius: 18px; overflow: hidden;
+}
+.ref-row {
+  display: grid; grid-template-columns: minmax(170px, 250px) minmax(0, 1fr);
+  gap: 22px; padding: 16px 20px; align-items: start;
+}
+.ref-row + .ref-row { border-top: 1px solid var(--bd-08); }
+
+/* the signature: the name is the only strong element of the row */
+.ref-sig { min-width: 0; }
+.ref-nm {
+  display: block; font-family: var(--mono); font-weight: 600; font-size: 14.5px;
+  line-height: 1.45; color: var(--amber); overflow-wrap: anywhere;
+}
+.ref-nm .alt { color: var(--mut2); font-weight: 400; }
+.ref-arg {
+  display: block; margin-top: 4px;
+  font-family: var(--mono); font-weight: 400; font-size: 12px; line-height: 1.55;
+  color: var(--mut2); overflow-wrap: anywhere;
+}
+
+/* the definition: short reading line, no matter how wide the viewport */
+.ref-def { min-width: 0; }
+.ref-desc { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--tx2); max-width: 54ch; }
+.ref-desc + .ref-subs, .ref-desc + .ref-meta, .ref-subs + .ref-meta { margin-top: 10px; }
+.ref-meta {
+  margin: 0; font-family: var(--mono); font-size: 11.5px; line-height: 1.5;
+  color: var(--mut2); max-width: 54ch;
+}
+
+/* subcommands and options: discrete tokens, not a sentence */
+.ref-subs { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; list-style: none; margin: 0; padding: 0; }
+.ref-subs .k {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--mut2); margin-right: 3px;
+}
+.ref-subs li {
+  font-family: var(--mono); font-size: 11.5px; line-height: 1; color: var(--tx2);
+  background: var(--s3); border: 1px solid var(--bd);
+  border-radius: 999px; padding: 5px 9px; white-space: nowrap;
+}
+.ref-subs li::before { content: none; }
+
+@media (max-width: 760px) {
+  .ref-row { grid-template-columns: 1fr; gap: 9px; padding: 15px 16px; }
+  .ref-desc, .ref-meta { max-width: none; }
+  .ref-arg { margin-top: 2px; }
+}
