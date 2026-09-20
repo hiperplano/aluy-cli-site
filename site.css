@@ -446,7 +446,9 @@ kbd { font-family: var(--mono); font-size: var(--fs-small); color: var(--tx); ba
 /* Era monoespaçado, 13,5px, em cinza fraco — desenho de anotação curta, usado
    para frases inteiras. Prosa quer a fonte de texto e contraste de leitura. */
 .hint { margin: var(--sp-4) 0 0; font-family: var(--ui); font-size: var(--fs-support); line-height: 1.65; color: var(--tx2); }
-.hint--centro { text-align: center; margin-left: auto; margin-right: auto; }
+/* o fecho da banda: 60ch e a largura minima que ainda da duas linhas
+   com esse texto — abaixo disso viram tres. */
+.hint--centro { text-align: center; max-width: 60ch; margin-left: auto; margin-right: auto; }
 .hint code { font-family: var(--mono); font-size: var(--fs-small); color: var(--tx2); }
 .lnk { color: var(--amber); text-decoration: none; }
 .lnk-b { color: var(--amber); font-weight: 600; text-decoration: none; }
@@ -943,6 +945,7 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
    cuida disso é o TEXTO, não o container — o trilho continua um só. */
 .lead        { max-width: 46ch; }
 .hint        { max-width: 48ch; }
+.hint--centro{ max-width: 60ch; }   /* minima que ainda da duas linhas */
 .note p      { max-width: 48ch; }
 .proof p     { max-width: 48ch; }
 .foot-fine   { max-width: 60ch; }
