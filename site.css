@@ -689,8 +689,6 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
 .foot-ic:hover { color: var(--tx); border-color: var(--bd-strong); background: var(--s2); }
 .foot-ic:hover svg { color: var(--amber); }
 
-/* pilula de versao: some so no telefone estreito */
-@media (max-width: 460px) { .ver-pill { display: none; } }
 
 /* ============================================================================
    REFERENCIA DE COMANDOS (comandos.html) — bloco novo, so APPEND.
@@ -767,3 +765,91 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
   .ref-desc, .ref-meta { max-width: none; }
   .ref-arg { margin-top: 2px; }
 }
+
+/* --- referencia: tabela de 3 colunas (variaveis de ambiente) ---------------
+   A secao existe pra mostrar o PAREAMENTO variavel <-> flag, entao ela ganha
+   uma coluna propria pra flag e uma faixa de cabecalho nomeando as tres.
+   Continua so APPEND; nada acima foi tocado. */
+.ref-hrow {
+  display: grid; grid-template-columns: minmax(150px, 232px) minmax(84px, 132px) minmax(0, 1fr);
+  gap: 18px; padding: 10px 20px;
+  background: var(--s2); border-bottom: 1px solid var(--bd);
+  font-family: var(--mono); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--mut2);
+}
+.ref-row--env { grid-template-columns: minmax(150px, 232px) minmax(84px, 132px) minmax(0, 1fr); gap: 18px; }
+.ref-flag {
+  font-family: var(--mono); font-size: 12px; line-height: 1.45;
+  color: var(--mut2); overflow-wrap: anywhere;
+}
+.ref-flag--none { color: var(--bd-20); }
+.ref-nm .fam { color: var(--mut2); font-weight: 400; }
+
+@media (max-width: 760px) {
+  .ref-hrow { display: none; }
+  .ref-row--env { grid-template-columns: 1fr; gap: 7px; }
+  .ref-flag::before { content: "flag: "; letter-spacing: .08em; text-transform: uppercase; font-size: 10px; }
+  .ref-flag--none { display: none; }
+}
+
+/* --- cabeçalho: faixa morta entre o menu hambúrguer e o trilho cheio -------
+   Os sete elementos do topo somam ~954px com os vãos, mas o menu compacto só
+   entrava em 680px. Entre 700 e 960 o GitHub ficava pendurado fora da caixa.
+   Agora eles saem por ordem de importância, do menos essencial para o mais. */
+@media (max-width: 1039px) {
+  .gh-link { display: none; }          /* o GitHub continua no rodapé */
+}
+@media (max-width: 939px) {
+  .ver-pill { display: none; }         /* a versão volta assim que couber */
+}
+
+@media (max-width: 760px) {
+  .nav { display: none; }
+  .nav-toggle { display: inline-flex; }
+  .nav.open {
+    display: flex; flex-direction: column; align-items: stretch; gap: 2px;
+    position: absolute; left: 0; right: 0; top: 62px; margin: 0;
+    background: var(--bg-blur-9); border-bottom: 1px solid var(--bd-09); padding: 8px var(--pad) 14px;
+  }
+}
+
+/* telefone estreito: o crachá "CLI" ao lado da marca é redundante e custa os
+   pixels que faltavam — em 360px a página rolava na horizontal. */
+@media (max-width: 430px) {
+  .topbar-inner { gap: 10px; }
+  .brand .cli { display: none; }
+}
+
+/* --- referencia: bloco de terminal com espacos preservados -----------------
+   O .codeblock normal deixa o HTML colapsar espacos repetidos, entao coluna
+   alinhada a mao (comentario, arte ASCII) so alinha no fonte, nunca na tela.
+   Este modificador preserva o espaco NOS FILHOS (nao no container, senao as
+   quebras entre <div> viram linha em branco). Usado na anatomia da linha de
+   comando. So APPEND. */
+.codeblock--pre > div { white-space: pre; }
+
+/* --- o alinhamento dos blocos de comando só existia no fonte ---------------
+   `.codeblock` tinha overflow-x mas nunca teve white-space, então o HTML
+   colapsava os espaços e as colunas de comentário desalinhavam — em 103
+   blocos, nas duas línguas. A `.tree` logo acima sempre teve `pre`; aqui
+   faltou. Vai nos filhos, não no container: no container as quebras entre
+   os <div> viram linhas em branco. */
+.codeblock > div { white-space: pre; }
+/* o bloco rola por dentro; ele não pode empurrar a página */
+.codeblock, .tree { max-width: 100%; }
+#docs-content, .docs-sec { min-width: 0; }
+
+/* --- celular: a régua de sistemas do cartão de instalação -------------------
+   `.install-head` é uma linha flex (rótulo + espaçador + abas). Abaixo de
+   ~560px as três abas somam mais do que sobra e a PÁGINA inteira rolava para
+   o lado — 97px de estouro na home e na instalação. Agora a régua quebra para
+   a linha de baixo e ocupa a largura toda. */
+@media (max-width: 560px) {
+  .install-head { flex-wrap: wrap; }
+  .install-head .grow { display: none; }
+  .tabs { width: 100%; justify-content: space-between; }
+  .tab { flex: 1; justify-content: center; padding: 7px 8px; }
+}
+/* nenhum título pode empurrar a página: no celular estreito o h1 da
+   documentação estourava a caixa por não ter quebra de palavra. */
+h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
