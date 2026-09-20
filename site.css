@@ -202,7 +202,7 @@ h1, h2, h3 { font-family: var(--ui); margin: 0; letter-spacing: -.02em; }
 /* hero — centered (Home) */
 .hero-c { text-align: center; padding: 66px var(--pad) 8px; max-width: var(--wrap); margin: 0 auto; }
 .hero-mark { display: block; margin: 0 auto var(--sp-6); filter: drop-shadow(0 8px 22px rgba(221,161,63,.18)); }
-.hero-c h1 { font-weight: 700; font-size: clamp(40px, 7vw, 68px); line-height: .99; letter-spacing: -.035em; overflow-wrap: break-word; }
+.hero-c h1 { font-weight: 700; font-size: clamp(40px, 7vw, 68px); line-height: 1.04; letter-spacing: -.035em; overflow-wrap: break-word; }
 .hero-c .lead { font-size: var(--fs-lead); max-width: 48ch; margin: 20px auto 0; }
 .badge {
   display: inline-flex; align-items: center; gap: 9px;
