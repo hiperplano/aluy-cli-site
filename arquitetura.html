@@ -147,20 +147,20 @@
     <!-- ===== THREE GUARANTEES ===== -->
     <section class="section section--flow-xs">
       <div class="grid grid-3">
-        <div class="card">
+        <div class="card card-gar">
           <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
           <h3>One binary, nothing hidden</h3>
-          <p>Monolithic delivery: you install one binary, <code>aluy</code>. Nothing runs in the background unless <b>you</b> start a service — and then it shows up in <code>aluy service list</code> and stops with one command.</p>
+          <p>You install one binary, <code>aluy</code>. Nothing runs in the background unless <b>you</b> start a service — and then it shows up in <code>aluy service list</code>.</p>
         </div>
-        <div class="card">
+        <div class="card card-gar">
           <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
           <h3>It cannot touch its own install</h3>
-          <p>The agent is forbidden from writing to <code>~/.aluy/</code> — where its own install, config and keys live. The rule is in the path-deny list, not in the prompt, so the model cannot talk its way around it.</p>
+          <p>The agent cannot write to <code>~/.aluy/</code>, where its own install, config and keys live. The rule is in the code, not in the prompt.</p>
         </div>
-        <div class="card">
+        <div class="card card-gar">
           <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2"/></svg></div>
           <h3>Sandbox &amp; limits</h3>
-          <p>OS-level confinement for shell (cgroups, egress policy) and hard ceilings on time and steps for autonomous runs.</p>
+          <p>Confinement from the operating system for the shell, and hard ceilings on time and steps for whatever runs on its own.</p>
         </div>
       </div>
       <div style="text-align:center; margin-top:26px;">
