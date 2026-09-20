@@ -213,6 +213,71 @@
         <h2>Duas metades, com uma fronteira que o compilador cobra.</h2>
       </div>
 
+      <div class="fluxo fluxo--comp">
+        <svg class="fluxo-svg" viewBox="0 0 900 600" role="img" aria-labelledby="comp-t comp-d">
+          <title id="comp-t">Os componentes do Aluy CLI e as portas entre eles</title>
+          <desc id="comp-d">O miolo fica no centro: o ciclo do turno, a montagem de contexto, a catraca, as ferramentas nativas, o contrato do modelo e o diário cifrado. À esquerda entram a interface e o parser da linha de comando. À direita, o miolo declara portas — shell e arquivos, modelo, credencial, pergunta ao humano, servidores externos — e a casca fornece a implementação de cada uma. Todas as setas apontam para dentro.</desc>
+
+          <!-- o miolo -->
+          <g class="c-miolo">
+            <rect x="286" y="72" width="328" height="456" rx="14" />
+            <text class="c-miolo-tit" x="450" y="104">O MIOLO</text>
+            <text class="c-miolo-sub" x="450" y="124">não sabe o que é uma tela</text>
+          </g>
+
+          <g class="c-peca">
+            <rect x="310" y="146" width="280" height="38" rx="8" /><text x="450" y="170">o ciclo do turno</text>
+            <rect x="310" y="192" width="280" height="38" rx="8" /><text x="450" y="216">a montagem do contexto</text>
+            <rect x="310" y="284" width="280" height="38" rx="8" /><text x="450" y="308">as ferramentas nativas</text>
+            <rect x="310" y="330" width="280" height="38" rx="8" /><text x="450" y="354">o contrato do modelo</text>
+            <rect x="310" y="376" width="280" height="38" rx="8" /><text x="450" y="400">o diário cifrado</text>
+            <rect x="310" y="422" width="280" height="38" rx="8" /><text x="450" y="446">o protocolo de tool-call</text>
+          </g>
+          <g class="c-catraca">
+            <rect x="310" y="238" width="280" height="38" rx="8" /><text x="450" y="263">A CATRACA</text>
+          </g>
+
+          <text class="c-selo" x="450" y="502">lint e teste impedem importar terminal aqui dentro</text>
+
+          <!-- entradas, a esquerda -->
+          <g class="c-fora">
+            <rect x="18" y="150" width="200" height="44" rx="9" /><text x="118" y="177">a interface</text>
+            <rect x="18" y="212" width="200" height="44" rx="9" /><text x="118" y="239">a linha de comando</text>
+          </g>
+          <path class="c-liga" d="M 218 172 L 286 172" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 218 234 L 286 234" marker-end="url(#cpa)" />
+
+          <!-- portas, a direita -->
+          <g class="c-porta">
+            <text x="626" y="166">porta de shell e arquivos</text>
+            <text x="626" y="246">porta de modelo</text>
+            <text x="626" y="326">porta de credencial</text>
+            <text x="626" y="406">porta de pergunta</text>
+            <text x="626" y="486">porta de servidores</text>
+          </g>
+          <g class="c-fora">
+            <rect x="682" y="142" width="206" height="44" rx="9" /><text x="785" y="169">o shell e o disco</text>
+            <rect x="682" y="222" width="206" height="44" rx="9" /><text x="785" y="249">nove providers</text>
+            <rect x="682" y="302" width="206" height="44" rx="9" /><text x="785" y="329">keychain ou cofre cifrado</text>
+            <rect x="682" y="382" width="206" height="44" rx="9" /><text x="785" y="409">a interface pergunta a você</text>
+            <rect x="682" y="462" width="206" height="44" rx="9" /><text x="785" y="489">MCP, sidecars, Telegram</text>
+          </g>
+          <path class="c-liga" d="M 682 164 L 614 164" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 682 244 L 614 244" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 682 324 L 614 324" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 682 404 L 614 404" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 682 484 L 614 484" marker-end="url(#cpa)" />
+
+          <text class="c-regra" x="450" y="562">a casca conhece o miolo · o miolo só conhece os contratos</text>
+
+          <defs>
+            <marker id="cpa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path class="f-ponta" d="M 0 0 L 10 5 L 0 10 z" />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+
       <div class="grid grid-2">
         <div class="card card-gar">
           <span class="cfg-kicker">o miolo · sem terminal</span>
@@ -233,7 +298,7 @@
         <span class="eyebrow">o estado</span>
         <h2>Onde cada coisa mora.</h2>
       </div>
-      <p class="lead">Tudo em <code class="icode">~/.aluy/</code>, com pasta 700 e arquivo 600. Não existe banco de dados em lugar nenhum: o índice da memória é um arquivo Markdown que você pode abrir e editar.</p>
+      <p class="lead">Tudo em <code class="icode">~/.aluy/</code>, com permissão só para o seu usuário — nenhuma outra conta da máquina entra lá. Não existe banco de dados em lugar nenhum: o índice da memória é um arquivo Markdown que você pode abrir e editar.</p>
 
       <div class="grid grid-2">
         <div class="minitile"><h4>sessão e transcrição</h4><p>Um JSON por sessão, com os blocos da conversa e o que você rodou.</p></div>
@@ -280,7 +345,7 @@
         </div>
       </div>
 
-      <p class="hint">Um serviço em segundo plano não abre porta de rede: quem quiser acompanhar entra por um soquete local, com permissão de dono. E um backend central é opcional — o código existe, o serviço ainda não está no ar.</p>
+      <p class="hint">Um serviço em segundo plano não abre porta de rede: quem quiser acompanhar entra por um canal que existe só dentro da máquina, e só para quem está logado como você. E um backend central é opcional — o código existe, o serviço ainda não está no ar.</p>
     </section>
 
     <section class="section section--flow-sm center">
