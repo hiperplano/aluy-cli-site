@@ -179,7 +179,7 @@ img { display: block; }
   font-family: var(--mono); font-weight: 500; font-size: 11px; letter-spacing: .16em;
   text-transform: uppercase; color: var(--amber);
 }
-.eyebrow--sm { font-size: 10.5px; }
+.eyebrow--sm { font-size: 11px; }
 .grad { background: var(--amber-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 
 /* ---- headings & copy ------------------------------------------------------ */
@@ -189,12 +189,12 @@ h1, h2, h3 { font-family: var(--ui); margin: 0; letter-spacing: -.02em; }
 /* hero — left aligned (Features/Commands/Architecture/Install) */
 .hero { max-width: var(--wrap); margin: 0 auto; padding: 56px var(--pad) 8px; }
 .hero h1 { font-weight: 700; font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: 14px 0 0; max-width: 20ch; overflow-wrap: break-word; }
-.hero .lead { max-width: 64ch; }
+.hero .lead { max-width: 48ch; }
 
 /* hero — Install page (shares the step column width; no extra side padding) */
 .ihero { padding: 56px 0 8px; }
 .ihero h1 { font-weight: 700; font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: 14px 0 0; overflow-wrap: break-word; }
-.ihero .lead { max-width: 64ch; }
+.ihero .lead { max-width: 48ch; }
 
 /* hero — centered (Home) */
 .hero-c { text-align: center; padding: 66px var(--pad) 8px; max-width: var(--wrap); margin: 0 auto; }
@@ -234,7 +234,7 @@ b { color: var(--tx); font-weight: 600; }
    quebrava a âncora da margem no meio da leitura: título no centro, tudo o
    mais encostado na esquerda. Agora cada página é coerente consigo mesma, e
    só a home, que é centrada de ponta a ponta, mantém o centro. */
-.block-head { text-align: left; margin-bottom: 32px; }
+.block-head { text-align: left; margin-bottom: var(--sp-8); }
 .block-head--centro { text-align: center; }
 .block-head h2 { font-weight: 700; font-size: 36px; margin: 12px 0 0; }
 .block-head h2.lg { font-size: 40px; }
@@ -314,7 +314,7 @@ b { color: var(--tx); font-weight: 600; }
 .install-meta .hi { color: var(--tx2); }
 
 /* ---- "your first minute" terminal block ----------------------------------- */
-.run-head { display: flex; align-items: center; gap: 10px; margin: 0 4px 10px; }
+.run-head { display: flex; align-items: center; gap: 10px; margin: 0 0 10px; }
 .run-rule { flex: 1; height: 1px; background: var(--bd-08); }
 .run {
   background: var(--code-bg); border: 0; border-radius: 20px; padding: 20px 22px; color: var(--code-tx);
@@ -333,7 +333,7 @@ b { color: var(--tx); font-weight: 600; }
   background: linear-gradient(180deg, var(--warm), var(--s1));
   border: 1px solid var(--bd); border-radius: 26px; padding: 34px;
 }
-.strip-head { text-align: center; margin-bottom: 22px; }
+.strip-head { margin-bottom: 22px; }
 .strip-head h3 { font-weight: 700; font-size: 29px; margin: 10px 0 0; }
 .tile { background: var(--s2); border: 1px solid var(--bd); border-radius: 20px; padding: 20px; }
 .tile--dashed { border: 1px dashed var(--bd-20); }
@@ -447,9 +447,9 @@ kbd { font-family: var(--mono); font-size: 13px; color: var(--tx); background: v
 /* ---- legal (terms) -------------------------------------------------------- */
 .legal { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); }
 .legal .upd { font-family: var(--mono); font-size: 12.5px; color: var(--mut2); margin-top: 10px; }
-.legal h2 { font-weight: 600; font-size: 21px; letter-spacing: -.01em; color: var(--tx); margin: 34px 0 0; max-width: 72ch; }
-.legal p { font-size: 16.5px; line-height: 1.65; color: var(--tx2); margin: 10px 0 0; max-width: 72ch; }
-.legal ul { margin: 10px 0 0; padding-left: 20px; color: var(--tx2); font-size: 16.5px; line-height: 1.6; max-width: 72ch; }
+.legal h2 { font-weight: 600; font-size: 21px; letter-spacing: -.01em; color: var(--tx); margin: 34px 0 0; max-width: 52ch; }
+.legal p { font-size: 16.5px; line-height: 1.65; color: var(--tx2); margin: 10px 0 0; max-width: 52ch; }
+.legal ul { margin: 10px 0 0; padding-left: 20px; color: var(--tx2); font-size: 16.5px; line-height: 1.6; max-width: 52ch; }
 .legal li { margin: 5px 0; }
 .legal a { color: var(--amber); text-decoration: none; }
 .legal b, .legal strong { color: var(--tx); }
@@ -509,10 +509,10 @@ kbd { font-family: var(--mono); font-size: 13px; color: var(--tx); background: v
 .docs-sec.first { margin-top: 18px; }
 .docs-sec h2 { font-weight: 700; font-size: 30px; margin: 8px 0 0; }
 .docs-sec h3 { font-weight: 600; font-size: 18px; margin: 26px 0 6px; color: var(--tx); letter-spacing: 0; }
-.docs-sec p { margin: 12px 0 0; font-size: 16.5px; line-height: 1.65; color: var(--tx2); max-width: 68ch; }
+.docs-sec p { margin: 12px 0 0; font-size: 16.5px; line-height: 1.65; color: var(--tx2); max-width: 50ch; }
 .codeblock { background: var(--code-bg); border: 0; border-radius: 16px; padding: 16px 18px; font-family: var(--mono); font-size: 14.5px; color: var(--code-tx); line-height: 1.9; margin-top: 14px; overflow-x: auto; }
 .codeblock .pr { color: var(--amber-solid); } .codeblock .cm { color: var(--code-cm); } .codeblock .str { color: var(--teal-br); } .codeblock .arg { color: #9CC7E8; }
-.docs-list { margin: 14px 0 0; padding: 0; list-style: none; max-width: 68ch; }
+.docs-list { margin: 14px 0 0; padding: 0; list-style: none; max-width: 50ch; }
 .docs-list li { position: relative; padding: 6px 0 6px 22px; color: var(--tx2); font-size: 16px; line-height: 1.55; }
 .docs-list li::before { content: ""; position: absolute; left: 4px; top: 14px; width: 6px; height: 6px; border-radius: 999px; background: var(--amber-solid); }
 .docs-link { display: inline-block; margin-top: 16px; font-family: var(--mono); font-size: 14px; color: var(--amber); text-decoration: none; }
@@ -624,7 +624,7 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
   background: var(--s2); border: 1px solid var(--bd); border-radius: 16px;
   padding: var(--sp-6) var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-3);
 }
-.nots-list { display: flex; flex-direction: column; gap: 10px; font-size: 16px; line-height: 1.5; }
+.nots-list { display: flex; flex-direction: column; gap: 10px; font-size: 16px; line-height: 1.5; max-width: 52ch; }
 .nots-list b { font-weight: 600; }
 .nots-list span { color: var(--tx2); }
 
@@ -697,7 +697,7 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
 .card { padding: var(--sp-6); }
 .grid { gap: var(--sp-4); }
 .grid-4 { gap: var(--sp-4); }
-.block-head { margin-bottom: var(--sp-8); }
+
 .cta-row { gap: var(--sp-3); margin-top: var(--sp-6); }
 .cta-row--flow { margin-top: var(--sp-8); }
 .note--flow { margin-top: var(--sp-3); }
@@ -734,7 +734,7 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
    Tokens existentes so — o tema escuro ja troca os tokens, entao acompanha.
    ========================================================================== */
 
-.ref-group { margin-bottom: var(--sp-12); }
+.ref-group { margin-bottom: var(--sp-8); }
 .ref-head {
   display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px;
   margin-bottom: var(--sp-3);
@@ -771,11 +771,11 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
 
 /* the definition: short reading line, no matter how wide the viewport */
 .ref-def { min-width: 0; }
-.ref-desc { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--tx2); max-width: 54ch; }
+.ref-desc { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--tx2); max-width: 50ch; }
 .ref-desc + .ref-subs, .ref-desc + .ref-meta, .ref-subs + .ref-meta { margin-top: 10px; }
 .ref-meta {
   margin: 0; font-family: var(--mono); font-size: 11.5px; line-height: 1.5;
-  color: var(--mut2); max-width: 54ch;
+  color: var(--mut2); max-width: 50ch;
 }
 
 /* subcommands and options: discrete tokens, not a sentence */
@@ -910,12 +910,12 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
    a largura inteira do trilho. Medido com a largura real do caractere, havia
    linha de 139 caracteres. O conforto de leitura fica entre 60 e 75. Quem
    cuida disso é o TEXTO, não o container — o trilho continua um só. */
-.lead        { max-width: 68ch; }
-.hint        { max-width: 72ch; }
-.note p      { max-width: 72ch; }
-.proof p     { max-width: 72ch; }
-.foot-fine   { max-width: 88ch; }
-.docs-sec p, .docs-intro { max-width: 72ch; }
+.lead        { max-width: 50ch; }
+.hint        { max-width: 52ch; }
+.note p      { max-width: 52ch; }
+.proof p     { max-width: 52ch; }
+.foot-fine   { max-width: 64ch; }
+.docs-sec p, .docs-intro { max-width: 52ch; }
 
 .proof-video {
   display: block; width: 100%; height: 100%;
@@ -1043,7 +1043,7 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
 .card-gar h3 { font-size: 16px; font-weight: 600; letter-spacing: -.01em; color: var(--tx); }
 .card-gar h3 + p { margin-top: 9px; }
 /* a caixa de aviso corria a largura inteira: 330px de âmbar vazio no desktop */
-.note p { max-width: 72ch; }
+.note p { max-width: 52ch; }
 /* a abertura encostava na grade */
 .lead + .grid { margin-top: var(--sp-6); }
 
@@ -1058,7 +1058,7 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
 .block-head--centro + .lead + .hint,
 .block-head--centro + p {
   text-align: center;
-  max-width: 62ch;
+  max-width: 46ch;
   margin-left: auto;
   margin-right: auto;
 }
@@ -1069,3 +1069,11 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
    caixa DAS PORTAS — que é o ponto da afirmação — com a derivação marcada. */
 .z-tronco { fill: none; stroke: var(--amber-solid); stroke-width: 1.8; }
 .z-no { fill: var(--amber-solid); }
+
+/* --- o ritmo no tablet ------------------------------------------------------
+   Abaixo de 860px o respiro das seções encolhe, mas a margem do título de
+   seção era pixel fixo: a razão entre o vão de seção e o vão interno caía de
+   2,0-3,4 para 1,25, e nada mais marcava onde uma seção começava. */
+@media (max-width: 860px) {
+  .block-head { margin-bottom: var(--sp-6); }
+}
