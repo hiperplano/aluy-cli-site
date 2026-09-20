@@ -583,9 +583,12 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
 .proof-frame {
   position: relative; border-radius: 14px; overflow: hidden;
   background: var(--code-bg); border: 1px solid var(--code-head);
-  /* a proporção é a do arquivo (1920x1018), não 16/9: forçar 16/9
-     deixaria tarja preta em cima e embaixo. */
-  aspect-ratio: 1920 / 1018;
+  /* A proporção não é 16/9 e nem a do arquivo: o topo do vídeo tem 28px de
+     barra de abas do WezTerm, que não é o produto. Medi o perfil de cor linha
+     a linha — até y=28 são tons neutros (51,51,51 … 26,26,26) e a partir dali
+     começam os tons quentes do terminal. Cortamos 30px pelo enquadramento, sem
+     reprocessar o arquivo: 1018 - 30 = 988. */
+  aspect-ratio: 1920 / 988;
 }
 .proof-play {
   width: 64px; height: 64px; border-radius: 999px; border: 1px solid var(--code-dot);
@@ -893,4 +896,12 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
 .foot-fine   { max-width: 88ch; }
 .docs-sec p, .docs-intro { max-width: 72ch; }
 
-.proof-video { display: block; width: 100%; height: 100%; object-fit: contain; background: var(--code-bg); }
+.proof-video {
+  display: block; width: 100%; height: 100%;
+  /* `cover` + ancoragem embaixo = o excedente sai por CIMA, que é onde está a
+     barra de abas. `contain` mostraria tudo, inclusive o que queremos cortar. */
+  object-fit: cover; object-position: center bottom;
+  background: var(--code-bg);
+  /* o âmbar do terminal fica apagado depois da compressão */
+  filter: saturate(1.32) contrast(1.06);
+}
