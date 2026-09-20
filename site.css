@@ -340,9 +340,9 @@ b { color: var(--tx); font-weight: 600; }
 }
 .strip-head { margin-bottom: var(--sp-6); }
 .strip-head h3 { font-weight: 700; font-size: var(--fs-h1); margin: var(--sp-2) 0 0; }
-.tile { background: var(--s2); border: 1px solid var(--bd); border-radius: 20px; padding: 20px; }
+.tile { background: var(--s2); border: 1px solid var(--bd); border-radius: 20px; padding: var(--sp-6); }
 .tile--dashed { border: 1px dashed var(--bd-20); }
-.tile-head { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
+.tile-head { display: flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-2); }
 .tile-head .ic { display: flex; }
 .tile-kicker { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .1em; text-transform: uppercase; }
 .tile p { margin: 0; font-size: var(--fs-support); line-height: 1.55; color: var(--tx2); }
