@@ -34,10 +34,9 @@
   /* text */
   --tx:        #171512;
   --tx2:       #6B6459;
-  --mut:       #7A7268;
-  --mut2:      #8A8279;
-  --faint:     #8A8279;
-  --faint2:    #A39A8D;
+  /* mut/mut2: corrigidos para passar em 4.5:1 sobre --bg (eram 4.43 e 3.54) */
+  --mut:       #675F54;
+  --mut2:      #6A6358;
   /* semantic */
   --green:     #2F6B48;
   --green-br:  #82CF9E;   /* on dark code surfaces */
@@ -50,13 +49,19 @@
   /* layout */
   --wrap: 1200px;
   --pad:  28px;
+  /* superfícies dependentes de tema (o tema escuro troca só os tokens) */
+  --bg-blur:     rgba(251,247,240,.86);
+  --bg-blur-9:   rgba(251,247,240,.97);
+  --scroll:      rgba(23,21,18,.20);
+  --scroll-hov:  rgba(23,21,18,.34);
+  --logo-invert: 0;
 }
 
-* { box-sizing: border-box; scrollbar-width: thin; scrollbar-color: rgba(23,21,18,.20) transparent; }
+* { box-sizing: border-box; scrollbar-width: thin; scrollbar-color: var(--scroll) transparent; }
 ::-webkit-scrollbar { width: 11px; height: 11px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(23,21,18,.20); border-radius: 999px; border: 3px solid transparent; background-clip: padding-box; }
-::-webkit-scrollbar-thumb:hover { background: rgba(23,21,18,.34); border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb { background: var(--scroll); border-radius: 999px; border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--scroll-hov); border: 3px solid transparent; background-clip: padding-box; }
 
 html { scroll-behavior: smooth; zoom: 1.1; }
 body {
@@ -92,7 +97,7 @@ img { display: block; }
 /* ---- header --------------------------------------------------------------- */
 .topbar {
   position: sticky; top: 0; z-index: 20;
-  background: rgba(251,247,240,.86);
+  background: var(--bg-blur);
   backdrop-filter: saturate(1.4) blur(14px);
   -webkit-backdrop-filter: saturate(1.4) blur(14px);
   border-bottom: 1px solid var(--bd-09);
@@ -530,11 +535,113 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
   .nav.open {
     display: flex; flex-direction: column; align-items: stretch; gap: 2px;
     position: absolute; left: 0; right: 0; top: 62px; margin: 0;
-    background: rgba(251,247,240,.97); border-bottom: 1px solid var(--bd-09); padding: 8px var(--pad) 14px;
+    background: var(--bg-blur-9); border-bottom: 1px solid var(--bd-09); padding: 8px var(--pad) 14px;
   }
   .hero h1, .hero-c h1 { font-size: 34px; }
   .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
   .cmd-row { grid-template-columns: 1fr; gap: 6px; }
   .cta-row { flex-direction: column; align-items: stretch; }
   .foot-inner { flex-direction: column; align-items: flex-start; }
+}
+
+/* ============================================================================
+   ONDA 1 — escala, contraste e tema escuro (proposta de 2026-09-20)
+   ========================================================================== */
+
+/* --- escala: 7 tamanhos de texto, espaçamento em múltiplos de 8 ------------ */
+:root {
+  --fs-display: 56px; --fs-h1: 40px; --fs-h2: 28px; --fs-h3: 20px;
+  --fs-body: 17px;    --fs-support: 15px; --fs-micro: 13px;
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px; --sp-6: 24px;
+  --sp-8: 32px; --sp-12: 48px; --sp-16: 64px; --sp-24: 96px;
+}
+/* ritmo vertical das seções: substitui os paddings escritos no HTML */
+.section--flow    { padding-top: var(--sp-24); }
+.section--flow-sm { padding-top: var(--sp-16); }
+.section--flow-xs { padding-top: var(--sp-8); }
+@media (max-width: 860px) {
+  .section--flow    { padding-top: var(--sp-16); }
+  .section--flow-sm { padding-top: var(--sp-12); }
+}
+
+/* o wordmark é monocromático: no tema escuro ele inverte */
+.brand img, .foot-inner img { filter: invert(var(--logo-invert)); }
+
+/* --- bloco de prova (gravação do produto rodando) -------------------------- */
+.proof { display: flex; flex-direction: column; gap: var(--sp-6); }
+.proof-head { display: flex; align-items: baseline; gap: var(--sp-4); }
+.proof-rule { flex: 1; height: 1px; background: var(--bd); }
+.proof h2 { font-size: var(--fs-h2); font-weight: 600; line-height: 1.2; }
+.proof-frame {
+  position: relative; aspect-ratio: 16 / 9; border-radius: 14px;
+  background: var(--code-bg); border: 1px solid var(--code-head);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--sp-4); text-align: center; padding: var(--sp-6);
+}
+.proof-play {
+  width: 64px; height: 64px; border-radius: 999px; border: 1px solid var(--code-dot);
+  display: inline-flex; align-items: center; justify-content: center; color: var(--code-tx);
+}
+.proof-cap { font-family: var(--mono); font-size: var(--fs-micro); color: var(--code-tx2); }
+.proof-sub { font-size: 14px; color: var(--code-cm); }
+.proof p { margin: 0; font-size: var(--fs-support); line-height: 1.55; color: var(--mut); }
+
+/* --- o que não é ----------------------------------------------------------- */
+.nots {
+  background: var(--s2); border: 1px solid var(--bd); border-radius: 16px;
+  padding: var(--sp-6) var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-3);
+}
+.nots-list { display: flex; flex-direction: column; gap: 10px; font-size: 16px; line-height: 1.5; }
+.nots-list b { font-weight: 600; }
+.nots-list span { color: var(--tx2); }
+
+/* --- rodapé: versão, changelog, issues, licença ---------------------------- */
+.foot-meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-4);
+  font-family: var(--mono); font-size: 12px; color: var(--mut2);
+}
+.foot-meta a { color: var(--mut2); text-decoration: none; }
+.foot-meta a:hover { color: var(--tx); }
+
+/* --- botão de tema --------------------------------------------------------- */
+.theme-toggle {
+  width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center;
+  color: var(--mut); background: var(--s1); border: 1px solid var(--bd-20);
+  border-radius: 9px; cursor: pointer;
+}
+.theme-toggle:hover { color: var(--tx); border-color: var(--bd-strong); }
+.theme-toggle .ic-dark { display: none; }
+:root[data-theme="dark"] .theme-toggle .ic-dark { display: block; }
+:root[data-theme="dark"] .theme-toggle .ic-light { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .ic-dark { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .ic-light { display: none; }
+}
+
+/* --- tema escuro: só tokens ------------------------------------------------ */
+:root[data-theme="dark"] {
+  --bg: #14120F; --s1: #1B1814; --s2: #211E19; --s3: #262119;
+  --bd: #2A251E; --bd-08: #231F19; --bd-09: #2A251E; --bd-strong: #3A342B; --bd-20: #3A342B;
+  --code-bg: #0E0C0A; --code-head: #171512;
+  --amber: #E8B765; --amber-bg: #2A2013; --amber-bd: #4A3A1E;
+  --amber-grad: linear-gradient(180deg,#F0CE93,#DDA13F);
+  --tx: #F7F3EC; --tx2: #CFC8BE; --mut: #A79F93; --mut2: #A79F93;
+  --green: #82CF9E; --teal: #5BA8A2;
+  --bg-blur: rgba(20,18,15,.86); --bg-blur-9: rgba(20,18,15,.97);
+  --scroll: rgba(247,243,236,.22); --scroll-hov: rgba(247,243,236,.34);
+  --logo-invert: 1;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14120F; --s1: #1B1814; --s2: #211E19; --s3: #262119;
+    --bd: #2A251E; --bd-08: #231F19; --bd-09: #2A251E; --bd-strong: #3A342B; --bd-20: #3A342B;
+    --code-bg: #0E0C0A; --code-head: #171512;
+    --amber: #E8B765; --amber-bg: #2A2013; --amber-bd: #4A3A1E;
+    --amber-grad: linear-gradient(180deg,#F0CE93,#DDA13F);
+    --tx: #F7F3EC; --tx2: #CFC8BE; --mut: #A79F93; --mut2: #A79F93;
+    --green: #82CF9E; --teal: #5BA8A2;
+    --bg-blur: rgba(20,18,15,.86); --bg-blur-9: rgba(20,18,15,.97);
+    --scroll: rgba(247,243,236,.22); --scroll-hov: rgba(247,243,236,.34);
+    --logo-invert: 1;
+  }
 }

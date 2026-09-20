@@ -58,11 +58,14 @@
     var lbl  = btn.querySelector(".copy-label");
     var icon = btn.querySelector(".copy-icon");
     var timer = null;
+    // o rótulo escrito no HTML manda: o terminal diz "copiar", o CTA do hero
+    // diz "Copiar comando de instalação".
+    var base = (lbl && lbl.textContent.trim()) || L.copy;
     function reset() {
       if (timer) { clearTimeout(timer); timer = null; }
       btn.classList.remove("copied");
       if (icon) icon.innerHTML = ICON_COPY;
-      if (lbl) lbl.textContent = L.copy;
+      if (lbl) lbl.textContent = base;
     }
     function done() {
       btn.classList.add("copied");

@@ -54,3 +54,28 @@
       .catch(function () { /* keep static fallback */ });
   });
 })();
+
+/* --- tema claro/escuro -----------------------------------------------------
+   Segue a preferência do sistema por padrão. O botão .theme-toggle fixa a
+   escolha em data-theme e guarda no localStorage. */
+(function () {
+  "use strict";
+  var KEY = "aluy-site-theme";
+  var root = document.documentElement;
+  try {
+    var salvo = localStorage.getItem(KEY);
+    if (salvo === "dark" || salvo === "light") root.setAttribute("data-theme", salvo);
+  } catch (_) {}
+  document.addEventListener("DOMContentLoaded", function () {
+    var btn = document.querySelector(".theme-toggle");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var escuroAgora = root.getAttribute("data-theme") === "dark" ||
+        (!root.hasAttribute("data-theme") &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches);
+      var proximo = escuroAgora ? "light" : "dark";
+      root.setAttribute("data-theme", proximo);
+      try { localStorage.setItem(KEY, proximo); } catch (_) {}
+    });
+  });
+})();
