@@ -157,7 +157,7 @@
           <span class="ref-nm">--no-subagents</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Turns off parallel sub-agents. By default they run at depth 1 or less, inheriting the parent’s permissions and sharing one ceiling.</p>
+          <p class="ref-desc">Turns off parallel subagents. By default they run at depth 1 or less, inheriting the parent’s permissions and sharing one ceiling.</p>
         </div>
       </div>
       </div>
@@ -182,7 +182,7 @@
           <span class="ref-arg">text|json|stream-json</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">How the result comes back: just the text, a single-line object, or a live NDJSON event stream.</p>
+          <p class="ref-desc">How the result comes back: just the text, a single JSON object, or a live stream of events, one JSON object per line.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy -p "list the open TODOs" --output-format json</div>
           <p class="ref-meta">Default: text.</p>
         </div>
@@ -203,7 +203,7 @@
           <p class="ref-desc">Runs the goal autonomously in cycles — the headless form of /cycle. A ceiling is required: iterations with the first, wall-clock time with the second.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy -p "fix the failing tests" --cycles 5</div>
           <ul class="ref-subs"><span class="k">durations</span><li>30m</li><li>2h</li></ul>
-          <p class="ref-meta">Both are clamped to hard limits. --cycle is the bare form.</p>
+          <p class="ref-meta">Both are capped at a hard limit you cannot raise. --cycle is the bare form.</p>
         </div>
       </div>
       </div>
@@ -251,7 +251,7 @@
           <span class="ref-arg">local|broker</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Local talks straight to your provider with your own credential — no middleman, no metering. Broker routes through a central backend, which is not available today.</p>
+          <p class="ref-desc">Local calls your provider directly with your own credential; nothing is routed through or counted by Aluy. Broker routes through a central backend, which is not available today.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --backend local</div>
           <p class="ref-meta">Default: local.</p>
         </div>
@@ -293,7 +293,7 @@
           <span class="ref-arg">&lt;url&gt;</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">The endpoint to call, for an OpenAI-compatible provider or a local runtime. Guarded against SSRF.</p>
+          <p class="ref-desc">The endpoint to call, for an OpenAI-compatible provider or a local runtime. Aluy refuses addresses that would make it call back into your own private network.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --local-base-url http://127.0.0.1:11434/v1</div>
           <p class="ref-meta">The four --local-* flags need --backend local, and fall back to ALUY_LOCAL_* or config.</p>
         </div>
@@ -312,7 +312,7 @@
         <div class="ref-def">
           <p class="ref-desc">The session token budget.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --max-tokens 250000</div>
-          <p class="ref-meta">Default: 1000000. Clamped.</p>
+          <p class="ref-meta">Default: 1000000. Capped at a hard limit.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -323,7 +323,7 @@
         <div class="ref-def">
           <p class="ref-desc">Caps the model → tool → observation loop.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --max-iterations 40</div>
-          <p class="ref-meta">Default: 300. Clamped.</p>
+          <p class="ref-meta">Default: 300. Capped at a hard limit.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -334,7 +334,7 @@
         <div class="ref-def">
           <p class="ref-desc">Caps the output of a single model call. On reaching any of these three ceilings, the run pauses and asks whether to continue or stop.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy --max-output-tokens 8000</div>
-          <p class="ref-meta">Clamped.</p>
+          <p class="ref-meta">Capped at a hard limit.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -397,7 +397,7 @@
           <span class="ref-nm">--fullscreen</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Starts in Cockpit mode, on the terminal’s alternate screen.</p>
+          <p class="ref-desc">Starts in Cockpit mode, which takes over the whole terminal and restores what was there when you leave.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -413,7 +413,7 @@
           <span class="ref-nm">--ascii</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Uses a safe glyph profile, to avoid Unicode "tofu" on terminals with narrow font coverage.</p>
+          <p class="ref-desc">Switches to a safe symbol set, for fonts that show empty boxes instead of symbols.</p>
           <p class="ref-meta">Same as ALUY_SAFE_GLYPHS=1.</p>
         </div>
       </div>
@@ -437,7 +437,7 @@
           <span class="ref-arg">[--no-agent]</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Provisions the local sidecars in user space — it offers each one and you choose. By default it installs them through its own agent; --no-agent takes the direct, deterministic path with no model involved.</p>
+          <p class="ref-desc">Installs the optional local programs — memory, context compression and local models — under your own user account. It offers each one and you choose. By default it installs them through its own agent; --no-agent takes the direct, deterministic path with no model involved.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy bootstrap --no-agent</div>
           <ul class="ref-subs"><span class="k">sidecars</span><li>mem0</li><li>headroom</li><li>ollama</li></ul>
         </div>
@@ -457,7 +457,7 @@
         <div class="ref-def">
           <p class="ref-desc">Authenticates. With a provider, it stores that provider’s API key in your vault; with OAuth, it signs you in with a subscription instead. With neither, it runs the device flow of the central backend.</p>
           <div class="ref-ex"><span class="pr">$</span> aluy login --provider anthropic</div>
-          <ul class="ref-subs"><span class="k">options</span><li>--provider &lt;p&gt;</li><li>--oauth</li><li>--token &lt;PAT&gt;</li><li>--org &lt;id&gt;</li><li>--device</li></ul>
+          <ul class="ref-subs"><span class="k">options</span><li>--provider &lt;p&gt;</li><li>--oauth</li><li>--token &lt;token&gt;</li><li>--org &lt;id&gt;</li><li>--device</li></ul>
           <p class="ref-meta">Subscription OAuth in a non-official client is a grey area in the provider’s terms — it is your call. --token is for CI.</p>
         </div>
       </div>
@@ -524,8 +524,8 @@
           <span class="ref-arg">&lt;when&gt; "&lt;task&gt;"</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Schedules persistent headless tasks through the OS scheduler, with no daemon. Each run executes headlessly, through the permission lock.</p>
-          <div class="ref-ex"><span class="pr">$</span> aluy cron add "0 9 * * 1-5" "summarise the commits from yesterday"</div>
+          <p class="ref-desc">Schedules persistent headless tasks through the OS scheduler, with no daemon. Each run executes headlessly, through the permission gate.</p>
+          <div class="ref-ex"><span class="pr">$</span> aluy cron add "0 9 * * 1-5" "summarize the commits from yesterday"</div>
           <ul class="ref-subs"><span class="k">subcommands</span><li>add</li><li>list</li><li>edit</li><li>enable</li><li>disable</li><li>rm</li><li>run</li></ul>
           <p class="ref-meta">Live on Linux (crontab); Windows and macOS to come. "add" takes a 5-field cron, such as "0 9 * * 1-5".</p>
         </div>
@@ -789,7 +789,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_MAESTRO_OFF</span></div>
         <div class="ref-flag ref-flag--none" aria-label="no equivalent flag">&mdash;</div>
-        <div class="ref-def"><p class="ref-desc">The kill switch for the supervisor — the layer that watches the run and, when the sidecars are up, uses them to steer it. It never touches the permission lock.</p></div>
+        <div class="ref-def"><p class="ref-desc">The kill switch for the supervisor — the layer that watches the run and, when the sidecars are up, uses them to steer it. It never touches the permission gate.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_MAESTRO</span></div>
@@ -896,7 +896,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_SYNC_OUTPUT</span></div>
         <div class="ref-flag ref-flag--none" aria-label="no equivalent flag">&mdash;</div>
-        <div class="ref-def"><p class="ref-desc">Synchronized output, which stops terminals tearing mid-repaint.</p></div>
+        <div class="ref-def"><p class="ref-desc">Sends each screen update in one piece, so the interface does not flicker while it redraws.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_SET_BG</span></div>
@@ -906,7 +906,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_OSC11_TIMEOUT_MS</span></div>
         <div class="ref-flag ref-flag--none" aria-label="no equivalent flag">&mdash;</div>
-        <div class="ref-def"><p class="ref-desc">How long to wait while asking the terminal what its background colour is.</p></div>
+        <div class="ref-def"><p class="ref-desc">How long to wait while asking the terminal what its background color is.</p></div>
       </div>
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">ALUY_PRINT_VERBOSE</span></div>
@@ -916,7 +916,7 @@
       <div class="ref-row ref-row--env">
         <div class="ref-sig"><span class="ref-nm">NO_COLOR</span></div>
         <div class="ref-flag ref-flag--none" aria-label="no equivalent flag">&mdash;</div>
-        <div class="ref-def"><p class="ref-desc">Not an Aluy variable, but honoured: it turns colour off everywhere.</p></div>
+        <div class="ref-def"><p class="ref-desc">Not an Aluy variable, but honored: it turns color off everywhere.</p></div>
       </div>
       </div>
     </div>
@@ -1052,7 +1052,7 @@
       </div>
 
     <div class="ref-group">
-      <div class="ref-head"><h2 class="ref-title">Put the agent to work</h2><span class="ref-cap">— start something and walk away.</span></div>
+      <div class="ref-head"><h2 class="ref-title">Put the agent to work</h2><span class="ref-cap">— start something that finishes without you.</span></div>
       <div class="ref-table">
       <div class="ref-row">
         <div class="ref-sig">
@@ -1188,7 +1188,7 @@
           <span class="ref-arg">[run &lt;name&gt;|use]</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">Activity flows that coordinate the agent. Bare, it lists them.</p>
+          <p class="ref-desc">A numbered list of steps the agent runs in order, each one optionally handed to a subagent. On its own, it lists the ones it found.</p>
           <div class="ref-ex"><span class="pr">$</span> /workflows run sdlc-story</div>
           <ul class="ref-subs"><span class="k">subcommands</span><li>run &lt;name&gt;</li><li>use</li></ul>
         </div>
@@ -1280,7 +1280,7 @@
           <span class="ref-arg">&lt;list|forget|edit|pin|unpin&gt;</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">See, edit, pin or forget what the agent remembers — global and per project. A pinned fact is kept, never promoted to an instruction.</p>
+          <p class="ref-desc">See, edit, pin or forget what the agent remembers — global and per project. A pinned fact is kept for good, and is given to the model as information, never as an order.</p>
           <div class="ref-ex"><span class="pr">$</span> /memory forget 3</div>
         </div>
       </div>
@@ -1298,7 +1298,7 @@
           <span class="ref-nm">/permissions</span>
         </div>
         <div class="ref-def">
-          <p class="ref-desc">What the agent may do without asking: mode, grants and safe tools. The always-ask gate stays locked.</p>
+          <p class="ref-desc">What the agent may do without asking: mode, grants and safe tools. The categories that always ask cannot be unlocked here.</p>
         </div>
       </div>
       <div class="ref-row">
@@ -1350,6 +1350,8 @@
         </div>
         <div class="ref-def">
           <p class="ref-desc">Checks the install end to end — credential, provider, catalog, MCP, profiles, config, version and memory — and prints a fix hint next to whatever failed.</p>
+          <ul class="ref-subs"><span class="k">also</span><li>fix</li></ul>
+          <p class="ref-meta">/doctor fix hands the repair to the agent, which reads the logs and retries.</p>
         </div>
       </div>
       <div class="ref-row">

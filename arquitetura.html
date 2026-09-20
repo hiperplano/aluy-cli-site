@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="How Aluy CLI is built — a single process in your terminal. Session, memory and your key stay local, behind the permission gate. Only the model call crosses the edge." />
+<meta name="description" content="How Aluy CLI is built — a single process in your terminal. Session, memory and your key stay local, behind the permission gate. The model call, the web search, the connectors you turn on and the version check are what cross the edge." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Aluy CLI" />
 <meta property="og:title" content="Architecture — Aluy CLI" />
-<meta property="og:description" content="How Aluy CLI is built — a single process in your terminal. Session, memory and your key stay local, behind the permission gate. Only the model call crosses the edge." />
+<meta property="og:description" content="How Aluy CLI is built — a single process in your terminal. Session, memory and your key stay local, behind the permission gate. The model call, the web search, the connectors you turn on and the version check are what cross the edge." />
 <meta property="og:url" content="https://aluy.dev/arquitetura.html" />
 <meta property="og:image" content="https://aluy.dev/assets/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Architecture — Aluy CLI" />
-<meta name="twitter:description" content="How Aluy CLI is built — a single process in your terminal. Session, memory and your key stay local, behind the permission gate. Only the model call crosses the edge." />
+<meta name="twitter:description" content="How Aluy CLI is built — a single process in your terminal. Session, memory and your key stay local, behind the permission gate. The model call, the web search, the connectors you turn on and the version check are what cross the edge." />
 <meta name="twitter:image" content="https://aluy.dev/assets/og.png" />
 <title>Architecture — Aluy CLI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -91,14 +91,14 @@
             <rect x="96" y="52" width="300" height="48" rx="10" />
             <text class="f-tit" x="116" y="82">you type the goal</text>
           </g>
-          <text class="f-nota" x="416" y="82">or the <tspan class="f-mono">!command</tspan>, which takes the same road</text>
+          <text class="f-nota" x="416" y="82">or a <tspan class="f-mono">!command</tspan> — it goes the same way</text>
           <path class="f-seta" d="M 246 100 L 246 140" marker-end="url(#pta)" />
 
           <!-- 2 · context -->
           <g class="f-no">
             <rect x="96" y="140" width="300" height="72" rx="10" />
             <text class="f-tit" x="116" y="170">the context is assembled</text>
-            <text class="f-sub" x="116" y="192">rebuilt every lap, never accumulated</text>
+            <text class="f-sub" x="116" y="192">rebuilt each turn, never piled up</text>
           </g>
           <g class="f-entrada">
             <text x="416" y="158">project and global memory</text>
@@ -123,14 +123,14 @@
             <text class="f-tit" x="116" y="394">the answer becomes a proposal</text>
             <text class="f-sub" x="116" y="416">a native tool call, or a block in the text</text>
           </g>
-          <text class="f-nota" x="416" y="400">both roads end in the same place</text>
+          <text class="f-nota" x="416" y="400">both end at the same place</text>
           <path class="f-seta" d="M 246 436 L 246 476" marker-end="url(#pta)" />
 
           <!-- 5 · the gate -->
           <g class="f-catraca">
             <rect x="60" y="476" width="372" height="76" rx="12" />
             <text class="f-catraca-tit" x="246" y="508">THE GATE</text>
-            <text class="f-catraca-sub" x="246" y="532">one point, five roads in, none around</text>
+            <text class="f-catraca-sub" x="246" y="532">one point — five ways in, no way around</text>
           </g>
 
           <!-- three outcomes -->
@@ -144,7 +144,7 @@
           <text class="f-sub f-sub--c" x="130" y="646">becomes an observation,</text>
           <text class="f-sub f-sub--c" x="130" y="663">with no effect</text>
           <text class="f-sub f-sub--c" x="246" y="646">waits for you.</text>
-          <text class="f-sub f-sub--c" x="246" y="663">with nobody there, it blocks</text>
+          <text class="f-sub f-sub--c" x="246" y="663">with no one to ask, it stops</text>
           <text class="f-sub f-sub--c" x="362" y="646">the tool runs</text>
 
           <!-- effect -->
@@ -191,18 +191,18 @@
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">denies, does not ask</span>
-          <p>Reading <code>~/.ssh</code>, <code>~/.aws</code>, <code>~/.gnupg</code>, private keys and certificates. And its own <code>~/.aluy/</code> folder, both ways.</p>
+          <p>Reading <code>~/.ssh</code>, <code>~/.aws</code>, <code>~/.gnupg</code>, private keys and certificates. And its own <code>~/.aluy/</code> folder — it may neither read it nor write to it.</p>
         </div>
       </div>
 
       <div class="note note--flow">
         <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4"/><path d="M12 17h.01"/><circle cx="12" cy="12" r="9"/></svg></span>
-        <p><b>Five categories cannot be relaxed</b>, not even by editing the config: destructive commands, network commands, privilege escalation, package installs, and writing to a startup file. The <code class="icode">/permissions</code> panel can only touch two read tools — the rest shows up locked.</p>
+        <p><b>Five command categories cannot be relaxed</b>, not even by editing the config: destructive commands, network commands, privilege escalation, package installs, and writing to a startup file. Every tool from an MCP server is its own locked category. The <code class="icode">/permissions</code> panel can only touch two read tools — the rest shows up locked.</p>
       </div>
 
       <div class="note note--flow">
         <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
-        <p><b>And the exception, in full:</b> <code class="icode">--yolo</code> returns <i>allow</i> before any of this. Under it the agent reaches its own <code class="icode">~/.aluy/</code> folder — the MCP config, the hooks, the undo journal and the credential vault. That is a deliberate decision of the mode, not a hole. Outside it, the floor holds.</p>
+        <p><b>And the exception, in full:</b> <code class="icode">--yolo</code> returns <i>allow</i> before any of this. Under it the agent reaches its own <code class="icode">~/.aluy/</code> folder — the MCP config, the hooks, the undo journal and the credential vault. That is a deliberate decision of the mode, not a hole. Everywhere else, that rule holds.</p>
       </div>
     </section>
 
@@ -210,7 +210,7 @@
     <section class="section section--flow-md" id="modulos">
       <div class="block-head">
         <span class="eyebrow">the modules</span>
-        <h2>Two halves, with a border the compiler enforces.</h2>
+        <h2>Two halves, with a border the build enforces.</h2>
       </div>
 
       <div class="fluxo fluxo--comp">
@@ -313,12 +313,12 @@
         <span class="eyebrow">the edges</span>
         <h2>Everything that leaves the machine — the whole list.</h2>
       </div>
-      <p class="lead">No asterisk and no "only". If it opens a connection, it is here.</p>
+      <p class="lead">No fine print. If it opens a connection, it is on this list.</p>
 
       <div class="grid grid-2">
         <div class="card card-gar">
           <span class="cfg-kicker">the model call</span>
-          <p>To the provider you configured, with your key. Nine in the catalog, plus any address you declare. The connection is pinned to the resolved IP and refuses redirects.</p>
+          <p>To the provider you configured, with your key. Nine in the catalog, plus any address you declare. Aluy connects to the address it looked up and refuses to be sent anywhere else, so a tampered DNS answer cannot carry your key to a different server.</p>
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">web search</span>
@@ -330,7 +330,7 @@
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">the sidecars</span>
-          <p>Long-term memory, context headroom and local models. Loopback only, each on a port the CLI checks before reusing, and none of them receives a credential.</p>
+          <p>Long-term memory, context headroom and local models. They listen only to this machine — nothing outside it can reach them — each on a port the CLI checks before reusing, and none of them receives a credential.</p>
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">Telegram</span>
@@ -338,7 +338,7 @@
         </div>
         <div class="card card-gar">
           <span class="cfg-kicker">the version check</span>
-          <p>On npm. And it <b>installs the update by itself</b>, by project decision — until you turn it off with <code>ALUY_AUTO_UPDATE=0</code>.</p>
+          <p>On npm. And it <b>installs the update by itself</b>. That is a deliberate default — turn it off with <code>ALUY_AUTO_UPDATE=0</code>.</p>
         </div>
       </div>
 

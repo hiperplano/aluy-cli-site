@@ -113,12 +113,12 @@
       <section class="docs-sec first" id="sec-overview">
         <span class="eyebrow eyebrow--sm">01 · start</span>
         <h2>Overview</h2>
-        <p>The <b>Aluy CLI</b> is a single agent that puts thousands of models to work for you. Instead of suggesting code for you to copy and paste, it <b>acts</b> on your project: it reads and edits files, runs commands and talks to tools — end to end, in your shell.</p>
-        <p>What runs on your machine stays on your machine: the session, the history, the files, the memory and the provider key (kept in the OS vault). The only thing that crosses the edge is the <b>model call</b> — by default Aluy handles that connection, or you plug in your own provider directly.</p>
-        <p>The code is <b>public on GitHub</b> under the <a href="https://github.com/hiperplano/aluy-cli/blob/main/LICENSE">MIT License</a>: what acts on your machine, you can read, audit and fork. The mission is simple — to democratize the automation of tasks, processes, tests and development, without depending on a platform team.</p>
+        <p>The <b>Aluy CLI</b> is a terminal agent that runs on the model provider you choose. Instead of suggesting code for you to copy and paste, it <b>acts</b> on your project: it reads and edits files, runs commands and talks to tools — end to end, in your shell.</p>
+        <p>What runs on your machine stays on your machine: the session, the history, the files, the memory and the provider key (kept in the OS vault). The <b>model call</b> goes straight to the provider you configured, with your own key — that is the default, and nothing is routed through Aluy. The full list of what else opens a connection is on the <a href="arquitetura.html#bordas">architecture page</a>.</p>
+        <p>The code is <b>public on GitHub</b> under the <a href="https://github.com/hiperplano/aluy-cli/blob/main/LICENSE">MIT License</a>: what acts on your machine, you can read, audit and fork. The point is that you can automate your own tasks, tests and builds without waiting on a platform team.</p>
         <div class="note">
           <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
-          <p>The Aluy CLI is the terminal agent — it's not the orchestrator of stories, ADRs and sprints in the Aluy platform. Here the focus is acting on your project.</p>
+          <p>The Aluy CLI is the terminal agent — it's not the orchestrator of stories, architecture decisions and sprints in the Aluy platform. Here the focus is acting on your project.</p>
         </div>
       </section>
 
@@ -141,7 +141,7 @@
         <h2>First steps</h2>
         <p>On your first <code class="icode">aluy</code>, a wizard opens and asks, in this order, for <b>provider</b>, <b>key</b> and <b>model</b>.</p>
         <ul class="docs-list">
-          <li><b>Provider</b> — by default the CLI talks straight to your provider, with your own credential (BYO): pick one and paste the key, or point it at a local model. Switch later with <code class="icode">/provider</code>.</li>
+          <li><b>Provider</b> — by default the CLI talks straight to your provider, with your own credential — you bring your own key: pick one and paste it, or point it at a local model. Switch later with <code class="icode">/provider</code>.</li>
           <li><b>Key</b> — goes straight to the OS vault (Keychain on macOS, libsecret on Linux, Credential Manager on Windows). On a headless machine with no vault, it goes to an encrypted file instead. Never in plain text, never in the repo.</li>
           <li><b>Model</b> — pick the tier with <code class="icode">/model</code>; tune the reasoning effort with <code class="icode">/effort</code> when you need to.</li>
         </ul>
@@ -193,7 +193,7 @@
         <p>This is the decision that matters most, and you make it when you launch.</p>
         <p>By default the agent asks before every effect. It reads your project freely. It stops and waits before it writes a file or runs a command.</p>
         <p><code class="icode">aluy --plan</code> is stricter. The agent reads, analyzes and proposes, and nothing at all happens to your project. Use it when you want to see the plan before anything moves.</p>
-        <p><code class="icode">aluy --yolo</code> is looser. The agent approves its own effects and keeps going, so you can walk away. Four categories still stop and ask, no matter what: deleting data, reaching the network, escalating privilege, and installing packages. Aluy also refuses to start as root.</p>
+        <p><code class="icode">aluy --yolo</code> is looser. The agent approves its own effects and keeps going, so you can walk away. Five command categories still stop and ask, no matter what: destructive commands, network commands, privilege escalation, package installs, and writing to a startup file. So does every tool that comes from an MCP server. Aluy also refuses to start as root.</p>
         <p>If you pass both flags, <code class="icode">--plan</code> wins.</p>
 
         <h3>Picking up where you left off</h3>
@@ -268,19 +268,19 @@
           <div class="swatch"><div class="prev" style="background:linear-gradient(90deg,#070707 50%,#DDA13F 50%)"></div><div class="lbl"><b>Dark</b> · <code class="icode">aluy-dark</code> — near-black, high contrast.</div></div>
           <div class="swatch"><div class="prev" style="background:linear-gradient(90deg,#1A1712 50%,#5BA8A2 50%)"></div><div class="lbl"><b>Slate</b> · <code class="icode">aluy-slate</code> — deep stone with teal hairlines.</div></div>
         </div>
-        <p>The themes come from the Aluy Design System tokens: color, typography and density come from variables, never from raw style.</p>
+        <p>All three themes share the same spacing and type, so switching does not move anything around.</p>
       </section>
 
       <!-- 08 /CYCLE -->
       <section class="docs-sec" id="sec-cycle">
         <span class="eyebrow eyebrow--sm">08 · autonomy</span>
         <h2>/cycle — run until done</h2>
-        <p>With <code class="icode">/cycle</code>, you describe the task and the agent works in <b>cycles on its own</b> until it's done — no babysitting. It's the "kick it off and go do something else".</p>
-        <p>It comes with a <b>handbrake</b>: hard ceilings on time and steps, and an automatic stop if something goes off the rails. The anti-runaway — no robot escaping control.</p>
+        <p>With <code class="icode">/cycle</code>, you describe the task and the agent works in <b>cycles on its own</b> until it's done. You do not have to sit and watch it.</p>
+        <p>It comes with a <b>handbrake</b>: hard ceilings on time and steps, and an automatic stop if something goes off the rails.</p>
         <div class="codeblock"><span class="pr">/cycle</span> <span class="str">"run the test suite and fix what breaks"</span></div>
         <ul class="docs-list">
           <li>Good for: fixing tests, mass sweeps, repetitive migrations, long tasks with a clear "done" criterion.</li>
-          <li>Every effect that touches your files still passes through the permission lock.</li>
+          <li>Every effect that touches your files still passes through the permission gate.</li>
         </ul>
       </section>
 
@@ -289,7 +289,7 @@
         <span class="eyebrow eyebrow--sm">09 · autonomy</span>
         <h2>Subagents</h2>
         <p>Each subagent is a <b>profile</b> (<code class="icode">.md</code> file) with its own focus. You <b>ask for the specialist and the agent itself creates</b> the subagent for you — describe what you need ("a security reviewer", "an E2E QA") and it generates the profile with the role, tone and limits. You don't write the <code class="icode">.md</code> by hand (but you can edit or create one if you want).</p>
-        <p>They work <b>in parallel, without mixing contexts</b>: each subagent has its own dedicated sub-session. A fleet, not a lone agent.</p>
+        <p>They work <b>in parallel, without mixing contexts</b>: each subagent has its own dedicated sub-session.</p>
         <div class="codeblock"><span class="pr">/subagent</span> reviewer   <span class="cm"># opens a 1:1 focus with the "reviewer" profile</span></div>
       </section>
 
@@ -440,7 +440,7 @@
         <h3 id="sec-structure">Where everything lives</h3>
         <p>Aluy keeps two homes. The <b>project</b> one is the instruction file at your repo root plus an optional <code class="icode">.aluy/</code> folder — both belong in version control, so your team shares them.</p>
         <div class="tree">&lt;your-project&gt;/.aluy/
-├── agents/<span class="cm">*.md</span>           <span class="cm"># project sub-agent profiles</span>
+├── agents/<span class="cm">*.md</span>           <span class="cm"># project subagent profiles</span>
 ├── commands/<span class="cm">*.md</span>         <span class="cm"># project custom slash-commands</span>
 ├── skills/<span class="cm">&lt;name&gt;/SKILL.md</span> <span class="cm"># project skills</span>
 ├── workflows/<span class="cm">*.md</span>        <span class="cm"># project workflow definitions</span>
@@ -473,7 +473,7 @@
       <section class="docs-sec" id="sec-mcp">
         <span class="eyebrow eyebrow--sm">14 · tools</span>
         <h2>MCP — connect tools</h2>
-        <p>Through <b>MCP</b> (the open connector standard), the agent talks to external tools and integrations — databases, APIs, services. It's what gives the agent <b>real</b> access to what you already use, not just conversation.</p>
+        <p>Through <b>MCP</b> (the open connector standard), the agent talks to external tools and integrations — databases, APIs, services. That is the difference between an agent that can query your database and one that can only describe how to query it.</p>
         <div class="codeblock">
           <div><span class="pr">$</span> /mcp search      <span class="cm"># searches connectors in the registry</span></div>
           <div><span class="pr">$</span> /mcp add         <span class="cm"># adds a local server</span></div>
@@ -544,17 +544,17 @@
         <span class="eyebrow eyebrow--sm">17 · support</span>
         <h2>FAQ</h2>
         <h3>Does my data go to the cloud?</h3>
-        <p>No. The session, the history, the project files and the memory stay on your machine. The only thing that crosses the edge is the <b>model call</b>.</p>
+        <p>Your code and your files do not. The session, the history, the project files and the memory stay on your machine. What does open a connection is listed in full on the <a href="arquitetura.html#bordas">architecture page</a>: the model call, web search, a <code class="icode">web_fetch</code> you approve, the MCP servers you turn on, Telegram if you connect it, and the version check on npm.</p>
         <h3>Where does my key live?</h3>
         <p>In the <b>OS vault</b> (Keychain, libsecret, Credential Manager). On a server with no vault, your provider key goes to an <b>encrypted file</b> instead — AES-256-GCM, with the key derived from the machine, so a copy of the directory is useless anywhere else. Either way: never in plain text, never in the repo. Aluy shows the model tier, never the credential.</p>
         <h3>How does Aluy talk to the model?</h3>
         <p>By default the CLI talks straight to your own provider, with your own credential (API key, OAuth or a local model): it is your usage, under your control, with no middleman and no metering. A central backend is optional and not available today.</p>
         <h3>Is there a cost?</h3>
-        <p>The Aluy CLI's code is public on GitHub. In direct mode, model usage runs through your own account at the provider. The sidecars run locally, with no API cost.</p>
+        <p>Not for Aluy itself — it is free and open source. You pay your model provider for what you use, on your own account and at their prices. The sidecars run on your machine and cost nothing.</p>
         <h3>Is it safe to leave /cycle running on its own?</h3>
-        <p><code class="icode">/cycle</code> has hard ceilings on time and steps, and an automatic stop. And every action that touches your files passes through a permission lock.</p>
+        <p><code class="icode">/cycle</code> has hard ceilings on time and steps, and an automatic stop. And every action that touches your files passes through the permission gate.</p>
         <h3>Can I read and modify the code?</h3>
-        <p>The code is public on GitHub under the <a href="https://github.com/hiperplano/aluy-cli/blob/main/LICENSE">MIT License</a>: read it, audit it, fork it and open issues. What acts on your machine, you deserve to be able to inspect. Aluy is in beta; expect rough edges and fast iteration.</p>
+        <p>The code is public on GitHub under the <a href="https://github.com/hiperplano/aluy-cli/blob/main/LICENSE">MIT License</a>: read it, audit it, fork it and open issues. If it runs on your machine, you should be able to read it. Aluy is in beta; expect rough edges and fast iteration.</p>
         <div class="note">
           <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
           <p>Didn't find the answer? Start with the <a href="comecar.html">Install</a> page or run <code class="icode">/doctor</code> inside the session.</p>
@@ -565,14 +565,14 @@
       <section class="docs-sec" id="sec-architecture">
         <span class="eyebrow eyebrow--sm">18 · internals</span>
         <h2>Architecture</h2>
-        <p>Under the hood, the Aluy CLI is <b>a single process</b> in your terminal — a monolithic delivery, no hidden server. The interface (the TUI) talks to the core, the engine that reads and edits files, runs commands and decides the next steps. Between the agent and your project sits the <b>permission lock</b>: the single point every effect passes through <b>before it happens</b>.</p>
+        <p>Under the hood, the Aluy CLI is <b>a single process</b> in your terminal — one program, no background server. The terminal interface talks to the core, the engine that reads and edits files, runs commands and decides the next steps. Between the agent and your project sits the <b>permission gate</b>: the single point every effect passes through <b>before it happens</b>.</p>
         <p>The state lives on your machine: the session memory (and the long-term one via <code class="icode">mem0</code>), your key in the OS vault, your files and your shell. Sidecars are optional local boosters that listen on <code class="icode">127.0.0.1</code> only.</p>
         <ul class="docs-list">
-          <li>The <b>only</b> things that cross the edge are the <b>model call</b> and the <b>MCP connectors you turn on</b>.</li>
+          <li>What leaves your machine: the <b>model call</b>, web search, a <code class="icode">web_fetch</code> you approve, the <b>MCP servers you turn on</b>, Telegram if you connect it, and the version check on npm — the <a href="arquitetura.html#bordas">architecture page</a> lists them in full.</li>
         </ul>
         <div class="note">
           <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
-          <p>The permission lock is a single point: no file is changed and no command runs without passing through it. It's what keeps you in control.</p>
+          <p>The permission gate is a single point: no file is changed and no command runs without passing through it.</p>
         </div>
       </section>
 
@@ -580,7 +580,7 @@
       <section class="docs-sec" id="sec-compat">
         <span class="eyebrow eyebrow--sm">19 · internals</span>
         <h2>Compatibility — Codex &amp; Claude Code</h2>
-        <p><b>Already using Codex or Claude Code? Aluy understands your structure. No reconfig.</b> Point Aluy at your project and it reads the same instruction and configuration files you already keep.</p>
+        <p><b>Already using Codex or Claude Code?</b> Point Aluy at your project and it reads the same instruction and configuration files you already keep, so there is nothing to reconfigure.</p>
         <h3>Project instruction files</h3>
         <ul class="docs-list">
           <li><code class="icode">ALUY.md</code> — the Aluy native file (what <code class="icode">/init</code> writes).</li>
@@ -588,11 +588,11 @@
           <li><code class="icode">CLAUDE.md</code> — the same file <b>Claude Code</b> uses.</li>
         </ul>
         <p>When more than one is present they are all read — see <a href="#sec-arquivos">Teaching the project</a> for the order.</p>
-        <h3>Structure parity</h3>
+        <h3>The same layout</h3>
         <ul class="docs-list">
           <li><code class="icode">.md</code> agents accept the <b>Claude Code tool names</b> — mapped to the native ones.</li>
           <li><b>Hooks</b> in the Claude Code <code class="icode">settings.json</code> format, and <b>user commands</b> in <code class="icode">.md</code>.</li>
-          <li><code class="icode">/rewind</code> + checkpoints, with parity to Claude Code.</li>
+          <li><code class="icode">/rewind</code> and checkpoints work the way they do in Claude Code.</li>
         </ul>
       </section>
 
