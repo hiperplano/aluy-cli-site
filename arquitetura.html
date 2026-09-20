@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="site.css?v=043199e8" />
+<link rel="stylesheet" href="site.css?v=d985dca7" />
 <script src="lang.js?v=b7823272"></script>
 <script defer src="site.js?v=9ecc00f5"></script>
 <script src="consent.js?v=d4a725b4" defer></script>
@@ -214,61 +214,58 @@
       </div>
 
       <div class="fluxo fluxo--comp">
-        <svg class="fluxo-svg" viewBox="0 0 900 600" role="img" aria-labelledby="comp-t comp-d">
+        <svg class="fluxo-svg fluxo-svg--comp" viewBox="0 0 1000 600" role="img" aria-labelledby="comp-t comp-d">
           <title id="comp-t">The components of the Aluy CLI and the ports between them</title>
-          <desc id="comp-d">The core sits in the middle: the turn cycle, the context assembly, the gate, the native tools, the model contract and the encrypted journal. On the left the interface and the command line come in. On the right the core declares ports — shell and files, model, credential, asking the human, external servers — and the shell half provides the implementation for each. Every arrow points inward.</desc>
+          <desc id="comp-d">The core sits in the middle: the turn cycle, the context assembly, the gate, the native tools, the model contract, the encrypted journal and the tool-call protocol. On the left the interface and the command line come in. On the right the core declares five ports — shell and files, model, credential, ask and servers — and the shell half provides the implementation for each. Every arrow points inward.</desc>
 
-          <!-- o miolo -->
           <g class="c-miolo">
-            <rect x="286" y="72" width="328" height="456" rx="14" />
-            <text class="c-miolo-tit" x="450" y="104">THE CORE</text>
-            <text class="c-miolo-sub" x="450" y="124">does not know what a screen is</text>
+            <rect x="228" y="60" width="340" height="470" rx="14" />
+            <text class="c-miolo-tit" x="398" y="96">THE CORE</text>
+            <text class="c-miolo-sub" x="398" y="116">does not know what a screen is</text>
           </g>
 
           <g class="c-peca">
-            <rect x="310" y="146" width="280" height="38" rx="8" /><text x="450" y="170">the turn cycle</text>
-            <rect x="310" y="192" width="280" height="38" rx="8" /><text x="450" y="216">the context assembly</text>
-            <rect x="310" y="284" width="280" height="38" rx="8" /><text x="450" y="308">the native tools</text>
-            <rect x="310" y="330" width="280" height="38" rx="8" /><text x="450" y="354">the model contract</text>
-            <rect x="310" y="376" width="280" height="38" rx="8" /><text x="450" y="400">the encrypted journal</text>
-            <rect x="310" y="422" width="280" height="38" rx="8" /><text x="450" y="446">the tool-call protocol</text>
+            <rect x="252" y="134" width="292" height="38" rx="8" /><text x="398" y="159">the turn cycle</text>
+            <rect x="252" y="180" width="292" height="38" rx="8" /><text x="398" y="205">the context assembly</text>
+            <rect x="252" y="272" width="292" height="38" rx="8" /><text x="398" y="297">the native tools</text>
+            <rect x="252" y="318" width="292" height="38" rx="8" /><text x="398" y="343">the model contract</text>
+            <rect x="252" y="364" width="292" height="38" rx="8" /><text x="398" y="389">the encrypted journal</text>
+            <rect x="252" y="410" width="292" height="38" rx="8" /><text x="398" y="435">the tool-call protocol</text>
           </g>
           <g class="c-catraca">
-            <rect x="310" y="238" width="280" height="38" rx="8" /><text x="450" y="263">THE GATE</text>
+            <rect x="252" y="226" width="292" height="38" rx="8" /><text x="398" y="251">THE GATE</text>
           </g>
+          <text class="c-selo" x="398" y="504">lint and a test forbid a terminal in here</text>
 
-          <text class="c-selo" x="450" y="502">lint and a test forbid importing a terminal in here</text>
-
-          <!-- entradas, a esquerda -->
           <g class="c-fora">
-            <rect x="18" y="150" width="200" height="44" rx="9" /><text x="118" y="177">the interface</text>
-            <rect x="18" y="212" width="200" height="44" rx="9" /><text x="118" y="239">the command line</text>
+            <rect x="8" y="196" width="160" height="44" rx="9" /><text x="88" y="223">the interface</text>
+            <rect x="8" y="258" width="160" height="44" rx="9" /><text x="88" y="285">the command line</text>
           </g>
-          <path class="c-liga" d="M 218 172 L 286 172" marker-end="url(#cpa)" />
-          <path class="c-liga" d="M 218 234 L 286 234" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 168 218 L 228 218" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 168 280 L 228 280" marker-end="url(#cpa)" />
 
-          <!-- portas, a direita -->
+          <text class="c-porta-tit" x="638" y="44">the ports it declares</text>
           <g class="c-porta">
-            <text x="626" y="166">shell and files port</text>
-            <text x="626" y="246">model port</text>
-            <text x="626" y="326">credential port</text>
-            <text x="626" y="406">ask port</text>
-            <text x="626" y="486">servers port</text>
+            <text x="638" y="113">shell and files</text>
+            <text x="638" y="193">model</text>
+            <text x="638" y="273">credential</text>
+            <text x="638" y="353">ask</text>
+            <text x="638" y="433">servers</text>
           </g>
           <g class="c-fora">
-            <rect x="682" y="142" width="206" height="44" rx="9" /><text x="785" y="169">your shell and disk</text>
-            <rect x="682" y="222" width="206" height="44" rx="9" /><text x="785" y="249">nine providers</text>
-            <rect x="682" y="302" width="206" height="44" rx="9" /><text x="785" y="329">keychain or encrypted vault</text>
-            <rect x="682" y="382" width="206" height="44" rx="9" /><text x="785" y="409">the interface asks you</text>
-            <rect x="682" y="462" width="206" height="44" rx="9" /><text x="785" y="489">MCP, sidecars, Telegram</text>
+            <rect x="708" y="100" width="284" height="44" rx="9" /><text x="850" y="127">your shell and disk</text>
+            <rect x="708" y="180" width="284" height="44" rx="9" /><text x="850" y="207">nine providers</text>
+            <rect x="708" y="260" width="284" height="44" rx="9" /><text x="850" y="287">keychain or encrypted vault</text>
+            <rect x="708" y="340" width="284" height="44" rx="9" /><text x="850" y="367">the interface asks you</text>
+            <rect x="708" y="420" width="284" height="44" rx="9" /><text x="850" y="447">MCP, sidecars, Telegram</text>
           </g>
-          <path class="c-liga" d="M 682 164 L 614 164" marker-end="url(#cpa)" />
-          <path class="c-liga" d="M 682 244 L 614 244" marker-end="url(#cpa)" />
-          <path class="c-liga" d="M 682 324 L 614 324" marker-end="url(#cpa)" />
-          <path class="c-liga" d="M 682 404 L 614 404" marker-end="url(#cpa)" />
-          <path class="c-liga" d="M 682 484 L 614 484" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 708 122 L 568 122" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 708 202 L 568 202" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 708 282 L 568 282" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 708 362 L 568 362" marker-end="url(#cpa)" />
+          <path class="c-liga" d="M 708 442 L 568 442" marker-end="url(#cpa)" />
 
-          <text class="c-regra" x="450" y="562">the shell half knows the core · the core only knows the contracts</text>
+          <text class="c-regra" x="500" y="572">the shell half knows the core · the core only knows the contracts</text>
 
           <defs>
             <marker id="cpa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
