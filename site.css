@@ -229,8 +229,8 @@ b { color: var(--tx); font-weight: 600; }
 /* ---- cards & grids -------------------------------------------------------- */
 .card { background: var(--s1); border: 1px solid var(--bd); border-radius: 20px; padding: 24px; }
 .card p { margin: 0; }
-.grid { display: grid; gap: 13px; }
-.grid-4 { grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.grid { display: grid; gap: var(--sp-4); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
 .grid-2 { grid-template-columns: 1fr 1fr; }
 /* O título de seção era centralizado em toda página. Nas que têm o herói à
@@ -644,9 +644,16 @@ details.acc .acc-body p { margin: 0; font-size: var(--fs-support); color: var(--
   background: var(--s2); border: 1px solid var(--bd); border-radius: 16px;
   padding: var(--sp-6) var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-3);
 }
-.nots-list { display: flex; flex-direction: column; gap: var(--sp-3); font-size: var(--fs-body); line-height: 1.5; max-width: 48ch; }
-.nots-list b { font-weight: 600; }
+.nots-list {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6);
+  font-size: var(--fs-support); line-height: 1.55;
+}
+.nots-list b { display: block; font-weight: 600; color: var(--tx); margin-bottom: var(--sp-1); }
 .nots-list span { color: var(--tx2); }
+@media (max-width: 860px) {
+  .nots-list { grid-template-columns: 1fr; gap: var(--sp-4); max-width: 48ch; }
+  .nots-list b { display: inline; margin-bottom: 0; }
+}
 
 /* --- rodapé: versão, changelog, issues, licença ---------------------------- */
 .foot-meta {
