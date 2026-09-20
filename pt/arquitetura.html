@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="../site.css?v=0f4db443" />
+<link rel="stylesheet" href="../site.css?v=7663f10c" />
 <script src="../lang.js?v=dfbd8e05"></script>
 <script defer src="../site.js?v=9ecc00f5"></script>
 <script src="../consent.js?v=b90dbe6e" defer></script>
@@ -80,7 +80,7 @@
       <div class="fluxo">
         <svg class="fluxo-svg" viewBox="0 0 880 720" role="img" aria-labelledby="fluxo-t fluxo-d">
           <title id="fluxo-t">O ciclo de um turno no Aluy CLI</title>
-          <desc id="fluxo-d">Você digita um objetivo. O contexto é montado com a memória, as instruções do projeto e a lista de ferramentas. A chamada sai para o modelo, que é a única etapa fora da sua máquina. A resposta vira uma proposta de ferramenta, que passa pela catraca de permissão. A catraca nega, pergunta ou permite. O efeito acontece e o resultado volta para o modelo como observação, fechando o ciclo.</desc>
+          <desc id="fluxo-d">Você digita um objetivo. O contexto é montado com a memória, as instruções do projeto e a lista de ferramentas. A chamada sai para o modelo, que é a única etapa fora da sua máquina. A resposta vira uma proposta de ferramenta, que passa pela catraca de permissão. A catraca nega, pergunta ou permite. A ferramenta roda e o resultado volta para o modelo como observação, fechando o ciclo.</desc>
 
           <!-- laço de retorno -->
           <path class="f-volta" d="M 96 596 L 40 596 Q 20 596 20 576 L 20 96 Q 20 76 40 76 L 96 76" />
@@ -142,7 +142,7 @@
           <g class="f-saida f-saida--permite"><rect x="312" y="584" width="100" height="40" rx="8" /><text x="362" y="609">permite</text></g>
 
           <text class="f-sub f-sub--c" x="130" y="646">vira observação,</text>
-          <text class="f-sub f-sub--c" x="130" y="663">sem efeito</text>
+          <text class="f-sub f-sub--c" x="130" y="663">nada muda</text>
           <text class="f-sub f-sub--c" x="246" y="646">espera você.</text>
           <text class="f-sub f-sub--c" x="246" y="663">sem humano, bloqueia</text>
           <text class="f-sub f-sub--c" x="362" y="646">a ferramenta roda</text>
@@ -152,7 +152,7 @@
           <path class="f-volta-curta" d="M 130 676 L 130 692 L 240 692" />
           <g class="f-no f-no--efeito">
             <rect x="96" y="672" width="150" height="40" rx="8" />
-            <text class="f-tit f-tit--sm" x="171" y="697">o efeito acontece</text>
+            <text class="f-tit f-tit--sm" x="171" y="697">o arquivo muda, o comando roda</text>
           </g>
 
           <defs>
@@ -173,7 +173,7 @@
     </section>
 
     <!-- ===== A CATRACA ===== -->
-    <section class="section section--flow-md" id="catraca">
+    <section class="section section--flow-sm" id="catraca">
       <div class="block-head">
         <span class="eyebrow">a catraca</span>
         <h2>O que ela deixa passar, e o que ela trava.</h2>
@@ -182,15 +182,15 @@
 
       <div class="grid grid-3">
         <div class="card card-gar">
-          <span class="cfg-kicker">passa direto</span>
+          <h3>passa direto</h3>
           <p>Só o que lê e não muda nada: abrir um arquivo, procurar um texto, procurar um arquivo pelo nome e listar uma pasta. Mais gravar uma memória e falar numa sala.</p>
         </div>
         <div class="card card-gar">
-          <span class="cfg-kicker">sempre pergunta</span>
+          <h3>sempre pergunta</h3>
           <p>Rodar comando, editar e escrever arquivo. E <b>qualquer ferramenta que ela não conheça</b> — incluindo toda ferramenta que vier de um servidor MCP.</p>
         </div>
         <div class="card card-gar">
-          <span class="cfg-kicker">nega, não pergunta</span>
+          <h3>nega, não pergunta</h3>
           <p>Ler <code>~/.ssh</code>, <code>~/.aws</code>, <code>~/.gnupg</code>, chaves privadas e certificados. E a própria pasta <code>~/.aluy/</code> — nem para ler, nem para escrever.</p>
         </div>
       </div>
@@ -204,7 +204,7 @@
     </section>
 
     <!-- ===== MÓDULOS ===== -->
-    <section class="section section--flow-md" id="modulos">
+    <section class="section section--flow-sm" id="modulos">
       <div class="block-head">
         <span class="eyebrow">os módulos</span>
         <h2>Duas metades, com uma fronteira que a esteira de testes cobra.</h2>
@@ -338,7 +338,7 @@
     </section>
 
     <!-- ===== ESTADO ===== -->
-    <section class="section section--flow-md" id="estado">
+    <section class="section section--flow-sm" id="estado">
       <div class="block-head">
         <span class="eyebrow">o estado</span>
         <h2>Onde cada coisa mora.</h2>
@@ -356,41 +356,15 @@
     </section>
 
     <!-- ===== BORDAS ===== -->
-    <section class="section section--flow-md" id="bordas">
+    <section class="section section--flow-sm" id="bordas">
       <div class="block-head">
         <span class="eyebrow">as bordas</span>
         <h2>Tudo que sai da máquina — a lista inteira.</h2>
       </div>
       <p class="lead">Sem asterisco e sem "apenas". Se abre conexão, está aqui.</p>
 
-      <div class="grid grid-2">
-        <div class="card card-gar">
-          <span class="cfg-kicker">a chamada ao modelo</span>
-          <p>Para o provider que você configurou, com a sua chave. Nove no catálogo, mais qualquer endereço que você declarar. Descoberto o endereço do provider, a conexão não aceita ser desviada para outro lugar no meio do caminho.</p>
-        </div>
-        <div class="card card-gar">
-          <span class="cfg-kicker">a busca na web</span>
-          <p>Um buscador fixo no código para a ferramenta de busca, e o <code>web_fetch</code> para o endereço que o modelo pedir — esse, com a sua aprovação a cada vez.</p>
-        </div>
-        <div class="card card-gar">
-          <span class="cfg-kicker">os servidores MCP</span>
-          <p>Rodam só na sua máquina, e o Aluy conversa com eles direto, sem abrir nenhuma porta de rede. O ambiente que eles recebem é mínimo: a sua credencial não vai junto.</p>
-        </div>
-        <div class="card card-gar">
-          <span class="cfg-kicker">os sidecars</span>
-          <p>Memória de longo prazo, conversas longas sem perder o fio, e modelos rodando na sua máquina. Só a sua própria máquina os alcança, e o Aluy confere que é mesmo o serviço dele antes de reusar a porta. Nenhum recebe credencial.</p>
-        </div>
-        <div class="card card-gar">
-          <span class="cfg-kicker">o Telegram</span>
-          <p>Se você conectar. O endereço do serviço é constante no código, e o destino da mensagem <b>não é argumento do modelo</b> — ele responde sempre no chat corrente. O agente só obedece aos chats que você autorizou; o que vier de qualquer outro ele lê como texto, nunca como ordem.</p>
-        </div>
-        <div class="card card-gar">
-          <span class="cfg-kicker">a checagem de versão</span>
-          <p>No npm. E ela <b>instala a atualização sozinha</b>. Foi uma escolha deliberada, e você desliga com <code>ALUY_AUTO_UPDATE=0</code>.</p>
-        </div>
-      </div>
 
-      <p class="hint">Um serviço em segundo plano não abre porta de rede: quem quiser acompanhar entra por um canal que existe só dentro da máquina, e só para quem está logado como você. E um servidor central da Aluy é opcional — o código existe, o serviço ainda não está no ar.</p>
+      <p class="hint">O desenho acima nomeia cada borda. Três coisas que ele não cabe: a conexão com o seu provider é <b>fixada no IP</b> que resolveu e recusa redirecionamento; o destino de uma mensagem do Telegram <b>não é argumento do modelo</b>, então uma instrução injetada não consegue mandar nada para outro lugar; e a checagem de versão <b>instala a atualização sozinha</b> até você desligar com <code>ALUY_AUTO_UPDATE=0</code>.</p>
     </section>
 
     <section class="section section--flow-sm center">
@@ -413,7 +387,7 @@
         <a class="foot-ic" href="https://github.com/hiperplano/aluy-cli/issues/new" aria-label="Reportar um problema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5"/><path d="M12 16.5h.01"/></svg><span>reportar um problema</span></a>
         <a class="foot-ic" href="https://www.npmjs.com/package/@hiperplano/aluy-cli" aria-label="npm"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"/></svg><span>npm</span></a>
       </div>
-      <p class="foot-fine">Aluy <span class="lam">&Lambda;</span> CLI &mdash; um agente único que faz centenas de modelos trabalharem pra você</p>
+      <p class="foot-fine">Aluy <span class="lam">&Lambda;</span> CLI &mdash; um terminal único que faz dezenas de agentes trabalharem pra você</p>
     </div>
   </footer>
 

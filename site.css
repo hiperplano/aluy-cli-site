@@ -1023,3 +1023,14 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
 .z-miolo rect { fill: none; stroke: var(--bd-strong); stroke-width: 1.4; stroke-dasharray: 6 4; }
 .z-miolo-tit { fill: var(--tx2); font-family: var(--mono); font-size: 11.5px; font-weight: 600; letter-spacing: .1em; }
 .z-liga { fill: var(--mut2); font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; }
+
+/* --- correções do QA de composição da arquitetura -------------------------
+   O rótulo do cartão era um `cfg-kicker` copiado do comecar.html SEM a regra
+   de espaçamento dele: o vão entre rótulo e parágrafo media 0px. E a regra
+   `.card-gar h3` existia sem ninguém para usar. Agora o título é título. */
+.card-gar h3 { font-size: 16px; font-weight: 600; letter-spacing: -.01em; color: var(--tx); }
+.card-gar h3 + p { margin-top: 9px; }
+/* a caixa de aviso corria a largura inteira: 330px de âmbar vazio no desktop */
+.note p { max-width: 72ch; }
+/* a abertura encostava na grade */
+.lead + .grid { margin-top: var(--sp-6); }
