@@ -67,7 +67,7 @@
     <section class="hero">
       <span class="eyebrow">arquitetura</span>
       <h1>Como o Aluy CLI é construído.</h1>
-      <p class="lead">O Aluy CLI é um único processo que roda no seu terminal — sem nenhum daemon que você não pediu, sem nuvem no meio do seu projeto. Ele lê e edita arquivos, roda comandos e guarda a sessão, a memória e a sua chave na sua máquina. A única coisa que sai para a internet é a chamada ao modelo (e os conectores MCP que você ligar).</p>
+      <p class="lead">O Aluy CLI é um único processo que roda no seu terminal — sem nenhum daemon que você não pediu, sem nuvem no meio do seu projeto. Ele lê e edita arquivos, roda comandos e guarda a sessão, a memória e a sua chave na sua máquina. Para a internet saem a chamada ao modelo, a busca na web, o <code>web_fetch</code> que você aprovar, os conectores MCP que você ligar, o Telegram se você conectar — e a checagem de versão no npm, que <b>instala a atualização sozinha</b> até você desligar.</p>
     </section>
 
     <!-- ===== LEGEND ===== -->
@@ -116,7 +116,7 @@
 
         <!-- sidecars -->
         <div class="zone-sub">
-          <span class="subhead">sidecars — opt-in, só local</span>
+          <span class="subhead">sidecars — locais, depois que você instala o turbo</span>
           <div class="grid grid-3">
             <div class="minitile"><h4 class="sc">mem0</h4><p>memória de longo prazo</p></div>
             <div class="minitile"><h4 class="sc">headroom</h4><p>fôlego de contexto</p></div>
@@ -131,7 +131,7 @@
         <span class="subhead">o que sai da máquina</span>
         <div class="edge-card">
           <h4><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span>Chamada ao modelo</h4>
-          <p>Direto no <b>seu provider</b>, com a <b>sua credencial</b> — esse é o padrão. Um backend central é opcional e hoje não está disponível.</p>
+          <p>Direto no <b>seu provider</b>, com a <b>sua credencial</b> — esse é o padrão. Um backend central é opcional: o código está pronto, o serviço ainda não está no ar.</p>
           <div class="chips">
             <span class="chip">Claude</span><span class="chip">GPT</span><span class="chip">Gemini</span><span class="chip">Grok</span><span class="chip">DeepSeek</span><span class="chip">Llama</span>
           </div>
@@ -155,12 +155,12 @@
         <div class="card card-gar">
           <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
           <h3>Ele não encosta na própria instalação</h3>
-          <p>O agente não escreve em <code>~/.aluy/</code>, onde moram a instalação dele, a config e as chaves. A regra está no código, não no prompt.</p>
+          <p>O agente não escreve em <code>~/.aluy/</code>, onde moram a instalação dele, a config e as chaves. A regra está no código, não no prompt — e cai por terra no <code>--yolo</code>, que libera tudo de propósito.</p>
         </div>
         <div class="card card-gar">
           <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2"/></svg></div>
-          <h3>Sandbox e limites</h3>
-          <p>Confinamento do sistema operacional para o shell, e tetos duros de tempo e de passos para o que roda sozinho.</p>
+          <h3>Tetos sempre; sandbox se você ligar</h3>
+          <p>Os tetos de tempo, passos e tokens valem sempre. Já o confinamento de sistema operacional para o shell é <b>opcional e vem desligado</b> — e só existe no Linux.</p>
         </div>
       </div>
       <div style="text-align:center; margin-top:26px;">

@@ -101,6 +101,13 @@
     // pouco na tela e o miolo (22s a 62s) e o trecho denso. O laco comeca la,
     // e volta pra la em vez de voltar pro zero.
     var INICIO = 22;
+    // a gravacao e de uma sessao real, entao tem as pausas de uma sessao real:
+    // acelerada, o ciclo inteiro cabe na atencao de quem parou pra olhar.
+    var VELOCIDADE = 1.6;
+    function acelera() { try { v.playbackRate = VELOCIDADE; } catch (_) {} }
+    acelera();
+    v.addEventListener("loadedmetadata", acelera);
+    v.addEventListener("play", acelera);
     function daInicio() { if (v.currentTime < INICIO) { try { v.currentTime = INICIO; } catch (_) {} } }
     // mover o currentTime interrompe o autoplay, entao religamos UMA vez.
     // depois disso quem manda e o usuario: se ele pausar, fica pausado.

@@ -590,6 +590,13 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
      reprocessar o arquivo: 1018 - 30 = 988. */
   aspect-ratio: 1920 / 988;
 }
+/* A gravação sai do trilho de 1040: é a prova do produto, e num terminal cada
+   coluna a mais é uma linha de comando que dá pra ler. Em degraus, e não com
+   `100vw`: o vw inclui a barra de rolagem e o quadro estourava a janela em
+   1024, 1280 e 1440. O título fica no trilho — quem sai é só o quadro. */
+@media (min-width: 1240px) { .proof-frame { margin-inline: -56px; } }
+@media (min-width: 1380px) { .proof-frame { margin-inline: -120px; } }
+@media (min-width: 1560px) { .proof-frame { margin-inline: -180px; } }
 .proof-play {
   width: 64px; height: 64px; border-radius: 999px; border: 1px solid var(--code-dot);
   display: inline-flex; align-items: center; justify-content: center; color: var(--code-tx);

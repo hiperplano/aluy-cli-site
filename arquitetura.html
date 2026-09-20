@@ -67,7 +67,7 @@
     <section class="hero">
       <span class="eyebrow">architecture</span>
       <h1>How the Aluy CLI is built.</h1>
-      <p class="lead">The Aluy CLI is a single process that runs in your terminal — no daemon you did not ask for, no cloud in the middle of your project. It reads and edits files, runs commands and keeps the session, memory and your key on your machine. The only thing that goes out to the internet is the model call (plus any MCP connectors you turn on).</p>
+      <p class="lead">The Aluy CLI is a single process that runs in your terminal — no daemon you did not ask for, no cloud in the middle of your project. It reads and edits files, runs commands and keeps the session, memory and your key on your machine. What goes out to the internet: the model call, the web search, the <code>web_fetch</code> calls you approve, the MCP connectors you turn on, Telegram if you connect it — and the version check on npm, which <b>installs the update by itself</b> until you turn that off.</p>
     </section>
 
     <!-- ===== LEGEND ===== -->
@@ -116,7 +116,7 @@
 
         <!-- sidecars -->
         <div class="zone-sub">
-          <span class="subhead">sidecars — opt-in, local only</span>
+          <span class="subhead">sidecars — local, once you install turbo</span>
           <div class="grid grid-3">
             <div class="minitile"><h4 class="sc">mem0</h4><p>long-term memory</p></div>
             <div class="minitile"><h4 class="sc">headroom</h4><p>context headroom</p></div>
@@ -131,7 +131,7 @@
         <span class="subhead">what leaves your machine</span>
         <div class="edge-card">
           <h4><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span>Model call</h4>
-          <p>Straight to <b>your provider</b>, with <b>your credential</b> — that is the default. A central backend is optional and not available today.</p>
+          <p>Straight to <b>your provider</b>, with <b>your credential</b> — that is the default. A central backend is optional: the code is there, the service is not up yet.</p>
           <div class="chips">
             <span class="chip">Claude</span><span class="chip">GPT</span><span class="chip">Gemini</span><span class="chip">Grok</span><span class="chip">DeepSeek</span><span class="chip">Llama</span>
           </div>
@@ -155,12 +155,12 @@
         <div class="card card-gar">
           <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
           <h3>It cannot touch its own install</h3>
-          <p>The agent cannot write to <code>~/.aluy/</code>, where its own install, config and keys live. The rule is in the code, not in the prompt.</p>
+          <p>The agent cannot write to <code>~/.aluy/</code>, where its own install, config and keys live. The rule is in the code, not in the prompt — and it is deliberately dropped by <code>--yolo</code>, which allows everything.</p>
         </div>
         <div class="card card-gar">
           <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2"/></svg></div>
-          <h3>Sandbox &amp; limits</h3>
-          <p>Confinement from the operating system for the shell, and hard ceilings on time and steps for whatever runs on its own.</p>
+          <h3>Ceilings always; sandbox if you turn it on</h3>
+          <p>The ceilings on time, steps and tokens always apply. The operating-system confinement for the shell is <b>optional and ships off</b> — and it only exists on Linux.</p>
         </div>
       </div>
       <div style="text-align:center; margin-top:26px;">
