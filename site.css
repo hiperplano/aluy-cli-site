@@ -869,3 +869,10 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
 }
 .ref-ex .pr { color: var(--amber-solid); }
 .ref-ex .cm { color: var(--code-cm); }
+
+/* --- a sequência instalar + onboard cabe numa moldura só -------------------
+   Eram duas caixas de terminal empilhadas, cada uma com moldura, título e
+   botão, para dois comandos que se rodam em seguida. Agora é uma caixa com
+   duas linhas e um botão que copia as duas. */
+.term-body--next { padding-top: 0; }
+.term-body[hidden] { display: none; }
