@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="../site.css?v=572a9d90" />
+<link rel="stylesheet" href="../site.css?v=916461f6" />
 <script src="../lang.js?v=dfbd8e05"></script>
 <script defer src="../site.js?v=9ecc00f5"></script>
 <script defer src="../help.js?v=12d61aab"></script>
@@ -110,16 +110,16 @@
 
     <!-- content -->
     <div id="docs-content">
-      <span class="eyebrow eyebrow--sm">docs · beta</span>
+      <span class="eyebrow">docs · beta</span>
       <h1>Documentação do Aluy CLI</h1>
       <p class="docs-intro">O guia do Aluy CLI: instalar, configurar e colocar o agente para trabalhar, do primeiro comando ao ciclo autônomo. A lista completa de subcomandos, flags e comandos da sessão está em <a href="comandos.html">Comandos</a>. O código é público no GitHub.</p>
 
       <!-- 01 OVERVIEW -->
       <section class="docs-sec first" id="sec-overview">
-        <span class="eyebrow eyebrow--sm">01 · início</span>
+        <span class="eyebrow">01 · início</span>
         <h2>Visão geral</h2>
         <p>O <b>Aluy CLI</b> é um agente que roda no seu terminal. Em vez de sugerir código para você copiar e colar, ele <b>age</b> no seu projeto: lê e edita arquivos, roda comandos e fala com ferramentas — de ponta a ponta, na sua shell.</p>
-        <p>O que roda na sua máquina fica na sua máquina: a sessão, o histórico, os arquivos, a memória e a chave do provider (guardada no cofre de credenciais do sistema). <b>Por padrão a chamada ao modelo vai direto do seu computador para o seu provider, com a sua chave</b> — sem passar por nenhum servidor nosso. Tudo o mais que sai da máquina está <a href="arquitetura.html#bordas">listado por inteiro na arquitetura</a>.</p>
+        <p>O que roda na sua máquina fica na sua máquina: a sessão, o histórico, os arquivos, a memória e a chave do provider (guardada no cofre de credenciais do sistema). <b>Por padrão a chamada ao modelo vai direto do seu computador para o seu provider, com a sua chave</b> — sem passar por nenhum servidor nosso. Tudo o mais que sai da máquina está <a href="arquitetura.html#modulos">listado por inteiro na arquitetura</a>.</p>
         <p>O código é <b>público no GitHub</b> sob a <a href="https://github.com/hiperplano/aluy-cli/blob/main/LICENSE">Licença MIT</a>: o que age na sua máquina, você pode ler, auditar e fazer a sua própria versão.</p>
         <div class="note">
           <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
@@ -129,7 +129,7 @@
 
       <!-- 02 INSTALL -->
       <section class="docs-sec" id="sec-install">
-        <span class="eyebrow eyebrow--sm">02 · início</span>
+        <span class="eyebrow">02 · início</span>
         <h2>Instalação</h2>
         <p>Instale em um comando, como seu usuário, sem <code class="icode">sudo</code>. O instalador resolve as dependências e coloca o <code class="icode">aluy</code> no PATH, a lista de pastas onde o seu terminal procura programas; re-rodar atualiza. A instalação vive em <code class="icode">~/.aluy</code>.</p>
         <h3>Linux · macOS</h3>
@@ -142,7 +142,7 @@
 
       <!-- 03 FIRST STEPS -->
       <section class="docs-sec" id="sec-first-steps">
-        <span class="eyebrow eyebrow--sm">03 · início</span>
+        <span class="eyebrow">03 · início</span>
         <h2>Primeiros passos</h2>
 
         <p>Entre na pasta de um projeto e rode <code class="icode">aluy</code>. Na primeira vez, antes da sessão abrir, um assistente faz três perguntas.</p>
@@ -187,7 +187,7 @@
 
       <!-- 04 LINHA DE COMANDO -->
       <section class="docs-sec" id="sec-cli">
-        <span class="eyebrow eyebrow--sm">04 · referência</span>
+        <span class="eyebrow">04 · referência</span>
         <h2>A linha de comando</h2>
 
         <p>Estes são os comandos que você digita no seu shell, fora da sessão. Rodar <code class="icode">aluy</code> sozinho abre a sessão interativa na pasta atual; tudo o mais é subcomando ou flag.</p>
@@ -236,7 +236,7 @@
 
       <!-- 05 COMANDOS DA SESSAO -->
       <section class="docs-sec" id="sec-commands">
-        <span class="eyebrow eyebrow--sm">05 · referência</span>
+        <span class="eyebrow">05 · referência</span>
         <h2>Comandos da sessão</h2>
 
         <p>Com a sessão aberta, digite <code class="icode">/</code> no começo da linha e o menu abre. Filtre digitando; <kbd>Tab</kbd> ou <kbd>Enter</kbd> completa. <kbd>Ctrl+P</kbd> abre a mesma lista como paleta de comandos.</p>
@@ -263,7 +263,7 @@
 
       <!-- 06 STRUCTURE -->
       <section class="docs-sec" id="sec-structure">
-        <span class="eyebrow eyebrow--sm">06 · referência</span>
+        <span class="eyebrow">06 · referência</span>
         <h2>Estrutura .aluy/</h2>
         <p>O Aluy mantém duas casas: uma <b>global</b> em <code class="icode">~/.aluy/</code> (instalação, configuração, sidecars, memória entre projetos) e uma de <b>projeto</b> — o arquivo de instrução na raiz do repositório mais uma pasta <code class="icode">.aluy/</code> opcional. A pasta <code class="icode">~/.aluy/</code> é a casa do próprio Aluy, e o agente não entra nela: não lê, não edita e não roda nada lá dentro, mesmo que você peça. A exceção é o <code class="icode">--yolo</code>, que alcança essa pasta — uma decisão deliberada daquele modo, explicada <a href="arquitetura.html#catraca">na arquitetura</a>.</p>
 
@@ -311,7 +311,7 @@
 
       <!-- 07 ARTEFATOS -->
       <section class="docs-sec" id="sec-arquivos">
-        <span class="eyebrow eyebrow--sm">07 · referência</span>
+        <span class="eyebrow">07 · referência</span>
         <h2>Artefatos — os arquivos do projeto</h2>
 
         <p>Você não precisa de nenhum destes arquivos para usar o Aluy. Eles existem para quando você quer que o agente se comporte de um jeito específico <b>neste</b> projeto, e que esse jeito fique versionado junto com o código.</p>
@@ -412,7 +412,7 @@
 
       <!-- 08 CYCLE -->
       <section class="docs-sec" id="sec-cycle">
-        <span class="eyebrow eyebrow--sm">08 · em foco</span>
+        <span class="eyebrow">08 · em foco</span>
         <h2>/cycle — roda até terminar</h2>
         <p>Com o <code class="icode">/cycle</code>, você descreve a tarefa e o agente trabalha em <b>ciclos por conta própria</b> até terminar. Você manda e vai cuidar de outra coisa.</p>
         <p>Ele tem tetos de tempo e de passos, e para sozinho se algo sair do trilho. É o que impede o agente de rodar sem fim.</p>
@@ -425,7 +425,7 @@
 
       <!-- 09 SUBAGENTS -->
       <section class="docs-sec" id="sec-subagents">
-        <span class="eyebrow eyebrow--sm">09 · em foco</span>
+        <span class="eyebrow">09 · em foco</span>
         <h2>Subagentes</h2>
         <p>Cada subagente é um <b>perfil</b> (arquivo <code class="icode">.md</code>) com o seu próprio foco. Você <b>pede o especialista e o próprio agente cria</b> o subagente para você — descreva o que precisa ("um revisor de segurança", "um QA de testes ponta a ponta") e ele gera o perfil com o papel, o tom e os limites. Você não escreve o <code class="icode">.md</code> na mão (mas pode editar ou criar um se quiser).</p>
         <p>Eles trabalham <b>em paralelo, sem misturar contextos</b>: cada subagente tem sua própria sub-sessão dedicada. Uma frota, não um agente sozinho.</p>
@@ -434,7 +434,7 @@
 
       <!-- 10 ROOMS -->
       <section class="docs-sec" id="sec-rooms">
-        <span class="eyebrow eyebrow--sm">10 · em foco</span>
+        <span class="eyebrow">10 · em foco</span>
         <h2>Salas</h2>
         <p>As salas (<code class="icode">/rooms</code>) colocam <b>vários agentes conversando entre si</b> sobre o mesmo problema — debatendo, dividindo e combinando o trabalho. Você acompanha a conversa <b>em tempo real</b> e entra quando fizer sentido.</p>
         <div class="codeblock">
@@ -446,7 +446,7 @@
 
       <!-- 11 MCP -->
       <section class="docs-sec" id="sec-mcp">
-        <span class="eyebrow eyebrow--sm">11 · em foco</span>
+        <span class="eyebrow">11 · em foco</span>
         <h2>MCP — conecte ferramentas</h2>
         <p>Pelo <b>MCP</b> (o padrão aberto de conectores), o agente fala com ferramentas e integrações externas — bancos, APIs, serviços. Com isso ele consulta e altera essas ferramentas de verdade, em vez de só falar sobre elas.</p>
         <div class="codeblock">
@@ -458,7 +458,7 @@
 
       <!-- TELEGRAM -->
       <section class="docs-sec" id="sec-telegram">
-        <span class="eyebrow eyebrow--sm">12 · em foco</span>
+        <span class="eyebrow">12 · em foco</span>
         <h2>Telegram — o agente no seu celular</h2>
         <p>Conecte um bot e o agente te alcança fora do terminal: ele reporta quando termina, pergunta quando precisa de uma decisão sua e avisa quando pausa. Você responde do celular e ele segue.</p>
         <div class="codeblock">
@@ -479,7 +479,7 @@
 
       <!-- SERVICOS -->
       <section class="docs-sec" id="sec-services">
-        <span class="eyebrow eyebrow--sm">13 · em foco</span>
+        <span class="eyebrow">13 · em foco</span>
         <h2>Serviços — um agente com rotina</h2>
         <p>Um serviço é um agente que trabalha sem você: acorda na hora marcada, trabalha até o limite de gasto que você deu, reporta no seu canal e volta a dormir. Ele é um diretório em <code class="icode">~/.aluy/services/&lt;nome&gt;/</code>, e o <code class="icode">service.md</code> é a ficha que diz o que ele pode.</p>
         <div class="codeblock">
@@ -502,7 +502,7 @@
 
       <!-- 12 COMPAT -->
       <section class="docs-sec" id="sec-compat">
-        <span class="eyebrow eyebrow--sm">14 · interoperável</span>
+        <span class="eyebrow">14 · interoperável</span>
         <h2>Compatibilidade — Codex e Claude Code</h2>
         <p>Se você já usa o Codex ou o Claude Code, <b>não precisa reconfigurar nada</b>. Aponte o Aluy para o seu projeto e ele lê os mesmos arquivos de instrução e configuração que você já mantém.</p>
         <h3>Arquivos de instrução do projeto</h3>
@@ -523,7 +523,7 @@
 
       <!-- 15 TURBO (absorve a antiga secao Sidecars) -->
       <section class="docs-sec" id="sec-turbo">
-        <span class="eyebrow eyebrow--sm">15 · avançado</span>
+        <span class="eyebrow">15 · avançado</span>
         <h2>Modo turbo</h2>
 
         <p>O Aluy funciona sozinho, sem instalar mais nada. O modo turbo acrescenta três serviços que rodam na sua própria máquina e dão ao agente memória de longo prazo, conversas longas sem perder o fio, e modelos locais.</p>
@@ -607,12 +607,12 @@
 
       <!-- 15 ARCHITECTURE -->
       <section class="docs-sec" id="sec-architecture">
-        <span class="eyebrow eyebrow--sm">16 · avançado</span>
+        <span class="eyebrow">16 · avançado</span>
         <h2>Arquitetura</h2>
         <p>Por baixo dos panos, o Aluy CLI é <b>um único processo</b> no seu terminal — um programa só, sem nenhum servidor escondido por trás. A tela que você vê fala com o <b>miolo</b>, que é quem lê e edita arquivos, roda comandos e decide o próximo passo. Entre o agente e o seu projeto fica a <b>catraca de permissão</b>: o único ponto por onde todo efeito passa <b>antes de acontecer</b>.</p>
         <p>O estado vive na sua máquina: a memória da sessão (e a de longo prazo, com o <code class="icode">mem0</code>), a sua chave no cofre de credenciais do sistema, os seus arquivos e o seu shell. Os <a href="#sec-sidecars">sidecars</a> são programas auxiliares opcionais que rodam na sua máquina e só aceitam conversa vinda dela.</p>
         <ul class="docs-list">
-          <li>O que sai da sua máquina, a lista inteira: a <b>chamada ao modelo</b>, a busca na web, o <code class="icode">web_fetch</code> que você aprovar, os <b>servidores MCP que você liga</b>, os sidecars (que só a sua própria máquina alcança), o Telegram se você conectar, e a checagem de versão no npm — que <b>instala a atualização sozinha</b> até você desligar com <code class="icode">ALUY_AUTO_UPDATE=0</code>. A <a href="arquitetura.html#bordas">página de arquitetura</a> detalha cada uma.</li>
+          <li>O que sai da sua máquina, a lista inteira: a <b>chamada ao modelo</b>, a busca na web, o <code class="icode">web_fetch</code> que você aprovar, os <b>servidores MCP que você liga</b>, os sidecars (que só a sua própria máquina alcança), o Telegram se você conectar, e a checagem de versão no npm — que <b>instala a atualização sozinha</b> até você desligar com <code class="icode">ALUY_AUTO_UPDATE=0</code>. A <a href="arquitetura.html#modulos">página de arquitetura</a> detalha cada uma.</li>
           <li>Sessão, histórico, arquivos, memória e sua chave nunca saem do seu computador.</li>
         </ul>
         <div class="note">
@@ -623,7 +623,7 @@
 
       <!-- 16 MEMORY -->
       <section class="docs-sec" id="sec-memory">
-        <span class="eyebrow eyebrow--sm">17 · avançado</span>
+        <span class="eyebrow">17 · avançado</span>
         <h2>Memória</h2>
         <p>O agente lembra <b>decisões e contexto do projeto</b> de uma conversa para a outra — fatos globais e por projeto. Você controla tudo com <code class="icode">/memory</code>: veja o que ele guardou, <b>fixe</b> o que importa e <b>esqueça</b> o que não serve mais.</p>
         <div class="codeblock">
@@ -639,7 +639,7 @@
 
       <!-- 17 THEMES -->
       <section class="docs-sec" id="sec-themes">
-        <span class="eyebrow eyebrow--sm">18 · avançado</span>
+        <span class="eyebrow">18 · avançado</span>
         <h2>Temas</h2>
         <p>A sessão vem em três temas — <b>light</b>, <b>dark</b> e <b>slate</b> — para você deixar do jeito que gosta de olhar o dia todo. Troque com <code class="icode">/theme aluy-dark | aluy-light | aluy-slate</code>; a sua escolha é salva.</p>
         <div class="swatches">
@@ -652,7 +652,7 @@
 
       <!-- 18 DOCTOR -->
       <section class="docs-sec" id="sec-doctor">
-        <span class="eyebrow eyebrow--sm">19 · avançado</span>
+        <span class="eyebrow">19 · avançado</span>
         <h2>Doctor</h2>
         <p>O <code class="icode">/doctor</code> confere a sua instalação: modelo, chave, conexão, servidores MCP e configuração. Para cada item que está fora do lugar, ele aponta uma <b>dica de conserto</b>. Ele só lê, não muda nada.</p>
         <div class="codeblock">
@@ -666,10 +666,10 @@
 
       <!-- 19 FAQ -->
       <section class="docs-sec" id="sec-faq">
-        <span class="eyebrow eyebrow--sm">20 · perguntas</span>
+        <span class="eyebrow">20 · perguntas</span>
         <h2>FAQ</h2>
         <h3>Meus dados vão para a nuvem?</h3>
-        <p>Não. A sessão, o histórico, os arquivos do projeto e a memória ficam na sua máquina. O que sai dela é a <b>chamada ao modelo</b> e, se você ligar, a busca na web, os servidores MCP e o Telegram. A checagem de versão no npm também sai. A <a href="arquitetura.html#bordas">lista inteira está na arquitetura</a>.</p>
+        <p>Não. A sessão, o histórico, os arquivos do projeto e a memória ficam na sua máquina. O que sai dela é a <b>chamada ao modelo</b> e, se você ligar, a busca na web, os servidores MCP e o Telegram. A checagem de versão no npm também sai. A <a href="arquitetura.html#modulos">lista inteira está na arquitetura</a>.</p>
         <h3>Onde mora a minha chave?</h3>
         <p>No <b>cofre do SO</b> (Keychain, libsecret, Credential Manager). Num servidor sem cofre, a chave do seu provider vai para um <b>arquivo cifrado</b> — AES-256-GCM, com a chave derivada da máquina, então uma cópia do diretório não serve em outro lugar. Nos dois casos: nunca em texto, nunca no repo. O Aluy mostra o tier do modelo, nunca a credencial.</p>
         <h3>Como o Aluy fala com o modelo?</h3>

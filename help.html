@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="site.css?v=572a9d90" />
+<link rel="stylesheet" href="site.css?v=916461f6" />
 <script src="lang.js?v=dfbd8e05"></script>
 <script defer src="site.js?v=9ecc00f5"></script>
 <script defer src="help.js?v=12d61aab"></script>
@@ -105,16 +105,16 @@
 
     <!-- content -->
     <div id="docs-content">
-      <span class="eyebrow eyebrow--sm">docs · beta</span>
+      <span class="eyebrow">docs · beta</span>
       <h1>Aluy CLI documentation</h1>
       <p class="docs-intro">The guide: what Aluy does, how to put it to work, and what to do when it misbehaves — from the first command to agents that run on their own. When you already know the name of a flag or a command and just want its definition, go to the <a href="comandos.html">reference</a>. The code is public on GitHub.</p>
 
       <!-- 01 OVERVIEW -->
       <section class="docs-sec first" id="sec-overview">
-        <span class="eyebrow eyebrow--sm">01 · start</span>
+        <span class="eyebrow">01 · start</span>
         <h2>Overview</h2>
         <p>The <b>Aluy CLI</b> is a terminal agent that runs on the model provider you choose. Instead of suggesting code for you to copy and paste, it <b>acts</b> on your project: it reads and edits files, runs commands and talks to tools — end to end, in your shell.</p>
-        <p>What runs on your machine stays on your machine: the session, the history, the files, the memory and the provider key (kept in the OS vault). The <b>model call</b> goes straight to the provider you configured, with your own key — that is the default, and nothing is routed through Aluy. The full list of what else opens a connection is on the <a href="arquitetura.html#bordas">architecture page</a>.</p>
+        <p>What runs on your machine stays on your machine: the session, the history, the files, the memory and the provider key (kept in the OS vault). The <b>model call</b> goes straight to the provider you configured, with your own key — that is the default, and nothing is routed through Aluy. The full list of what else opens a connection is on the <a href="arquitetura.html#modulos">architecture page</a>.</p>
         <p>The code is <b>public on GitHub</b> under the <a href="https://github.com/hiperplano/aluy-cli/blob/main/LICENSE">MIT License</a>: what acts on your machine, you can read, audit and fork. The point is that you can automate your own tasks, tests and builds without waiting on a platform team.</p>
         <div class="note">
           <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
@@ -124,7 +124,7 @@
 
       <!-- 02 INSTALLATION -->
       <section class="docs-sec" id="sec-install">
-        <span class="eyebrow eyebrow--sm">02 · start</span>
+        <span class="eyebrow">02 · start</span>
         <h2>Installation</h2>
         <p>Install in one command, as your user, no <code class="icode">sudo</code>. The installer resolves the dependencies and puts <code class="icode">aluy</code> on the PATH; re-running updates it. The install lives in <code class="icode">~/.aluy</code>.</p>
         <h3>Linux · macOS</h3>
@@ -137,7 +137,7 @@
 
       <!-- 03 FIRST STEPS -->
       <section class="docs-sec" id="sec-first-steps">
-        <span class="eyebrow eyebrow--sm">03 · start</span>
+        <span class="eyebrow">03 · start</span>
         <h2>First steps</h2>
         <p>On your first <code class="icode">aluy</code>, a wizard opens and asks, in this order, for <b>provider</b>, <b>key</b> and <b>model</b>.</p>
         <ul class="docs-list">
@@ -159,7 +159,7 @@
 
       <!-- 04 RUNNING ALUY -->
       <section class="docs-sec" id="sec-cli">
-        <span class="eyebrow eyebrow--sm">04 · start</span>
+        <span class="eyebrow">04 · start</span>
         <h2>Running aluy from your shell</h2>
 
         <p>There are three ways to start Aluy, and they answer three different needs.</p>
@@ -212,7 +212,7 @@
 
       <!-- 05 SLASH COMMANDS -->
       <section class="docs-sec" id="sec-commands">
-        <span class="eyebrow eyebrow--sm">05 · start</span>
+        <span class="eyebrow">05 · start</span>
         <h2>Talking to the session</h2>
 
         <p>Inside a running session, a line that starts with <code class="icode">/</code> is an order to Aluy itself, not a task for the agent. Type the slash and a menu opens; keep typing to filter it, then <kbd>Tab</kbd> or <kbd>Enter</kbd> to complete.</p>
@@ -244,7 +244,7 @@
 
       <!-- 06 MEMORY -->
       <section class="docs-sec" id="sec-memory">
-        <span class="eyebrow eyebrow--sm">06 · everyday</span>
+        <span class="eyebrow">06 · everyday</span>
         <h2>Memory</h2>
         <p>The agent remembers <b>project decisions and context</b> from one conversation to the next — global and per-project facts. You control all of it with <code class="icode">/memory</code>: see what it stored, <b>pin</b> what matters and <b>forget</b> what's no longer useful.</p>
         <div class="codeblock">
@@ -260,7 +260,7 @@
 
       <!-- 07 THEMES -->
       <section class="docs-sec" id="sec-themes">
-        <span class="eyebrow eyebrow--sm">07 · everyday</span>
+        <span class="eyebrow">07 · everyday</span>
         <h2>Themes</h2>
         <p>The session comes in three themes — <b>light</b>, <b>dark</b> and <b>slate</b> — so you can set it to whatever you like looking at all day. Switch with <code class="icode">/theme aluy-dark | aluy-light | aluy-slate</code>; your choice is saved.</p>
         <div class="swatches">
@@ -273,7 +273,7 @@
 
       <!-- 08 /CYCLE -->
       <section class="docs-sec" id="sec-cycle">
-        <span class="eyebrow eyebrow--sm">08 · autonomy</span>
+        <span class="eyebrow">08 · autonomy</span>
         <h2>/cycle — run until done</h2>
         <p>With <code class="icode">/cycle</code>, you describe the task and the agent works in <b>cycles on its own</b> until it's done. You do not have to sit and watch it.</p>
         <p>It comes with a <b>handbrake</b>: hard ceilings on time and steps, and an automatic stop if something goes off the rails.</p>
@@ -286,7 +286,7 @@
 
       <!-- 09 SUBAGENTS -->
       <section class="docs-sec" id="sec-subagents">
-        <span class="eyebrow eyebrow--sm">09 · autonomy</span>
+        <span class="eyebrow">09 · autonomy</span>
         <h2>Subagents</h2>
         <p>Each subagent is a <b>profile</b> (<code class="icode">.md</code> file) with its own focus. You <b>ask for the specialist and the agent itself creates</b> the subagent for you — describe what you need ("a security reviewer", "an E2E QA") and it generates the profile with the role, tone and limits. You don't write the <code class="icode">.md</code> by hand (but you can edit or create one if you want).</p>
         <p>They work <b>in parallel, without mixing contexts</b>: each subagent has its own dedicated sub-session.</p>
@@ -295,7 +295,7 @@
 
       <!-- 10 ROOMS -->
       <section class="docs-sec" id="sec-rooms">
-        <span class="eyebrow eyebrow--sm">10 · autonomy</span>
+        <span class="eyebrow">10 · autonomy</span>
         <h2>Rooms</h2>
         <p>Rooms (<code class="icode">/rooms</code>) put <b>multiple agents talking to each other</b> about the same problem — debating, splitting and combining the work. You follow the conversation <b>in real time</b> and step in when it makes sense.</p>
         <div class="codeblock">
@@ -307,7 +307,7 @@
 
       <!-- 11 TELEGRAM -->
       <section class="docs-sec" id="sec-telegram">
-        <span class="eyebrow eyebrow--sm">11 · autonomy</span>
+        <span class="eyebrow">11 · autonomy</span>
         <h2>Telegram — the agent on your phone</h2>
         <p>Connect a bot and the agent reaches you outside the terminal: it reports when the work ends, asks when it needs a decision from you, and warns when it pauses. You answer from the phone and it carries on.</p>
         <div class="codeblock">
@@ -328,7 +328,7 @@
 
       <!-- 12 SERVICES -->
       <section class="docs-sec" id="sec-services">
-        <span class="eyebrow eyebrow--sm">12 · autonomy</span>
+        <span class="eyebrow">12 · autonomy</span>
         <h2>Services — an agent with a routine</h2>
 
         <p>Some work does not need you in the room. The test suite should run before you sit down. The dependency report should land on Monday. A service is an agent that does exactly that: it wakes on a schedule, works inside a budget you set, reports on a channel you chose, and goes back to sleep.</p>
@@ -363,7 +363,7 @@
 
       <!-- 13 TEACHING THE PROJECT -->
       <section class="docs-sec" id="sec-arquivos">
-        <span class="eyebrow eyebrow--sm">13 · your project</span>
+        <span class="eyebrow">13 · your project</span>
         <h2>Teaching the project</h2>
 
         <p>The agent starts every session knowing nothing about your repository. You fix that once, in plain Markdown files, and every session after that starts informed.</p>
@@ -471,7 +471,7 @@
 
       <!-- 14 MCP -->
       <section class="docs-sec" id="sec-mcp">
-        <span class="eyebrow eyebrow--sm">14 · tools</span>
+        <span class="eyebrow">14 · tools</span>
         <h2>MCP — connect tools</h2>
         <p>Through <b>MCP</b> (the open connector standard), the agent talks to external tools and integrations — databases, APIs, services. That is the difference between an agent that can query your database and one that can only describe how to query it.</p>
         <div class="codeblock">
@@ -483,7 +483,7 @@
 
       <!-- 15 SIDECARS -->
       <section class="docs-sec" id="sec-sidecars">
-        <span class="eyebrow eyebrow--sm">15 · advanced</span>
+        <span class="eyebrow">15 · advanced</span>
         <h2>Sidecars — memory, headroom and local models</h2>
 
         <p>Aluy works without sidecars. They are three optional programs that run on your own machine and give the agent things one process cannot do alone.</p>
@@ -526,7 +526,7 @@
 
       <!-- 16 DOCTOR -->
       <section class="docs-sec" id="sec-doctor">
-        <span class="eyebrow eyebrow--sm">16 · support</span>
+        <span class="eyebrow">16 · support</span>
         <h2>Doctor</h2>
         <p>Run it whenever something stops behaving: after an install, after changing provider, or the first time a session refuses to start.</p>
         <p><code class="icode">/doctor</code> is the <b>read-only</b> diagnostic of your install: it checks model, key, connection, MCP and config — and points to a <b>fix hint</b> when something is out of place. It changes nothing, only reads.</p>
@@ -541,10 +541,10 @@
 
       <!-- 17 FAQ -->
       <section class="docs-sec" id="sec-faq">
-        <span class="eyebrow eyebrow--sm">17 · support</span>
+        <span class="eyebrow">17 · support</span>
         <h2>FAQ</h2>
         <h3>Does my data go to the cloud?</h3>
-        <p>Your code and your files do not. The session, the history, the project files and the memory stay on your machine. What does open a connection is listed in full on the <a href="arquitetura.html#bordas">architecture page</a>: the model call, web search, a <code class="icode">web_fetch</code> you approve, the MCP servers you turn on, Telegram if you connect it, and the version check on npm.</p>
+        <p>Your code and your files do not. The session, the history, the project files and the memory stay on your machine. What does open a connection is listed in full on the <a href="arquitetura.html#modulos">architecture page</a>: the model call, web search, a <code class="icode">web_fetch</code> you approve, the MCP servers you turn on, Telegram if you connect it, and the version check on npm.</p>
         <h3>Where does my key live?</h3>
         <p>In the <b>OS vault</b> (Keychain, libsecret, Credential Manager). On a server with no vault, your provider key goes to an <b>encrypted file</b> instead — AES-256-GCM, with the key derived from the machine, so a copy of the directory is useless anywhere else. Either way: never in plain text, never in the repo. Aluy shows the model tier, never the credential.</p>
         <h3>How does Aluy talk to the model?</h3>
@@ -563,12 +563,12 @@
 
       <!-- 18 ARCHITECTURE -->
       <section class="docs-sec" id="sec-architecture">
-        <span class="eyebrow eyebrow--sm">18 · internals</span>
+        <span class="eyebrow">18 · internals</span>
         <h2>Architecture</h2>
         <p>Under the hood, the Aluy CLI is <b>a single process</b> in your terminal — one program, no background server. The terminal interface talks to the core, the engine that reads and edits files, runs commands and decides the next steps. Between the agent and your project sits the <b>permission gate</b>: the single point every effect passes through <b>before it happens</b>.</p>
         <p>The state lives on your machine: the session memory (and the long-term one via <code class="icode">mem0</code>), your key in the OS vault, your files and your shell. Sidecars are optional local boosters that listen on <code class="icode">127.0.0.1</code> only.</p>
         <ul class="docs-list">
-          <li>What leaves your machine, the whole list: the <b>model call</b>, web search, a <code class="icode">web_fetch</code> you approve, the <b>MCP servers you turn on</b>, the sidecars (which only your own machine can reach), Telegram if you connect it, and the version check on npm — which <b>installs the update by itself</b> until you turn that off with <code class="icode">ALUY_AUTO_UPDATE=0</code> — the <a href="arquitetura.html#bordas">architecture page</a> lists them in full.</li>
+          <li>What leaves your machine, the whole list: the <b>model call</b>, web search, a <code class="icode">web_fetch</code> you approve, the <b>MCP servers you turn on</b>, the sidecars (which only your own machine can reach), Telegram if you connect it, and the version check on npm — which <b>installs the update by itself</b> until you turn that off with <code class="icode">ALUY_AUTO_UPDATE=0</code> — the <a href="arquitetura.html#modulos">architecture page</a> lists them in full.</li>
         </ul>
         <div class="note">
           <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
@@ -578,7 +578,7 @@
 
       <!-- 19 CODEX & CLAUDE CODE -->
       <section class="docs-sec" id="sec-compat">
-        <span class="eyebrow eyebrow--sm">19 · internals</span>
+        <span class="eyebrow">19 · internals</span>
         <h2>Compatibility — Codex &amp; Claude Code</h2>
         <p><b>Already using Codex or Claude Code?</b> Point Aluy at your project and it reads the same instruction and configuration files you already keep, so there is nothing to reconfigure.</p>
         <h3>Project instruction files</h3>

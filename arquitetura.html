@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="site.css?v=572a9d90" />
+<link rel="stylesheet" href="site.css?v=916461f6" />
 <script src="lang.js?v=dfbd8e05"></script>
 <script defer src="site.js?v=9ecc00f5"></script>
 <script src="consent.js?v=b90dbe6e" defer></script>
@@ -195,12 +195,12 @@
         </div>
       </div>
 
-      <p class="hint"><b>Five command categories cannot be relaxed</b>, not even by editing the config: destructive commands, network commands, privilege escalation, package installs, and writing to a startup file. Every tool from an MCP server is its own locked category. The <code class="icode">/permissions</code> panel can only touch two read tools — the rest shows up locked.</p>
-
       <div class="note note--flow">
         <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
         <p><b>And the exception, in full:</b> <code class="icode">--yolo</code> returns <i>allow</i> before any of this. Under it the agent reaches its own <code class="icode">~/.aluy/</code> folder — the MCP config, the hooks, the undo journal and the credential vault. That is a deliberate decision of the mode, not a hole. Everywhere else, that rule holds.</p>
       </div>
+
+      <p class="hint"><b>Five command categories cannot be relaxed</b>, not even by editing the config: destructive commands, network commands, privilege escalation, package installs, and writing to a startup file. Every tool from an MCP server is its own locked category. The <code class="icode">/permissions</code> panel can only touch two read tools — the rest shows up locked.</p>
     </section>
 
     <!-- ===== MODULES ===== -->
@@ -348,12 +348,12 @@
       <p class="lead">All under <code class="icode">~/.aluy/</code>, readable only by your own user account — no other account on the machine gets in. There is no database anywhere: the memory index is a Markdown file you can open and edit.</p>
 
       <div class="grid grid-2">
-        <div class="minitile"><h4>session and transcript</h4><p>One JSON per session, with the blocks of the conversation and what you ran.</p></div>
-        <div class="minitile"><h4>undo journal</h4><p>The previous state of each file, <b>encrypted</b>. The key belongs to the session and dies with the process — undo does not survive a restart.</p></div>
-        <div class="minitile"><h4>memory</h4><p>Markdown: one global, one per project. One fact per line, editable by hand.</p></div>
-        <div class="minitile"><h4>credential</h4><p>In the OS vault, or an encrypted file where there is none — with the key derived from the machine, never written down.</p></div>
-        <div class="minitile"><h4>configuration</h4><p>Theme, model, backend, profile, services. Plus the hooks and the MCP servers, each in its own file.</p></div>
-        <div class="minitile"><h4>what you write</h4><p>Agents, commands, skills, workflows and plugins: <code>.md</code> files you can put in version control.</p></div>
+        <div class="card"><h3>session and transcript</h3><p>One JSON per session, with the blocks of the conversation and what you ran.</p></div>
+        <div class="card"><h3>undo journal</h3><p>The previous state of each file, <b>encrypted</b>. The key belongs to the session and dies with the process — undo does not survive a restart.</p></div>
+        <div class="card"><h3>memory</h3><p>Markdown: one global, one per project. One fact per line, editable by hand.</p></div>
+        <div class="card"><h3>credential</h3><p>In the OS vault, or an encrypted file where there is none — with the key derived from the machine, never written down.</p></div>
+        <div class="card"><h3>configuration</h3><p>Theme, model, backend, profile, services. Plus the hooks and the MCP servers, each in its own file.</p></div>
+        <div class="card"><h3>what you write</h3><p>Agents, commands, skills, workflows and plugins: <code>.md</code> files you can put in version control.</p></div>
       </div>
     </section>
 
