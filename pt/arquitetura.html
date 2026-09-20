@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="../site.css?v=12643088" />
+<link rel="stylesheet" href="../site.css?v=1f5a143f" />
 <script src="../lang.js?v=dfbd8e05"></script>
 <script defer src="../site.js?v=9ecc00f5"></script>
 <script src="../consent.js?v=b90dbe6e" defer></script>
@@ -211,61 +211,73 @@
       </div>
 
       <div class="fluxo fluxo--comp">
-        <svg class="fluxo-svg fluxo-svg--comp" viewBox="0 0 1000 600" role="img" aria-labelledby="comp-t comp-d">
-          <title id="comp-t">Os componentes do Aluy CLI e as portas entre eles</title>
-          <desc id="comp-d">O miolo fica no centro: o ciclo do turno, a montagem de contexto, a catraca, as ferramentas nativas, o contrato do modelo, o diário cifrado e o protocolo de tool-call. À esquerda entram a interface e a linha de comando. À direita o miolo declara cinco portas — shell e arquivos, modelo, credencial, pergunta e servidores — e a casca fornece a implementação de cada uma. Todas as setas apontam para dentro.</desc>
+        <svg class="fluxo-svg" viewBox="0 0 880 700" role="img" aria-labelledby="mapa-t mapa-d">
+          <title id="mapa-t">O mapa dos componentes do Aluy CLI</title>
+          <desc id="mapa-d">De cima para baixo: a interface recebe o que você digita e entrega à sessão. A sessão monta tudo e chama o miolo, que tem o ciclo do turno, a catraca e as ferramentas. O que a catraca permite desce para as portas — shell, arquivos, rede, cofre — e só as portas alcançam o mundo, que é o seu provider, os servidores MCP e os programas auxiliares. O miolo nunca toca o mundo direto.</desc>
 
-          <g class="c-miolo">
-            <rect x="228" y="60" width="340" height="470" rx="14" />
-            <text class="c-miolo-tit" x="398" y="96">O MIOLO</text>
-            <text class="c-miolo-sub" x="398" y="116">não sabe o que é uma tela</text>
+          <!-- 1 · a interface -->
+          <g class="f-no">
+            <rect x="240" y="24" width="400" height="66" rx="10" />
+            <text class="f-tit" x="264" y="52">a interface</text>
+            <text class="f-sub" x="264" y="74">o que você vê e digita: painéis, temas, o menu de barra</text>
           </g>
+          <text class="m-lado" x="664" y="60">a casca</text>
+          <path class="f-seta" d="M 440 90 L 440 124" marker-end="url(#mpa)" />
 
-          <g class="c-peca">
-            <rect x="252" y="134" width="292" height="38" rx="8" /><text x="398" y="159">o ciclo do turno</text>
-            <rect x="252" y="180" width="292" height="38" rx="8" /><text x="398" y="205">a montagem do contexto</text>
-            <rect x="252" y="272" width="292" height="38" rx="8" /><text x="398" y="297">as ferramentas nativas</text>
-            <rect x="252" y="318" width="292" height="38" rx="8" /><text x="398" y="343">o contrato do modelo</text>
-            <rect x="252" y="364" width="292" height="38" rx="8" /><text x="398" y="389">o diário cifrado</text>
-            <rect x="252" y="410" width="292" height="38" rx="8" /><text x="398" y="435">o protocolo de tool-call</text>
+          <!-- 2 · a sessao -->
+          <g class="f-no">
+            <rect x="240" y="124" width="400" height="66" rx="10" />
+            <text class="f-tit" x="264" y="152">a sessão</text>
+            <text class="f-sub" x="264" y="174">monta o que o turno precisa e liga o miolo às portas</text>
           </g>
-          <g class="c-catraca">
-            <rect x="252" y="226" width="292" height="38" rx="8" /><text x="398" y="251">A CATRACA</text>
-          </g>
-          <text class="c-selo" x="398" y="504">lint e teste barram terminal aqui dentro</text>
+          <text class="m-lado" x="664" y="160">a casca</text>
+          <path class="f-seta" d="M 440 190 L 440 224" marker-end="url(#mpa)" />
 
-          <g class="c-fora">
-            <rect x="8" y="196" width="160" height="44" rx="9" /><text x="88" y="223">a interface</text>
-            <rect x="8" y="258" width="160" height="44" rx="9" /><text x="88" y="285">a linha de comando</text>
+          <!-- 3 · o miolo, agrupando tres pecas -->
+          <g class="m-grupo">
+            <rect x="200" y="224" width="480" height="256" rx="14" />
+            <text class="m-grupo-tit" x="224" y="252">O MIOLO</text>
+            <text class="m-grupo-sub" x="224" y="272">não sabe o que é uma tela, e não alcança o mundo</text>
           </g>
-          <path class="c-liga" d="M 168 218 L 228 218" marker-end="url(#cpa)" />
-          <path class="c-liga" d="M 168 280 L 228 280" marker-end="url(#cpa)" />
+          <g class="f-no">
+            <rect x="240" y="288" width="400" height="44" rx="9" />
+            <text class="f-tit f-tit--sm2" x="264" y="316">o ciclo do turno</text>
+          </g>
+          <path class="f-seta" d="M 440 332 L 440 350" marker-end="url(#mpa)" />
+          <g class="f-catraca">
+            <rect x="240" y="350" width="400" height="48" rx="9" />
+            <text class="f-catraca-tit" x="440" y="380">A CATRACA</text>
+          </g>
+          <path class="f-seta" d="M 440 398 L 440 416" marker-end="url(#mpa)" />
+          <g class="f-no">
+            <rect x="240" y="416" width="400" height="44" rx="9" />
+            <text class="f-tit f-tit--sm2" x="264" y="444">as ferramentas nativas</text>
+          </g>
+          <path class="f-seta" d="M 440 480 L 440 514" marker-end="url(#mpa)" />
 
-          <text class="c-porta-tit" x="638" y="44">as portas que ele declara</text>
-          <g class="c-porta">
-            <text x="638" y="113">shell e arquivos</text>
-            <text x="638" y="193">modelo</text>
-            <text x="638" y="273">credencial</text>
-            <text x="638" y="353">pergunta</text>
-            <text x="638" y="433">servidores</text>
+          <!-- 4 · as portas -->
+          <g class="f-no">
+            <rect x="240" y="514" width="400" height="66" rx="10" />
+            <text class="f-tit" x="264" y="542">as portas</text>
+            <text class="f-sub" x="264" y="564">shell · arquivos · busca · rede · cofre da credencial</text>
           </g>
-          <g class="c-fora">
-            <rect x="708" y="100" width="284" height="44" rx="9" /><text x="850" y="127">o shell e o disco</text>
-            <rect x="708" y="180" width="284" height="44" rx="9" /><text x="850" y="207">nove providers</text>
-            <rect x="708" y="260" width="284" height="44" rx="9" /><text x="850" y="287">keychain ou cofre cifrado</text>
-            <rect x="708" y="340" width="284" height="44" rx="9" /><text x="850" y="367">a interface pergunta a você</text>
-            <rect x="708" y="420" width="284" height="44" rx="9" /><text x="850" y="447">MCP, sidecars, Telegram</text>
-          </g>
-          <path class="c-liga" d="M 708 122 L 568 122" marker-end="url(#cpa)" />
-          <path class="c-liga" d="M 708 202 L 568 202" marker-end="url(#cpa)" />
-          <path class="c-liga" d="M 708 282 L 568 282" marker-end="url(#cpa)" />
-          <path class="c-liga" d="M 708 362 L 568 362" marker-end="url(#cpa)" />
-          <path class="c-liga" d="M 708 442 L 568 442" marker-end="url(#cpa)" />
+          <text class="m-lado" x="664" y="550">a casca</text>
+          <path class="f-seta f-seta--tracejada" d="M 440 580 L 440 614" marker-end="url(#mpa)" />
 
-          <text class="c-regra" x="500" y="572">a casca conhece o miolo · o miolo só conhece os contratos</text>
+          <!-- 5 · o mundo -->
+          <g class="f-no f-no--borda">
+            <rect x="240" y="614" width="400" height="62" rx="10" />
+            <text class="f-tit" x="264" y="642">o mundo</text>
+            <text class="f-sub" x="264" y="663">o seu provider · os servidores MCP · os programas auxiliares</text>
+          </g>
+          <text class="f-borda-rot" x="664" y="648">fora da sua máquina</text>
+
+          <!-- o que o miolo NAO alcanca, dito de lado -->
+          <path class="m-nunca" d="M 200 352 L 120 352 L 120 547 L 236 547" />
+          <text class="m-nunca-rot" x="112" y="450" transform="rotate(-90 112 450)">o miolo nunca chega aqui sozinho</text>
 
           <defs>
-            <marker id="cpa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <marker id="mpa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
               <path class="f-ponta" d="M 0 0 L 10 5 L 0 10 z" />
             </marker>
           </defs>

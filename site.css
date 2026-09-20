@@ -1003,3 +1003,13 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
 .c-porta-tit { fill: var(--mut2); font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-anchor: middle; }
 .c-liga { fill: none; stroke: var(--bd-strong); stroke-width: 1.4; }
 .c-regra { fill: var(--mut2); font-family: var(--ui); font-size: 14px; text-anchor: middle; }
+
+/* --- mapa de componentes: mesma gramática do diagrama do turno ------------- */
+.m-grupo rect { fill: none; stroke: var(--bd-strong); stroke-width: 1.6; stroke-dasharray: 7 5; }
+.m-grupo-tit { fill: var(--tx); font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: .14em; }
+.m-grupo-sub { fill: var(--mut2); font-family: var(--ui); font-size: 13px; }
+.m-lado { fill: var(--mut2); font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; }
+.f-tit--sm2 { font-size: 15px; }
+.f-seta--tracejada { stroke-dasharray: 5 4; }
+.m-nunca { fill: none; stroke: var(--bd); stroke-width: 1.2; stroke-dasharray: 3 5; }
+.m-nunca-rot { fill: var(--mut2); font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-anchor: middle; }
