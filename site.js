@@ -3,7 +3,8 @@
    2) dynamic version: writes the latest release of hiperplano/aluy-cli into every
       [data-version] element (hero badge + header pill). Uses /releases (includes
       prereleases/RC; /releases/latest skips them). Cached 1h; static fallback kept.
-      data-version="tag" → just the tag; otherwise → "tag · beta" while pre-1.0.
+      data-version="tag" → just the tag (header pill); "beta" → only the stage,
+      hidden once the release is stable; anything else → "tag · beta" while pre-1.0.
       "beta" comes from the TAG (SemVer: a `-` means prerelease), not from GitHub's
       prerelease FLAG: the flag is a release-CHANNEL decision (it drives the "Latest"
       badge, and while there is no stable the rc IS the current release, so the flag is
@@ -30,9 +31,15 @@
       if (!tag) return;
       var pre = tag.indexOf("-") !== -1; // SemVer prerelease (v1.0.0-rc.N)
       els.forEach(function (el) {
-        el.textContent = (el.getAttribute("data-version") === "tag")
-          ? tag
-          : (pre ? tag + " · beta" : tag);
+        var modo = el.getAttribute("data-version");
+        if (modo === "tag") { el.textContent = tag; return; }
+        if (modo === "beta") {
+          // o numero ja esta fixo na pilula do topo; aqui so o estagio.
+          if (pre) { el.textContent = "beta"; }
+          else { var selo = el.closest(".badge") || el; selo.style.display = "none"; }
+          return;
+        }
+        el.textContent = pre ? tag + " · beta" : tag;
       });
     }
 

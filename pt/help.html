@@ -39,6 +39,7 @@
         <img src="../assets/aluy-wordmark-ink.png" alt="Aluy" />
         <span class="cli">CLI</span>
       </a>
+      <a class="ver-pill" href="https://github.com/hiperplano/aluy-cli/blob/main/CHANGELOG.md" data-version="tag" title="Versão atual — abre o changelog">v1.0.0-rc.180</a>
       <nav class="nav" aria-label="Principal">
         <a href="comecar.html">Instalar</a>
         <a href="comandos.html">Comandos</a>
@@ -148,7 +149,7 @@
         <p>No seu primeiro <code class="icode">aluy</code>, um assistente abre e pede, nesta ordem, <b>provider</b>, <b>chave</b> e <b>modelo</b>.</p>
         <ul class="docs-list">
           <li><b>Provedor</b> — por padrão o CLI fala direto com o seu provedor, com a sua credencial (BYO): escolha um e cole a chave, ou aponte para um modelo local. Troque depois com <code class="icode">/provider</code>.</li>
-          <li><b>Chave</b> — vai direto pro cofre do SO (Keychain no macOS, libsecret no Linux, Credential Manager no Windows). Nunca em texto, nunca no repo.</li>
+          <li><b>Chave</b> — vai direto pro cofre do SO (Keychain no macOS, libsecret no Linux, Credential Manager no Windows). Em máquina headless, sem cofre, ela vai para um arquivo cifrado. Nunca em texto, nunca no repo.</li>
           <li><b>Modelo</b> — escolha o tier com <code class="icode">/model</code>; ajuste o esforço de raciocínio com <code class="icode">/effort</code> quando precisar.</li>
         </ul>
         <p>Então mande a primeira tarefa: abra a sessão, descreva o objetivo (ou use um <code class="icode">/comando</code>) e deixe o agente trabalhar. Cada ação que toca seus arquivos pede permissão.</p>
@@ -675,7 +676,7 @@
         <h3>Meus dados vão para a nuvem?</h3>
         <p>Não. A sessão, o histórico, os arquivos do projeto e a memória ficam na sua máquina. A única coisa que cruza a borda é a <b>chamada ao modelo</b>.</p>
         <h3>Onde mora a minha chave?</h3>
-        <p>No <b>cofre do SO</b> (Keychain, libsecret, Credential Manager) — nunca em texto, nunca no repo. O Aluy mostra o tier do modelo, nunca a credencial.</p>
+        <p>No <b>cofre do SO</b> (Keychain, libsecret, Credential Manager). Num servidor sem cofre, a chave do seu provedor vai para um <b>arquivo cifrado</b> — AES-256-GCM, com a chave derivada da máquina, então uma cópia do diretório não serve em outro lugar. Nos dois casos: nunca em texto, nunca no repo. O Aluy mostra o tier do modelo, nunca a credencial.</p>
         <h3>Como o Aluy fala com o modelo?</h3>
         <p>Por padrão o CLI fala direto com o seu provedor, com a sua credencial (chave de API, OAuth ou um modelo local): é o seu uso, sob o seu controle, sem intermediário e sem medição. Um backend central é opcional e hoje não está disponível.</p>
         <h3>Tem custo?</h3>
@@ -692,12 +693,11 @@
 
       <!-- footer (inside content panel) -->
       <footer class="docs-foot">
-        <div class="foot-meta">
-          <span data-version="tag">v1.0.0-rc.180</span>
-          <a href="https://github.com/hiperplano/aluy-cli/blob/main/CHANGELOG.md">changelog</a>
-          <a href="https://github.com/hiperplano/aluy-cli/issues/new">reportar um problema</a>
-          <a href="https://www.npmjs.com/package/@hiperplano/aluy-cli">npm</a>
-        </div>
+      <div class="foot-meta">
+        <a class="foot-ic" href="https://github.com/hiperplano/aluy-cli/blob/main/CHANGELOG.md" aria-label="Changelog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg><span>changelog</span></a>
+        <a class="foot-ic" href="https://github.com/hiperplano/aluy-cli/issues/new" aria-label="Reportar um problema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5"/><path d="M12 16.5h.01"/></svg><span>reportar um problema</span></a>
+        <a class="foot-ic" href="https://www.npmjs.com/package/@hiperplano/aluy-cli" aria-label="npm"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"/></svg><span>npm</span></a>
+      </div>
         <p class="foot-fine">Aluy <span class="lam">&Lambda;</span> CLI &mdash; um agente único que faz milhares de modelos trabalharem pra você</p>
       </footer>
 

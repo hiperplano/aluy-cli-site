@@ -532,7 +532,7 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
 }
 @media (max-width: 680px) {
   :root { --pad: 18px; }
-  .nav, .gh-link, .ver-pill { display: none; }
+  .nav, .gh-link { display: none; }
   .nav-toggle { display: inline-flex; }
   .nav.open {
     display: flex; flex-direction: column; align-items: stretch; gap: 2px;
@@ -673,3 +673,21 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
 
 /* título de três linhas: um pouco menor para a primeira dobra não estourar */
 .hero-c h1 { font-size: clamp(36px, 5.6vw, 60px); }
+
+
+/* --- rodape: links com icone (changelog, problema, npm) -------------------- */
+.foot-meta { gap: var(--sp-2); }
+.foot-ic {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: .01em;
+  color: var(--mut2); text-decoration: none;
+  padding: 7px 13px; border-radius: 999px;
+  border: 1px solid var(--bd-20); background: var(--s1);
+  transition: color .14s, border-color .14s, background .14s;
+}
+.foot-ic svg { width: 14px; height: 14px; flex: none; }
+.foot-ic:hover { color: var(--tx); border-color: var(--bd-strong); background: var(--s2); }
+.foot-ic:hover svg { color: var(--amber); }
+
+/* pilula de versao: some so no telefone estreito */
+@media (max-width: 460px) { .ver-pill { display: none; } }
