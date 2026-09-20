@@ -142,9 +142,11 @@
         </div>
         <h2>Um ciclo real: do teste quebrado ao verde.</h2>
         <div class="proof-frame">
-          <span class="proof-play"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-          <span class="proof-cap">[GRAVAÇÃO — /cycle consertando um teste que quebrou · 18s]</span>
-          <span class="proof-sub">asciinema ou GIF, gravado na sessão real</span>
+          <video class="proof-video" autoplay muted loop controls playsinline preload="metadata"
+                 aria-label="O Aluy CLI rodando um /cycle até os testes passarem">
+            <source src="../assets/demo.mp4" type="video/mp4" />
+            Seu navegador não toca vídeo. <a href="../assets/demo.mp4">Baixe a gravação</a>.
+          </video>
         </div>
         <p>O agente roda os testes, lê a saída, corrige e repete até passar ou bater o teto que você definiu.</p>
       </div>

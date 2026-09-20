@@ -142,9 +142,11 @@
         </div>
         <h2>A real cycle: from broken test to green.</h2>
         <div class="proof-frame">
-          <span class="proof-play"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span>
-          <span class="proof-cap">[RECORDING &mdash; /cycle fixing a broken test &middot; 18s]</span>
-          <span class="proof-sub">asciinema or GIF, recorded in a real session</span>
+          <video class="proof-video" autoplay muted loop controls playsinline preload="metadata"
+                 aria-label="Aluy CLI running a /cycle until the tests pass">
+            <source src="assets/demo.mp4" type="video/mp4" />
+            Your browser does not play video. <a href="assets/demo.mp4">Download the recording</a>.
+          </video>
         </div>
         <p>The agent runs the tests, reads the output, fixes and repeats until it passes or hits the ceiling you set.</p>
       </div>

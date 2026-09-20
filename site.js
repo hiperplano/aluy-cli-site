@@ -86,3 +86,38 @@
     });
   });
 })();
+
+/* A gravacao da home toca sozinha, muda e em laco. Quem pediu menos movimento
+   no sistema recebe ela parada, com os controles para tocar se quiser. */
+(function () {
+  "use strict";
+  document.addEventListener("DOMContentLoaded", function () {
+    var v = document.querySelector(".proof-video");
+    if (!v) return;
+    var menos = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (menos && menos.matches) { v.removeAttribute("autoplay"); v.pause(); v.currentTime = 0; return; }
+
+    // Os primeiros segundos sao o terminal ainda vazio: na home isso e um
+    // retangulo preto. O laco comeca onde ja ha o que mostrar, e volta pra la
+    // em vez de voltar pro zero.
+    var INICIO = 10;
+    function daInicio() { if (v.currentTime < INICIO) { try { v.currentTime = INICIO; } catch (_) {} } }
+    // mover o currentTime interrompe o autoplay, entao religamos UMA vez.
+    // depois disso quem manda e o usuario: se ele pausar, fica pausado.
+    var religado = false;
+    function toca() {
+      if (religado) return;
+      religado = true;
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    }
+    if (v.readyState >= 1) daInicio();
+    else v.addEventListener("loadedmetadata", daInicio, { once: true });
+    v.addEventListener("seeked", toca);
+    v.addEventListener("canplay", toca);
+    v.addEventListener("timeupdate", function () {
+      // o loop nativo volta pro 0; devolvemos pro ponto util
+      if (v.currentTime < INICIO - 1) daInicio();
+    });
+  });
+})();

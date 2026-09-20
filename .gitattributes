@@ -11,3 +11,12 @@
 # `AMBERRESETLUYRESET`). Pior: o script SEGUE adiante meio quebrado.
 *.cmd text eol=crlf
 *.ps1 text eol=crlf
+
+# Mídia é binária: sem `binary` explícito, o `* text=auto` acima depende da
+# heurística do git para não normalizar quebras de linha dentro do arquivo —
+# e um mp4 normalizado não toca mais.
+*.mp4 binary
+*.webm binary
+*.png binary
+*.jpg binary
+*.gif binary
