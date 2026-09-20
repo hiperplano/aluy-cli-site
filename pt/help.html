@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Documentação do Aluy CLI — instale, configure e coloque o agente de terminal para trabalhar. Referência completa de CLI e comandos slash, o layout .aluy/, /cycle, subagentes, salas, MCP, sidecars e mais. Código aberto, MIT." />
+<meta name="description" content="Documentação do Aluy CLI — instale, configure e coloque o agente de terminal para trabalhar. Referência completa de CLI e comandos slash, o layout .aluy/, /cycle, subagentes, salas, MCP, sidecars e mais." />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Aluy CLI" />
 <meta property="og:title" content="Docs — Aluy CLI" />
-<meta property="og:description" content="Documentação do Aluy CLI — instale, configure e coloque o agente de terminal para trabalhar. Referência completa de CLI e comandos slash, o layout .aluy/, /cycle, subagentes, salas, MCP, sidecars e mais. Código aberto, MIT." />
+<meta property="og:description" content="Documentação do Aluy CLI — instale, configure e coloque o agente de terminal para trabalhar. Referência completa de CLI e comandos slash, o layout .aluy/, /cycle, subagentes, salas, MCP, sidecars e mais." />
 <meta property="og:url" content="https://aluy.dev/pt/help.html" />
 <meta property="og:image" content="https://aluy.dev/assets/og.png" />
 <meta property="og:image:width" content="1200" />
@@ -15,7 +15,7 @@
 <meta property="og:locale" content="pt_BR" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Docs — Aluy CLI" />
-<meta name="twitter:description" content="Documentação do Aluy CLI — instale, configure e coloque o agente de terminal para trabalhar. Referência completa de CLI e comandos slash, o layout .aluy/, /cycle, subagentes, salas, MCP, sidecars e mais. Código aberto, MIT." />
+<meta name="twitter:description" content="Documentação do Aluy CLI — instale, configure e coloque o agente de terminal para trabalhar. Referência completa de CLI e comandos slash, o layout .aluy/, /cycle, subagentes, salas, MCP, sidecars e mais." />
 <meta name="twitter:image" content="https://aluy.dev/assets/og.png" />
 <title>Docs — Aluy CLI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,11 +40,8 @@
         <span class="cli">CLI</span>
       </a>
       <nav class="nav" aria-label="Principal">
-        <a href="funcionalidades.html">Funcionalidades</a>
-        <a href="comandos.html">Comandos</a>
-        <a href="arquitetura.html">Arquitetura</a>
         <a href="comecar.html">Instalar</a>
-        <a href="help.html#sec-turbo">Turbo</a>
+        <a href="comandos.html">Comandos</a>
         <a href="help.html" class="active">Docs</a>
         <a href="integracoes.html">Ecossistema</a>
       </nav>
@@ -53,12 +50,14 @@
         <a href="../help.html" data-lang="en" hreflang="en" aria-current="false">EN</a>
         <a href="help.html" data-lang="pt" hreflang="pt-BR" aria-current="true">PT</a>
       </div>
-      <a class="ver-pill" data-version="tag" href="https://github.com/hiperplano/aluy-cli/releases" aria-label="Último release">v1.0.0-rc.180</a>
+      <button class="theme-toggle" type="button" aria-label="Alternar tema claro e escuro">
+        <svg class="ic-light" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+        <svg class="ic-dark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
       <a class="gh-link" href="https://github.com/hiperplano/aluy-cli" aria-label="Ver no GitHub">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5a10.5 10.5 0 0 0-3.32 20.46c.52.1.71-.23.71-.5v-1.95c-2.9.63-3.52-1.24-3.52-1.24-.47-1.2-1.16-1.52-1.16-1.52-.95-.65.07-.64.07-.64 1.05.08 1.6 1.08 1.6 1.08.93 1.6 2.45 1.13 3.05.86.09-.68.36-1.13.66-1.39-2.32-.26-4.76-1.16-4.76-5.16 0-1.14.41-2.07 1.07-2.8-.11-.26-.46-1.32.1-2.75 0 0 .88-.28 2.88 1.07a9.9 9.9 0 0 1 5.24 0c2-1.35 2.87-1.07 2.87-1.07.57 1.43.21 2.49.11 2.75.67.73 1.07 1.66 1.07 2.8 0 4.01-2.45 4.9-4.78 5.16.38.32.71.95.71 1.92v2.85c0 .28.19.61.72.5A10.5 10.5 0 0 0 12 1.5z"/></svg>
         GitHub
       </a>
-      <a class="gh-link" href="https://www.npmjs.com/package/@hiperplano/aluy-cli" aria-label="Pacote no npm"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L12.04 19.17H5.113z"/></svg>npm</a>
       <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
@@ -112,15 +111,15 @@
     <div id="docs-content">
       <span class="eyebrow eyebrow--sm">docs · beta</span>
       <h1>Documentação do Aluy CLI</h1>
-      <p class="docs-intro">Tudo para instalar, configurar e colocar o agente para trabalhar — do primeiro comando ao ciclo autônomo, a referência completa do CLI e dos comandos slash, o layout <code class="icode">.aluy/</code> e a compatibilidade. Código aberto sob MIT.</p>
+      <p class="docs-intro">Tudo para instalar, configurar e colocar o agente para trabalhar — do primeiro comando ao ciclo autônomo, a referência completa do CLI e dos comandos slash, o layout <code class="icode">.aluy/</code> e a compatibilidade. O código é público no GitHub.</p>
 
       <!-- 01 OVERVIEW -->
       <section class="docs-sec first" id="sec-overview">
         <span class="eyebrow eyebrow--sm">01 · início</span>
         <h2>Visão geral</h2>
-        <p>O <b>Aluy CLI</b> é seu agente local que trabalha em escala. Em vez de sugerir código para você copiar e colar, ele <b>age</b> no seu projeto: lê e edita arquivos, roda comandos e fala com ferramentas — de ponta a ponta, na sua shell.</p>
+        <p>O <b>Aluy CLI</b> é um único agente que faz qualquer modelo trabalhar pra você. Em vez de sugerir código para você copiar e colar, ele <b>age</b> no seu projeto: lê e edita arquivos, roda comandos e fala com ferramentas — de ponta a ponta, na sua shell.</p>
         <p>O que roda na sua máquina fica na sua máquina: a sessão, o histórico, os arquivos, a memória e a chave de provider (guardada no cofre do SO). A única coisa que cruza a borda é a <b>chamada ao modelo</b> — por padrão o Aluy cuida dessa conexão, ou você liga o seu próprio provider direto.</p>
-        <p>É <b>código aberto, sob a licença MIT</b>: o que age na sua máquina, você pode ler, auditar e mudar. A missão é simples — democratizar a automação de tarefas, processos, testes e desenvolvimento, sem depender de um time de plataforma.</p>
+        <p>O código é <b>público no GitHub</b>: o que age na sua máquina, você pode ler e auditar. A licença está sendo definida. A missão é simples — democratizar a automação de tarefas, processos, testes e desenvolvimento, sem depender de um time de plataforma.</p>
         <div class="note">
           <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
           <p>O Aluy CLI é o agente de terminal — não é o orquestrador de histórias, ADRs e sprints na plataforma Aluy. Aqui o foco é agir no seu projeto.</p>
@@ -282,10 +281,9 @@
         <p>O arquivo de instrução nativo do projeto é o <code class="icode">ALUY.md</code> na raiz do repo — o que o <code class="icode">/init</code> cria. O Aluy lê vários nomes de arquivo como instruções de projeto, nesta precedência, compondo todos os presentes:</p>
         <div class="tree">&lt;seu-projeto&gt;/
 ├── <span class="c">ALUY.md</span>       <span class="cm"># nativo do Aluy (primário — o que o /init escreve)</span>
-├── <span class="c">AGENT.md</span>      <span class="cm"># compat — nome anterior/genérico</span>
 ├── <span class="c">AGENTS.md</span>     <span class="cm"># Codex / OpenAI</span>
 └── <span class="c">CLAUDE.md</span>     <span class="cm"># Claude Code / Anthropic</span></div>
-        <p>A precedência é <code class="icode">ALUY.md › AGENT.md › AGENTS.md › CLAUDE.md</code>. São lidos uma vez na largada e injetados no system prompt, cada um sob um cabeçalho marcando a origem. Symlinks que escapam da raiz do projeto são rejeitados e nada é lido.</p>
+        <p>A precedência é <code class="icode">ALUY.md › AGENTS.md › CLAUDE.md</code>. São lidos uma vez na largada e injetados no system prompt, cada um sob um cabeçalho marcando a origem. Symlinks que escapam da raiz do projeto são rejeitados e nada é lido.</p>
 
         <h3>Projeto: a pasta .aluy/</h3>
         <div class="tree">&lt;seu-projeto&gt;/.aluy/
@@ -331,10 +329,9 @@
         <p>Fica na <b>raiz do repo</b> (não dentro de <code class="icode">.aluy/</code>). É o arquivo de instrução do projeto — comandos de build/test, convenções, o objetivo — injetado no system prompt na largada. <code class="icode">ALUY.md</code> é o nome nativo (o que o <code class="icode">/init</code> escreve). Outros três nomes são lidos como compat, nesta precedência, compondo todos os presentes:</p>
         <div class="tree">&lt;seu-projeto&gt;/
 ├── <span class="c">ALUY.md</span>       <span class="cm"># nativo do Aluy — primário (o que o /init escreve)</span>
-├── <span class="c">AGENT.md</span>      <span class="cm"># compat — nome anterior/genérico</span>
 ├── <span class="c">AGENTS.md</span>     <span class="cm"># Codex / OpenAI</span>
 └── <span class="c">CLAUDE.md</span>     <span class="cm"># Claude Code / Anthropic</span></div>
-        <p>Precedência: <code class="icode">ALUY.md › AGENT.md › AGENTS.md › CLAUDE.md</code>. Sem frontmatter — o arquivo inteiro é o texto de instrução. Um teto de tamanho corta arquivos gigantes antes de injetar.</p>
+        <p>Precedência: <code class="icode">ALUY.md › AGENTS.md › CLAUDE.md</code>. Sem frontmatter — o arquivo inteiro é o texto de instrução. Um teto de tamanho corta arquivos gigantes antes de injetar.</p>
         <div class="codeblock">
           <div class="cm"># ALUY.md</div>
           <div>Este é um monorepo Next.js + FastAPI.</div>
@@ -465,11 +462,10 @@
         <h3>Arquivos de instrução do projeto</h3>
         <ul class="docs-list">
           <li><code class="icode">ALUY.md</code> — o arquivo nativo do Aluy (o que o <code class="icode">/init</code> escreve).</li>
-          <li><code class="icode">AGENT.md</code> — alias de compat (nome anterior/genérico de agente).</li>
           <li><code class="icode">AGENTS.md</code> — o mesmo arquivo que o <b>Codex</b> (OpenAI) usa.</li>
           <li><code class="icode">CLAUDE.md</code> — o mesmo arquivo que o <b>Claude Code</b> usa.</li>
         </ul>
-        <p>A precedência é <code class="icode">ALUY.md › AGENT.md › AGENTS.md › CLAUDE.md</code> — todos os presentes compõem juntos.</p>
+        <p>A precedência é <code class="icode">ALUY.md › AGENTS.md › CLAUDE.md</code> — todos os presentes compõem juntos.</p>
         <h3>Paridade de estrutura</h3>
         <ul class="docs-list">
           <li>Agentes <code class="icode">.md</code> aceitam os <b>nomes de ferramentas do Claude Code</b> — mapeados para os nativos.</li>
@@ -636,11 +632,11 @@
         <h3>Como o Aluy fala com o modelo?</h3>
         <p>Por padrão, o Aluy cuida da conexão com o modelo — você não configura nada. Se preferir, ligue o seu próprio provider direto, com a sua credencial (API key ou OAuth): é o seu uso, sob o seu controle.</p>
         <h3>Tem custo?</h3>
-        <p>O Aluy CLI é código aberto, sob MIT. No modo direto, o uso do modelo corre pela sua própria conta no provider. Os sidecars rodam localmente, sem custo de API.</p>
+        <p>O código do Aluy CLI é público no GitHub. No modo direto, o uso do modelo corre pela sua própria conta no provider. Os sidecars rodam localmente, sem custo de API.</p>
         <h3>É seguro deixar o /cycle rodando sozinho?</h3>
         <p>O <code class="icode">/cycle</code> tem tetos duros de tempo e de passos, e parada automática. E toda ação que toca seus arquivos passa por uma trava de permissão.</p>
         <h3>Posso ler e modificar o código?</h3>
-        <p>Sim — é código aberto sob MIT. Leia, audite, abra issues e faça fork. O que age na sua máquina, você merece poder inspecionar. O Aluy está em beta; espere arestas e iteração rápida.</p>
+        <p>O código é público no GitHub: leia, audite e abra issues. A licença está sendo definida. O que age na sua máquina, você merece poder inspecionar. O Aluy está em beta; espere arestas e iteração rápida.</p>
         <div class="note">
           <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
           <p>Não achou a resposta? Comece pela página <a href="comecar.html">Instalar</a> ou rode <code class="icode">/doctor</code> dentro da sessão.</p>
@@ -649,7 +645,13 @@
 
       <!-- footer (inside content panel) -->
       <footer class="docs-foot">
-        <p class="foot-fine">Aluy <span class="lam">Λ</span> CLI — seu agente local que trabalha em escala · código aberto · MIT · <a class="lnk" href="https://www.npmjs.com/package/@hiperplano/aluy-cli">npm</a> · <a class="lnk" href="termos.html">Termos</a></p>
+        <div class="foot-meta">
+          <span data-version="tag">v1.0.0-rc.180</span>
+          <a href="https://github.com/hiperplano/aluy-cli/blob/main/CHANGELOG.md">changelog</a>
+          <a href="https://github.com/hiperplano/aluy-cli/issues/new">reportar um problema</a>
+          <a href="https://www.npmjs.com/package/@hiperplano/aluy-cli">npm</a>
+        </div>
+        <p class="foot-fine">Aluy <span class="lam">&Lambda;</span> CLI &mdash; um único agente que faz qualquer modelo trabalhar pra você</p>
       </footer>
 
     </div>
