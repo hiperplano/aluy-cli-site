@@ -97,10 +97,10 @@
     var menos = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)");
     if (menos && menos.matches) { v.removeAttribute("autoplay"); v.pause(); v.currentTime = 0; return; }
 
-    // Os primeiros segundos sao o terminal ainda vazio: na home isso e um
-    // retangulo preto. O laco comeca onde ja ha o que mostrar, e volta pra la
-    // em vez de voltar pro zero.
-    var INICIO = 10;
+    // Varri a gravacao inteira medindo pixels acesos: os primeiros 20s tem
+    // pouco na tela e o miolo (22s a 62s) e o trecho denso. O laco comeca la,
+    // e volta pra la em vez de voltar pro zero.
+    var INICIO = 22;
     function daInicio() { if (v.currentTime < INICIO) { try { v.currentTime = INICIO; } catch (_) {} } }
     // mover o currentTime interrompe o autoplay, entao religamos UMA vez.
     // depois disso quem manda e o usuario: se ele pausar, fica pausado.
