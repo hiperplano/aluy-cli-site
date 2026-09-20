@@ -80,11 +80,11 @@
       <div class="fluxo">
         <svg class="fluxo-svg" viewBox="0 0 880 764" role="img" aria-labelledby="fluxo-t fluxo-d">
           <title id="fluxo-t">The cycle of one turn in the Aluy CLI</title>
-          <desc id="fluxo-d">You type a goal. The context is assembled from memory, the project instructions and the tool list. The call goes out to the model, the only step outside your machine. The answer becomes a tool proposal, which passes through the permission gate. The gate denies, asks or allows. The tool runs and the result comes back to the model as an observation, closing the cycle.</desc>
+          <desc id="fluxo-d">You type a goal. The context is assembled from memory, the project instructions and the tool list. The call goes out to the model, the only step outside your machine. The answer becomes a tool proposal, which passes through the permission gate. The gate denies, asks or allows. The tool runs and the result comes back to the model, closing the cycle.</desc>
 
           <!-- return loop -->
-          <path class="f-volta" d="M 76 715 L 40 715 Q 20 715 20 695 L 20 96 Q 20 76 40 76 L 96 76" />
-          <text class="f-volta-rot" x="26" y="330" transform="rotate(-90 26 330)">the observation goes back into the context</text>
+          <path class="f-volta" d="M 212 715 L 40 715 Q 20 715 20 695 L 20 96 Q 20 76 40 76 L 96 76" />
+          <text class="f-volta-rot" x="26" y="330" transform="rotate(-90 26 330)">the result goes back into the context</text>
 
           <!-- 1 · you type -->
           <g class="f-no">
@@ -141,7 +141,7 @@
           <g class="f-saida f-saida--pergunta"><rect x="196" y="584" width="100" height="40" rx="8" /><text x="246" y="609">asks</text></g>
           <g class="f-saida f-saida--permite"><rect x="312" y="584" width="100" height="40" rx="8" /><text x="362" y="609">allows</text></g>
 
-          <text class="f-sub f-sub--c" x="130" y="646">becomes an observation,</text>
+          <text class="f-sub f-sub--c" x="130" y="646">the model is told,</text>
           <text class="f-sub f-sub--c" x="130" y="663">nothing changes</text>
           <text class="f-sub f-sub--c" x="246" y="646">waits for you.</text>
           <text class="f-sub f-sub--c" x="246" y="663">with no one to ask, it stops</text>
@@ -151,8 +151,8 @@
           <!-- what actually changes -->
           <path class="f-seta" d="M 362 624 L 362 692" marker-end="url(#pta)" />
           <g class="f-no f-no--efeito">
-            <rect x="76" y="692" width="340" height="46" rx="9" />
-            <text class="f-tit f-tit--sm" x="246" y="721">the file changes, the command runs</text>
+            <rect x="212" y="692" width="300" height="46" rx="9" />
+            <text class="f-tit f-tit--sm" x="362" y="721">the file changes, the command runs</text>
           </g>
 
           <defs>

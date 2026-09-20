@@ -80,11 +80,11 @@
       <div class="fluxo">
         <svg class="fluxo-svg" viewBox="0 0 880 764" role="img" aria-labelledby="fluxo-t fluxo-d">
           <title id="fluxo-t">O ciclo de um turno no Aluy CLI</title>
-          <desc id="fluxo-d">Você digita um objetivo. O contexto é montado com a memória, as instruções do projeto e a lista de ferramentas. A chamada sai para o modelo, que é a única etapa fora da sua máquina. A resposta vira uma proposta de ferramenta, que passa pela catraca de permissão. A catraca nega, pergunta ou permite. A ferramenta roda e o resultado volta para o modelo como observação, fechando o ciclo.</desc>
+          <desc id="fluxo-d">Você digita um objetivo. O contexto é montado com a memória, as instruções do projeto e a lista de ferramentas. A chamada sai para o modelo, que é a única etapa fora da sua máquina. A resposta vira uma proposta de ferramenta, que passa pela catraca de permissão. A catraca nega, pergunta ou permite. A ferramenta roda e o resultado volta para o modelo, fechando o ciclo.</desc>
 
           <!-- laço de retorno -->
-          <path class="f-volta" d="M 76 715 L 40 715 Q 20 715 20 695 L 20 96 Q 20 76 40 76 L 96 76" />
-          <text class="f-volta-rot" x="26" y="330" transform="rotate(-90 26 330)">observação volta ao contexto</text>
+          <path class="f-volta" d="M 212 715 L 40 715 Q 20 715 20 695 L 20 96 Q 20 76 40 76 L 96 76" />
+          <text class="f-volta-rot" x="26" y="330" transform="rotate(-90 26 330)">o resultado volta para o contexto</text>
 
           <!-- 1 · você digita -->
           <g class="f-no">
@@ -141,7 +141,7 @@
           <g class="f-saida f-saida--pergunta"><rect x="196" y="584" width="100" height="40" rx="8" /><text x="246" y="609">pergunta</text></g>
           <g class="f-saida f-saida--permite"><rect x="312" y="584" width="100" height="40" rx="8" /><text x="362" y="609">permite</text></g>
 
-          <text class="f-sub f-sub--c" x="130" y="646">vira observação,</text>
+          <text class="f-sub f-sub--c" x="130" y="646">o modelo fica sabendo,</text>
           <text class="f-sub f-sub--c" x="130" y="663">nada muda</text>
           <text class="f-sub f-sub--c" x="246" y="646">espera você.</text>
           <text class="f-sub f-sub--c" x="246" y="663">sem humano, bloqueia</text>
@@ -149,8 +149,8 @@
           <!-- o que muda de verdade -->
           <path class="f-seta" d="M 362 624 L 362 692" marker-end="url(#pta)" />
           <g class="f-no f-no--efeito">
-            <rect x="76" y="692" width="340" height="46" rx="9" />
-            <text class="f-tit f-tit--sm" x="246" y="721">o arquivo muda, o comando roda</text>
+            <rect x="212" y="692" width="300" height="46" rx="9" />
+            <text class="f-tit f-tit--sm" x="362" y="721">o arquivo muda, o comando roda</text>
           </g>
 
           <defs>
