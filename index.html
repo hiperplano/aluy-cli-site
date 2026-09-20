@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="site.css?v=1a576ad4" />
+<link rel="stylesheet" href="site.css?v=e9435200" />
 <script src="lang.js?v=dfbd8e05"></script>
 <script defer src="site.js?v=9ecc00f5"></script>
 <script defer src="install.js?v=d1356c76"></script>
@@ -257,19 +257,19 @@
         </div>
         <div class="grid grid-3">
           <div class="tile">
-            <div class="tile-head"><span class="ic c-teal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5v14a9 3 0 0 0 18 0V5"/><ellipse cx="12" cy="5" rx="9" ry="3"/></svg></span><span class="tile-kicker c-teal">memory</span></div>
-            <p>The agent remembers the project from one day to the next, instead of starting over each session.</p>
+            <div class="tile-head"><span class="ic c-teal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg></span><span class="tile-kicker tile-kicker--nome c-teal">mem0</span></div>
+            <p>Memory that outlives the session: the agent keeps facts and preferences and recalls them in the next conversation.</p>
           </div>
           <div class="tile">
-            <div class="tile-head"><span class="ic c-teal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></span><span class="tile-kicker c-teal">local models</span></div>
-            <p>The models run on your machine. No call leaves it.</p>
+            <div class="tile-head"><span class="ic c-teal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6M20 10h-6V4"/><path d="M14 10 21 3M3 21l7-7"/></svg></span><span class="tile-kicker tile-kicker--nome c-teal">headroom</span></div>
+            <p>Condenses the conversation as it grows, so a long session keeps fitting in the model’s window.</p>
           </div>
           <div class="tile">
-            <div class="tile-head"><span class="ic c-teal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14h6v6M20 10h-6V4"/><path d="M14 10 21 3M3 21l7-7"/></svg></span><span class="tile-kicker c-teal">long conversations</span></div>
-            <p>A compressor holds the thread when the conversation stretches and the model’s window gets tight.</p>
+            <div class="tile-head"><span class="ic c-teal"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></span><span class="tile-kicker tile-kicker--nome c-teal">ollama</span></div>
+            <p>Runs small models on your machine for Aluy’s own internal work — those calls never leave it.</p>
           </div>
         </div>
-        <p class="hint">All three are optional and come with <a href="help.html#sec-turbo" class="lnk-b">turbo mode</a>. Without them Aluy works the same — it just forgets between one session and the next.</p>
+        <p class="hint hint--centro">All three are optional and come with <a href="help.html#sec-turbo" class="lnk-b">turbo mode</a>. Without them Aluy works the same: memory stays in the project’s <code class="icode">ALUY.md</code>, written by you or by <code class="icode">/init</code>.</p>
       </div>
     </section>
     <!-- ===== WHAT IT IS NOT ===== -->

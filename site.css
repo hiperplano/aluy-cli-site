@@ -345,6 +345,8 @@ b { color: var(--tx); font-weight: 600; }
 .tile-head { display: flex; align-items: center; gap: var(--sp-2); margin-bottom: var(--sp-2); }
 .tile-head .ic { display: flex; }
 .tile-kicker { font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .1em; text-transform: uppercase; }
+/* nome de componente e caixa baixa: mem0, headroom, ollama */
+.tile-kicker--nome { text-transform: none; letter-spacing: .04em; font-size: var(--fs-small); }
 .tile p { margin: 0; font-size: var(--fs-support); line-height: 1.55; color: var(--tx2); }
 .c-green { color: var(--green); } .c-mut { color: var(--mut2); } .c-teal { color: var(--teal); }
 
@@ -444,6 +446,7 @@ kbd { font-family: var(--mono); font-size: var(--fs-small); color: var(--tx); ba
 /* Era monoespaçado, 13,5px, em cinza fraco — desenho de anotação curta, usado
    para frases inteiras. Prosa quer a fonte de texto e contraste de leitura. */
 .hint { margin: var(--sp-4) 0 0; font-family: var(--ui); font-size: var(--fs-support); line-height: 1.65; color: var(--tx2); }
+.hint--centro { text-align: center; margin-left: auto; margin-right: auto; }
 .hint code { font-family: var(--mono); font-size: var(--fs-small); color: var(--tx2); }
 .lnk { color: var(--amber); text-decoration: none; }
 .lnk-b { color: var(--amber); font-weight: 600; text-decoration: none; }
