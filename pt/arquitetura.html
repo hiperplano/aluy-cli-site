@@ -69,7 +69,7 @@
     <section class="hero">
       <span class="eyebrow">arquitetura</span>
       <h1>Como o Aluy CLI é construído.</h1>
-      <p class="lead">O Aluy CLI é um único processo que roda no seu terminal — sem servidor, sem nuvem no meio do seu projeto. Ele lê e edita arquivos, roda comandos e guarda a sessão, a memória e a sua chave na sua máquina. A única coisa que sai para a internet é a chamada ao modelo (e os conectores MCP que você ligar).</p>
+      <p class="lead">O Aluy CLI é um único processo que roda no seu terminal — sem nenhum daemon que você não pediu, sem nuvem no meio do seu projeto. Ele lê e edita arquivos, roda comandos e guarda a sessão, a memória e a sua chave na sua máquina. A única coisa que sai para a internet é a chamada ao modelo (e os conectores MCP que você ligar).</p>
     </section>
 
     <!-- ===== LEGEND ===== -->
@@ -90,7 +90,7 @@
         <div class="flow">
           <div class="flow-node">
             <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></span>
-            <div><h4>TUI <span class="tag">Ink</span></h4><p>A interface onde você digita. Temas, painéis, o menu de slash.</p></div>
+            <div><h4>TUI <span class="tag">no seu terminal</span></h4><p>A interface onde você digita. Temas, painéis, o menu de slash.</p></div>
           </div>
           <div class="arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DDA13F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg></div>
           <div class="flow-node">
@@ -122,7 +122,7 @@
           <div class="grid grid-3">
             <div class="minitile"><h4 class="sc">mem0</h4><p>memória de longo prazo</p></div>
             <div class="minitile"><h4 class="sc">headroom</h4><p>fôlego de contexto</p></div>
-            <div class="minitile"><h4 class="sc">ollama</h4><p>modelos locais</p></div>
+            <div class="minitile"><h4 class="sc">ollama</h4><p>modelos locais, sem chave</p></div>
           </div>
         </div>
       </div>
@@ -135,9 +135,9 @@
           <h4><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg></span>Chamada ao modelo</h4>
           <p>Direto no <b>seu provider</b>, com a <b>sua credencial</b> — esse é o padrão. Um backend central é opcional e hoje não está disponível.</p>
           <div class="chips">
-            <span class="chip">Claude</span><span class="chip">GPT</span><span class="chip">Gemini</span><span class="chip">DeepSeek</span>
+            <span class="chip">Claude</span><span class="chip">GPT</span><span class="chip">Gemini</span><span class="chip">Grok</span><span class="chip">DeepSeek</span><span class="chip">Llama</span>
           </div>
-          <div class="providers">providers: Anthropic · OpenAI · OpenRouter</div>
+          <div class="providers">nove providers no catálogo — e qualquer endpoint compatível com a OpenAI que você declarar</div>
         </div>
         <div class="edge-card">
           <h4><span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span>Conectores MCP</h4>
@@ -156,8 +156,8 @@
         </div>
         <div class="card">
           <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-          <h3>Kernel-cliente confinado</h3>
-          <p>As próprias regras de path-deny do agente o proíbem de tocar em <code>~/.aluy/</code> — sua instalação, config e chaves.</p>
+          <h3>Ele não encosta na própria instalação</h3>
+          <p>O agente é proibido de escrever em <code>~/.aluy/</code> — onde moram a instalação dele, a config e as chaves. A regra está na lista de path-deny, não no prompt, então o modelo não tem como conversar em volta dela.</p>
         </div>
         <div class="card">
           <div class="guarantee"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l2 2"/></svg></div>
