@@ -162,8 +162,11 @@ img { display: block; }
 /* ---- generic layout helpers ----------------------------------------------- */
 /* base layout applies to the modifiers too, so they work standalone */
 .section, .section--narrow, .section--mid, .section--install { max-width: 1040px; margin: 0 auto; padding: 0 var(--pad); }
-.section--narrow { max-width: 880px; }
-.section--mid { max-width: 760px; }
+/* as variantes estreitas vinham do trilho antigo e brigavam com o herói:
+   na referência de comandos o título começava em x=94 e a lista em x=151.
+   Agora seguem o trilho; quem cuida da linha de leitura é o texto (ch). */
+.section--narrow { max-width: var(--wrap); }
+.section--mid { max-width: var(--wrap); }
 .section--install { max-width: 800px; }
 .center { text-align: center; }
 .eyebrow {
@@ -706,7 +709,7 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
 .ref-group { margin-bottom: var(--sp-12); }
 .ref-head {
   display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px;
-  margin-bottom: var(--sp-3); padding-left: 2px;
+  margin-bottom: var(--sp-3);
 }
 .ref-head .ic { color: var(--amber); display: flex; align-self: center; }
 .ref-title {
@@ -853,3 +856,16 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
 /* nenhum título pode empurrar a página: no celular estreito o h1 da
    documentação estourava a caixa por não ter quebra de palavra. */
 h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
+
+/* --- exemplo de verdade em cada linha da referência ------------------------
+   Uma assinatura com marcadores (`<intervalo> "<tarefa>"`) diz a gramática e
+   não ensina a montar o comando. Cada linha que aceita argumento ganha uma
+   linha que dá para copiar e colar. */
+.ref-ex {
+  margin-top: 9px; padding: 8px 12px; border-radius: 10px;
+  background: var(--code-bg); color: var(--code-tx);
+  font-family: var(--mono); font-size: 13px; line-height: 1.7;
+  white-space: pre; overflow-x: auto; max-width: 100%;
+}
+.ref-ex .pr { color: var(--amber-solid); }
+.ref-ex .cm { color: var(--code-cm); }

@@ -82,7 +82,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/><path d="M12 7v5l3 2"/></svg></span>
           <h2 class="ref-title">Trabalho</h2>
           <span class="ref-cap">— coloque o agente para rodar.</span>
         </div>
@@ -90,10 +89,11 @@
           <div class="ref-row">
             <div class="ref-sig">
             <span class="ref-nm">/cycle</span>
-            <span class="ref-arg">&lt;intervalo&gt; "&lt;tarefa&gt;" · --por &lt;dur&gt; · --auto</span>
+            <span class="ref-arg">&lt;intervalo&gt; "&lt;tarefa&gt;" [--por &lt;dur&gt;] [--auto]</span>
             </div>
             <div class="ref-def">
             <p class="ref-desc">Roda uma tarefa em ciclos, sozinho, até terminar. Todo efeito passa pela catraca.</p>
+            <div class="ref-ex"><span class="pr">$</span> /cycle 30m "arruma os testes que quebraram"</div>
             <ul class="ref-subs"><li class="k">em voo</li><li>pause</li><li>resume</li><li>edit</li><li>status</li><li>stop</li></ul>
             <p class="ref-meta">Tem teto de tempo e de passos, e para sozinho se sair do trilho.</p>
             </div>
@@ -122,7 +122,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 21v-1a6 6 0 0 1 12 0v1M15.5 21v-.5a4.5 4.5 0 0 1 5.5-4.4"/></svg></span>
           <h2 class="ref-title">Multi-agente</h2>
           <span class="ref-cap">— sua frota e as salas onde ela colabora.</span>
         </div>
@@ -159,7 +158,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span>
           <h2 class="ref-title">Ferramentas e integrações</h2>
           <span class="ref-cap">— conecte o agente ao que você já usa.</span>
         </div>
@@ -214,7 +212,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
           <h2 class="ref-title">Sessão</h2>
           <span class="ref-cap">— saúde, contexto e histórico.</span>
         </div>
@@ -320,7 +317,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
           <h2 class="ref-title">Configuração e conta</h2>
           <span class="ref-cap">— modelo, provider, permissões e acesso.</span>
         </div>
@@ -459,34 +455,7 @@
       </div>
 
       <div class="note">
-        <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
-        <p>Dentro de uma sessão, <code class="icode">/help</code> lista a versão ao vivo e <kbd>Ctrl+P</kbd> abre a paleta de comandos.</p>
-      </div>
-    </section>
-
-    <!-- ===== LINHA DE COMANDO ===== -->
-    <section class="section section--narrow section--flow-xs" id="ref-cli">
-      <span class="subhead">no seu shell · o comando aluy</span>
-      <p class="lead">Fora da sessão, tudo começa com a palavra <code class="icode">aluy</code>. Estes quatro exemplos cobrem quase tudo que você vai digitar.</p>
-
-      <div class="codeblock">
-        <div><span class="pr">$</span> aluy</div>
-        <div class="cm">  abre a sessão nesta pasta e espera você falar</div>
-        <div></div>
-        <div><span class="pr">$</span> aluy <span class="str">"conserte os testes que estão quebrando"</span></div>
-        <div class="cm">  abre a sessão já com esse objetivo</div>
-        <div></div>
-        <div><span class="pr">$</span> aluy doctor</div>
-        <div class="cm">  confere a instalação, imprime o resultado e sai</div>
-        <div></div>
-        <div><span class="pr">$</span> aluy -p <span class="str">"quantos testes existem neste repositório?"</span></div>
-        <div class="cm">  responde, imprime e sai — sem abrir a interface</div>
-      </div>
-
-      <div class="ref-group">
-        <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span>
-          <h2 class="ref-title">As três partes de uma linha</h2>
+        <h2 class="ref-title">As três partes de uma linha</h2>
           <span class="ref-cap">— só a primeira é obrigatória.</span>
         </div>
         <div class="ref-table">
@@ -518,13 +487,11 @@
             </div>
           </div>
         </div>
-      </div>
 
       <p class="lead">A regra de desempate é uma só: se a primeira palavra for um subcomando conhecido, é ele que roda; qualquer outra coisa vira o objetivo da sessão.</p>
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
           <h2 class="ref-title">Instalar e configurar</h2>
           <span class="ref-cap">— a primeira meia hora.</span>
         </div>
@@ -561,7 +528,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
           <h2 class="ref-title">Conta</h2>
           <span class="ref-cap">— a sua credencial, no seu cofre.</span>
         </div>
@@ -598,7 +564,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span>
           <h2 class="ref-title">Diagnóstico e descoberta</h2>
           <span class="ref-cap">— as cinco listagens só leem, saem com código 0 e não chamam o modelo.</span>
         </div>
@@ -658,7 +623,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/><path d="M12 7v5l3 2"/></svg></span>
           <h2 class="ref-title">Trabalhar sozinho</h2>
           <span class="ref-cap">— agendamento, rotina e canal remoto.</span>
         </div>
@@ -707,7 +671,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
           <h2 class="ref-title">Flags de sessão e segurança</h2>
           <span class="ref-cap">— quem autoriza o quê.</span>
         </div>
@@ -769,7 +732,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span>
           <h2 class="ref-title">Flags de execução sem interface</h2>
           <span class="ref-cap">— para script, pipe e CI.</span>
         </div>
@@ -817,7 +779,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
           <h2 class="ref-title">Flags de modelo e conexão</h2>
           <span class="ref-cap">— qual modelo, por onde.</span>
         </div>
@@ -911,7 +872,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/><path d="M12 7v5l3 2"/></svg></span>
           <h2 class="ref-title">Flags de teto e de qualidade</h2>
           <span class="ref-cap">— até onde a sessão pode ir.</span>
         </div>
@@ -976,7 +936,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span>
           <h2 class="ref-title">Flags de interface</h2>
           <span class="ref-cap">— como a sessão aparece no terminal.</span>
         </div>
@@ -1047,7 +1006,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
           <h2 class="ref-title">Variáveis: acesso e backend</h2>
           <span class="ref-cap">— quem atende e com qual credencial.</span>
         </div>
@@ -1122,7 +1080,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 3v6h6"/><path d="M12 7v5l3 2"/></svg></span>
           <h2 class="ref-title">Variáveis: limites e tetos</h2>
           <span class="ref-cap">— até onde a sessão pode ir sozinha.</span>
         </div>
@@ -1249,7 +1206,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/><path d="M6.5 10v4a2 2 0 0 0 2 2H14"/></svg></span>
           <h2 class="ref-title">Variáveis: terminal e saída</h2>
           <span class="ref-cap">— como a sessão aparece e o que ela imprime.</span>
         </div>
@@ -1332,7 +1288,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
           <h2 class="ref-title">Variáveis: sidecars</h2>
           <span class="ref-cap">— onde cada serviço local escuta.</span>
         </div>
@@ -1391,7 +1346,6 @@
 
       <div class="ref-group">
         <div class="ref-head">
-          <span class="ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
           <h2 class="ref-title">Variáveis: depuração</h2>
           <span class="ref-cap">— só quando algo está errado.</span>
         </div>
