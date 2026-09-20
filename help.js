@@ -1,5 +1,7 @@
-/* aluy CLI — docs (split layout). Scroll-spy on the CONTENT pane (#docs-content),
-   not the window: highlights the active TOC link in #docs-sidebar, smooth-scrolls
+/* aluy CLI — docs (split layout). Scroll-spy na JANELA: quem rola e a pagina,
+   e a barra lateral fica grudada (position:sticky). Antes rolava o painel, e o
+   rodape ficava preso dentro dele.
+   O spy: highlights the active TOC link in #docs-sidebar, smooth-scrolls
    the pane on click (offset -18px), and keeps the active link in view. */
 (function () {
   "use strict";
@@ -85,10 +87,10 @@
     var ticking = false;
     function compute() {
       ticking = false;
-      var line = pane.getBoundingClientRect().top + 110; // reading line near pane top
+      var line = 130; // linha de leitura, medida da borda de cima da janela
       var current = sections[0];
       // bottom of pane → force last section
-      if (pane.scrollTop + pane.clientHeight >= pane.scrollHeight - 4) {
+      if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 4) {
         current = sections[sections.length - 1];
       } else {
         for (var i = 0; i < sections.length; i++) {
@@ -102,7 +104,7 @@
       if (!ticking) { ticking = true; window.requestAnimationFrame(compute); }
     }
 
-    pane.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
 
     links.forEach(function (a) {

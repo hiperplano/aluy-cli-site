@@ -105,7 +105,7 @@ img { display: block; }
   border-bottom: 1px solid var(--bd-09);
 }
 .topbar-inner {
-  display: flex; align-items: center; gap: 18px;
+  display: flex; align-items: center; gap: 14px;
   max-width: var(--wrap); margin: 0 auto; padding: 14px var(--pad); min-height: 62px;
 }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
@@ -114,10 +114,10 @@ img { display: block; }
   font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: .04em;
   color: var(--tx2); border: 1px solid var(--bd-strong); border-radius: 999px; padding: 2px 8px;
 }
-.nav { display: flex; align-items: center; gap: 2px; margin-left: 8px; }
+.nav { display: flex; align-items: center; gap: 0; margin-left: 4px; }
 .nav a {
   font-size: 15px; font-weight: 500; color: var(--tx2);
-  padding: 9px 14px; border-radius: 999px; text-decoration: none;
+  padding: 8px 11px; border-radius: 999px; text-decoration: none; white-space: nowrap;
   transition: color .14s, background .14s;
 }
 .nav a:hover { color: var(--tx); background: var(--s3); }
@@ -455,9 +455,12 @@ kbd { font-family: var(--mono); font-size: 13px; color: var(--tx); background: v
 /* ---- docs (split layout) -------------------------------------------------- */
 .docs-wrap {
   max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad);
-  height: calc(100vh - 64px); display: grid; grid-template-columns: 236px minmax(0,1fr); gap: 40px;
+  display: grid; grid-template-columns: 236px minmax(0,1fr); gap: 40px;
 }
-#docs-sidebar { height: 100%; overflow-y: auto; padding: 24px 10px 24px 0; }
+#docs-sidebar {
+  position: sticky; top: 70px; align-self: start;
+  max-height: calc(100vh - 86px); overflow-y: auto; padding: 24px 10px 24px 0;
+}
 .docs-kicker {
   display: block; padding: 0 12px 10px; font-family: var(--mono); font-weight: 500; font-size: 10px;
   letter-spacing: .16em; text-transform: uppercase; color: var(--mut2);
@@ -485,7 +488,7 @@ kbd { font-family: var(--mono); font-size: 13px; color: var(--tx); background: v
 #docs-sidebar a .n { font-family: var(--mono); font-size: 10.5px; color: var(--mut2); min-width: 16px; }
 #docs-sidebar a:hover { color: var(--tx); }
 #docs-sidebar a.active { color: var(--amber); background: var(--amber-bg); border-left-color: var(--amber-solid); }
-#docs-content { height: 100%; overflow-y: auto; min-width: 0; padding: 34px 28px 0 0; scroll-behavior: smooth; }
+#docs-content { min-width: 0; padding: 34px 28px 0 0; }
 #docs-content > h1 { font-weight: 700; font-size: 46px; line-height: 1.08; margin: 12px 0 0; }
 .docs-sec, .docs-sec h3[id] { scroll-margin-top: 92px; }
 .docs-sec { padding: 36px 0 8px; border-top: 1px solid var(--bd-09); }
@@ -802,11 +805,11 @@ details.acc .acc-body p { margin: 0; font-size: 15px; color: var(--tx2); line-he
 @media (max-width: 1039px) {
   .gh-link { display: none; }          /* o GitHub continua no rodapé */
 }
-@media (max-width: 939px) {
-  .ver-pill { display: none; }         /* a versão volta assim que couber */
+@media (max-width: 1199px) {
+  .ver-pill { display: none; }        /* a versão volta assim que couber */
 }
 
-@media (max-width: 760px) {
+@media (max-width: 999px) {
   .nav { display: none; }
   .nav-toggle { display: inline-flex; }
   .nav.open {
