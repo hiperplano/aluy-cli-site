@@ -90,6 +90,10 @@
             <div class="cmd-name">/cron <span class="arg">&lt;when&gt; "&lt;task&gt;"</span></div>
             <div class="cmd-desc">Agendamento persistente — lista e gerencia jobs que rodam sozinhos, na sua máquina. <span class="sub">list · add · edit · enable · disable · rm.</span></div>
           </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/service <span class="arg">&lt;sub&gt;</span></div>
+            <div class="cmd-desc">Agentes com rotina: acordam na hora marcada, trabalham dentro do orçamento e reportam no seu canal. <span class="sub">create · list · status · start · stop · logs · attach.</span></div>
+          </div>
         </div>
       </div>
 
@@ -125,6 +129,10 @@
         </div>
         <div class="cmd-list">
           <div class="cmd-row">
+            <div class="cmd-name">/telegram <span class="arg">&lt;sub&gt;</span></div>
+            <div class="cmd-desc">O agente no seu celular: reporta, pergunta quando precisa de decisão e avisa quando pausa. Só os chats que você autorizar. <span class="sub">login · allow · deny · status · logout.</span></div>
+          </div>
+          <div class="cmd-row">
             <div class="cmd-name">/mcp <span class="arg">[add|search|list|remove]</span></div>
             <div class="cmd-desc">Lista e gerencia conectores MCP: busca no registro aberto, adiciona um servidor local, liga e desliga. <span class="sub">reconnect · reload.</span></div>
           </div>
@@ -153,7 +161,7 @@
         <div class="cmd-list">
           <div class="cmd-row">
             <div class="cmd-name">/doctor</div>
-            <div class="cmd-desc">Diagnóstico read-only: testa modelo, chave, broker, MCP e config — com dica de conserto.</div>
+            <div class="cmd-desc">Diagnóstico read-only: testa modelo, chave, MCP e config — com dica de conserto.</div>
           </div>
           <div class="cmd-row">
             <div class="cmd-name">/ask <span class="arg">"&lt;question&gt;"</span></div>

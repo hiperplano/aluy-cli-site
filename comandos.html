@@ -90,6 +90,10 @@
             <div class="cmd-name">/cron <span class="arg">&lt;when&gt; "&lt;task&gt;"</span></div>
             <div class="cmd-desc">Persistent scheduling — list and manage jobs that run on their own, on your machine. <span class="sub">list · add · edit · enable · disable · rm.</span></div>
           </div>
+          <div class="cmd-row">
+            <div class="cmd-name">/service <span class="arg">&lt;sub&gt;</span></div>
+            <div class="cmd-desc">Agents with a routine: they wake on schedule, work inside a budget and report on your channel. <span class="sub">create · list · status · start · stop · logs · attach.</span></div>
+          </div>
         </div>
       </div>
 
@@ -125,6 +129,10 @@
         </div>
         <div class="cmd-list">
           <div class="cmd-row">
+            <div class="cmd-name">/telegram <span class="arg">&lt;sub&gt;</span></div>
+            <div class="cmd-desc">The agent on your phone: it reports, asks when it needs a decision and warns when it pauses. Only chats you allow. <span class="sub">login · allow · deny · status · logout.</span></div>
+          </div>
+          <div class="cmd-row">
             <div class="cmd-name">/mcp <span class="arg">[add|search|list|remove]</span></div>
             <div class="cmd-desc">List and manage MCP connectors: search the open registry, add a local server, enable and disable. <span class="sub">reconnect · reload.</span></div>
           </div>
@@ -153,7 +161,7 @@
         <div class="cmd-list">
           <div class="cmd-row">
             <div class="cmd-name">/doctor</div>
-            <div class="cmd-desc">Read-only diagnosis: tests model, key, broker, MCP and config — with a fix hint.</div>
+            <div class="cmd-desc">Read-only diagnosis: tests model, key, MCP and config — with a fix hint.</div>
           </div>
           <div class="cmd-row">
             <div class="cmd-name">/ask <span class="arg">"&lt;question&gt;"</span></div>
