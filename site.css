@@ -294,7 +294,7 @@ b { color: var(--tx); font-weight: 600; }
 }
 .term-dot { width: 10px; height: 10px; border-radius: 999px; background: var(--code-dot); }
 .term-title { font-family: var(--mono); font-size: var(--fs-small); color: var(--code-cm); margin-left: 8px; }
-.term-body { display: flex; align-items: flex-start; gap: var(--sp-4); padding: var(--sp-5) var(--sp-4); background: var(--code-bg); }
+.term-body { display: flex; align-items: flex-start; gap: var(--sp-4); padding: var(--sp-6) var(--sp-4); background: var(--code-bg); }
 .term-body .ps1 { font-family: var(--mono); color: var(--amber-solid); font-weight: 600; }
 /* TODO comando de instalação (curl/irm principal E o "cmd tradicional" do Windows, #cmd2)
    fica em UMA linha: nowrap + scroll horizontal no overflow, em vez de quebrar em 2 linhas. */
@@ -756,7 +756,7 @@ details.acc .acc-body p { margin: 0; font-size: var(--fs-support); color: var(--
 .ref-group { margin-bottom: var(--sp-8); }
 .ref-head {
   display: flex; align-items: baseline; flex-wrap: wrap; gap: var(--sp-1) var(--sp-3);
-  margin-bottom: var(--sp-3);
+  margin-bottom: var(--sp-4);
 }
 .ref-head .ic { color: var(--amber); display: flex; align-self: center; }
 .ref-title {
@@ -790,11 +790,11 @@ details.acc .acc-body p { margin: 0; font-size: var(--fs-support); color: var(--
 
 /* the definition: short reading line, no matter how wide the viewport */
 .ref-def { min-width: 0; }
-.ref-desc { margin: 0; font-size: var(--fs-support); line-height: 1.55; color: var(--tx2); max-width: 46ch; }
-.ref-desc + .ref-subs, .ref-desc + .ref-meta, .ref-subs + .ref-meta { margin-top: var(--sp-2); }
+.ref-desc { margin: 0; font-size: var(--fs-support); line-height: 1.55; color: var(--tx2); max-width: 48ch; }
+.ref-desc + .ref-subs, .ref-desc + .ref-meta, .ref-subs + .ref-meta { margin-top: var(--sp-3); }
 .ref-meta {
   margin: 0; font-family: var(--mono); font-size: var(--fs-micro); line-height: 1.5;
-  color: var(--mut2); max-width: 46ch;
+  color: var(--mut2); max-width: 48ch;
 }
 
 /* subcommands and options: discrete tokens, not a sentence */
@@ -909,7 +909,7 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
    não ensina a montar o comando. Cada linha que aceita argumento ganha uma
    linha que dá para copiar e colar. */
 .ref-ex {
-  margin-top: var(--sp-2); padding: 8px 12px; border-radius: 10px;
+  margin-top: var(--sp-3); padding: 8px 12px; border-radius: 10px;
   background: var(--code-bg); color: var(--code-tx);
   font-family: var(--mono); font-size: var(--fs-small); line-height: 1.7;
   white-space: pre; overflow-x: auto; max-width: 100%;
