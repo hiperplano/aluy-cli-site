@@ -82,7 +82,35 @@ def main() -> int:
             print('\nRode: python scripts/versionar.py')
             return 1
         print(f'Todas as {len(paginas())} páginas com o carimbo em dia.')
-        return 0
+        return tokens_fantasma()
+
+    print(f'\n{tocados} página(s) atualizada(s). Versões:')
+    for arquivo, v in sorted(cache.items()):
+        print(f'  {arquivo:<14} {v}')
+    return tokens_fantasma()
+
+
+def tokens_fantasma() -> int:
+    """Uma propriedade custom que nao existe nao falha sozinha: ela derruba a
+    DECLARACAO INTEIRA. `padding: var(--sp-5) var(--sp-6)` com --sp-5 ausente
+    vira padding zero, sem aviso nenhum. Foi assim que a pagina de comandos e o
+    terminal da home ficaram sem respiro, e so deu para ver olhando.
+    """
+    import re
+    css = (RAIZ / 'site.css').read_text(encoding='utf-8')
+    declarados = set(re.findall(r'(--[a-z0-9-]+)\s*:', css))
+    usados = set(re.findall(r'var\(\s*(--[a-z0-9-]+)', css))
+    orfaos = sorted(usados - declarados)
+    if orfaos:
+        print('\nvar() apontando para propriedade que nao existe — a declaração')
+        print('inteira é descartada pelo navegador:')
+        for o in orfaos:
+            for n, linha in enumerate(css.splitlines(), 1):
+                if f'var({o})' in linha:
+                    print(f'  {o}  site.css:{n}')
+                    break
+        return 1
+    return 0
 
     print(f'\n{tocados} página(s) atualizada(s). Versões:')
     for arquivo, v in sorted(cache.items()):
