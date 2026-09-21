@@ -481,14 +481,17 @@ kbd { font-family: var(--mono); font-size: var(--fs-small); color: var(--tx); ba
 .legal p { font-size: var(--fs-body); line-height: 1.65; color: var(--tx2); margin: var(--sp-3) 0 0; max-width: 48ch; }
 .legal ul { margin: var(--sp-3) 0 0; padding-left: 20px; color: var(--tx2); font-size: var(--fs-body); line-height: 1.6; max-width: 48ch; }
 .legal li { margin: var(--sp-1) 0; }
+/* documento legal: justificado, com hifenizacao para nao abrir espaco
+   demais entre as palavras numa coluna estreita */
+.legal p, .legal li { text-align: justify; hyphens: auto; -webkit-hyphens: auto; text-wrap: pretty; }
 .legal a { color: var(--amber); text-decoration: none; }
 .legal b, .legal strong { color: var(--tx); }
 .legal .ph { color: var(--amber); background: var(--amber-bg); border: 1px dashed var(--amber-bd); border-radius: 5px; padding: 0 5px; font-family: var(--mono); font-size: var(--fs-small); }
 .legal .disclaim { margin-top: var(--sp-4); }
 
 /* ---- footer --------------------------------------------------------------- */
-.foot { margin-top: var(--sp-16); padding: var(--sp-8) var(--pad) var(--sp-12); border-top: 1px solid var(--bd-09); }
-.foot-inner { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; max-width: var(--wrap); margin: 0 auto; }
+.foot { margin-top: var(--sp-16); padding: var(--sp-8) 0 var(--sp-12); border-top: 1px solid var(--bd-09); }
+.foot-inner { display: flex; align-items: center; gap: var(--sp-4); flex-wrap: wrap; max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); }
 .foot img { height: 18px; width: auto; }
 .foot-nav { display: flex; gap: 18px; flex-wrap: wrap; }
 .foot-nav a { font-size: var(--fs-support); color: var(--tx2); text-decoration: none; transition: color .14s; }
