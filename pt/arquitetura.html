@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="../site.css?v=ee3f6ef9" />
+<link rel="stylesheet" href="../site.css?v=05d9cc5c" />
 <script src="../lang.js?v=dfbd8e05"></script>
 <script defer src="../site.js?v=9ecc00f5"></script>
 <script src="../consent.js?v=b90dbe6e" defer></script>
@@ -215,13 +215,13 @@
       </div>
 
       <div class="fluxo fluxo--comp">
-        <svg class="fluxo-svg" viewBox="0 0 1000 720" role="img" aria-labelledby="mapa-t mapa-d">
+        <svg class="fluxo-svg" viewBox="0 0 1000 732" role="img" aria-labelledby="mapa-t mapa-d">
           <title id="mapa-t">O mapa dos componentes do Aluy CLI</title>
           <desc id="mapa-d">Três zonas. Dentro do processo aluy ficam a TUI, a sessão e o miolo — o ciclo do turno, o contexto, as ferramentas nativas, a memória, o diário cifrado, o cliente MCP e a catraca — mais as portas. Na sua máquina, em outro processo, ficam os sidecars mem0, headroom e ollama, os servidores MCP e os serviços em segundo plano. Fora da sua máquina ficam o seu provider de modelo, a busca na web e o Telegram. Só as portas cruzam para fora.</desc>
 
           <!-- ZONA 1 · dentro do processo aluy -->
           <g class="z-zona">
-            <rect x="16" y="46" width="600" height="644" rx="14" />
+            <rect x="16" y="46" width="600" height="656" rx="14" />
             <text class="z-tit" x="36" y="76">DENTRO DO PROCESSO aluy</text>
             <text class="z-sub" x="36" y="95">um binário só; nada disso é serviço</text>
           </g>
@@ -237,7 +237,7 @@
           </g>
 
           <g class="z-miolo">
-            <rect x="36" y="216" width="560" height="356" rx="12" />
+            <rect x="36" y="216" width="560" height="368" rx="12" />
             <text class="z-miolo-tit" x="56" y="244">O MIOLO — não sabe o que é uma tela</text>
           </g>
           <g class="f-no">
@@ -270,9 +270,9 @@
             <text class="f-sub" x="72" y="470">decide tudo que muda alguma coisa</text>
           </g>
           <g class="f-no">
-            <rect x="36" y="596" width="560" height="64" rx="9" />
-            <text class="f-tit" x="52" y="622">as portas</text>
-            <text class="f-sub" x="52" y="642">shell · arquivos · busca · rede · cofre — tudo que sai passa por aqui</text>
+            <rect x="36" y="608" width="560" height="64" rx="9" />
+            <text class="f-tit" x="52" y="634">as portas</text>
+            <text class="f-sub" x="52" y="654">shell · arquivos · busca · rede · cofre — tudo que sai passa por aqui</text>
           </g>
 
           <!-- ZONA 2 · na maquina, fora do processo -->
@@ -304,7 +304,7 @@
 
           <!-- ZONA 3 · fora da maquina -->
           <g class="z-zona z-zona--fora">
-            <rect x="648" y="424" width="336" height="266" rx="14" />
+            <rect x="648" y="424" width="336" height="278" rx="14" />
             <text class="z-tit z-tit--fora" x="668" y="454">FORA DA SUA MÁQUINA</text>
             <text class="z-sub" x="668" y="473">o que atravessa a rede</text>
           </g>
@@ -319,15 +319,15 @@
             <text class="f-sub" x="684" y="608">o buscador, e o web_fetch que você aprovar</text>
           </g>
           <g class="f-no">
-            <rect x="668" y="618" width="296" height="56" rx="9" />
-            <text class="f-tit" x="684" y="644">o Telegram · o npm</text>
-            <text class="f-sub" x="684" y="664">se você conectar; e a checagem de versão</text>
+            <rect x="668" y="630" width="296" height="56" rx="9" />
+            <text class="f-tit" x="684" y="656">o Telegram · o npm</text>
+            <text class="f-sub" x="684" y="676">se você conectar; e a checagem de versão</text>
           </g>
 
           <!-- ligacoes: so as portas cruzam -->
-          <path class="z-tronco" d="M 596 628 L 624 628 L 624 222 L 639 222" marker-end="url(#zpa)" />
-          <path class="z-tronco" d="M 624 557 L 639 557" marker-end="url(#zpa)" />
-          <circle class="z-no" cx="624" cy="557" r="3.5" />
+          <path class="z-tronco" d="M 596 640 L 624 640 L 624 222 L 639 222" marker-end="url(#zpa)" />
+          <path class="z-tronco" d="M 624 563 L 639 563" marker-end="url(#zpa)" />
+          <circle class="z-no" cx="624" cy="563" r="3.5" />
 
           <defs>
             <marker id="zpa" viewBox="0 0 10 10" refX="3" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">

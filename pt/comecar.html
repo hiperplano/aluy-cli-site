@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="../site.css?v=ee3f6ef9" />
+<link rel="stylesheet" href="../site.css?v=05d9cc5c" />
 <script src="../lang.js?v=dfbd8e05"></script>
 <script defer src="../site.js?v=9ecc00f5"></script>
 <script defer src="../install.js?v=d1356c76"></script>
@@ -144,22 +144,22 @@
       <p class="lead">Na primeira vez que você abre, um assistente aparece. Você escolhe o provider, cola a chave e seleciona o modelo — nessa ordem.</p>
 
       <div class="grid grid-3">
-        <div class="card cfg-card">
-          <span class="cfg-kicker">provider</span>
+        <div class="card card-gar">
+          <div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a6 6 0 0 1-12 0V8z"/></svg></span><span class="mono-label">/provider</span></div><h3>o provider</h3>
           <p>O seu provider, com a sua credencial. É assim que vem de fábrica. Troque depois com <code class="icode">/provider</code>.</p>
         </div>
-        <div class="card cfg-card">
-          <span class="cfg-kicker">chave</span>
+        <div class="card card-gar">
+          <div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.5" cy="15.5" r="5.5"/><path d="m21 2-9.6 9.6M15.5 7.5l3 3L22 7l-3-3"/></svg></span><span class="mono-label">keyring</span></div><h3>a chave</h3>
           <p>A chave vai direto para o cofre de senhas do seu sistema — o mesmo que guarda as senhas do navegador. Se a máquina não tiver cofre, ela vai para um arquivo criptografado. <b>Nunca num arquivo que dê para abrir e ler, e nunca dentro do projeto</b>. Você não digita de novo.</p>
         </div>
-        <div class="card cfg-card">
-          <span class="cfg-kicker">modelo</span>
+        <div class="card card-gar">
+          <div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></span><span class="mono-label">/model</span></div><h3>o modelo</h3>
           <p>Escolha o tier — a faixa de modelo, que define o quanto ele é potente e o quanto custa — com <code class="icode">/model</code>. Ajuste o esforço de raciocínio com <code class="icode">/effort</code> quando precisar.</p>
         </div>
       </div>
-      <div class="note note--flow">
-        <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
-        <p><b>Confira antes da primeira tarefa:</b> rode <code class="icode">/doctor</code> para checar modelo, chave, conexão e ferramentas — somente-leitura, com dica de conserto quando algo está fora do lugar.</p>
+      <div class="note note--flow note--faixa">
+        <div class="note-tit"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>Confira antes da primeira tarefa.</div>
+        <p>Rode <code class="icode">/doctor</code> para checar modelo, chave, conexão e ferramentas — somente-leitura, com dica de conserto quando algo está fora do lugar.</p>
       </div>
 
       <!-- ===== PASSO 3 — PRIMEIROS COMANDOS ===== -->
@@ -174,7 +174,11 @@
         <div><span class="adot"></span>/cycle <span class="str">"rode os testes e conserte o que quebrar"</span></div>
         <div><span class="adot"></span>/memory list<span class="cm">  o que o agente já lembra aqui</span></div>
       </div>
-      <p class="hint"><code class="icode">/</code> abre o menu · <code class="icode">Ctrl+P</code> abre a mesma lista numa busca rápida · <code class="icode">/help</code> lista tudo</p>
+      <div class="req-chips req-chips--atalhos">
+        <span><code class="icode">/</code> abre o menu</span>
+        <span><code class="icode">Ctrl+P</code> busca rápida na mesma lista</span>
+        <span><code class="icode">/help</code> lista tudo</span>
+      </div>
 
       <!-- ===== PASSO 4 — CONTINUAR ===== -->
       <div class="step-head">
@@ -182,17 +186,20 @@
         <h2>Para onde ir agora</h2>
       </div>
       <div class="grid grid-3">
-        <a class="next-card" href="funcionalidades.html">
+        <a class="card next-card" href="funcionalidades.html">
+          <svg class="brand-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>
           <span class="t">Funcionalidades</span>
           <span class="d">Local, modelo à sua escolha, /cycle, subagentes, salas, MCP, memória.</span>
           <span class="go">ver →</span>
         </a>
-        <a class="next-card" href="comandos.html">
+        <a class="card next-card" href="comandos.html">
+          <svg class="brand-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 17 6-6-6-6M12 19h8"/></svg>
           <span class="t">Comandos</span>
           <span class="d">Todos os comandos por categoria, com sintaxe e descrição.</span>
           <span class="go">ver →</span>
         </a>
-        <a class="next-card" href="https://github.com/hiperplano/aluy-cli">
+        <a class="card next-card" href="https://github.com/hiperplano/aluy-cli">
+          <svg class="brand-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3v12"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
           <span class="t">GitHub</span>
           <span class="d">O código está público no GitHub — leia, audite e relate problemas.</span>
           <span class="go">abrir →</span>

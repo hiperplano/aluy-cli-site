@@ -448,12 +448,12 @@ kbd { font-family: var(--mono); font-size: var(--fs-small); color: var(--tx); ba
 }
 .step-num--done { color: var(--ink); background: var(--amber-solid); border: 0; box-shadow: 0 6px 16px -8px rgba(221,161,63,.6); }
 .step-head h2 { font-weight: 700; font-size: var(--fs-h2); letter-spacing: -.01em; }
-.req-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.req-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-4); }
+/* atalhos: a mesma ficha dos requisitos, com a tecla no lugar do check */
+.req-chips--atalhos span .icode { margin-right: 2px; }
 .req-chips span { display: inline-flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: var(--fs-small); color: var(--tx2); background: var(--s1); border: 1px solid var(--bd); border-radius: 999px; padding: 7px 14px; }
 .req-chips .ck { color: var(--tx2); }
 .req-chips .ck::before { content: "\2713"; color: var(--amber-solid); font-weight: 600; margin-right: 7px; }
-.cfg-kicker { font-family: var(--mono); font-size: var(--fs-small); letter-spacing: .1em; text-transform: uppercase; color: var(--amber); }
-.cfg-card p { margin: 8px 0 0; font-size: var(--fs-support); line-height: 1.55; color: var(--tx2); }
 .next-card { display: flex; flex-direction: column; gap: var(--sp-2); text-decoration: none; }
 .next-card:hover { border-color: var(--amber-solid); }
 .next-card .t { font-family: var(--ui); font-weight: 600; font-size: var(--fs-h4); color: var(--tx); }
