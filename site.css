@@ -182,6 +182,14 @@ img { display: block; }
    depois ficou a esquerda DELE — os tres eixos discordavam. Agora e um so. */
 .section--install .hint { max-width: 48ch; margin-inline: auto; text-align: center; }
 .center { text-align: center; }
+/* texto que fecha uma figura de largura cheia (diagrama, grade de
+   cartoes) vai para o eixo da pagina: encostado a esquerda ele ficava
+   pendurado sob a figura, com 540px vazios ao lado. A caixa da nota
+   centra; o texto dela continua alinhado a esquerda, dentro da caixa. */
+.eixo { margin-left: auto; margin-right: auto; }
+/* .hint vem depois no arquivo e zera as margens laterais: por isso a
+   dica repete o auto aqui, com a especificidade de duas classes. */
+.hint.eixo { text-align: center; margin-left: auto; margin-right: auto; }
 .eyebrow {
   font-family: var(--mono); font-weight: 500; font-size: var(--fs-micro); letter-spacing: .16em;
   text-transform: uppercase; color: var(--amber);
@@ -354,6 +362,10 @@ b { color: var(--tx); font-weight: 600; }
 .tile-kicker--nome { text-transform: none; letter-spacing: .04em; font-size: var(--fs-small); }
 .tile p { margin: 0; font-size: var(--fs-support); line-height: 1.55; color: var(--tx2); }
 .c-green { color: var(--green); } .c-mut { color: var(--mut2); } .c-teal { color: var(--teal); }
+.c-verde { color: var(--green); } .c-vermelho { color: var(--vermelho); }
+/* o veredicto da catraca na cor do que ele faz */
+.icon-tile--verde { background: var(--verde-bg); color: var(--green); }
+.icon-tile--vermelho { background: var(--vermelho-bg); color: var(--vermelho); }
 
 /* ---- command reference tables (Commands page) ----------------------------- */
 .cmd-group { margin-bottom: var(--sp-8); }
@@ -1038,10 +1050,10 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
 
 /* tokens do diagrama: o vermelho do "nega" e o texto sobre o ambar da catraca.
    Cravados davam 3,39:1 no escuro e 4,21:1 no claro. */
-:root { --vermelho: #A8402B; --catraca-tx: #7A4A08; }
-:root[data-theme="dark"] { --vermelho: #E8907A; --catraca-tx: #E8B765; }
+:root { --vermelho: #A8402B; --catraca-tx: #7A4A08; --verde-bg: #DDEEE3; --vermelho-bg: #F6E0D9; }
+:root[data-theme="dark"] { --vermelho: #E8907A; --catraca-tx: #E8B765; --verde-bg: #15281C; --vermelho-bg: #2D1713; }
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) { --vermelho: #E8907A; --catraca-tx: #E8B765; }
+  :root:not([data-theme="light"]) { --vermelho: #E8907A; --catraca-tx: #E8B765; --verde-bg: #15281C; --vermelho-bg: #2D1713; }
 }
 
 /* --- arquitetura: os componentes e as portas -------------------------------
@@ -1114,6 +1126,9 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
    caixa DAS PORTAS — que é o ponto da afirmação — com a derivação marcada. */
 .z-tronco { fill: none; stroke: var(--amber-solid); stroke-width: 1.8; }
 .z-no { fill: var(--amber-solid); }
+/* a ponta e da mesma cor da haste. Antes ela usava .f-ponta, o cinza das
+   setas do turno: ponta cinza numa linha ambar. */
+.z-ponta { fill: var(--amber-solid); }
 
 /* --- o ritmo no tablet ------------------------------------------------------
    Abaixo de 860px o respiro das seções encolhe, mas a margem do título de
