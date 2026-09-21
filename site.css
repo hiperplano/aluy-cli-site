@@ -48,6 +48,9 @@
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   /* layout */
   --wrap: 1040px;   /* trilho unico: header, conteudo, rodape e docs */
+  --prosa: 440px;   /* coluna de texto solto: uma borda direita so, em qualquer
+                       corpo. 440 e o ponto onde o hint cabe em 75 caracteres no ingles,
+                       que e mais denso que o portugues no mesmo tamanho. */
   --pad:  28px;
   /* superfícies dependentes de tema (o tema escuro troca só os tokens) */
   --bg-blur:     rgba(251,247,240,.86);
@@ -191,20 +194,20 @@ h1, h2, h3 { font-family: var(--ui); margin: 0; letter-spacing: -.02em; }
 .lead { font-size: var(--fs-lead); line-height: 1.55; color: var(--tx2); margin: var(--sp-4) 0 0; }
 
 /* hero — left aligned (Features/Commands/Architecture/Install) */
-.hero { max-width: var(--wrap); margin: 0 auto; padding: 56px var(--pad) 8px; }
+.hero { max-width: var(--wrap); margin: 0 auto; padding: 56px var(--pad) 0; }
 .hero h1 { font-weight: 700; font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: var(--sp-4) 0 0; max-width: 20ch; overflow-wrap: break-word; }
-.hero .lead { max-width: 48ch; }
+.hero .lead { max-width: var(--prosa); }
 
 /* hero — Install page (shares the step column width; no extra side padding) */
-.ihero { padding: 56px 0 8px; }
+.ihero { padding: 56px 0 0; }
 .ihero h1 { font-weight: 700; font-size: clamp(36px, 6vw, 56px); line-height: 1.08; margin: var(--sp-4) 0 0; max-width: 20ch; overflow-wrap: break-word; }
-.ihero .lead { max-width: 48ch; }
+.ihero .lead { max-width: var(--prosa); }
 
 /* hero — centered (Home) */
-.hero-c { text-align: center; padding: 66px var(--pad) 8px; max-width: var(--wrap); margin: 0 auto; }
+.hero-c { text-align: center; padding: var(--sp-16) var(--pad) 0; max-width: var(--wrap); margin: 0 auto; }
 .hero-mark { display: block; margin: 0 auto var(--sp-6); filter: drop-shadow(0 8px 22px rgba(221,161,63,.18)); }
 .hero-c h1 { font-weight: 700; font-size: clamp(36px, 5.6vw, 60px); line-height: 1.04; letter-spacing: -.035em; overflow-wrap: break-word; }
-.hero-c .lead { font-size: var(--fs-lead); max-width: 48ch; margin: 20px auto 0; }
+.hero-c .lead { font-size: var(--fs-lead); max-width: var(--prosa); margin: var(--sp-6) auto 0; }
 .badge {
   display: inline-flex; align-items: center; gap: 9px;
   font-family: var(--mono); font-weight: 500; font-size: var(--fs-small); letter-spacing: .04em;
@@ -241,7 +244,7 @@ b { color: var(--tx); font-weight: 600; }
    mais encostado na esquerda. Agora cada página é coerente consigo mesma, e
    só a home, que é centrada de ponta a ponta, mantém o centro. */
 .block-head { text-align: left; margin-bottom: var(--sp-8); }
-.lead + .grid, .lead + .cards { margin-top: var(--sp-6); }
+.lead + .grid, .lead + .cards { margin-top: var(--sp-4); }
 .block-head--centro { text-align: center; }
 .block-head h2 { font-weight: 700; font-size: var(--fs-h1); margin: 12px 0 0; }
 .block-head h2.lg { font-size: var(--fs-h1); }
@@ -366,7 +369,7 @@ b { color: var(--tx); font-weight: 600; }
 .cmd-desc { font-size: var(--fs-support); color: var(--tx2); line-height: 1.5; }
 .cmd-desc .sub { color: var(--mut2); }
 .note {
-  display: flex; align-items: flex-start; gap: var(--sp-3); max-width: 760px;
+  display: flex; align-items: flex-start; gap: var(--sp-3); max-width: var(--prosa);
   background: var(--warm); border: 1px solid var(--warm-bd);
   border-radius: 16px; padding: 16px 18px;
 }
@@ -425,6 +428,7 @@ kbd { font-family: var(--mono); font-size: var(--fs-small); color: var(--tx); ba
 
 /* ---- install steps -------------------------------------------------------- */
 .step-head { display: flex; align-items: center; gap: var(--sp-3); margin: var(--sp-12) 0 var(--sp-4); }
+.step-head:first-child { margin-top: var(--sp-4); }
 .step-num {
   width: 34px; height: 34px; border-radius: 999px; display: flex; align-items: center; justify-content: center;
   font-family: var(--mono); font-weight: 600; font-size: var(--fs-support); color: var(--amber);
@@ -719,12 +723,10 @@ details.acc .acc-body p { margin: 0; font-size: var(--fs-support); color: var(--
 /* --- simetria e respiro nas páginas internas -------------------------------
    Tudo o que estava em pixel solto passa a usar a escala. As quatro páginas do
    menu (Instalar, Comandos, Docs, Ecossistema) ficam com o mesmo ritmo. */
-.section--flow-md { padding-top: var(--sp-12); }   /* 48 */
-@media (max-width: 860px) { .section--flow-md { padding-top: var(--sp-8); } }
 
 /* hero das páginas internas: mesma respiração em todas */
-.hero  { padding: var(--sp-16) var(--pad) var(--sp-2); }
-.ihero { padding: var(--sp-16) 0 var(--sp-2); }
+.hero  { padding: var(--sp-16) var(--pad) 0; }
+.ihero { padding: var(--sp-16) 0 0; }
 .hero h1, .ihero h1 { margin-top: var(--sp-4); }
 .lead { margin-top: var(--sp-4); }
 
@@ -735,7 +737,7 @@ details.acc .acc-body p { margin: 0; font-size: var(--fs-support); color: var(--
 
 .cta-row { gap: var(--sp-3); margin-top: var(--sp-6); }
 .cta-row--flow { margin-top: var(--sp-8); }
-.note--flow { margin-top: var(--sp-3); }
+.note--flow { margin-top: var(--sp-4); }
 
 
 
@@ -943,11 +945,11 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
    a largura inteira do trilho. Medido com a largura real do caractere, havia
    linha de 139 caracteres. O conforto de leitura fica entre 60 e 75. Quem
    cuida disso é o TEXTO, não o container — o trilho continua um só. */
-.lead        { max-width: 46ch; }
-.hint        { max-width: 48ch; }
+.lead        { max-width: var(--prosa); }
+.hint        { max-width: var(--prosa); }
 .hint--centro{ max-width: 60ch; }   /* minima que ainda da duas linhas */
-.note p      { max-width: 48ch; }
-.proof p     { max-width: 48ch; }
+.note p      { max-width: none; }   /* quem limita e a caixa */
+.proof p     { max-width: var(--prosa); }
 .foot-fine   { max-width: 60ch; }
 .docs-sec p, .docs-intro { max-width: 48ch; }
 /* o primeiro paragrafo da documentacao so tinha largura: entrelinha
@@ -1089,7 +1091,6 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
 /* a caixa de aviso corria a largura inteira: 330px de âmbar vazio no desktop */
 .note p { max-width: 48ch; }
 /* a abertura encostava na grade */
-.lead + .grid { margin-top: var(--sp-6); }
 
 /* --- o parágrafo que vem depois do título de seção -------------------------
    `.block-head` é centralizado. Todo parágrafo solto logo abaixo dele ficava
