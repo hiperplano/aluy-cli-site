@@ -203,7 +203,7 @@ h1, h2, h3 { font-family: var(--ui); margin: 0; letter-spacing: -.02em; }
 /* hero — centered (Home) */
 .hero-c { text-align: center; padding: 66px var(--pad) 8px; max-width: var(--wrap); margin: 0 auto; }
 .hero-mark { display: block; margin: 0 auto var(--sp-6); filter: drop-shadow(0 8px 22px rgba(221,161,63,.18)); }
-.hero-c h1 { font-weight: 700; font-size: clamp(40px, 7vw, 68px); line-height: 1.04; letter-spacing: -.035em; overflow-wrap: break-word; }
+.hero-c h1 { font-weight: 700; font-size: clamp(36px, 5.6vw, 60px); line-height: 1.04; letter-spacing: -.035em; overflow-wrap: break-word; }
 .hero-c .lead { font-size: var(--fs-lead); max-width: 48ch; margin: 20px auto 0; }
 .badge {
   display: inline-flex; align-items: center; gap: 9px;
@@ -228,7 +228,9 @@ b { color: var(--tx); font-weight: 600; }
 
 /* ---- cards & grids -------------------------------------------------------- */
 .card { background: var(--s1); border: 1px solid var(--bd); border-radius: 20px; padding: 24px; }
-.card p { margin: 0; }
+/* cartao simples nao tinha tamanho de paragrafo: herdava os 16px do corpo.
+   As variantes (lg, hl, gar) vem depois e continuam mandando na sua. */
+.card p { margin: 0; font-size: var(--fs-support); line-height: 1.55; color: var(--tx2); }
 .grid { display: grid; gap: var(--sp-4); }
 .grid-4 { grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
@@ -735,8 +737,6 @@ details.acc .acc-body p { margin: 0; font-size: var(--fs-support); color: var(--
 .cta-row--flow { margin-top: var(--sp-8); }
 .note--flow { margin-top: var(--sp-3); }
 
-/* título de três linhas: um pouco menor para a primeira dobra não estourar */
-.hero-c h1 { font-size: clamp(36px, 5.6vw, 60px); }
 
 
 /* --- rodape: links com icone (changelog, problema, npm) -------------------- */
@@ -981,7 +981,10 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
    onde todo efeito e decidido, e os cinco caminhos possiveis passam por ele.
    ========================================================================== */
 .fluxo { margin-top: var(--sp-6); }
-.fluxo-svg { display: block; width: 100%; height: auto; max-width: 880px; margin: 0 auto; }
+/* o diagrama parava em 880 e se centrava dentro de um trilho de 984
+   ancorado a esquerda: nao batia com nenhuma borda da pagina. E como o
+   viewBox do mapa e 1000, renderizar em 880 encolhia todo texto dele 12%. */
+.fluxo-svg { display: block; width: 100%; height: auto; }
 
 /* caixas do fluxo */
 .f-no rect { fill: var(--s1); stroke: var(--bd-strong); stroke-width: 1; }
@@ -1024,7 +1027,11 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
   /* no telefone a figura vira rolagem lateral dentro do proprio quadro, em vez
      de encolher a ponto de ninguem ler os rotulos */
   .fluxo { overflow-x: auto; }
-  .fluxo-svg { min-width: 620px; }
+  /* a largura minima da rolagem tem que acompanhar a viewBox de cada
+     diagrama: 620 fixo para os dois fazia o mapa (viewBox 1000) renderizar
+     a 0,68 e o rotulo menor cair para 8,9px. */
+  .fluxo-svg { min-width: 700px; }
+  .fluxo--comp .fluxo-svg { min-width: 900px; }
 }
 
 /* tokens do diagrama: o vermelho do "nega" e o texto sobre o ambar da catraca.
@@ -1066,11 +1073,11 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
 /* --- mapa de componentes: as tres zonas ----------------------------------- */
 .z-zona rect { fill: var(--s2); stroke: var(--bd); stroke-width: 1.2; }
 .z-zona--fora rect { fill: none; stroke: var(--amber-bd); stroke-dasharray: 7 5; }
-.z-tit { fill: var(--tx2); font-family: var(--mono); font-size: var(--fs-micro); font-weight: 600; letter-spacing: .12em; }
+.z-tit { fill: var(--tx2); font-family: var(--mono); font-size: var(--fs-small); font-weight: 600; letter-spacing: .12em; }
 .z-tit--fora { fill: var(--amber); }
 .z-sub { fill: var(--mut2); font-family: var(--ui); font-size: var(--fs-small); }
 .z-miolo rect { fill: none; stroke: var(--bd-strong); stroke-width: 1.4; stroke-dasharray: 6 4; }
-.z-miolo-tit { fill: var(--tx2); font-family: var(--mono); font-size: var(--fs-micro); font-weight: 600; letter-spacing: .1em; }
+.z-miolo-tit { fill: var(--tx2); font-family: var(--mono); font-size: var(--fs-small); font-weight: 600; letter-spacing: .1em; }
 .z-liga { fill: var(--mut2); font-family: var(--mono); font-size: var(--fs-micro); letter-spacing: .06em; }
 
 /* --- correções do QA de composição da arquitetura -------------------------
