@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23070707'/%3E%3Cpath d='M6 26 L16 6' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3Cpath d='M16 6 L26 26' stroke='%23DDA13F' stroke-width='3.2' stroke-linecap='round'/%3E%3C/svg%3E" />
-<link rel="stylesheet" href="site.css?v=a86a3c1f" />
+<link rel="stylesheet" href="site.css?v=ee3f6ef9" />
 <script src="lang.js?v=dfbd8e05"></script>
 <script defer src="site.js?v=9ecc00f5"></script>
 <script src="consent.js?v=b90dbe6e" defer></script>
@@ -147,7 +147,6 @@
           <text class="f-sub f-sub--c" x="246" y="663">no human: it blocks</text>
           <text class="f-sub f-sub--c" x="362" y="646">the tool runs</text>
 
-
           <!-- what actually changes -->
           <path class="f-seta" d="M 362 624 L 362 692" marker-end="url(#pta)" />
           <g class="f-no f-no--efeito">
@@ -195,12 +194,18 @@
         </div>
       </div>
 
-      <div class="note note--flow eixo">
-        <span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>
-        <p><b>And the exception, in full:</b> <code class="icode">--yolo</code> returns <i>allow</i> before any of this. Under it the agent reaches its own <code class="icode">~/.aluy/</code> folder — the MCP config, the hooks, the undo journal and the credential vault. That is a deliberate decision of the mode, not a hole. Everywhere else, that rule holds.</p>
+      <div class="nots">
+        <span class="eyebrow">what never loosens</span>
+        <div class="nots-list">
+          <div><b>Five categories, not even by config.</b> <span>Destructive commands, network commands, privilege escalation, package installs, and writing to a startup file.</span></div>
+          <div><b>MCP tools are locked apart.</b> <span>Every tool from an MCP server is its own locked category.</span></div>
+          <div><b>The panel touches only two.</b> <span>The <code class="icode">/permissions</code> panel can only touch two read tools — the rest shows up locked.</span></div>
+        </div>
       </div>
-
-      <p class="hint eixo"><b>Five command categories cannot be relaxed</b>, not even by editing the config: destructive commands, network commands, privilege escalation, package installs, and writing to a startup file. Every tool from an MCP server is its own locked category. The <code class="icode">/permissions</code> panel can only touch two read tools — the rest shows up locked.</p>
+      <div class="note note--flow note--faixa">
+        <div class="note-tit"><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.8 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></span>And the exception, in full.</div>
+        <p><code class="icode">--yolo</code> returns <i>allow</i> before any of this. Under it the agent reaches its own <code class="icode">~/.aluy/</code> folder — the MCP config, the hooks, the undo journal and the credential vault. That is a deliberate decision of the mode, not a hole. Everywhere else, that rule holds.</p>
+      </div>
     </section>
 
     <!-- ===== MODULES ===== -->
@@ -271,7 +276,6 @@
             <text class="f-sub" x="52" y="642">shell · files · search · network · vault — everything that leaves goes through here</text>
           </g>
 
-
           <!-- ZONA 2 · na maquina, fora do processo -->
           <g class="z-zona">
             <rect x="648" y="46" width="336" height="352" rx="14" />
@@ -299,7 +303,6 @@
             <text class="f-sub" x="684" y="366">child processes, standard input and output</text>
           </g>
 
-
           <!-- ZONA 3 · fora da maquina -->
           <g class="z-zona z-zona--fora">
             <rect x="648" y="424" width="336" height="266" rx="14" />
@@ -322,7 +325,6 @@
             <text class="f-sub" x="684" y="664">if you connect it; and the version check</text>
           </g>
 
-
           <!-- ligacoes: so as portas cruzam -->
           <path class="z-tronco" d="M 596 628 L 624 628 L 624 222 L 639 222" marker-end="url(#zpa)" />
           <path class="z-tronco" d="M 624 557 L 639 557" marker-end="url(#zpa)" />
@@ -336,7 +338,14 @@
         </svg>
       </div>
 
-      <p class="hint eixo">Three things the drawing cannot carry: the connection to your provider is <b>pinned to the IP</b> it resolved and refuses redirects; the destination of a Telegram message <b>is not an argument of the model</b>, so an injected instruction cannot send anything elsewhere; and the version check <b>installs the update by itself</b> until you turn it off with <code>ALUY_AUTO_UPDATE=0</code>.</p>
+      <div class="nots">
+        <span class="eyebrow">what the drawing can’t show</span>
+        <div class="nots-list">
+          <div><b>The provider, pinned to the IP.</b> <span>The connection to your provider is pinned to the IP it resolved and refuses redirects.</span></div>
+          <div><b>Telegram, out of the model’s reach.</b> <span>The destination of a message is not an argument of the model, so an injected instruction cannot send anything elsewhere.</span></div>
+          <div><b>The update, by itself.</b> <span>The version check installs the update by itself until you turn it off with <code class="icode">ALUY_AUTO_UPDATE=0</code>.</span></div>
+        </div>
+      </div>
     </section>
 
     <!-- ===== STATE ===== -->
@@ -356,7 +365,6 @@
         <div class="card"><div class="card-row"><span class="icon-tile icon-tile--lg"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span><span class="mono-label">agents/ skills/</span></div><h3>what you write</h3><p>Agents, commands, skills, workflows and plugins: <code>.md</code> files you can put in version control.</p></div>
       </div>
     </section>
-
 
     <section class="section section--flow-sm center">
       <a class="btn btn-secondary" href="help.html">Read the documentation →</a>
