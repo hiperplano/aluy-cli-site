@@ -1164,8 +1164,8 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
 
 /* a recomendacao do terminal: cartao pequeno, no eixo da pagina, com o
    icone de terminal. O texto fica a esquerda dentro dele, colado no icone. */
-.card-dica { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
-  max-width: 640px; margin: var(--sp-6) auto 0; padding: var(--sp-6); text-align: center; }
+.card-dica { display: flex; align-items: center; gap: var(--sp-4); max-width: 640px;
+  margin: var(--sp-6) auto 0; padding: var(--sp-4) var(--sp-6); }
 .card-dica .icon-tile { flex: none; }
 .card-dica p { margin: 0; font-size: var(--fs-support); line-height: 1.55; color: var(--tx2); max-width: none; }
 
