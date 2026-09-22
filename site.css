@@ -1156,3 +1156,9 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
      era fixo: a razao desabava para 1,25-1,50. Os dois encolhem juntos. */
   .block-head { margin-bottom: var(--sp-4); }
 }
+
+/* docs: a coluna ja e estreita (a barra lateral ocupa o resto). A medida de
+   prosa (500px) e para o trilho de 984 das outras paginas; aqui ela deixava o
+   texto 180px mais curto que os blocos de codigo logo abaixo. Texto, lista e
+   nota ocupam a coluna inteira, como o codigo — uma borda direita so. */
+.docs-sec p, .docs-intro, .docs-list, .docs-sec .note, .docs-sec .note p { max-width: none; }
