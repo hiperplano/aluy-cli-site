@@ -48,9 +48,12 @@
   --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   /* layout */
   --wrap: 1040px;   /* trilho unico: header, conteudo, rodape e docs */
-  --prosa: 62ch;    /* medida unica de leitura. Substitui as seis larguras que
+  --prosa: 500px;   /* medida unica de leitura. Substitui as seis larguras que
                        coexistiam (440px, 42ch, 46ch, 48ch, 60ch): eram seis eixos
-                       direitos diferentes para o mesmo papel. */
+                       direitos diferentes para o mesmo papel. Em px, e nao em ch:
+                       62ch dava 635px no lead e 501px na dica — duas bordas de
+                       novo. 500px e o que 62ch dava na dica (77 caracteres);
+                       o lead fica com 65 na mesma borda. */
   --pad:  28px;
   /* superfícies dependentes de tema (o tema escuro troca só os tokens) */
   --bg-blur:     rgba(251,247,240,.86);
@@ -182,14 +185,6 @@ img { display: block; }
    depois ficou a esquerda DELE — os tres eixos discordavam. Agora e um so. */
 .section--install .hint { max-width: var(--prosa); margin-inline: 0; text-align: left; }
 .center { text-align: center; }
-/* texto que fecha uma figura de largura cheia (diagrama, grade de
-   cartoes) vai para o eixo da pagina: encostado a esquerda ele ficava
-   pendurado sob a figura, com 540px vazios ao lado. A caixa da nota
-   centra; o texto dela continua alinhado a esquerda, dentro da caixa. */
-.eixo { margin-left: auto; margin-right: auto; }
-/* .hint vem depois no arquivo e zera as margens laterais: por isso a
-   dica repete o auto aqui, com a especificidade de duas classes. */
-.hint.eixo { text-align: center; margin-left: auto; margin-right: auto; }
 .eyebrow {
   font-family: var(--mono); font-weight: 500; font-size: var(--fs-micro); letter-spacing: .16em;
   text-transform: uppercase; color: var(--amber);
@@ -483,7 +478,7 @@ kbd { font-family: var(--mono); font-size: var(--fs-small); color: var(--tx); ba
 .legal li { margin: var(--sp-1) 0; }
 /* documento legal: justificado, com hifenizacao para nao abrir espaco
    demais entre as palavras numa coluna estreita */
-.legal p, .legal li { text-align: left; text-wrap: pretty; }
+.legal p, .legal li { text-align: justify; hyphens: auto; -webkit-hyphens: auto; text-wrap: pretty; }
 .legal a { color: var(--amber); text-decoration: none; }
 .legal b, .legal strong { color: var(--tx); }
 .legal .ph { color: var(--amber); background: var(--amber-bg); border: 1px dashed var(--amber-bd); border-radius: 5px; padding: 0 5px; font-family: var(--mono); font-size: var(--fs-small); }
