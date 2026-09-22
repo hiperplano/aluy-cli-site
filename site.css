@@ -1142,7 +1142,6 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
    solto, não ligação. Agora é um tronco só, que parte da borda direita da
    caixa DAS PORTAS — que é o ponto da afirmação — com a derivação marcada. */
 .z-tronco { fill: none; stroke: var(--amber-solid); stroke-width: 1.8; }
-.z-no { fill: var(--amber-solid); }
 /* a ponta e da mesma cor da haste. Antes ela usava .f-ponta, o cinza das
    setas do turno: ponta cinza numa linha ambar. */
 .z-ponta { fill: var(--amber-solid); }
@@ -1162,3 +1161,17 @@ h1, h2, h3, h4, .ref-nm, .cmd-name { overflow-wrap: break-word; }
    texto 180px mais curto que os blocos de codigo logo abaixo. Texto, lista e
    nota ocupam a coluna inteira, como o codigo — uma borda direita so. */
 .docs-sec p, .docs-intro, .docs-list, .docs-sec .note, .docs-sec .note p { max-width: none; }
+
+/* a recomendacao do terminal: cartao pequeno, no eixo da pagina, com o
+   icone de terminal. O texto fica a esquerda dentro dele, colado no icone. */
+.card-dica { display: flex; align-items: center; gap: var(--sp-4); max-width: 640px;
+  margin: var(--sp-6) auto 0; padding: var(--sp-4) var(--sp-6); }
+.card-dica .icon-tile { flex: none; }
+.card-dica p { margin: 0; font-size: var(--fs-support); line-height: 1.55; color: var(--tx2); max-width: none; }
+
+/* dez providers numa grade de tres: os nove remotos fecham o 3x3 e o ultimo
+   (o Ollama, o unico local) ocupa a linha inteira em vez de ficar sozinho. So
+   com tres colunas: em duas, dez ja fecha. */
+@media (min-width: 901px) {
+  .grid-3 > .next-card:last-child:nth-child(3n+1) { grid-column: 1 / -1; }
+}
