@@ -53,7 +53,7 @@ pelas páginas e compartilhado entre EN e `pt/`:
 ## Estilo
 
 - `site.css` — folha **única** compartilhada (tokens do Aluy DS, tema claro). Sem CSS por página.
-- `assets/` — wordmark oficial: `aluy-wordmark-ink.png` para o tema claro · `aluy-wordmark-white.png` para fundos escuros · `og.png` para social preview.
+- `assets/` — wordmark oficial: `aluy-wordmark-ink.png` para o tema claro · `aluy-wordmark-white.png` para fundos escuros · `hiperplano-wordmark-ink.png` / `hiperplano-wordmark-white.png` (assinatura da Hiperplano no rodapé, claro/escuro) · `og.png` para social preview.
 
 ## i18n
 
